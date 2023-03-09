@@ -21,8 +21,11 @@ public class ShareKnowledge {
             throw new ActionException(ActionsType.SHAREKNOWLEDGE, "Receiver has overpass 7 cards hand capacity");
         } else if(!sender.getCity().equals(receiver.getCity())) {
             throw new ActionException(ActionsType.SHAREKNOWLEDGE, "Sender and receiver are not on same city");
-        } else if(sender.getCity().equals(card.getCity())) {
+        } else if(!sender.getCity().equals(card.getCity())) {
             throw new ActionException(ActionsType.SHAREKNOWLEDGE, "Sender is not on the Card city");
         }
+
+        sender.getListCard().remove(card);
+        receiver.getListCard().add(card);
     }
 }

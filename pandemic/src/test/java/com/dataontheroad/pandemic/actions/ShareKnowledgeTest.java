@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
-import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShareKnowledgeTest {
@@ -100,7 +99,7 @@ class ShareKnowledgeTest {
     public void doAction_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> ShareKnowledge.doAction(sender, receiver, createCityCard(newyork)));
+                        () -> ShareKnowledge.doAction(sender, receiver, createCityCard(calculta)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHAREKNOWLEDGE.label));
         assertTrue(actualMessage.contains("Sender is not on the Card city"));
@@ -132,4 +131,11 @@ class ShareKnowledgeTest {
         assertTrue(actualMessage.contains("Sender and receiver are not on same city"));
     }
 
+    @Test
+    public void doAction_transferCard() throws ActionException {
+        Card newyorkCard = createCityCard(newyork);
+        ShareKnowledge.doAction(sender, receiver, newyorkCard);
+        assertFalse(sender.getListCard().contains(newyorkCard));
+        assertTrue(receiver.getListCard().contains(newyorkCard));
+    }
 }
