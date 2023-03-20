@@ -14,7 +14,7 @@ import java.util.List;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlyDirectCityTest {
+class FlyCharterTest {
 
     List<City> emptyNodeCityConnection = new ArrayList<>();
     private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
@@ -40,30 +40,32 @@ class FlyDirectCityTest {
     }
 
     @Test
-    public void isDoable_tokioIsNotOnPlayerHand_thenFalse() {
-        assertFalse(FlyDirectCity.isDoable(player, tokio));
+    public void isDoable_atlantaIsNotOnPlayerHand_thenFalse() {
+        assertFalse(FlyCharter.isDoable(player));
     }
 
     @Test
-    public void isDoable_limaIsOnPlayerHand_thenTrue() {
-        assertTrue(FlyDirectCity.isDoable(player, lima));
+    public void isDoable_atlantaIsOnPlayerHand_thenTrue() {
+        player.getListCard().add(createCityCard(atlanta));
+        assertTrue(FlyCharter.isDoable(player));
     }
 
     @Test
-    public void doAction_tokioIsNotOnPlayerHand_throwException() {
+    public void doAction_atlantaIsNotOnPlayerHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyDirectCity.doAction(player, tokio));
+                        () -> FlyCharter.doAction(player, tokio));
         String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(ActionsType.FLYDIRECT.label));
-        assertTrue(actualMessage.contains("Discard a City card to move to the city named on the card"));
+        assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
+        assertTrue(actualMessage.contains("Discard the City card that matches the city you are in to move to any city"));
     }
 
     @Test
-    public void doAction_playerHasMoveToLima() throws ActionException  {
-        FlyDirectCity.doAction(player, lima);
-        assertEquals(player.getCity(), lima);
-        assertFalse(player.getListCard().contains(createCityCard(lima)));
+    public void doAction_playerHasMoveToTokioAndAtlantaCardIsNotOnHand() throws ActionException  {
+        player.getListCard().add(createCityCard(atlanta));
+        FlyCharter.doAction(player, tokio);
+        assertEquals(player.getCity(), tokio);
+        assertFalse(player.getListCard().contains(createCityCard(atlanta)));
     }
 
 }

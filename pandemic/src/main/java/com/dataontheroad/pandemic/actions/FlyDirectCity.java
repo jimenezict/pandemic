@@ -17,6 +17,6 @@ public class FlyDirectCity {
             throw new ActionException(ActionsType.FLYDIRECT, "Destination is not available for the player cards");
         }
         player.setCity(destination);
-        player.getListCard().remove(destination);
+        player.getListCard().remove(createCityCard(destination));
     }
 }
