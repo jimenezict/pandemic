@@ -7,6 +7,9 @@ import com.dataontheroad.pandemic.model.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,8 +17,10 @@ class FlyBetweenResearchCenterTest {
 
     Player player;
 
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City calculta = new City("Calcuta", VirusType.BLACK);
+    List<City> emptyNodeCityConnection = new ArrayList<>();
+
+    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
 
     @BeforeEach
     public void setPlayer() {

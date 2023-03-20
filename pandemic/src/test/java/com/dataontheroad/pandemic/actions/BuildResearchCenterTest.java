@@ -8,6 +8,7 @@ import com.dataontheroad.pandemic.model.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,13 @@ class BuildResearchCenterTest {
 
     Player player;
 
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City calculta = new City("Calcuta", VirusType.BLACK);
-    private City essen = new City("Essen", VirusType.BLUE);
-    private City lima = new City("Lima", VirusType.YELLOW);
-    private City tokio = new City("Tokio", VirusType.RED);
+    List<City> emptyNodeCityConnection = new ArrayList<>();
+
+    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
+    private City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
+    private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
 
     @BeforeEach
     public void setPlayer() {

@@ -1,5 +1,6 @@
-package com.dataontheroad.pandemic.helper;
+package com.dataontheroad.pandemic.actions;
 
+import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
@@ -10,26 +11,24 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.helper.ActionsHelper.playerHasCardForHisPosition;
-import static com.dataontheroad.pandemic.helper.ActionsHelper.playerRemoveCardFromDeck;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ActionsHelperTest {
-
-    Player player;
+class FlyDirectCityTest {
 
     List<City> emptyNodeCityConnection = new ArrayList<>();
-
     private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
     private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
     private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
     private City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
     private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
+    private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
+    Player player;
 
     @BeforeEach
     public void setPlayer() {
         player = new Player();
+        player.setCity(atlanta);
 
         List<Card> cardList = new ArrayList<>();
         cardList.add(createCityCard(newyork));
@@ -41,32 +40,29 @@ class ActionsHelperTest {
     }
 
     @Test
-    void playerRemoveCardFromDeck_whenCardExists(){
-        playerRemoveCardFromDeck(player, createCityCard(newyork));
-        assertEquals(3, player.getListCard().size());
+    public void isDoable_tokioIsNotOnPlayerHand_thenFalse() {
+        assertFalse(FlyDirectCity.isDoable(player, tokio));
     }
 
     @Test
-    void playerRemoveCardFromDeck_whenCardDoNotExists(){
-        playerRemoveCardFromDeck(player, createCityCard(tokio));
-        assertEquals(4, player.getListCard().size());
+    public void isDoable_limaIsOnPlayerHand_thenTrue() {
+        assertTrue(FlyDirectCity.isDoable(player, lima));
     }
 
     @Test
-    void playerRemoveCardFromDeck_whenCardDoNotExists_BecauseListIsEmpty(){
-        player.setListCard(new ArrayList<>());
-        playerRemoveCardFromDeck(player, createCityCard(newyork));
-        assertEquals(0, player.getListCard().size());
+    public void doAction_tokioIsNotOnPlayerHand_throwException() {
+        ActionException exception =
+                assertThrows(ActionException.class,
+                        () -> FlyDirectCity.doAction(player, tokio));
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(ActionsType.FLYDIRECT.label));
+        assertTrue(actualMessage.contains("Discard a City card to move to the city named on the card"));
     }
 
     @Test
-    void playerHasCardForHisPosition_whenHasCardForLima_IsOnLima_ReturnsTrue() {
-        assertTrue(playerHasCardForHisPosition(player, lima));
-    }
-
-    @Test
-    void playerHasCardForHisPosition_whenHasNoCardForTokio_IsOnTokio_ReturnsFalse() {
-        assertFalse(playerHasCardForHisPosition(player, tokio));
+    public void doAction_playerHasMoveToLima() throws ActionException  {
+        FlyDirectCity.doAction(player, lima);
+        assertEquals(player.getCity(), lima);
     }
 
 }
