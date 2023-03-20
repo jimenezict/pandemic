@@ -5,11 +5,9 @@ import static com.dataontheroad.pandemic.model.CardType.INFECTION;
 
 public class Card {
     private City city;
-    private Virus virus;
+    private VirusType virus;
     private CardType cardType;
-
-
-    private Card(City city, Virus virus, CardType cardType) {
+    private Card(City city, VirusType virus, CardType cardType) {
         this.city = city;
         this.cardType = cardType;
         this.virus = virus;
@@ -19,7 +17,7 @@ public class Card {
         return new Card(city, city.getVirus(), CITY);
     }
 
-    public static Card createInfectionCard(City city, Virus virus) {
+    public static Card createInfectionCard(City city, VirusType virus) {
         return new Card(city, city.getVirus(), INFECTION);
     }
 
@@ -27,7 +25,7 @@ public class Card {
         return city;
     }
 
-    public Virus getVirus() {
+    public VirusType getVirus() {
         return virus;
     }
 

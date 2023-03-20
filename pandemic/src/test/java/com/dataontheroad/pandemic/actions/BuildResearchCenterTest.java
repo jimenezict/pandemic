@@ -4,7 +4,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
-import com.dataontheroad.pandemic.model.Virus;
+import com.dataontheroad.pandemic.model.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +19,11 @@ class BuildResearchCenterTest {
 
     Player player;
 
-    private City newyork = new City("New York", Virus.BLUE);
-    private City calculta = new City("Calcuta", Virus.BLACK);
-    private City essen = new City("Essen", Virus.BLUE);
-    private City lima = new City("Lima", Virus.YELLOW);
-    private City tokio = new City("Tokio", Virus.RED);
+    private City newyork = new City("New York", VirusType.BLUE);
+    private City calculta = new City("Calcuta", VirusType.BLACK);
+    private City essen = new City("Essen", VirusType.BLUE);
+    private City lima = new City("Lima", VirusType.YELLOW);
+    private City tokio = new City("Tokio", VirusType.RED);
 
     @BeforeEach
     public void setPlayer() {

@@ -4,7 +4,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
-import com.dataontheroad.pandemic.model.Virus;
+import com.dataontheroad.pandemic.model.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,17 +17,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShareKnowledgeTest {
     Player sender, receiver;
 
-    private City newyork = new City("New York", Virus.BLUE);
-    private City calculta = new City("Calcuta", Virus.BLACK);
-    private City essen = new City("Essen", Virus.BLUE);
-    private City lima = new City("Lima", Virus.YELLOW);
-    private City tokio = new City("Tokio", Virus.RED);
-    private City cairo =  new City("Cairo", Virus.BLACK);
-    private City argel =  new City("Argel", Virus.BLACK);
-    private City buenosaires = new City("Buenos Aires", Virus.YELLOW);
-    private City atlanta = new City("Atlanta", Virus.BLUE);
-    private City madrid = new City("Madrid", Virus.BLUE);
-    private City paris = new City("Paris", Virus.BLUE);
+    private City newyork = new City("New York", VirusType.BLUE);
+    private City calculta = new City("Calcuta", VirusType.BLACK);
+    private City essen = new City("Essen", VirusType.BLUE);
+    private City lima = new City("Lima", VirusType.YELLOW);
+    private City tokio = new City("Tokio", VirusType.RED);
+    private City cairo =  new City("Cairo", VirusType.BLACK);
+    private City argel =  new City("Argel", VirusType.BLACK);
+    private City buenosaires = new City("Buenos Aires", VirusType.YELLOW);
+    private City atlanta = new City("Atlanta", VirusType.BLUE);
+    private City madrid = new City("Madrid", VirusType.BLUE);
+    private City paris = new City("Paris", VirusType.BLUE);
 
     @BeforeEach
     public void setPlayer() {

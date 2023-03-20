@@ -1,17 +1,12 @@
 package com.dataontheroad.pandemic.actions;
 
 import com.dataontheroad.pandemic.exceptions.ActionException;
-import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
-import com.dataontheroad.pandemic.model.Virus;
+import com.dataontheroad.pandemic.model.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +14,8 @@ class FlyBetweenResearchCenterTest {
 
     Player player;
 
-    private City newyork = new City("New York", Virus.BLUE);
-    private City calculta = new City("Calcuta", Virus.BLACK);
+    private City newyork = new City("New York", VirusType.BLUE);
+    private City calculta = new City("Calcuta", VirusType.BLACK);
 
     @BeforeEach
     public void setPlayer() {

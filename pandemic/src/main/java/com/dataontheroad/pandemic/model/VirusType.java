@@ -1,5 +1,5 @@
 package com.dataontheroad.pandemic.model;
 
-public enum Virus {
+public enum VirusType {
     BLUE, RED, BLACK, YELLOW
 }
