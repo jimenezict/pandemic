@@ -1,5 +1,6 @@
-package com.dataontheroad.pandemic.actions;
+package com.dataontheroad.pandemic.actions.services;
 
+import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.Player;

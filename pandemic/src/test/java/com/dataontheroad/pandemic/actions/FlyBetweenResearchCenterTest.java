@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.actions;
 
+import com.dataontheroad.pandemic.actions.services.FlyBetweenResearchCenter;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;

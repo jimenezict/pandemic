@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.actions;
 
+import com.dataontheroad.pandemic.actions.services.ShareKnowledge;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;

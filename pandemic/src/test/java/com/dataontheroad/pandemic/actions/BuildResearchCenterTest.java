@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.actions;
 
+import com.dataontheroad.pandemic.actions.services.BuildResearchCenter;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;
@@ -8,7 +9,6 @@ import com.dataontheroad.pandemic.model.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +31,7 @@ class BuildResearchCenterTest {
     @BeforeEach
     public void setPlayer() {
         player = new Player();
+        player.setCity(newyork);
 
         List<Card> cardList = new ArrayList<>();
         cardList.add(createCityCard(newyork));
@@ -43,17 +44,18 @@ class BuildResearchCenterTest {
     @Test
     public void isDoable_cityHasAlreadyResearchCenter_thenFalse() {
         newyork.setHasCenter(TRUE);
-        assertFalse(BuildResearchCenter.isDoable(player, newyork));
+        assertFalse(BuildResearchCenter.isDoable(player));
     }
 
     @Test
     public void isDoable_cityHasNoResearchCenter_HasNoCardForHisPosition_thenFalse() {
-        assertFalse(BuildResearchCenter.isDoable(player, tokio));
+        player.setCity(tokio);
+        assertFalse(BuildResearchCenter.isDoable(player));
     }
 
     @Test
     public void isDoable_cityHasNoResearchCenter_HasCardForHisPosition_thenFalse() {
-        assertTrue(BuildResearchCenter.isDoable(player, newyork));
+        assertTrue(BuildResearchCenter.isDoable(player));
     }
 
     @Test
@@ -61,7 +63,7 @@ class BuildResearchCenterTest {
         newyork.setHasCenter(TRUE);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> BuildResearchCenter.doAction(player,newyork));
+                        () -> BuildResearchCenter.doAction(player));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHCENTER.label));
         assertTrue(actualMessage.contains("Center already created"));
@@ -69,9 +71,10 @@ class BuildResearchCenterTest {
 
     @Test
     public void doAction_cityHasNoResearchCenterAndPlayerIsNotOnSite_throwException() {
+        player.setCity(tokio);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> BuildResearchCenter.doAction(player,tokio));
+                        () -> BuildResearchCenter.doAction(player));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHCENTER.label));
         assertTrue(actualMessage.contains("Player has no card for that city"));
@@ -79,7 +82,7 @@ class BuildResearchCenterTest {
 
     @Test
     public void doAction_cityHasNoResearchCenter_createCenterAndRemoveCard() throws ActionException {
-        BuildResearchCenter.doAction(player,newyork);
+        BuildResearchCenter.doAction(player);
         assertTrue(newyork.getHasCenter());
         assertFalse(player.getListCard().contains(createCityCard(newyork)));
     }

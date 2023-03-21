@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.actions;
 
+import com.dataontheroad.pandemic.actions.services.MoveNodeCity;
 import com.dataontheroad.pandemic.exceptions.ActionException;
-import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
 import com.dataontheroad.pandemic.model.VirusType;
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.model.Card.createCityCard;
-import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoveNodeCityTest {
