@@ -1,10 +1,20 @@
 package com.dataontheroad.pandemic.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
     private List<Card> listCard;
     private City city;
+
+    public Player() {
+        listCard = new ArrayList<>();
+    }
+
+    public Player(City city) {
+        listCard = new ArrayList<>();
+        this.city = city;
+    }
 
     public List<Card> getListCard() {
         return listCard;
