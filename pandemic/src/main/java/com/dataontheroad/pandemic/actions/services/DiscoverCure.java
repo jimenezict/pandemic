@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.dataontheroad.pandemic.constants.Literals.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 public class DiscoverCure {
@@ -34,11 +35,11 @@ public class DiscoverCure {
 
     public static void doAction(Player player, Virus virus) throws ActionException {
         if(!player.getCity().getHasCenter()) {
-            throw new ActionException(ActionsType.DISCOVERCURE, "The city do not have a research station");
+            throw new ActionException(ActionsType.DISCOVERCURE, DISCOVERCURE_ERROR_NO_RESEARCH_STATION);
         } else if (virus.getCureDiscovered()) {
-            throw new ActionException(ActionsType.DISCOVERCURE, "The cure has been already discovered");
+            throw new ActionException(ActionsType.DISCOVERCURE, DISCOVERCURE_ERROR_CURE_DISCOVERED);
         } else if (!playerHasEnoughCars(player, virus.getVirusType())) {
-            throw new ActionException(ActionsType.DISCOVERCURE, "The player do not have enough cars");
+            throw new ActionException(ActionsType.DISCOVERCURE, DISCOVERCURE_ERROR_NO_CARD);
         }
 
         virus.cureHasBeenDiscovered();

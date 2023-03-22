@@ -3,14 +3,16 @@ package com.dataontheroad.pandemic.actions.model;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.model.Player;
 
+import static com.dataontheroad.pandemic.constants.Literals.BUILDRESEARCHSTATION_ACTION;
+
 public class BuildResearchCenterAction extends Action {
 
     public BuildResearchCenterAction(Player player) {
-        super(ActionsType.BUILDRESEARCHCENTER, player);
+        super(ActionsType.BUILDRESEARCHSTATION, player);
     }
 
     @Override
     public String actionPrompt() {
-        return "Build Research Center at city: " + player.getCity().getName();
+        return BUILDRESEARCHSTATION_ACTION + player.getCity().getName();
     }
 }

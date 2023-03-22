@@ -5,6 +5,8 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.Player;
 
+import static com.dataontheroad.pandemic.constants.Literals.*;
+
 public class ShareKnowledge {
 
     public static Boolean isDoable(Player sender, Player receiver, Card card) {
@@ -17,13 +19,13 @@ public class ShareKnowledge {
 
     public static void doAction(Player sender, Player receiver, Card card) throws ActionException {
         if(!sender.getListCard().contains(card)) {
-            throw new ActionException(ActionsType.SHAREKNOWLEDGE, "Sender do not have the Card");
+            throw new ActionException(ActionsType.SHAREKNOWLEDGE, SHAREKNOWLEDGE_ERROR_NO_CARD);
         } else if (receiver.getListCard().size() == 7) {
-            throw new ActionException(ActionsType.SHAREKNOWLEDGE, "Receiver has overpass 7 cards hand capacity");
+            throw new ActionException(ActionsType.SHAREKNOWLEDGE, SHAREKNOWLEDGE_ERROR_OVERCAPACITY);
         } else if(!sender.getCity().equals(receiver.getCity())) {
-            throw new ActionException(ActionsType.SHAREKNOWLEDGE, "Sender and receiver are not on same city");
+            throw new ActionException(ActionsType.SHAREKNOWLEDGE, SHAREKNOWLEDGE_ERROR_NOT_SAME_CITY);
         } else if(!sender.getCity().equals(card.getCity())) {
-            throw new ActionException(ActionsType.SHAREKNOWLEDGE, "Sender is not on the Card city");
+            throw new ActionException(ActionsType.SHAREKNOWLEDGE, SHAREKNOWLEDGE_ERROR_NOT_CARD_CITY);
         }
 
         sender.getListCard().remove(card);

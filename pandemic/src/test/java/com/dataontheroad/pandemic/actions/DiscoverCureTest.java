@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.Literals.*;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,7 +101,7 @@ class DiscoverCureTest {
                         () -> DiscoverCure.doAction(player, virusNotDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
-        assertTrue(actualMessage.contains("The city do not have a research station"));
+        assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_NO_RESEARCH_STATION));
     }
 
     @Test
@@ -110,7 +111,7 @@ class DiscoverCureTest {
                         () -> DiscoverCure.doAction(player, virusDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
-        assertTrue(actualMessage.contains("The cure has been already discovered"));
+        assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_CURE_DISCOVERED));
     }
 
     @Test
@@ -124,7 +125,7 @@ class DiscoverCureTest {
                         () -> DiscoverCure.doAction(player, virusNotDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
-        assertTrue(actualMessage.contains("The player do not have enough cars"));
+        assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_NO_CARD));
     }
 
     @Test

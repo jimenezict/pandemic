@@ -1,7 +1,6 @@
 package com.dataontheroad.pandemic.actions;
 
 import com.dataontheroad.pandemic.actions.model.Action;
-import com.dataontheroad.pandemic.actions.model.BuildResearchCenterAction;
 import com.dataontheroad.pandemic.actions.services.BuildResearchCenter;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
@@ -14,7 +13,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.actions.ActionsType.BUILDRESEARCHCENTER;
+import static com.dataontheroad.pandemic.constants.Literals.BUILDRESEARCHSTATION_ERROR_CENTER_CREATED;
+import static com.dataontheroad.pandemic.constants.Literals.BUILDRESEARCHSTATION_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,8 +70,8 @@ class BuildResearchCenterTest {
                 assertThrows(ActionException.class,
                         () -> BuildResearchCenter.doAction(player));
         String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHCENTER.label));
-        assertTrue(actualMessage.contains("Center already created"));
+        assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHSTATION.label));
+        assertTrue(actualMessage.contains(BUILDRESEARCHSTATION_ERROR_CENTER_CREATED));
     }
 
     @Test
@@ -81,8 +81,8 @@ class BuildResearchCenterTest {
                 assertThrows(ActionException.class,
                         () -> BuildResearchCenter.doAction(player));
         String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHCENTER.label));
-        assertTrue(actualMessage.contains("Player has no card for that city"));
+        assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHSTATION.label));
+        assertTrue(actualMessage.contains(BUILDRESEARCHSTATION_ERROR_NO_CARD));
     }
 
     @Test

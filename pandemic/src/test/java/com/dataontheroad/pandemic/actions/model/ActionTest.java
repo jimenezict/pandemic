@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.actions.ActionsType.BUILDRESEARCHCENTER;
+import static com.dataontheroad.pandemic.actions.ActionsType.BUILDRESEARCHSTATION;
 import static com.dataontheroad.pandemic.actions.ActionsType.DISCOVERCURE;
+import static com.dataontheroad.pandemic.constants.Literals.BUILDRESEARCHSTATION_ACTION;
+import static com.dataontheroad.pandemic.constants.Literals.DISCOVERCURE_ACTION;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
@@ -47,8 +49,8 @@ class ActionTest {
     public void buildResearchCenterAction_isDoable_returnsAction() {
         List<Action> availableActions = BuildResearchCenter.returnAvailableActions(player);
         assertEquals(1, availableActions.size());
-        assertEquals(BUILDRESEARCHCENTER, availableActions.get(0).actionsType);
-        assertEquals("Build Research Center at city: New York", availableActions.get(0).actionPrompt());
+        assertEquals(BUILDRESEARCHSTATION, availableActions.get(0).actionsType);
+        assertEquals(BUILDRESEARCHSTATION_ACTION + "New York", availableActions.get(0).actionPrompt());
     }
 
     @Test
@@ -70,7 +72,7 @@ class ActionTest {
         List<Action> availableActions = DiscoverCure.returnAvailableActions(player, virusList);
         assertEquals(1, availableActions.size());
         assertEquals(DISCOVERCURE, availableActions.get(0).actionsType);
-        assertEquals("Discover a Cure for: BLUE", availableActions.get(0).actionPrompt());
+        assertEquals(DISCOVERCURE_ACTION + "BLUE", availableActions.get(0).actionPrompt());
     }
 
     @Test

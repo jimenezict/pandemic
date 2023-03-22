@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.Literals.FLYDIRECT_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,7 +58,7 @@ class FlyDirectCityTest {
                         () -> FlyDirectCity.doAction(player, tokio));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYDIRECT.label));
-        assertTrue(actualMessage.contains("Discard a City card to move to the city named on the card"));
+        assertTrue(actualMessage.contains(FLYDIRECT_ERROR_NO_CARD));
     }
 
     @Test

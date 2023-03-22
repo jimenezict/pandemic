@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.Literals.*;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -95,7 +96,7 @@ class ShareKnowledgeTest {
                         () -> ShareKnowledge.doAction(sender, receiver, createCityCard(cairo)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHAREKNOWLEDGE.label));
-        assertTrue(actualMessage.contains("Sender do not have the Card"));
+        assertTrue(actualMessage.contains(SHAREKNOWLEDGE_ERROR_NO_CARD));
     }
 
     @Test
@@ -105,7 +106,7 @@ class ShareKnowledgeTest {
                         () -> ShareKnowledge.doAction(sender, receiver, createCityCard(calculta)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHAREKNOWLEDGE.label));
-        assertTrue(actualMessage.contains("Sender is not on the Card city"));
+        assertTrue(actualMessage.contains(SHAREKNOWLEDGE_ERROR_NOT_CARD_CITY));
     }
 
     @Test
@@ -120,7 +121,7 @@ class ShareKnowledgeTest {
                         () -> ShareKnowledge.doAction(sender, receiver, createCityCard(newyork)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHAREKNOWLEDGE.label));
-        assertTrue(actualMessage.contains("Receiver has overpass 7 cards hand capacity"));
+        assertTrue(actualMessage.contains(SHAREKNOWLEDGE_ERROR_OVERCAPACITY));
     }
 
     @Test
@@ -131,7 +132,7 @@ class ShareKnowledgeTest {
                         () -> ShareKnowledge.doAction(sender, receiver, createCityCard(newyork)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHAREKNOWLEDGE.label));
-        assertTrue(actualMessage.contains("Sender and receiver are not on same city"));
+        assertTrue(actualMessage.contains(SHAREKNOWLEDGE_ERROR_NOT_SAME_CITY));
     }
 
     @Test

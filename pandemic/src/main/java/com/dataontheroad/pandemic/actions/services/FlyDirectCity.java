@@ -5,6 +5,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
 
+import static com.dataontheroad.pandemic.constants.Literals.FLYDIRECT_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 
 public class FlyDirectCity {
@@ -15,7 +16,7 @@ public class FlyDirectCity {
 
     public static void doAction(Player player, City destination) throws ActionException {
         if(!player.getListCard().contains(createCityCard(destination))) {
-            throw new ActionException(ActionsType.FLYDIRECT, "Destination is not available for the player cards");
+            throw new ActionException(ActionsType.FLYDIRECT, FLYDIRECT_ERROR_NO_CARD);
         }
         player.setCity(destination);
         player.getListCard().remove(createCityCard(destination));

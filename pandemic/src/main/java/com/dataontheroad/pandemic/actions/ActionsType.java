@@ -1,13 +1,15 @@
 package com.dataontheroad.pandemic.actions;
 
+import static com.dataontheroad.pandemic.constants.Literals.*;
+
 public enum ActionsType {
-    BUILDRESEARCHCENTER("Build Research Center"),
-    SHAREKNOWLEDGE("Share knowledge"),
-    FLYBETWEENRESEARCH("Fly between research center"),
-    MOVENODECITY("Move to near city when there is a direct connection"),
-    FLYDIRECT("Discard a City card to move to the city named on the card"),
-    FLYCHARTER("Discard the City card that matches the city you are in to move to any city"),
-    DISCOVERCURE("At any research station, discard 3 city cards of the same disease color to cure that disease");
+    BUILDRESEARCHSTATION(BUILDRESEARCHSTATION_DESCRIPTION),
+    SHAREKNOWLEDGE(SHAREKNOWLEDGE_DESCRIPTION),
+    SHUTTLEFLIGHT(SHUTTLEFLIGHT_DESCRIPTION),
+    DRIVEFERRY(DRIVEFERRY_DESCRIPTION),
+    FLYDIRECT(FLYDIRECT_DESCRIPTION),
+    FLYCHARTER(FLYCHARTER_DESCRIPTION),
+    DISCOVERCURE(DISCOVERCURE_DESCRIPTION);
 
     public final String label;
     private ActionsType(String label) {

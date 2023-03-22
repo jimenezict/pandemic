@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.Literals.DRIVEFERRY_DESCRIPTION;
+import static com.dataontheroad.pandemic.constants.Literals.DRIVEFERRY_ERROR_NO_CONNECTION;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoveNodeCityTest {
@@ -46,8 +48,8 @@ class MoveNodeCityTest {
                 assertThrows(ActionException.class,
                         () -> MoveNodeCity.doAction(player, calculta));
         String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(ActionsType.MOVENODECITY.label));
-        assertTrue(actualMessage.contains("Move to near city when there is a direct connection"));
+        assertTrue(actualMessage.contains(ActionsType.DRIVEFERRY.label));
+        assertTrue(actualMessage.contains(DRIVEFERRY_ERROR_NO_CONNECTION));
     }
 
     @Test

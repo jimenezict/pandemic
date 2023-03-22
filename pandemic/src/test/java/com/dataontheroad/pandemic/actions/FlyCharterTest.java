@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.Literals.FLYCHARTER_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,7 +59,7 @@ class FlyCharterTest {
                         () -> FlyCharter.doAction(player, tokio));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
-        assertTrue(actualMessage.contains("Discard the City card that matches the city you are in to move to any city"));
+        assertTrue(actualMessage.contains(FLYCHARTER_ERROR_NO_CARD));
     }
 
     @Test
