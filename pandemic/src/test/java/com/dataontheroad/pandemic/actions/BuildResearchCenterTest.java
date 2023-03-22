@@ -1,5 +1,7 @@
 package com.dataontheroad.pandemic.actions;
 
+import com.dataontheroad.pandemic.actions.model.Action;
+import com.dataontheroad.pandemic.actions.model.BuildResearchCenterAction;
 import com.dataontheroad.pandemic.actions.services.BuildResearchCenter;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.actions.ActionsType.BUILDRESEARCHCENTER;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +31,8 @@ class BuildResearchCenterTest {
     private City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
     private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
 
+    Action action;
+
     @BeforeEach
     public void setPlayer() {
         player = new Player();
@@ -40,22 +45,23 @@ class BuildResearchCenterTest {
         cardList.add(createCityCard(lima));
 
         player.setListCard(cardList);
+        action = new BuildResearchCenterAction(player);
     }
     @Test
     public void isDoable_cityHasAlreadyResearchCenter_thenFalse() {
         newyork.setHasCenter(TRUE);
-        assertFalse(BuildResearchCenter.isDoable(player));
+        assertFalse(BuildResearchCenter.isDoable(action));
     }
 
     @Test
     public void isDoable_cityHasNoResearchCenter_HasNoCardForHisPosition_thenFalse() {
         player.setCity(tokio);
-        assertFalse(BuildResearchCenter.isDoable(player));
+        assertFalse(BuildResearchCenter.isDoable(action));
     }
 
     @Test
     public void isDoable_cityHasNoResearchCenter_HasCardForHisPosition_thenFalse() {
-        assertTrue(BuildResearchCenter.isDoable(player));
+        assertTrue(BuildResearchCenter.isDoable(action));
     }
 
     @Test

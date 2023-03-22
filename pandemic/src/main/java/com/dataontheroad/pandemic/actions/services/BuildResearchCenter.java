@@ -18,13 +18,14 @@ import static com.dataontheroad.pandemic.model.Card.createCityCard;
 
 public class BuildResearchCenter {
 
-    public static Boolean isDoable(Player player) {
+    public static Boolean isDoable(Action action) {
+        Player player = action.getPlayer();
         City position = player.getCity();
         return !position.getHasCenter() && playerHasCardForHisPosition(player, position);
     }
 
-    public static List<Action> returnAvailableActions(Player player) {
-        return isDoable(player)? new ArrayList<>(Arrays.asList(new BuildResearchCenterAction(player))) : null;
+    public static List<Action> returnAvailableActions(Action action) {
+        return isDoable(action)? new ArrayList<>(Arrays.asList(new BuildResearchCenterAction(action.getPlayer()))) : new ArrayList<>();
     }
 
     public static void doAction(Player player) throws ActionException {

@@ -14,5 +14,11 @@ public abstract class Action {
 
     public abstract String actionPrompt();
 
+    public ActionsType getActionsType() {
+        return actionsType;
+    }
 
+    public Player getPlayer() {
+        return player;
+    }
 }
