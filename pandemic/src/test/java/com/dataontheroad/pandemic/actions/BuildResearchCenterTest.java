@@ -45,23 +45,22 @@ class BuildResearchCenterTest {
         cardList.add(createCityCard(lima));
 
         player.setListCard(cardList);
-        action = new BuildResearchCenterAction(player);
     }
     @Test
     public void isDoable_cityHasAlreadyResearchCenter_thenFalse() {
         newyork.setHasCenter(TRUE);
-        assertFalse(BuildResearchCenter.isDoable(action));
+        assertFalse(BuildResearchCenter.isDoable(player));
     }
 
     @Test
     public void isDoable_cityHasNoResearchCenter_HasNoCardForHisPosition_thenFalse() {
         player.setCity(tokio);
-        assertFalse(BuildResearchCenter.isDoable(action));
+        assertFalse(BuildResearchCenter.isDoable(player));
     }
 
     @Test
     public void isDoable_cityHasNoResearchCenter_HasCardForHisPosition_thenFalse() {
-        assertTrue(BuildResearchCenter.isDoable(action));
+        assertTrue(BuildResearchCenter.isDoable(player));
     }
 
     @Test
