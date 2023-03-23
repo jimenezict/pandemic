@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.actions.model;
 
 import com.dataontheroad.pandemic.actions.services.BuildResearchCenter;
 import com.dataontheroad.pandemic.actions.services.DiscoverCure;
+import com.dataontheroad.pandemic.actions.services.FlyCharter;
 import com.dataontheroad.pandemic.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.actions.ActionsType.BUILDRESEARCHSTATION;
-import static com.dataontheroad.pandemic.actions.ActionsType.DISCOVERCURE;
-import static com.dataontheroad.pandemic.constants.Literals.BUILDRESEARCHSTATION_ACTION;
-import static com.dataontheroad.pandemic.constants.Literals.DISCOVERCURE_ACTION;
+import static com.dataontheroad.pandemic.actions.ActionsType.*;
+import static com.dataontheroad.pandemic.constants.Literals.*;
 import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
@@ -61,7 +60,7 @@ class ActionTest {
     }
 
     @Test
-    public void isDoable_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
+    public void discoverCure_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
         List<Card> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
@@ -76,7 +75,7 @@ class ActionTest {
     }
 
     @Test
-    public void isDoable_cityHasNoResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
+    public void discoverCure_cityHasNoResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
         List<Card> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
@@ -89,7 +88,7 @@ class ActionTest {
     }
 
     @Test
-    public void isDoable_cityHasResearchCenterCureIsDiscoveredHas5BlueCards_returnsAction() {
+    public void discoverCure_cityHasResearchCenterCureIsDiscoveredHas5BlueCards_returnsAction() {
         List<Card> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
@@ -99,6 +98,21 @@ class ActionTest {
         virusList.get(0).cureHasBeenDiscovered();
 
         List<Action> availableActions = DiscoverCure.returnAvailableActions(player, virusList);
+        assertEquals(0, availableActions.size());
+    }
+
+    @Test
+    public void flyCharter_playerHasCityCardThenCanFlyAnywhere_returnsAction() {
+        List<Action> availableActions = FlyCharter.returnAvailableActions(player);
+        assertEquals(1, availableActions.size());
+        assertEquals(FLYCHARTER, availableActions.get(0).actionsType);
+        assertEquals(FLYCHARTER_ACTION, availableActions.get(0).actionPrompt());
+    }
+
+    @Test
+    public void flyCharter_playerHasNoCityCardThenCannotFlyAnywhere_returnsAction() {
+        player.setCity(madrid);
+        List<Action> availableActions = FlyCharter.returnAvailableActions(player);
         assertEquals(0, availableActions.size());
     }
 }

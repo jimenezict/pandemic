@@ -26,6 +26,7 @@ public class Literals {
     public static final String FLYDIRECT_ERROR_NO_CARD = "Destination is not available for the player cards";
     //Fly charter
     public static final String FLYCHARTER_DESCRIPTION = "Discard the City card that matches the city you are in to move to any city";
+    public static final String FLYCHARTER_ACTION = "You own cities card, where do you want to fly?";
     public static final String FLYCHARTER_ERROR_NO_CARD = "Player has no card to fly to the city";
 
     //Discover Cure
