@@ -23,6 +23,7 @@ public class Literals {
     public static final String DRIVEFERRY_ERROR_NO_CONNECTION = "Destinition is not available for the origin city";
     //Fly direct
     public static final String FLYDIRECT_DESCRIPTION = "Discard a City card to move to the city named on the card";
+    public static final String FLYDIRECT_ACTION = "You can directly fly to: ";
     public static final String FLYDIRECT_ERROR_NO_CARD = "Destination is not available for the player cards";
     //Fly charter
     public static final String FLYCHARTER_DESCRIPTION = "Discard the City card that matches the city you are in to move to any city";

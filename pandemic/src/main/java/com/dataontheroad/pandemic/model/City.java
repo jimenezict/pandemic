@@ -45,4 +45,10 @@ public class City {
     public void setVirusBoxes(List<VirusType> virusBoxes) {
         this.virusBoxes = virusBoxes;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        City city = (City) obj;
+        return city.getName().equals(name);
+    }
 }

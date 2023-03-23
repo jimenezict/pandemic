@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.actions.model;
 import com.dataontheroad.pandemic.actions.services.BuildResearchCenter;
 import com.dataontheroad.pandemic.actions.services.DiscoverCure;
 import com.dataontheroad.pandemic.actions.services.FlyCharter;
+import com.dataontheroad.pandemic.actions.services.FlyDirectCity;
 import com.dataontheroad.pandemic.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -114,5 +115,34 @@ class ActionTest {
         player.setCity(madrid);
         List<Action> availableActions = FlyCharter.returnAvailableActions(player);
         assertEquals(0, availableActions.size());
+    }
+
+
+    @Test
+    public void flyDirect_playerHave3ValidCardsToTravel_returnsActions() {
+        //player is new york and has card for essen paris madrid
+        List<Card> listCard = player.getListCard();
+        listCard.clear();
+        listCard.add(createCityCard(essen));
+        listCard.add(createCityCard(paris));
+        listCard.add(createCityCard(madrid));
+
+        List<Action> availableActions = FlyDirectCity.returnAvailableActions(player);
+        assertEquals(3, availableActions.size());
+        assertEquals(FLYDIRECT, availableActions.get(0).actionsType);
+        assertEquals(FLYDIRECT_ACTION + "Essen", availableActions.get(0).actionPrompt());
+    }
+
+    @Test
+    public void flyDirect_playerHave2ValidCardsToTravel_returnsActions() {
+        List<Card> listCard = player.getListCard();
+        //player is new york and has card for new york paris madrid
+        listCard.add(createCityCard(paris));
+        listCard.add(createCityCard(madrid));
+
+        List<Action> availableActions = FlyDirectCity.returnAvailableActions(player);
+        assertEquals(2, availableActions.size());
+        assertEquals(FLYDIRECT, availableActions.get(0).actionsType);
+        assertEquals(FLYDIRECT_ACTION + "Paris", availableActions.get(0).actionPrompt());
     }
 }
