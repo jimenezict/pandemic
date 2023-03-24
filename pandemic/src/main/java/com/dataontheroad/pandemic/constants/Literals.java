@@ -21,6 +21,7 @@ public class Literals {
     public static final String SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION = "Destiny city has not research center";
     //Drive ferry
     public static final String DRIVEFERRY_DESCRIPTION = "Move to a city connected by a white line";
+    public static final String DRIVEFERRY_ACTION = "You can drive to: ";
     public static final String DRIVEFERRY_ERROR_NO_CONNECTION = "Destinition is not available for the origin city";
     //Fly direct
     public static final String FLYDIRECT_DESCRIPTION = "Discard a City card to move to the city named on the card";

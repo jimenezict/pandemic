@@ -23,7 +23,7 @@ class ActionTest {
     private City calcuta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
     private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
     private City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
-    private City paris = new City("Paris", VirusType.BLUE, emptyNodeCityConnection);
+    private City paris = new City("Paris", VirusType.BLUE, Arrays.asList(essen, madrid));
     private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
     private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
 
@@ -166,5 +166,17 @@ class ActionTest {
         assertEquals(2, availableActions.size());
         assertEquals(SHUTTLEFLIGHT, availableActions.get(0).actionsType);
         assertEquals(SHUTTLEFLIGHT_ACTION + "Calcuta", availableActions.get(0).actionPrompt());
+    }
+
+    @Test
+    public void moveNodeCity_returnsActions() {
+        // player is in Paris and can travel to madrid or essen
+        player.setCity(paris);
+        List<Action> availableActions = MoveNodeCity.returnAvailableActions(player);
+        assertEquals(2, availableActions.size());
+        assertEquals(DRIVEFERRY, availableActions.get(0).actionsType);
+        assertEquals(DRIVEFERRY_ACTION + "Essen", availableActions.get(0).actionPrompt());
+        assertEquals(DRIVEFERRY, availableActions.get(1).actionsType);
+        assertEquals(DRIVEFERRY_ACTION + "Madrid", availableActions.get(1).actionPrompt());
     }
 }
