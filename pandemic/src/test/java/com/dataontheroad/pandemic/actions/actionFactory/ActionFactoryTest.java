@@ -1,6 +1,6 @@
-package com.dataontheroad.pandemic.actions.model;
+package com.dataontheroad.pandemic.actions.actionFactory;
 
-import com.dataontheroad.pandemic.actions.services.*;
+import com.dataontheroad.pandemic.actions.defaultServices.*;
 import com.dataontheroad.pandemic.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static com.dataontheroad.pandemic.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
-class ActionTest {
+class ActionFactoryTest {
 
     Player player;
     List<City> emptyNodeCityConnection = new ArrayList<>();

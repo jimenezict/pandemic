@@ -1,6 +1,6 @@
-package com.dataontheroad.pandemic.actions;
+package com.dataontheroad.pandemic.actions.defaultServices;
 
-import com.dataontheroad.pandemic.actions.services.MoveNodeCity;
+import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
@@ -12,11 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.constants.Literals.DRIVEFERRY_DESCRIPTION;
 import static com.dataontheroad.pandemic.constants.Literals.DRIVEFERRY_ERROR_NO_CONNECTION;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MoveNodeCityTest {
+class DriveFerryTest {
 
     List<City> emptyNodeCityConnection = new ArrayList<>();
     private City santiago = new City("Santiago de Chile", VirusType.YELLOW, emptyNodeCityConnection);

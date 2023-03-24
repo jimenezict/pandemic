@@ -1,11 +1,9 @@
-package com.dataontheroad.pandemic.actions.model;
+package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.model.Card;
-import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
 
-import static com.dataontheroad.pandemic.constants.Literals.DRIVEFERRY_ACTION;
 import static com.dataontheroad.pandemic.constants.Literals.SHAREKNOWLEDGE_ACTION;
 
 public class ShareKnowledgeAction extends Action {

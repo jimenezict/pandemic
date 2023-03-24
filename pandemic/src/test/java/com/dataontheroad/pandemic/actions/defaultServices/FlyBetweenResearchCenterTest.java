@@ -1,6 +1,7 @@
-package com.dataontheroad.pandemic.actions;
+package com.dataontheroad.pandemic.actions.defaultServices;
 
-import com.dataontheroad.pandemic.actions.services.FlyShuttle;
+import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.actions.defaultServices.FlyShuttle;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;

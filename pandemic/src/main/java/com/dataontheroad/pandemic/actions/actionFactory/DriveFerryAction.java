@@ -1,17 +1,16 @@
-package com.dataontheroad.pandemic.actions.model;
+package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.model.City;
 import com.dataontheroad.pandemic.model.Player;
 
 import static com.dataontheroad.pandemic.constants.Literals.DRIVEFERRY_ACTION;
-import static com.dataontheroad.pandemic.constants.Literals.SHUTTLEFLIGHT_ACTION;
 
-public class MoveNodeCityAction extends Action {
+public class DriveFerryAction extends Action {
 
     City destination;
 
-    public MoveNodeCityAction(Player player, City destination) {
+    public DriveFerryAction(Player player, City destination) {
         super(ActionsType.DRIVEFERRY, player);
         this.destination = destination;
     }

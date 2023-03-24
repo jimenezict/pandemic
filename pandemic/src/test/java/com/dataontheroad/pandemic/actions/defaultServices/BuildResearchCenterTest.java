@@ -1,7 +1,8 @@
-package com.dataontheroad.pandemic.actions;
+package com.dataontheroad.pandemic.actions.defaultServices;
 
-import com.dataontheroad.pandemic.actions.model.Action;
-import com.dataontheroad.pandemic.actions.services.BuildResearchCenter;
+import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.actions.actionFactory.Action;
+import com.dataontheroad.pandemic.actions.defaultServices.BuildResearchCenter;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.Card;
 import com.dataontheroad.pandemic.model.City;
