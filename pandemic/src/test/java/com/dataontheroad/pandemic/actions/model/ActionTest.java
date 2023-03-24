@@ -179,4 +179,67 @@ class ActionTest {
         assertEquals(DRIVEFERRY, availableActions.get(1).actionsType);
         assertEquals(DRIVEFERRY_ACTION + "Madrid", availableActions.get(1).actionPrompt());
     }
+
+    @Test
+    public void shareKnowledge_player1HasNewYork_returnActions() {
+        // All in new york, player1 (newyork, madrid), player2 (tokio, calcuta), player3 (paris, atlanta)
+        Player player1 = new Player(newyork);
+        player1.setListCard(Arrays.asList(Card.createCityCard(newyork), Card.createCityCard(madrid)));
+        Player player2 = new Player(newyork);
+        player2.setListCard(Arrays.asList(Card.createCityCard(tokio), Card.createCityCard(calcuta)));
+        Player player3 = new Player(newyork);
+        player3.setListCard(Arrays.asList(Card.createCityCard(paris), Card.createCityCard(atlanta)));
+        List<Player> players = new ArrayList<>();
+        players.add(player2);
+        players.add(player3);
+
+        List<Action> availableActions = ShareKnowledge.returnAvailableActions(player1, players);
+        assertEquals(2, availableActions.size());
+        assertEquals(SHAREKNOWLEDGE, availableActions.get(0).actionsType);
+        assertEquals(player1, ((ShareKnowledgeAction) availableActions.get(0)).getSender());
+        assertEquals(player2, ((ShareKnowledgeAction) availableActions.get(0)).getReceiver());
+        assertEquals(SHAREKNOWLEDGE, availableActions.get(1).actionsType);
+        assertEquals(player1, ((ShareKnowledgeAction) availableActions.get(1)).getSender());
+        assertEquals(player3, ((ShareKnowledgeAction) availableActions.get(1)).getReceiver());
+    }
+
+    @Test
+    public void shareKnowledge_player3HasNewYork_returnActions() {
+        // All in new york, player1 (essen, madrid), player2 (tokio, calcuta), player3 (paris, atlanta)
+        Player player1 = new Player(newyork);
+        player1.setListCard(Arrays.asList(Card.createCityCard(essen), Card.createCityCard(madrid)));
+        Player player2 = new Player(newyork);
+        player2.setListCard(Arrays.asList(Card.createCityCard(tokio), Card.createCityCard(calcuta)));
+        Player player3 = new Player(newyork);
+        player3.setListCard(Arrays.asList(Card.createCityCard(paris), Card.createCityCard(newyork)));
+        List<Player> players = new ArrayList<>();
+        players.add(player2);
+        players.add(player3);
+
+        List<Action> availableActions = ShareKnowledge.returnAvailableActions(player1, players);
+        assertEquals(2, availableActions.size());
+        assertEquals(SHAREKNOWLEDGE, availableActions.get(0).actionsType);
+        assertEquals(player3, ((ShareKnowledgeAction) availableActions.get(0)).getSender());
+        assertEquals(player2, ((ShareKnowledgeAction) availableActions.get(0)).getReceiver());
+        assertEquals(SHAREKNOWLEDGE, availableActions.get(1).actionsType);
+        assertEquals(player3, ((ShareKnowledgeAction) availableActions.get(1)).getSender());
+        assertEquals(player1, ((ShareKnowledgeAction) availableActions.get(1)).getReceiver());
+    }
+
+    @Test
+    public void shareKnowledge_nobodyHasNewYork_returnActions() {
+        // All in new york, player1 (essen, madrid), player2 (tokio, calcuta), player3 (paris, newyork)
+        Player player1 = new Player(newyork);
+        player1.setListCard(Arrays.asList(Card.createCityCard(essen), Card.createCityCard(madrid)));
+        Player player2 = new Player(newyork);
+        player2.setListCard(Arrays.asList(Card.createCityCard(tokio), Card.createCityCard(calcuta)));
+        Player player3 = new Player(newyork);
+        player3.setListCard(Arrays.asList(Card.createCityCard(paris), Card.createCityCard(atlanta)));
+        List<Player> players = new ArrayList<>();
+        players.add(player2);
+        players.add(player3);
+
+        List<Action> availableActions = ShareKnowledge.returnAvailableActions(player1, players);
+        assertEquals(0, availableActions.size());
+    }
 }

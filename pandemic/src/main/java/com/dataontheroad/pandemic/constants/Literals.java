@@ -9,6 +9,7 @@ public class Literals {
     public static final String BUILDRESEARCHSTATION_ERROR_NO_CARD = "Player has no card for that city";
     //Share knowledge
     public static final String SHAREKNOWLEDGE_DESCRIPTION = "Give the card that matches the city you are in to another player, or take that card from another player. The other player must also be in the city with you";
+    public static final String SHAREKNOWLEDGE_ACTION = "The shared knowledge belongs to: ";
     public static final String SHAREKNOWLEDGE_ERROR_NO_CARD = "Sender do not have the Card";
     public static final String SHAREKNOWLEDGE_ERROR_OVERCAPACITY = "Receiver has overpass 7 cards hand capacity";
     public static final String SHAREKNOWLEDGE_ERROR_NOT_SAME_CITY = "Sender and receiver are not on same city";
