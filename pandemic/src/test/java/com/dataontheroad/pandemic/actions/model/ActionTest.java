@@ -1,9 +1,6 @@
 package com.dataontheroad.pandemic.actions.model;
 
-import com.dataontheroad.pandemic.actions.services.BuildResearchCenter;
-import com.dataontheroad.pandemic.actions.services.DiscoverCure;
-import com.dataontheroad.pandemic.actions.services.FlyCharter;
-import com.dataontheroad.pandemic.actions.services.FlyDirectCity;
+import com.dataontheroad.pandemic.actions.services.*;
 import com.dataontheroad.pandemic.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +40,9 @@ class ActionTest {
         player.setCity(newyork);
         player.getListCard().add(createCityCard(newyork));
         virusList = Arrays.asList(blueVirus, blackVirus, redVirus, yellowVirus);
+        calcuta.setHasCenter(Boolean.FALSE);
+        newyork.setHasCenter(Boolean.FALSE);
+        essen.setHasCenter(Boolean.FALSE);
     }
 
     @Test
@@ -144,5 +144,27 @@ class ActionTest {
         assertEquals(2, availableActions.size());
         assertEquals(FLYDIRECT, availableActions.get(0).actionsType);
         assertEquals(FLYDIRECT_ACTION + "Paris", availableActions.get(0).actionPrompt());
+    }
+
+    @Test
+    public void flyShuttle_playerIsNotOnResearchCenter_returnsActions() {
+        calcuta.setHasCenter(Boolean.TRUE);
+        newyork.setHasCenter(Boolean.FALSE);
+        essen.setHasCenter(Boolean.TRUE);
+        List<City> citiesWithLabs = Arrays.asList(calcuta, essen);
+        List<Action> availableActions = FlyShuttle.returnAvailableActions(player, citiesWithLabs);
+        assertEquals(0, availableActions.size());
+    }
+
+    @Test
+    public void flyShuttle_playerIsOnResearchCenter_returnsActions() {
+        calcuta.setHasCenter(Boolean.TRUE);
+        newyork.setHasCenter(Boolean.TRUE);
+        essen.setHasCenter(Boolean.TRUE);
+        List<City> citiesWithLabs = Arrays.asList(calcuta, essen);
+        List<Action> availableActions = FlyShuttle.returnAvailableActions(player, citiesWithLabs);
+        assertEquals(2, availableActions.size());
+        assertEquals(SHUTTLEFLIGHT, availableActions.get(0).actionsType);
+        assertEquals(SHUTTLEFLIGHT_ACTION + "Calcuta", availableActions.get(0).actionPrompt());
     }
 }

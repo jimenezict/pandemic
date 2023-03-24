@@ -16,6 +16,7 @@ public class Literals {
 
     //Flight Shuttle
     public static final String SHUTTLEFLIGHT_DESCRIPTION = "Move from a city with a research station to any other city that has a research station";
+    public static final String SHUTTLEFLIGHT_ACTION = "You can fly from Research to Research Center: ";
     public static final String SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION = "Origin city has not research center";
     public static final String SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION = "Destiny city has not research center";
     //Drive ferry
