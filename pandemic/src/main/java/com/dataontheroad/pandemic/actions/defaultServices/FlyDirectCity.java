@@ -4,14 +4,14 @@ import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.actionFactory.Action;
 import com.dataontheroad.pandemic.actions.actionFactory.FlyDirectAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
-import com.dataontheroad.pandemic.model.City;
-import com.dataontheroad.pandemic.model.Player;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.Literals.FLYDIRECT_ERROR_NO_CARD;
-import static com.dataontheroad.pandemic.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
 
 public class FlyDirectCity {
 

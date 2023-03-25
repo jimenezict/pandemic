@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.infections;
 
-import com.dataontheroad.pandemic.model.City;
-import com.dataontheroad.pandemic.model.VirusType;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;

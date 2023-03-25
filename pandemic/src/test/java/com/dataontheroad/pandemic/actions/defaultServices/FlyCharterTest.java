@@ -1,12 +1,11 @@
 package com.dataontheroad.pandemic.actions.defaultServices;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.defaultServices.FlyCharter;
 import com.dataontheroad.pandemic.exceptions.ActionException;
-import com.dataontheroad.pandemic.model.Card;
-import com.dataontheroad.pandemic.model.City;
-import com.dataontheroad.pandemic.model.Player;
-import com.dataontheroad.pandemic.model.VirusType;
+import com.dataontheroad.pandemic.board.model.Card;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.Literals.FLYCHARTER_ERROR_NO_CARD;
-import static com.dataontheroad.pandemic.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FlyCharterTest {

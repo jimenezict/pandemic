@@ -1,8 +1,8 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.model.Card;
-import com.dataontheroad.pandemic.model.Player;
+import com.dataontheroad.pandemic.board.model.Card;
+import com.dataontheroad.pandemic.board.model.Player;
 
 import static com.dataontheroad.pandemic.constants.Literals.SHAREKNOWLEDGE_ACTION;
 

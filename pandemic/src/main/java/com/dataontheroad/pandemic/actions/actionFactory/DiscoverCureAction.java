@@ -1,9 +1,9 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.model.Player;
-import com.dataontheroad.pandemic.model.Virus;
-import com.dataontheroad.pandemic.model.VirusType;
+import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.model.Virus;
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 
 import static com.dataontheroad.pandemic.constants.Literals.DISCOVERCURE_ACTION;
 

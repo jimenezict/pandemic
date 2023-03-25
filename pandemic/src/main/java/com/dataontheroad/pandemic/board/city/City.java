@@ -1,11 +1,13 @@
-package com.dataontheroad.pandemic.model;
+package com.dataontheroad.pandemic.board.city;
+
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class City {
 
-    private Boolean hasCenter = false;
+    private Boolean hasCenter = Boolean.FALSE;
     private final VirusType virus;
     private final String name;
     private final List<City> nodeCityConnection;
@@ -15,6 +17,13 @@ public class City {
         this.name = name;
         this.virus = virus;
         this.nodeCityConnection = nodeCityConnection;
+        virusBoxes = new ArrayList<>();
+    }
+
+    public City(String name, VirusType virus) {
+        this.name = name;
+        this.virus = virus;
+        this.nodeCityConnection = new ArrayList<>();
         virusBoxes = new ArrayList<>();
     }
 

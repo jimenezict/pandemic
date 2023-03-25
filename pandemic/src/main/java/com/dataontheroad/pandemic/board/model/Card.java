@@ -1,7 +1,8 @@
-package com.dataontheroad.pandemic.model;
+package com.dataontheroad.pandemic.board.model;
 
-import static com.dataontheroad.pandemic.model.CardType.CITY;
-import static com.dataontheroad.pandemic.model.CardType.INFECTION;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.enums.CardType;
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 
 public class Card {
     private City city;
@@ -14,11 +15,11 @@ public class Card {
     }
 
     public static Card createCityCard(City city) {
-        return new Card(city, city.getVirus(), CITY);
+        return new Card(city, city.getVirus(), CardType.CITY);
     }
 
-    public static Card createInfectionCard(City city, VirusType virus) {
-        return new Card(city, city.getVirus(), INFECTION);
+    public static Card createInfectionCard(City city) {
+        return new Card(city, city.getVirus(), CardType.INFECTION);
     }
 
     public City getCity() {

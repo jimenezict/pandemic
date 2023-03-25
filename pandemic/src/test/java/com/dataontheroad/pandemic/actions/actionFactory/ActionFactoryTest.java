@@ -1,7 +1,9 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.defaultServices.*;
-import com.dataontheroad.pandemic.model.*;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.*;
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.*;
 import static com.dataontheroad.pandemic.constants.Literals.*;
-import static com.dataontheroad.pandemic.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 

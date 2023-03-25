@@ -1,4 +1,6 @@
-package com.dataontheroad.pandemic.model;
+package com.dataontheroad.pandemic.board.model;
+
+import com.dataontheroad.pandemic.board.city.City;
 
 import java.util.ArrayList;
 import java.util.List;

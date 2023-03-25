@@ -1,9 +1,9 @@
 package com.dataontheroad.pandemic.helper;
 
-import com.dataontheroad.pandemic.model.Card;
-import com.dataontheroad.pandemic.model.City;
-import com.dataontheroad.pandemic.model.Player;
-import com.dataontheroad.pandemic.model.VirusType;
+import com.dataontheroad.pandemic.board.model.Card;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerHasCardForHisPosition;
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerRemoveCardFromDeck;
-import static com.dataontheroad.pandemic.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionsHelperTest {

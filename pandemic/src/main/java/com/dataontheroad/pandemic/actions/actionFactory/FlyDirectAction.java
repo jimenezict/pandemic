@@ -1,8 +1,8 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.model.City;
-import com.dataontheroad.pandemic.model.Player;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.Player;
 
 import static com.dataontheroad.pandemic.constants.Literals.FLYDIRECT_ACTION;
 

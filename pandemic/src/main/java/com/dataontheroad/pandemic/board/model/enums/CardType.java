@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.model;
+package com.dataontheroad.pandemic.board.model.enums;
 
 public enum CardType {
     INFECTION, // Card on the board deck, decides where an infection box is placed

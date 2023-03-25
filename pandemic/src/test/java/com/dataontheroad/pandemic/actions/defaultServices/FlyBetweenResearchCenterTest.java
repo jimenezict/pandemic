@@ -1,11 +1,10 @@
 package com.dataontheroad.pandemic.actions.defaultServices;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.defaultServices.FlyShuttle;
 import com.dataontheroad.pandemic.exceptions.ActionException;
-import com.dataontheroad.pandemic.model.City;
-import com.dataontheroad.pandemic.model.Player;
-import com.dataontheroad.pandemic.model.VirusType;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.model.enums.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

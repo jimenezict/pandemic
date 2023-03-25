@@ -1,8 +1,8 @@
 package com.dataontheroad.pandemic.helper;
 
-import com.dataontheroad.pandemic.model.Card;
-import com.dataontheroad.pandemic.model.City;
-import com.dataontheroad.pandemic.model.Player;
+import com.dataontheroad.pandemic.board.model.Card;
+import com.dataontheroad.pandemic.board.city.City;
+import com.dataontheroad.pandemic.board.model.Player;
 
 public class ActionsHelper {
 
