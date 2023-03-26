@@ -16,14 +16,14 @@ public class CityFactory {
         return cityList;
     }
 
-    public static List<City> createCityListWithoutConnections() {
+    private static List<City> createCityListWithoutConnections() {
         List<City> cityList = new ArrayList<>();
         List<CityEnum> cities = Arrays.asList(CityEnum.values());
         cities.forEach(cityEnum -> {cityList.add(new City(cityEnum.cityName, cityEnum.virusType));});
         return cityList;
     }
 
-    public static List<City> addConnectionCityList(List<City> cityList) {
+    private static List<City> addConnectionCityList(List<City> cityList) {
         List<CityConnectionEnum> citiesConnectionEnum = Arrays.asList(CityConnectionEnum.values());
         citiesConnectionEnum.forEach(cityConnectionEnum -> {
             City city1 = cityList.stream().filter(city -> city.getName().equals(cityConnectionEnum.city1)).findFirst().orElse(null);
@@ -36,7 +36,7 @@ public class CityFactory {
         return cityList;
     }
 
-    public static List<City> atlantaHasResearchCenter(List<City> cityList) {
+    private static List<City> atlantaHasResearchCenter(List<City> cityList) {
         City atlanta = cityList.stream().filter(city -> city.getName().equals("Atlanta")).findFirst().orElse(null);
         atlanta.setHasCenter(Boolean.TRUE);
         return cityList;

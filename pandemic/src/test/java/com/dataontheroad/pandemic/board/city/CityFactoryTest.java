@@ -10,26 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class CityFactoryTest {
 
     @Test
-    public void createCityListWithoutConnectionsTest() {
-        List<City> cityList = createCityListWithoutConnections();
-        assertEquals(48, cityList.size());
-    }
-
-    @Test
-    public void atlantaHasResearchCenterTest() {
-        List<City> cityList = createCityListWithoutConnections();
-        atlantaHasResearchCenter(cityList);
+    public void createCityListFullTest() {
+        List<City> cityList = createCityList();
         City atlanta = cityList.stream().filter(city -> city.getName().equals("Atlanta")).findFirst().orElse(null);
+
         assertEquals(48, cityList.size());
         assertTrue(atlanta.getHasCenter());
-    }
-
-    @Test
-    public void createConnection() {
-        List<City> cityList = createCityListWithoutConnections();
-        addConnectionCityList(cityList);
-        assertEquals(48, cityList.size());
-
         assertEquals(3, sizeConnectionByCityName("Atlanta", cityList));
         assertEquals(5, sizeConnectionByCityName("Chicago", cityList));
         assertEquals(3, sizeConnectionByCityName("Montreal", cityList));
