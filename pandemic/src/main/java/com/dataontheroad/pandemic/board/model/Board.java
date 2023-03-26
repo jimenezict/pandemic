@@ -1,13 +1,14 @@
 package com.dataontheroad.pandemic.board.model;
 
+import com.dataontheroad.pandemic.board.cards.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 
 import java.util.List;
 
 public class Board {
 
-    private List<Card> infectionDeck, infectionDiscardDeck;
-    private List<Card> playerDeck, playerDiscardDeck;
+    private List<CityCard> infectionDeck, infectionDiscardDeck;
+    private List<CityCard> playerDeck, playerDiscardDeck;
     private List<City> boardCities;
     private List<Player> players;
     private List<Virus> virusList;
