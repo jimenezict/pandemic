@@ -5,7 +5,7 @@ import com.dataontheroad.pandemic.board.model.Player;
 import com.dataontheroad.pandemic.board.model.Virus;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
 
-import static com.dataontheroad.pandemic.constants.Literals.DISCOVERCURE_ACTION;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.DISCOVERCURE_ACTION;
 
 public class DiscoverCureAction extends Action {
 

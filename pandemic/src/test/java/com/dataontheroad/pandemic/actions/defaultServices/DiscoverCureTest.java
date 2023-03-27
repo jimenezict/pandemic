@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.actions.defaultServices;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.model.*;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
@@ -11,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.constants.Literals.*;
-import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DiscoverCureTest {
@@ -62,7 +63,7 @@ class DiscoverCureTest {
 
     @Test
     public void isDoable_cityHasResearchCenterCureIsNotDiscoveredHas2BlueCards_thenFalse() {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
@@ -71,7 +72,7 @@ class DiscoverCureTest {
 
     @Test
     public void isDoable_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_thenTrue() {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(newyork));
@@ -83,7 +84,7 @@ class DiscoverCureTest {
 
     @Test
     public void isDoable_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards2Others_thenTrue() {
-         List<Card> listCard = player.getListCard();
+         List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(newyork));
@@ -118,7 +119,7 @@ class DiscoverCureTest {
 
     @Test
     public void doAction_cityHasResearchCenterCureIsNotDiscoveredHas2BlueCards_throwException() {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
@@ -132,7 +133,7 @@ class DiscoverCureTest {
 
     @Test
     public void doAction_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_virusIsDiscovered() throws ActionException {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(newyork));

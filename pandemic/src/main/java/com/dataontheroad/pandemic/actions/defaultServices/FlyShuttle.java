@@ -10,8 +10,8 @@ import com.dataontheroad.pandemic.board.model.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.constants.Literals.SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION;
-import static com.dataontheroad.pandemic.constants.Literals.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
 
 public class FlyShuttle {
     public static Boolean isDoable(Player player, City destination) {

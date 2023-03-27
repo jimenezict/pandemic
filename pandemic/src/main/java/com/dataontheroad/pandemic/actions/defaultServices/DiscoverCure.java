@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.dataontheroad.pandemic.constants.Literals.*;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 public class DiscoverCure {

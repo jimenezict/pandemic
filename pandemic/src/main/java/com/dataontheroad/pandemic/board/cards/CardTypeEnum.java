@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.board.cards;
 
-public enum CardType {
+public enum CardTypeEnum {
     INFECTION, // Card on the board deck, decides where an infection box is placed
     CITY, // Card of cities on the players deck
     SPECIAL_ACTION, // Card on the players deck do not represent a city

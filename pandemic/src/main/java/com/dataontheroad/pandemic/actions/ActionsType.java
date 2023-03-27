@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.actions;
 
-import static com.dataontheroad.pandemic.constants.Literals.*;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 
 public enum ActionsType {
     BUILDRESEARCHSTATION(BUILDRESEARCHSTATION_DESCRIPTION),

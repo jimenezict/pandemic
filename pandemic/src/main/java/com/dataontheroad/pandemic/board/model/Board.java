@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.board.model;
 
-import com.dataontheroad.pandemic.board.cards.CityCard;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class Board {
     private List<City> boardCities;
     private List<Player> players;
     private List<Virus> virusList;
-    int infectionRate, outbreaks;
+    private Integer infectionRate, outbreaks;
 
     public Board(int numPlayers) {
         //the board will be initialized with reversing parameters, so will be provided from outside instead

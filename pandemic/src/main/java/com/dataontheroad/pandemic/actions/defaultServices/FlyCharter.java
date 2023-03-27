@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.constants.Literals.FLYCHARTER_ERROR_NO_CARD;
-import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERROR_NO_CARD;
+import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 public class FlyCharter {

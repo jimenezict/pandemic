@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.defaultServices.*;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.model.*;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
@@ -12,8 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.*;
-import static com.dataontheroad.pandemic.constants.Literals.*;
-import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -64,7 +65,7 @@ class ActionFactoryTest {
 
     @Test
     public void discoverCure_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -79,7 +80,7 @@ class ActionFactoryTest {
 
     @Test
     public void discoverCure_cityHasNoResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -92,7 +93,7 @@ class ActionFactoryTest {
 
     @Test
     public void discoverCure_cityHasResearchCenterCureIsDiscoveredHas5BlueCards_returnsAction() {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -123,7 +124,7 @@ class ActionFactoryTest {
     @Test
     public void flyDirect_playerHave3ValidCardsToTravel_returnsActions() {
         //player is new york and has card for essen paris madrid
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         listCard.clear();
         listCard.add(createCityCard(essen));
         listCard.add(createCityCard(paris));
@@ -137,7 +138,7 @@ class ActionFactoryTest {
 
     @Test
     public void flyDirect_playerHave2ValidCardsToTravel_returnsActions() {
-        List<Card> listCard = player.getListCard();
+        List<CityCard> listCard = player.getListCard();
         //player is new york and has card for new york paris madrid
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
@@ -186,11 +187,11 @@ class ActionFactoryTest {
     public void shareKnowledge_player1HasNewYork_returnActions() {
         // All in new york, player1 (newyork, madrid), player2 (tokio, calcuta), player3 (paris, atlanta)
         Player player1 = new Player(newyork);
-        player1.setListCard(Arrays.asList(Card.createCityCard(newyork), Card.createCityCard(madrid)));
+        player1.setListCard(Arrays.asList(CityCard.createCityCard(newyork), CityCard.createCityCard(madrid)));
         Player player2 = new Player(newyork);
-        player2.setListCard(Arrays.asList(Card.createCityCard(tokio), Card.createCityCard(calcuta)));
+        player2.setListCard(Arrays.asList(CityCard.createCityCard(tokio), CityCard.createCityCard(calcuta)));
         Player player3 = new Player(newyork);
-        player3.setListCard(Arrays.asList(Card.createCityCard(paris), Card.createCityCard(atlanta)));
+        player3.setListCard(Arrays.asList(CityCard.createCityCard(paris), CityCard.createCityCard(atlanta)));
         List<Player> players = new ArrayList<>();
         players.add(player2);
         players.add(player3);
@@ -209,11 +210,11 @@ class ActionFactoryTest {
     public void shareKnowledge_player3HasNewYork_returnActions() {
         // All in new york, player1 (essen, madrid), player2 (tokio, calcuta), player3 (paris, atlanta)
         Player player1 = new Player(newyork);
-        player1.setListCard(Arrays.asList(Card.createCityCard(essen), Card.createCityCard(madrid)));
+        player1.setListCard(Arrays.asList(CityCard.createCityCard(essen), CityCard.createCityCard(madrid)));
         Player player2 = new Player(newyork);
-        player2.setListCard(Arrays.asList(Card.createCityCard(tokio), Card.createCityCard(calcuta)));
+        player2.setListCard(Arrays.asList(CityCard.createCityCard(tokio), CityCard.createCityCard(calcuta)));
         Player player3 = new Player(newyork);
-        player3.setListCard(Arrays.asList(Card.createCityCard(paris), Card.createCityCard(newyork)));
+        player3.setListCard(Arrays.asList(CityCard.createCityCard(paris), CityCard.createCityCard(newyork)));
         List<Player> players = new ArrayList<>();
         players.add(player2);
         players.add(player3);
@@ -232,11 +233,11 @@ class ActionFactoryTest {
     public void shareKnowledge_nobodyHasNewYork_returnActions() {
         // All in new york, player1 (essen, madrid), player2 (tokio, calcuta), player3 (paris, newyork)
         Player player1 = new Player(newyork);
-        player1.setListCard(Arrays.asList(Card.createCityCard(essen), Card.createCityCard(madrid)));
+        player1.setListCard(Arrays.asList(CityCard.createCityCard(essen), CityCard.createCityCard(madrid)));
         Player player2 = new Player(newyork);
-        player2.setListCard(Arrays.asList(Card.createCityCard(tokio), Card.createCityCard(calcuta)));
+        player2.setListCard(Arrays.asList(CityCard.createCityCard(tokio), CityCard.createCityCard(calcuta)));
         Player player3 = new Player(newyork);
-        player3.setListCard(Arrays.asList(Card.createCityCard(paris), Card.createCityCard(atlanta)));
+        player3.setListCard(Arrays.asList(CityCard.createCityCard(paris), CityCard.createCityCard(atlanta)));
         List<Player> players = new ArrayList<>();
         players.add(player2);
         players.add(player3);

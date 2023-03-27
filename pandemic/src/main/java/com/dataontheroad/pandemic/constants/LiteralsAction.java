@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.constants;
 
-public class Literals {
+public class LiteralsAction {
 
     //Build Research Station
     public static final String BUILDRESEARCHSTATION_DESCRIPTION = "Discard the City card that matches the city you are in to place a research station there";

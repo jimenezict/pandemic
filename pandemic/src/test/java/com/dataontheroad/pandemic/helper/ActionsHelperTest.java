@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.helper;
 
-import com.dataontheroad.pandemic.board.model.Card;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.model.Player;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerHasCardForHisPosition;
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerRemoveCardFromDeck;
-import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionsHelperTest {
@@ -31,7 +31,7 @@ class ActionsHelperTest {
     public void setPlayer() {
         player = new Player();
 
-        List<Card> cardList = new ArrayList<>();
+        List<CityCard> cardList = new ArrayList<>();
         cardList.add(createCityCard(newyork));
         cardList.add(createCityCard(calculta));
         cardList.add(createCityCard(essen));

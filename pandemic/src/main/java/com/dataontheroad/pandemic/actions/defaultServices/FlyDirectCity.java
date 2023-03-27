@@ -10,8 +10,8 @@ import com.dataontheroad.pandemic.board.model.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.constants.Literals.FLYDIRECT_ERROR_NO_CARD;
-import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
+import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 
 public class FlyDirectCity {
 

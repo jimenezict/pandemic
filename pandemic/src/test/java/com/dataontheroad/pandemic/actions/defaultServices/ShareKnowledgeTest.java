@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.actions.defaultServices;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.exceptions.ActionException;
-import com.dataontheroad.pandemic.board.model.Card;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.model.Player;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.constants.Literals.*;
-import static com.dataontheroad.pandemic.board.model.Card.createCityCard;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShareKnowledgeTest {
@@ -38,7 +38,7 @@ class ShareKnowledgeTest {
         sender = new Player();
         sender.setCity(newyork);
 
-        List<Card> cardList = new ArrayList<>();
+        List<CityCard> cardList = new ArrayList<>();
         cardList.add(createCityCard(newyork));
         cardList.add(createCityCard(calculta));
         cardList.add(createCityCard(essen));
@@ -75,7 +75,7 @@ class ShareKnowledgeTest {
 
     @Test
     public void isDoable_sharingRightCardOnRightCityButReceiverIsFull_thenFalse() {
-        List<Card> cardList = receiver.getListCard();
+        List<CityCard> cardList = receiver.getListCard();
         cardList.add(createCityCard(atlanta));
         cardList.add(createCityCard(madrid));
         cardList.add(createCityCard(paris));
@@ -111,7 +111,7 @@ class ShareKnowledgeTest {
 
     @Test
     public void doAction_sharingRightCardOnRightCityButReceiverIsFull_throwException() {
-        List<Card> cardList = receiver.getListCard();
+        List<CityCard> cardList = receiver.getListCard();
         cardList.add(createCityCard(atlanta));
         cardList.add(createCityCard(madrid));
         cardList.add(createCityCard(paris));
@@ -137,7 +137,7 @@ class ShareKnowledgeTest {
 
     @Test
     public void doAction_transferCard() throws ActionException {
-        Card newyorkCard = createCityCard(newyork);
+        CityCard newyorkCard = createCityCard(newyork);
         ShareKnowledge.doAction(sender, receiver, newyorkCard);
         assertFalse(sender.getListCard().contains(newyorkCard));
         assertTrue(receiver.getListCard().contains(newyorkCard));
