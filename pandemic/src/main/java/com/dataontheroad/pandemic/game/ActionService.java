@@ -5,10 +5,12 @@ import com.dataontheroad.pandemic.actions.defaultServices.*;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.model.Player;
 import com.dataontheroad.pandemic.board.model.Virus;
+import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class ActionService {
@@ -30,7 +32,11 @@ public class ActionService {
     }
 
     public Boolean executeAction(Action action) {
-        action.execute();
+        try {
+            action.execute();
+        } catch (ActionException e) {
+            return FALSE;
+        }
         return TRUE;
     }
 }
