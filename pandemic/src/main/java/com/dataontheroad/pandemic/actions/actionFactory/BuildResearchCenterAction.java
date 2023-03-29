@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.defaultServices.BuildResearchCenter;
+import com.dataontheroad.pandemic.actions.defaultServices.BuildResearchCenterDefaultService;
 import com.dataontheroad.pandemic.board.model.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
@@ -20,7 +20,7 @@ public class BuildResearchCenterAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        BuildResearchCenter.doAction(player);
+        BuildResearchCenterDefaultService.doAction(player);
     }
 
 }

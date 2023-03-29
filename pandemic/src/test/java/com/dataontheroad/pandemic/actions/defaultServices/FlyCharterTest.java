@@ -43,20 +43,20 @@ class FlyCharterTest {
 
     @Test
     public void isDoable_atlantaIsNotOnPlayerHand_thenFalse() {
-        assertFalse(FlyCharter.isDoable(player));
+        assertFalse(FlyCharterDefaultService.isDoable(player));
     }
 
     @Test
     public void isDoable_atlantaIsOnPlayerHand_thenTrue() {
         player.getListCard().add(createCityCard(atlanta));
-        assertTrue(FlyCharter.isDoable(player));
+        assertTrue(FlyCharterDefaultService.isDoable(player));
     }
 
     @Test
     public void doAction_atlantaIsNotOnPlayerHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyCharter.doAction(player, tokio));
+                        () -> FlyCharterDefaultService.doAction(player, tokio));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
         assertTrue(actualMessage.contains(FLYCHARTER_ERROR_NO_CARD));
@@ -65,7 +65,7 @@ class FlyCharterTest {
     @Test
     public void doAction_playerHasMoveToTokioAndAtlantaCardIsNotOnHand() throws ActionException  {
         player.getListCard().add(createCityCard(atlanta));
-        FlyCharter.doAction(player, tokio);
+        FlyCharterDefaultService.doAction(player, tokio);
         assertEquals(player.getCity(), tokio);
         assertFalse(player.getListCard().contains(createCityCard(atlanta)));
     }

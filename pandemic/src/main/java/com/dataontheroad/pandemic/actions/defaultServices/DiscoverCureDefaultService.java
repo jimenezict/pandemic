@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
-public class DiscoverCure {
+public class DiscoverCureDefaultService {
 
     public static Boolean isDoable(Player player, Virus virus) {
         return player.getCity().getHasCenter()

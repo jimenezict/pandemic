@@ -17,13 +17,13 @@ public class ActionService {
 
     public List<Action> getListOfActions(Player player, List<Virus> virusList, List<City> citiesWithResearchCenter, List<Player> otherPlayersOnTheCity) {
         List<Action> allowedActions = new ArrayList<>();
-        allowedActions.addAll(BuildResearchCenter.returnAvailableActions(player));
-        allowedActions.addAll(DiscoverCure.returnAvailableActions(player, virusList));
-        allowedActions.addAll(FlyCharter.returnAvailableActions(player));
-        allowedActions.addAll(FlyDirectCity.returnAvailableActions(player));
-        allowedActions.addAll(FlyShuttle.returnAvailableActions(player, citiesWithResearchCenter));
-        allowedActions.addAll(MoveNodeCity.returnAvailableActions(player));
-        allowedActions.addAll(ShareKnowledge.returnAvailableActions(player, otherPlayersOnTheCity));
+        allowedActions.addAll(BuildResearchCenterDefaultService.returnAvailableActions(player));
+        allowedActions.addAll(DiscoverCureDefaultService.returnAvailableActions(player, virusList));
+        allowedActions.addAll(FlyCharterDefaultService.returnAvailableActions(player));
+        allowedActions.addAll(FlyDirectCityDefaultService.returnAvailableActions(player));
+        allowedActions.addAll(FlyShuttleDefaultService.returnAvailableActions(player, citiesWithResearchCenter));
+        allowedActions.addAll(DriveFerryDefaultService.returnAvailableActions(player));
+        allowedActions.addAll(ShareKnowledgeDefaultService.returnAvailableActions(player, otherPlayersOnTheCity));
         return allowedActions;
     }
 

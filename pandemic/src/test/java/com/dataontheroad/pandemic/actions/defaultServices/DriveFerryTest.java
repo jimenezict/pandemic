@@ -33,19 +33,19 @@ class DriveFerryTest {
 
     @Test
     public void isDoable_calcutaIsNotNearToLima_thenFalse() {
-        assertFalse(MoveNodeCity.isDoable(player, calculta));
+        assertFalse(DriveFerryDefaultService.isDoable(player, calculta));
     }
 
     @Test
     public void isDoable_bogotaIsNearToLima_thenFalse() {
-        assertTrue(MoveNodeCity.isDoable(player, bogota));
+        assertTrue(DriveFerryDefaultService.isDoable(player, bogota));
     }
 
     @Test
     public void doAction_calcutaIsNotNearToLima_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> MoveNodeCity.doAction(player, calculta));
+                        () -> DriveFerryDefaultService.doAction(player, calculta));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DRIVEFERRY.label));
         assertTrue(actualMessage.contains(DRIVEFERRY_ERROR_NO_CONNECTION));
@@ -53,7 +53,7 @@ class DriveFerryTest {
 
     @Test
     public void doAction_playerHasMoveToBogota() throws ActionException  {
-        MoveNodeCity.doAction(player, bogota);
+        DriveFerryDefaultService.doAction(player, bogota);
         assertEquals(player.getCity(), bogota);
     }
 }

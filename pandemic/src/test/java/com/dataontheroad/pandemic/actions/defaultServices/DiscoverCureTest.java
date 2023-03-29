@@ -48,17 +48,17 @@ class DiscoverCureTest {
     @Test
     public void isDoable_cityHasNoResearchCenter_thenFalse() {
         player.setCity(calcuta);
-        assertFalse(DiscoverCure.isDoable(player, virusNotDiscovered));
+        assertFalse(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
     public void isDoable_cityHasResearchCenterCureIsDiscovered_thenFalse() {
-        assertFalse(DiscoverCure.isDoable(player, virusDiscovered));
+        assertFalse(DiscoverCureDefaultService.isDoable(player, virusDiscovered));
     }
 
     @Test
     public void isDoable_cityHasResearchCenterCureIsNotDiscoveredHasNoCards_thenFalse() {
-        assertFalse(DiscoverCure.isDoable(player, virusNotDiscovered));
+        assertFalse(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -67,7 +67,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
-        assertFalse(DiscoverCure.isDoable(player, virusNotDiscovered));
+        assertFalse(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -79,7 +79,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(essen));
         listCard.add(createCityCard(atlanta));
 
-        assertTrue(DiscoverCure.isDoable(player, virusNotDiscovered));
+        assertTrue(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -93,7 +93,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(tokio));
         listCard.add(createCityCard(calcuta));
 
-        assertTrue(DiscoverCure.isDoable(player, virusNotDiscovered));
+        assertTrue(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -101,7 +101,7 @@ class DiscoverCureTest {
         player.setCity(calcuta);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> DiscoverCure.doAction(player, virusNotDiscovered));
+                        () -> DiscoverCureDefaultService.doAction(player, virusNotDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
         assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_NO_RESEARCH_STATION));
@@ -111,7 +111,7 @@ class DiscoverCureTest {
     public void doAction_originCityHasResearchCenterVirusDiscovered_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> DiscoverCure.doAction(player, virusDiscovered));
+                        () -> DiscoverCureDefaultService.doAction(player, virusDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
         assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_CURE_DISCOVERED));
@@ -125,7 +125,7 @@ class DiscoverCureTest {
 
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> DiscoverCure.doAction(player, virusNotDiscovered));
+                        () -> DiscoverCureDefaultService.doAction(player, virusNotDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
         assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_NO_CARD));
@@ -140,7 +140,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(essen));
         listCard.add(createCityCard(atlanta));
 
-        DiscoverCure.doAction(player, virusNotDiscovered);
+        DiscoverCureDefaultService.doAction(player, virusNotDiscovered);
         assertTrue(virusDiscovered.getCureDiscovered());
     }
 }

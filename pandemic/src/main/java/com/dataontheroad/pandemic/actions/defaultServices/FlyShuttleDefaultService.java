@@ -13,7 +13,7 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
 
-public class FlyShuttle {
+public class FlyShuttleDefaultService {
     public static Boolean isDoable(Player player, City destination) {
         return player.getCity().getHasCenter() && destination.getHasCenter();
     }

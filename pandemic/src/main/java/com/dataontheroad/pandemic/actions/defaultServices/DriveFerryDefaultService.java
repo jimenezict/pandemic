@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERROR_NO_CONNECTION;
 
-public class MoveNodeCity {
+public class DriveFerryDefaultService {
 
     public static Boolean isDoable(Player player, City destination) {
         return player.getCity().getNodeCityConnection().contains(destination);

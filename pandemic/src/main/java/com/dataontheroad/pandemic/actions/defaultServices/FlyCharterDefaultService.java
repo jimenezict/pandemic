@@ -15,7 +15,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERR
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
-public class FlyCharter {
+public class FlyCharterDefaultService {
 
     public static Boolean isDoable(Player player) {
         return player.getListCard().contains(createCityCard(player.getCity()));

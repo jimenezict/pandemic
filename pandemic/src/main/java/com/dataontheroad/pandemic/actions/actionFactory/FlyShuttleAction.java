@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.defaultServices.FlyShuttle;
+import com.dataontheroad.pandemic.actions.defaultServices.FlyShuttleDefaultService;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.model.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
@@ -24,6 +24,6 @@ public class FlyShuttleAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        FlyShuttle.doAction(player, destination);
+        FlyShuttleDefaultService.doAction(player, destination);
     }
 }

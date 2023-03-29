@@ -13,7 +13,7 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerHasCardForHisPosition;
 
-public class ShareKnowledge {
+public class ShareKnowledgeDefaultService {
 
     public static Boolean isDoable(Player sender, Player receiver, CityCard card) {
         return sender.getCity().equals(receiver.getCity())  // sender and receiver are on the same city

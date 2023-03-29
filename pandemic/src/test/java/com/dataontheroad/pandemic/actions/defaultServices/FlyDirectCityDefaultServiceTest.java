@@ -16,7 +16,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERRO
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlyDirectCityTest {
+class FlyDirectCityDefaultServiceTest {
 
     List<City> emptyNodeCityConnection = new ArrayList<>();
     private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
@@ -43,19 +43,19 @@ class FlyDirectCityTest {
 
     @Test
     public void isDoable_tokioIsNotOnPlayerHand_thenFalse() {
-        assertFalse(FlyDirectCity.isDoable(player, tokio));
+        assertFalse(FlyDirectCityDefaultService.isDoable(player, tokio));
     }
 
     @Test
     public void isDoable_limaIsOnPlayerHand_thenTrue() {
-        assertTrue(FlyDirectCity.isDoable(player, lima));
+        assertTrue(FlyDirectCityDefaultService.isDoable(player, lima));
     }
 
     @Test
     public void doAction_tokioIsNotOnPlayerHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyDirectCity.doAction(player, tokio));
+                        () -> FlyDirectCityDefaultService.doAction(player, tokio));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYDIRECT.label));
         assertTrue(actualMessage.contains(FLYDIRECT_ERROR_NO_CARD));
@@ -63,7 +63,7 @@ class FlyDirectCityTest {
 
     @Test
     public void doAction_playerHasMoveToLima() throws ActionException  {
-        FlyDirectCity.doAction(player, lima);
+        FlyDirectCityDefaultService.doAction(player, lima);
         assertEquals(player.getCity(), lima);
         assertFalse(player.getListCard().contains(createCityCard(lima)));
     }

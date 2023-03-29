@@ -33,27 +33,27 @@ class FlyBetweenResearchCenterTest {
 
     @Test
     public void isDoable_originCityHasNoResearchCenter_thenFalse() {
-        assertFalse(FlyShuttle.isDoable(player, calculta));
+        assertFalse(FlyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
     public void isDoable_originCityHasResearchCenterButNotDestiny_thenFalse() {
         newyork.setHasCenter(TRUE);
-        assertFalse(FlyShuttle.isDoable(player, calculta));
+        assertFalse(FlyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
     public void isDoable_originCityHasResearchCenterButNotDestiny_thenTrue() {
         newyork.setHasCenter(TRUE);
         calculta.setHasCenter(TRUE);
-        assertTrue(FlyShuttle.isDoable(player, calculta));
+        assertTrue(FlyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
     public void doAction_originCityHasNoResearchCenter_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyShuttle.doAction(player, calculta));
+                        () -> FlyShuttleDefaultService.doAction(player, calculta));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHUTTLEFLIGHT.label));
         assertTrue(actualMessage.contains(SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION));
@@ -64,7 +64,7 @@ class FlyBetweenResearchCenterTest {
         newyork.setHasCenter(TRUE);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyShuttle.doAction(player, calculta));
+                        () -> FlyShuttleDefaultService.doAction(player, calculta));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHUTTLEFLIGHT.label));
         assertTrue(actualMessage.contains(SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION));
@@ -75,7 +75,7 @@ class FlyBetweenResearchCenterTest {
         newyork.setHasCenter(TRUE);
         calculta.setHasCenter(TRUE);
 
-        FlyShuttle.doAction(player, calculta);
+        FlyShuttleDefaultService.doAction(player, calculta);
     }
 
 }

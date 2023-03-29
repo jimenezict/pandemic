@@ -13,7 +13,7 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 
-public class FlyDirectCity {
+public class FlyDirectCityDefaultService {
 
     public static Boolean isDoable(Player player, City destination) {
         return player.getListCard().contains(createCityCard(destination));

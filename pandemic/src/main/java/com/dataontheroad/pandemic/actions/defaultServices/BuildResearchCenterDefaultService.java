@@ -17,7 +17,7 @@ import static com.dataontheroad.pandemic.helper.ActionsHelper.playerHasCardForHi
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerRemoveCardFromDeck;
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 
-public class BuildResearchCenter {
+public class BuildResearchCenterDefaultService {
 
     public static Boolean isDoable(Player player) {
         City position = player.getCity();
