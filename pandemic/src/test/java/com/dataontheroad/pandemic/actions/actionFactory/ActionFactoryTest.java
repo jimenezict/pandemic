@@ -201,9 +201,11 @@ class ActionFactoryTest {
         assertEquals(SHAREKNOWLEDGE, availableActions.get(0).actionsType);
         assertEquals(player1, ((ShareKnowledgeAction) availableActions.get(0)).getSender());
         assertEquals(player2, ((ShareKnowledgeAction) availableActions.get(0)).getReceiver());
+        assertTrue(availableActions.get(0).actionPrompt().contains(SHAREKNOWLEDGE_ACTION));
         assertEquals(SHAREKNOWLEDGE, availableActions.get(1).actionsType);
         assertEquals(player1, ((ShareKnowledgeAction) availableActions.get(1)).getSender());
         assertEquals(player3, ((ShareKnowledgeAction) availableActions.get(1)).getReceiver());
+        assertTrue(availableActions.get(1).actionPrompt().contains(SHAREKNOWLEDGE_ACTION));
     }
 
     @Test
