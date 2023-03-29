@@ -1,9 +1,8 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.defaultServices.DiscoverCureDefaultService;
-import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.model.Virus;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DISCOVERCURE_ACTION;

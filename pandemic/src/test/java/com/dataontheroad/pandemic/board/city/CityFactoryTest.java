@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.dataontheroad.pandemic.board.city.CityFactory.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.dataontheroad.pandemic.board.city.CityFactory.createCityList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CityFactoryTest {
 

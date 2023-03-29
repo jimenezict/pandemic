@@ -14,7 +14,8 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static java.lang.Boolean.TRUE;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ActionServiceExecuteActionTest {
 

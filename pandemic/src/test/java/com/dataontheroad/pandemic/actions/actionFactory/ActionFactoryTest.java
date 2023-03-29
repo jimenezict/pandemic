@@ -3,7 +3,7 @@ package com.dataontheroad.pandemic.actions.actionFactory;
 import com.dataontheroad.pandemic.actions.defaultServices.*;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.*;
+import com.dataontheroad.pandemic.board.model.Virus;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
 import com.dataontheroad.pandemic.board.player.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.*;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 class ActionFactoryTest {

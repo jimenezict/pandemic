@@ -1,7 +1,6 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.defaultServices.ShareKnowledgeDefaultService;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;

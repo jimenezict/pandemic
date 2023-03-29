@@ -3,10 +3,10 @@ package com.dataontheroad.pandemic.actions.defaultServices;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.actionFactory.Action;
 import com.dataontheroad.pandemic.actions.actionFactory.DiscoverCureAction;
-import com.dataontheroad.pandemic.exceptions.ActionException;
-import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.model.Virus;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
+import com.dataontheroad.pandemic.board.player.Player;
+import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

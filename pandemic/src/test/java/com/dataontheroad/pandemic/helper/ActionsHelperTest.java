@@ -2,17 +2,17 @@ package com.dataontheroad.pandemic.helper;
 
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
+import com.dataontheroad.pandemic.board.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerHasCardForHisPosition;
 import static com.dataontheroad.pandemic.helper.ActionsHelper.playerRemoveCardFromDeck;
-import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionsHelperTest {

@@ -11,7 +11,8 @@ import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.EPIDEMIC;
 import static com.dataontheroad.pandemic.board.cards.DeckCardFactory.*;
 import static com.dataontheroad.pandemic.constants.LiteralsCard.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class DeckCardFactoryTest {
 
