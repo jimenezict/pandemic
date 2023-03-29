@@ -1,9 +1,8 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.defaultServices.DriveFerryDefaultService;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ACTION;
@@ -24,6 +23,6 @@ public class DriveFerryAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        DriveFerryDefaultService.doAction(player, destination);
+        getPlayer().getDriveFerry().doAction(player, destination);
     }
 }

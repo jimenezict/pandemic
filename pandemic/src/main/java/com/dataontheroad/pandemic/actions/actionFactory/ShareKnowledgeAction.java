@@ -3,7 +3,7 @@ package com.dataontheroad.pandemic.actions.actionFactory;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.defaultServices.ShareKnowledgeDefaultService;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHAREKNOWLEDGE_ACTION;
@@ -34,6 +34,6 @@ public class ShareKnowledgeAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        ShareKnowledgeDefaultService.doAction(player, receiver, card);
+        getPlayer().getShareKnowledge().doAction(player, receiver, card);
     }
 }

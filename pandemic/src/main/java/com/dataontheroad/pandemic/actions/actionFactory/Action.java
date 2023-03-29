@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
 public abstract class Action {

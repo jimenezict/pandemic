@@ -3,7 +3,7 @@ package com.dataontheroad.pandemic.actions.actionFactory;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.defaultServices.FlyCharterDefaultService;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ACTION;
@@ -24,6 +24,6 @@ public class FlyDirectAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        FlyCharterDefaultService.doAction(player, destination);
+        getPlayer().getFlyCharter().doAction(player, destination);
     }
 }

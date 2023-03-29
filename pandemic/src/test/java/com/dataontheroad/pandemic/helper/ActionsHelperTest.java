@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.helper;
 
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.model.enums.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

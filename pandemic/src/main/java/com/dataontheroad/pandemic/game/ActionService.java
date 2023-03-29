@@ -3,7 +3,7 @@ package com.dataontheroad.pandemic.game;
 import com.dataontheroad.pandemic.actions.actionFactory.Action;
 import com.dataontheroad.pandemic.actions.defaultServices.*;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.model.Virus;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
@@ -15,7 +15,8 @@ import static java.lang.Boolean.TRUE;
 
 public class ActionService {
 
-    public List<Action> getListOfActions(Player player, List<Virus> virusList, List<City> citiesWithResearchCenter, List<Player> otherPlayersOnTheCity) {
+    public static List<Action> getListOfActions(Player player, List<Virus> virusList, List<City> citiesWithResearchCenter, List<Player> otherPlayersOnTheCity) {
+        //TO-DO: Replace the Default Services by the ones of the player
         List<Action> allowedActions = new ArrayList<>();
         allowedActions.addAll(BuildResearchCenterDefaultService.returnAvailableActions(player));
         allowedActions.addAll(DiscoverCureDefaultService.returnAvailableActions(player, virusList));
@@ -27,11 +28,11 @@ public class ActionService {
         return allowedActions;
     }
 
-    public void printListOfActions(List<Action> getListOfActions) {
+    public static void printListOfActions(List<Action> getListOfActions) {
         getListOfActions.stream().forEach(action -> {System.out.println(action.actionPrompt());});
     }
 
-    public Boolean executeAction(Action action) {
+    public static Boolean executeAction(Action action) {
         try {
             action.execute();
         } catch (ActionException e) {

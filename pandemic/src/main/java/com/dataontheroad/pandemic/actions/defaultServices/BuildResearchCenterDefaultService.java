@@ -5,7 +5,7 @@ import com.dataontheroad.pandemic.actions.actionFactory.Action;
 import com.dataontheroad.pandemic.actions.actionFactory.BuildResearchCenterAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;

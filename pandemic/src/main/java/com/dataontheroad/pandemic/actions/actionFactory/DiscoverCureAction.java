@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.actions.actionFactory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.defaultServices.DiscoverCureDefaultService;
-import com.dataontheroad.pandemic.board.model.Player;
+import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.model.Virus;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
@@ -24,6 +24,6 @@ public class DiscoverCureAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        DiscoverCureDefaultService.doAction(player, virus);
+        getPlayer().getDiscoverCure().doAction(player, virus);
     }
 }
