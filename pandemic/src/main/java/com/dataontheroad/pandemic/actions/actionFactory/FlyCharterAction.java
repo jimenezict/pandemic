@@ -8,6 +8,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ACTION;
 
 public class FlyCharterAction extends Action {
+    City destination;
 
     public FlyCharterAction(Player player) {
         super(ActionsType.FLYCHARTER, player);
@@ -20,10 +21,10 @@ public class FlyCharterAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getFlyCharter().doAction(player, getDestination());
+        getPlayer().getFlyCharter().doAction(player, destination);
     }
 
-    private City getDestination() {
-        return null;
+    public void setDestination(City destination) {
+        this.destination = destination;
     }
 }

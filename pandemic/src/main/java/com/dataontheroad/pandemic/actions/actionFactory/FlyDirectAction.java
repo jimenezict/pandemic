@@ -23,6 +23,6 @@ public class FlyDirectAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getFlyCharter().doAction(player, destination);
+        getPlayer().getFlyDirectCity().doAction(player, destination);
     }
 }
