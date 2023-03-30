@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.actions.defaultServices;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.enums.VirusType;
+import com.dataontheroad.pandemic.board.virus.VirusType;
 import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import org.junit.jupiter.api.BeforeEach;

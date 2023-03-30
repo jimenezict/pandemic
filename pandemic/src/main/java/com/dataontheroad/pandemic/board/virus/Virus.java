@@ -1,6 +1,4 @@
-package com.dataontheroad.pandemic.board.model;
-
-import com.dataontheroad.pandemic.board.model.enums.VirusType;
+package com.dataontheroad.pandemic.board.virus;
 
 public class Virus {
 

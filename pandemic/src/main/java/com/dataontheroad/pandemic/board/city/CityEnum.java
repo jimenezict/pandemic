@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.board.city;
 
-import com.dataontheroad.pandemic.board.model.enums.VirusType;
+import com.dataontheroad.pandemic.board.virus.VirusType;
 
 public enum CityEnum {
     ALGIERS("Algiers",VirusType.BLACK),

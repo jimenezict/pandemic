@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.board.cards.model;
 
 import com.dataontheroad.pandemic.board.cards.CardTypeEnum;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.enums.VirusType;
+import com.dataontheroad.pandemic.board.virus.VirusType;
 
 public class CityCard extends BaseCard{
     private final City city;

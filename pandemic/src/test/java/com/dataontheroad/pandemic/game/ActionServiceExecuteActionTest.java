@@ -2,8 +2,8 @@ package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.actionFactory.BuildResearchCenterAction;
 import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.model.Virus;
-import com.dataontheroad.pandemic.board.model.enums.VirusType;
+import com.dataontheroad.pandemic.board.virus.Virus;
+import com.dataontheroad.pandemic.board.virus.VirusType;
 import com.dataontheroad.pandemic.board.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

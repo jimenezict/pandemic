@@ -1,8 +1,9 @@
-package com.dataontheroad.pandemic.board.model;
+package com.dataontheroad.pandemic.board;
 
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.player.Player;
+import com.dataontheroad.pandemic.board.virus.Virus;
 
 import java.util.List;
 

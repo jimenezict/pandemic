@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.board.city;
 
-import com.dataontheroad.pandemic.board.model.enums.VirusType;
+import com.dataontheroad.pandemic.board.virus.VirusType;
 
 import java.util.ArrayList;
 import java.util.List;
