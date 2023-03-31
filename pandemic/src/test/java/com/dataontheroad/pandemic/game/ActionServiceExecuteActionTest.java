@@ -301,5 +301,50 @@ class ActionServiceExecuteActionTest {
         assertFalse(ActionService.executeAction(action));
     }
 
-    //TO-DO test for the ShareKnowledge.executeAction
+
+    @Test
+    public void executeAction_ShareKnowledge_correct() {
+        //Sender (player) is in New York
+        //Receiver is in New York
+        //Sender has New York card
+        //Receiver has 0 card
+        Player receiver = new Player();
+        receiver.setCity(newyork);
+
+        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver, player.getListCard().get(0));
+
+        assertTrue(ActionService.executeAction(action));
+        assertTrue(player.getListCard().isEmpty());
+        assertEquals(newyork.getName(), receiver.getListCard().get(0).getCity().getName());
+    }
+
+    @Test
+    public void executeAction_ShareKnowledge_differentCity() {
+        //Sender (player) is in New York
+        //Receiver is in Tokio
+        //Sender has New York card
+        //Receiver has 0 card
+        Player receiver = new Player();
+        receiver.setCity(tokio);
+
+        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver, player.getListCard().get(0));
+
+        assertFalse(ActionService.executeAction(action));
+    }
+
+    @Test
+    public void executeAction_ShareKnowledge_incorrectCardToChange() {
+        //Sender (player) is in New York
+        //Receiver is in New York
+        //Sender has Tokio card
+        //Receiver has 0 card
+        Player receiver = new Player();
+        receiver.setCity(newyork);
+        player.getListCard().remove(0);
+        player.getListCard().add(createCityCard(tokio));
+
+        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver, player.getListCard().get(0));
+
+        assertFalse(ActionService.executeAction(action));
+    }
 }
