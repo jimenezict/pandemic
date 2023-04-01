@@ -16,15 +16,14 @@ import static java.lang.Boolean.TRUE;
 public class ActionService {
 
     public static List<Action> getListOfActions(Player player, List<Virus> virusList, List<City> citiesWithResearchCenter, List<Player> otherPlayersOnTheCity) {
-        //TO-DO: Replace the Default Services by the ones of the player
         List<Action> allowedActions = new ArrayList<>();
-        allowedActions.addAll(BuildResearchCenterDefaultService.returnAvailableActions(player));
-        allowedActions.addAll(DiscoverCureDefaultService.returnAvailableActions(player, virusList));
-        allowedActions.addAll(FlyCharterDefaultService.returnAvailableActions(player));
-        allowedActions.addAll(FlyDirectCityDefaultService.returnAvailableActions(player));
-        allowedActions.addAll(FlyShuttleDefaultService.returnAvailableActions(player, citiesWithResearchCenter));
-        allowedActions.addAll(DriveFerryDefaultService.returnAvailableActions(player));
-        allowedActions.addAll(ShareKnowledgeDefaultService.returnAvailableActions(player, otherPlayersOnTheCity));
+        allowedActions.addAll(player.getBuildResearchCenter().returnAvailableActions(player));
+        allowedActions.addAll(player.getDiscoverCure().returnAvailableActions(player, virusList));
+        allowedActions.addAll(player.getFlyCharter().returnAvailableActions(player));
+        allowedActions.addAll(player.getFlyDirectCity().returnAvailableActions(player));
+        allowedActions.addAll(player.getFlyShuttle().returnAvailableActions(player, citiesWithResearchCenter));
+        allowedActions.addAll(player.getDriveFerry().returnAvailableActions(player));
+        allowedActions.addAll(player.getShareKnowledge().returnAvailableActions(player, otherPlayersOnTheCity));
         return allowedActions;
     }
 
