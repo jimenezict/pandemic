@@ -23,6 +23,6 @@ public class FlyShuttleAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getFlyShuttle().doAction(player, destination);
+        this.player.getFlyShuttle().doAction(player, destination);
     }
 }

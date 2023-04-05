@@ -23,6 +23,6 @@ public class DiscoverCureAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getDiscoverCure().doAction(player, virus);
+        this.player.getDiscoverCure().doAction(player, virus);
     }
 }

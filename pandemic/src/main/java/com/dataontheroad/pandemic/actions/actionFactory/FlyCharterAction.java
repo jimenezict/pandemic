@@ -21,7 +21,7 @@ public class FlyCharterAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getFlyCharter().doAction(player, destination);
+        this.player.getFlyCharter().doAction(player, destination);
     }
 
     public void setDestination(City destination) {

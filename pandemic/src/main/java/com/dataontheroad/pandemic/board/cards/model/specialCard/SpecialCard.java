@@ -10,7 +10,15 @@ public abstract class SpecialCard extends BaseCard {
 
     private String eventDescription;
 
-    public SpecialCard() {
+    protected SpecialCard() {
         super(SPECIAL_ACTION);
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
     }
 }

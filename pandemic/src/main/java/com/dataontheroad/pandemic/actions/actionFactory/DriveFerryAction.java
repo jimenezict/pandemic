@@ -23,6 +23,6 @@ public class DriveFerryAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getDriveFerry().doAction(player, destination);
+        this.player.getDriveFerry().doAction(player, destination);
     }
 }

@@ -57,7 +57,15 @@ public class City {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
+
         City city = (City) obj;
         return city.getName().equals(name);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
     }
 }

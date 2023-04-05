@@ -15,6 +15,10 @@ import static com.dataontheroad.pandemic.board.cards.model.CityCard.createInfect
 
 public class DeckCardFactory {
 
+    private DeckCardFactory() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static List<CityCard> createInfectionDeck() {
         List<CityCard> infectionDeck = CityFactory.createCityList().stream().map(city -> createInfectionCard(city)).collect(Collectors.toList());
         Collections.shuffle(infectionDeck);

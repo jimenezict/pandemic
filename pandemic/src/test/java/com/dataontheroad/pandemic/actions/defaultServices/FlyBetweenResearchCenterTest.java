@@ -43,7 +43,7 @@ class FlyBetweenResearchCenterTest {
     }
 
     @Test
-    public void isDoable_originCityHasResearchCenterButNotDestiny_thenTrue() {
+    public void isDoable_originCityHasResearchCenterAndDestiny_thenTrue() {
         newyork.setHasCenter(TRUE);
         calculta.setHasCenter(TRUE);
         assertTrue(FlyShuttleDefaultService.isDoable(player, calculta));
@@ -68,14 +68,6 @@ class FlyBetweenResearchCenterTest {
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHUTTLEFLIGHT.label));
         assertTrue(actualMessage.contains(SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION));
-    }
-
-    @Test
-    public void doAction_originCityHasResearchCenterButNotDestiny() throws ActionException  {
-        newyork.setHasCenter(TRUE);
-        calculta.setHasCenter(TRUE);
-
-        FlyShuttleDefaultService.doAction(player, calculta);
     }
 
 }

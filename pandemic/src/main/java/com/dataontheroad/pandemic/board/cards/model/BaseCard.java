@@ -6,7 +6,7 @@ public abstract class BaseCard {
 
     private final CardTypeEnum cardTypeEnum;
 
-    public BaseCard(CardTypeEnum cardTypeEnum) {
+    protected BaseCard(CardTypeEnum cardTypeEnum) {
         this.cardTypeEnum = cardTypeEnum;
     }
 

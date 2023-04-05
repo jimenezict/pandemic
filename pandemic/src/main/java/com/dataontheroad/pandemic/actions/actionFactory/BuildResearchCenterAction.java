@@ -19,7 +19,7 @@ public class BuildResearchCenterAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getBuildResearchCenter().doAction(player);
+        this.player.getBuildResearchCenter().doAction(player);
     }
 
 }

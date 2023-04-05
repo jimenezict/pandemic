@@ -33,6 +33,6 @@ public class ShareKnowledgeAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        getPlayer().getShareKnowledge().doAction(player, receiver, card);
+        this.player.getShareKnowledge().doAction(player, receiver, card);
     }
 }

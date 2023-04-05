@@ -32,7 +32,15 @@ public class CityCard extends BaseCard{
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
+
         CityCard card = (CityCard) obj;
         return card.getCity().getName().equals(city.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.city.getName().hashCode();
     }
 }

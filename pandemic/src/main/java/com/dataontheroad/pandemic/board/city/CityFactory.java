@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 public class CityFactory {
+
+    private CityFactory()  {
+        throw new IllegalStateException("Utility class");
+    }
 
     //
     public static List<City> createCityList() {
         List<City> cityList = createCityListWithoutConnections();
-        cityList = addConnectionCityList(cityList);
+        addConnectionCityList(cityList);
         atlantaHasResearchCenter(cityList);
         return cityList;
     }
@@ -36,7 +42,7 @@ public class CityFactory {
 
     private static List<City> atlantaHasResearchCenter(List<City> cityList) {
         City atlanta = cityList.stream().filter(city -> city.getName().equals("Atlanta")).findFirst().orElse(null);
-        atlanta.setHasCenter(Boolean.TRUE);
+        if(!isNull(atlanta)) atlanta.setHasCenter(Boolean.TRUE);
         return cityList;
     }
 

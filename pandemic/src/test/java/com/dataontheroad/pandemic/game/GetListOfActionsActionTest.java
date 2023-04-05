@@ -70,6 +70,6 @@ public class GetListOfActionsActionTest {
         List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, otherPlayersOnTheCity);
 
         printListOfActions(actions);
-        //TO-DO:assertions of the result
+        assertEquals(11, actions.size());
     }
 }
