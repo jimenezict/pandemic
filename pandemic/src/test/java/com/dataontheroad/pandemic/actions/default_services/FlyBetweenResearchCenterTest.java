@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.actions.defaultServices;
+package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.board.city.City;
@@ -32,25 +32,25 @@ class FlyBetweenResearchCenterTest {
     }
 
     @Test
-    public void isDoable_originCityHasNoResearchCenter_thenFalse() {
+    void isDoable_originCityHasNoResearchCenter_thenFalse() {
         assertFalse(FlyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
-    public void isDoable_originCityHasResearchCenterButNotDestiny_thenFalse() {
+    void isDoable_originCityHasResearchCenterButNotDestiny_thenFalse() {
         newyork.setHasCenter(TRUE);
         assertFalse(FlyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
-    public void isDoable_originCityHasResearchCenterAndDestiny_thenTrue() {
+    void isDoable_originCityHasResearchCenterAndDestiny_thenTrue() {
         newyork.setHasCenter(TRUE);
         calculta.setHasCenter(TRUE);
         assertTrue(FlyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
-    public void doAction_originCityHasNoResearchCenter_throwException() {
+    void doAction_originCityHasNoResearchCenter_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
                         () -> FlyShuttleDefaultService.doAction(player, calculta));
@@ -60,7 +60,7 @@ class FlyBetweenResearchCenterTest {
     }
 
     @Test
-    public void doAction_originCityHasResearchCenterButNotDestiny_throwException() {
+    void doAction_originCityHasResearchCenterButNotDestiny_throwException() {
         newyork.setHasCenter(TRUE);
         ActionException exception =
                 assertThrows(ActionException.class,

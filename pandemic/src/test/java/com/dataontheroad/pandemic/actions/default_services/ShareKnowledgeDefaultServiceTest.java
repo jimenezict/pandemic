@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.actions.defaultServices;
+package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
@@ -59,22 +59,22 @@ class ShareKnowledgeDefaultServiceTest {
     }
 
     @Test
-    public void isDoable_sharingRightCardOnRightCity_thenTrue() {
+    void isDoable_sharingRightCardOnRightCity_thenTrue() {
         assertTrue(ShareKnowledgeDefaultService.isDoable(sender, receiver, createCityCard(newyork)));
     }
 
     @Test
-    public void isDoable_sharingCardWhichIsNotOnTheSendersHand_thenFalse() {
+    void isDoable_sharingCardWhichIsNotOnTheSendersHand_thenFalse() {
         assertFalse(ShareKnowledgeDefaultService.isDoable(sender, receiver, createCityCard(cairo)));
     }
 
     @Test
-    public void isDoable_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity_thenFalse() {
+    void isDoable_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity_thenFalse() {
         assertFalse(ShareKnowledgeDefaultService.isDoable(sender, receiver, createCityCard(calculta)));
     }
 
     @Test
-    public void isDoable_sharingRightCardOnRightCityButReceiverIsFull_thenFalse() {
+    void isDoable_sharingRightCardOnRightCityButReceiverIsFull_thenFalse() {
         List<CityCard> cardList = receiver.getListCard();
         cardList.add(createCityCard(atlanta));
         cardList.add(createCityCard(madrid));
@@ -84,13 +84,13 @@ class ShareKnowledgeDefaultServiceTest {
     }
 
     @Test
-    public void isDoable_sharingRightCardOnRightCityButReceiverIsOnAnotherCity_thenFalse() {
+    void isDoable_sharingRightCardOnRightCityButReceiverIsOnAnotherCity_thenFalse() {
         receiver.setCity(madrid);
         assertFalse(ShareKnowledgeDefaultService.isDoable(sender, receiver, createCityCard(newyork)));
     }
 
     @Test
-    public void doAction_sharingCardWhichIsNotOnTheSendersHand_throwException() {
+    void doAction_sharingCardWhichIsNotOnTheSendersHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
                         () -> ShareKnowledgeDefaultService.doAction(sender, receiver, createCityCard(cairo)));
@@ -100,7 +100,7 @@ class ShareKnowledgeDefaultServiceTest {
     }
 
     @Test
-    public void doAction_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity_throwException() {
+    void doAction_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
                         () -> ShareKnowledgeDefaultService.doAction(sender, receiver, createCityCard(calculta)));
@@ -110,7 +110,7 @@ class ShareKnowledgeDefaultServiceTest {
     }
 
     @Test
-    public void doAction_sharingRightCardOnRightCityButReceiverIsFull_throwException() {
+    void doAction_sharingRightCardOnRightCityButReceiverIsFull_throwException() {
         List<CityCard> cardList = receiver.getListCard();
         cardList.add(createCityCard(atlanta));
         cardList.add(createCityCard(madrid));
@@ -125,7 +125,7 @@ class ShareKnowledgeDefaultServiceTest {
     }
 
     @Test
-    public void doAction_sharingRightCardOnRightCityButReceiverIsOnAnotherCity_throwException() {
+    void doAction_sharingRightCardOnRightCityButReceiverIsOnAnotherCity_throwException() {
         receiver.setCity(madrid);
         ActionException exception =
                 assertThrows(ActionException.class,
@@ -136,7 +136,7 @@ class ShareKnowledgeDefaultServiceTest {
     }
 
     @Test
-    public void doAction_transferCard() throws ActionException {
+    void doAction_transferCard() throws ActionException {
         CityCard newyorkCard = createCityCard(newyork);
         ShareKnowledgeDefaultService.doAction(sender, receiver, newyorkCard);
         assertFalse(sender.getListCard().contains(newyorkCard));

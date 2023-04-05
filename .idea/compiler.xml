@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="pandemic.pandemic.main~1" target="1.8" />
-      <module name="pandemic.pandemic.test~1" target="1.8" />
+      <module name="pandemic.pandemic.main" target="1.8" />
+      <module name="pandemic.pandemic.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

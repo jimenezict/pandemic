@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.board.player;
 
-import com.dataontheroad.pandemic.actions.defaultServices.*;
+import com.dataontheroad.pandemic.actions.default_services.*;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 

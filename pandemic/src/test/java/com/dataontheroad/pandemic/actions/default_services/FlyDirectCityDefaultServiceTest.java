@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.actions.defaultServices;
+package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERROR_NO_CARD;
+import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlyCharterTest {
+class FlyDirectCityDefaultServiceTest {
 
     List<City> emptyNodeCityConnection = new ArrayList<>();
     private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
@@ -42,32 +42,30 @@ class FlyCharterTest {
     }
 
     @Test
-    public void isDoable_atlantaIsNotOnPlayerHand_thenFalse() {
-        assertFalse(FlyCharterDefaultService.isDoable(player));
+    void isDoable_tokioIsNotOnPlayerHand_thenFalse() {
+        assertFalse(FlyDirectCityDefaultService.isDoable(player, tokio));
     }
 
     @Test
-    public void isDoable_atlantaIsOnPlayerHand_thenTrue() {
-        player.getListCard().add(createCityCard(atlanta));
-        assertTrue(FlyCharterDefaultService.isDoable(player));
+    void isDoable_limaIsOnPlayerHand_thenTrue() {
+        assertTrue(FlyDirectCityDefaultService.isDoable(player, lima));
     }
 
     @Test
-    public void doAction_atlantaIsNotOnPlayerHand_throwException() {
+    void doAction_tokioIsNotOnPlayerHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyCharterDefaultService.doAction(player, tokio));
+                        () -> FlyDirectCityDefaultService.doAction(player, tokio));
         String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
-        assertTrue(actualMessage.contains(FLYCHARTER_ERROR_NO_CARD));
+        assertTrue(actualMessage.contains(ActionsType.FLYDIRECT.label));
+        assertTrue(actualMessage.contains(FLYDIRECT_ERROR_NO_CARD));
     }
 
     @Test
-    public void doAction_playerHasMoveToTokioAndAtlantaCardIsNotOnHand() throws ActionException  {
-        player.getListCard().add(createCityCard(atlanta));
-        FlyCharterDefaultService.doAction(player, tokio);
-        assertEquals(player.getCity(), tokio);
-        assertFalse(player.getListCard().contains(createCityCard(atlanta)));
+    void doAction_playerHasMoveToLima() throws ActionException  {
+        FlyDirectCityDefaultService.doAction(player, lima);
+        assertEquals(player.getCity(), lima);
+        assertFalse(player.getListCard().contains(createCityCard(lima)));
     }
 
 }

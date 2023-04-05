@@ -1,7 +1,6 @@
 package com.dataontheroad.pandemic.game;
 
-import com.dataontheroad.pandemic.actions.actionFactory.Action;
-import com.dataontheroad.pandemic.actions.defaultServices.*;
+import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.Virus;
 import com.dataontheroad.pandemic.board.player.Player;

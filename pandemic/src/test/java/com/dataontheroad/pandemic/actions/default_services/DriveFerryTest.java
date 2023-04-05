@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.actions.defaultServices;
+package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.board.city.City;
@@ -32,17 +32,17 @@ class DriveFerryTest {
     }
 
     @Test
-    public void isDoable_calcutaIsNotNearToLima_thenFalse() {
+    void isDoable_calcutaIsNotNearToLima_thenFalse() {
         assertFalse(DriveFerryDefaultService.isDoable(player, calculta));
     }
 
     @Test
-    public void isDoable_bogotaIsNearToLima_thenFalse() {
+    void isDoable_bogotaIsNearToLima_thenFalse() {
         assertTrue(DriveFerryDefaultService.isDoable(player, bogota));
     }
 
     @Test
-    public void doAction_calcutaIsNotNearToLima_throwException() {
+    void doAction_calcutaIsNotNearToLima_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
                         () -> DriveFerryDefaultService.doAction(player, calculta));
@@ -52,7 +52,7 @@ class DriveFerryTest {
     }
 
     @Test
-    public void doAction_playerHasMoveToBogota() throws ActionException  {
+    void doAction_playerHasMoveToBogota() throws ActionException  {
         DriveFerryDefaultService.doAction(player, bogota);
         assertEquals(player.getCity(), bogota);
     }

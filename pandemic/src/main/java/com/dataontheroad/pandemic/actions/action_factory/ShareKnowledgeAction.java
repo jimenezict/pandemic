@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.actions.actionFactory;
+package com.dataontheroad.pandemic.actions.action_factory;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;

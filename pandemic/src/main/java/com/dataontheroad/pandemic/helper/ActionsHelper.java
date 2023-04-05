@@ -6,6 +6,10 @@ import com.dataontheroad.pandemic.board.player.Player;
 
 public class ActionsHelper {
 
+    private ActionsHelper() {
+        throw new IllegalStateException("Service Class");
+    }
+
     public static final Boolean playerRemoveCardFromDeck(Player player, CityCard card) {
         return player.getListCard().remove(card);
     }

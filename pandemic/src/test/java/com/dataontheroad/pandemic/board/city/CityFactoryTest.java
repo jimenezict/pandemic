@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CityFactoryTest {
 
     @Test
-    public void createCityListFullTest() {
+    void createCityListFullTest() {
         List<City> cityList = createCityList();
         City atlanta = cityList.stream().filter(city -> city.getName().equals("Atlanta")).findFirst().orElse(null);
 

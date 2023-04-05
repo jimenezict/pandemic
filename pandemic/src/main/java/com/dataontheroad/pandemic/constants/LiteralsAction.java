@@ -2,6 +2,10 @@ package com.dataontheroad.pandemic.constants;
 
 public class LiteralsAction {
 
+    private LiteralsAction() {
+        throw new IllegalStateException("Constant Class");
+    }
+
     //Build Research Station
     public static final String BUILDRESEARCHSTATION_DESCRIPTION = "Discard the City card that matches the city you are in to place a research station there";
     public static final String BUILDRESEARCHSTATION_ACTION = "Build Research Center at city: ";

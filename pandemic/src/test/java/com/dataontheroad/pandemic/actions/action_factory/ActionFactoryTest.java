@@ -1,6 +1,6 @@
-package com.dataontheroad.pandemic.actions.actionFactory;
+package com.dataontheroad.pandemic.actions.action_factory;
 
-import com.dataontheroad.pandemic.actions.defaultServices.*;
+import com.dataontheroad.pandemic.actions.default_services.*;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.Virus;
@@ -51,7 +51,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void buildResearchCenterAction_isDoable_returnsAction() {
+    void buildResearchCenterAction_isDoable_returnsAction() {
         List<Action> availableActions = BuildResearchCenterDefaultService.returnAvailableActions(player);
         assertEquals(1, availableActions.size());
         assertEquals(BUILDRESEARCHSTATION, availableActions.get(0).actionsType);
@@ -59,14 +59,14 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void buildResearchCenterAction_isNotDoable_returnsAction() {
+    void buildResearchCenterAction_isNotDoable_returnsAction() {
         player.getCity().setHasCenter(Boolean.TRUE);
         List<Action> availableActions = BuildResearchCenterDefaultService.returnAvailableActions(player);
         assertTrue(isEmpty(availableActions));
     }
 
     @Test
-    public void discoverCure_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
+    void discoverCure_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
         List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
@@ -81,7 +81,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void discoverCure_cityHasNoResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
+    void discoverCure_cityHasNoResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
         List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
@@ -94,7 +94,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void discoverCure_cityHasResearchCenterCureIsDiscoveredHas5BlueCards_returnsAction() {
+    void discoverCure_cityHasResearchCenterCureIsDiscoveredHas5BlueCards_returnsAction() {
         List<CityCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
@@ -108,7 +108,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void flyCharter_playerHasCityCardThenCanFlyAnywhere_returnsAction() {
+    void flyCharter_playerHasCityCardThenCanFlyAnywhere_returnsAction() {
         List<Action> availableActions = FlyCharterDefaultService.returnAvailableActions(player);
         assertEquals(1, availableActions.size());
         assertEquals(FLYCHARTER, availableActions.get(0).actionsType);
@@ -116,7 +116,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void flyCharter_playerHasNoCityCardThenCannotFlyAnywhere_returnsAction() {
+    void flyCharter_playerHasNoCityCardThenCannotFlyAnywhere_returnsAction() {
         player.setCity(madrid);
         List<Action> availableActions = FlyCharterDefaultService.returnAvailableActions(player);
         assertEquals(0, availableActions.size());
@@ -124,7 +124,7 @@ class ActionFactoryTest {
 
 
     @Test
-    public void flyDirect_playerHave3ValidCardsToTravel_returnsActions() {
+    void flyDirect_playerHave3ValidCardsToTravel_returnsActions() {
         //player is new york and has card for essen paris madrid
         List<CityCard> listCard = player.getListCard();
         listCard.clear();
@@ -139,7 +139,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void flyDirect_playerHave2ValidCardsToTravel_returnsActions() {
+    void flyDirect_playerHave2ValidCardsToTravel_returnsActions() {
         List<CityCard> listCard = player.getListCard();
         //player is new york and has card for new york paris madrid
         listCard.add(createCityCard(paris));
@@ -152,7 +152,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void flyShuttle_playerIsNotOnResearchCenter_returnsActions() {
+    void flyShuttle_playerIsNotOnResearchCenter_returnsActions() {
         calcuta.setHasCenter(Boolean.TRUE);
         newyork.setHasCenter(Boolean.FALSE);
         essen.setHasCenter(Boolean.TRUE);
@@ -162,7 +162,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void flyShuttle_playerIsOnResearchCenter_returnsActions() {
+    void flyShuttle_playerIsOnResearchCenter_returnsActions() {
         calcuta.setHasCenter(Boolean.TRUE);
         newyork.setHasCenter(Boolean.TRUE);
         essen.setHasCenter(Boolean.TRUE);
@@ -174,7 +174,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void moveNodeCity_returnsActions() {
+    void moveNodeCity_returnsActions() {
         // player is in Paris and can travel to madrid or essen
         player.setCity(paris);
         List<Action> availableActions = DriveFerryDefaultService.returnAvailableActions(player);
@@ -186,7 +186,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void shareKnowledge_player1HasNewYork_returnActions() {
+    void shareKnowledge_player1HasNewYork_returnActions() {
         // All in new york, player1 (newyork, madrid), player2 (tokio, calcuta), player3 (paris, atlanta)
         Player player1 = new Player(newyork);
         player1.setListCard(Arrays.asList(CityCard.createCityCard(newyork), CityCard.createCityCard(madrid)));
@@ -211,7 +211,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void shareKnowledge_player3HasNewYork_returnActions() {
+    void shareKnowledge_player3HasNewYork_returnActions() {
         // All in new york, player1 (essen, madrid), player2 (tokio, calcuta), player3 (paris, atlanta)
         Player player1 = new Player(newyork);
         player1.setListCard(Arrays.asList(CityCard.createCityCard(essen), CityCard.createCityCard(madrid)));
@@ -234,7 +234,7 @@ class ActionFactoryTest {
     }
 
     @Test
-    public void shareKnowledge_nobodyHasNewYork_returnActions() {
+    void shareKnowledge_nobodyHasNewYork_returnActions() {
         // All in new york, player1 (essen, madrid), player2 (tokio, calcuta), player3 (paris, newyork)
         Player player1 = new Player(newyork);
         player1.setListCard(Arrays.asList(CityCard.createCityCard(essen), CityCard.createCityCard(madrid)));

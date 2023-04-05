@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.board.cards.model.specialCard;
+package com.dataontheroad.pandemic.board.cards.model.special_card;
 
 import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 

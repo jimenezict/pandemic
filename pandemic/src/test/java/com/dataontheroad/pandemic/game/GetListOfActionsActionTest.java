@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.game;
 
-import com.dataontheroad.pandemic.actions.actionFactory.Action;
+import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.player.Player;
@@ -21,7 +21,7 @@ import static com.dataontheroad.pandemic.game.ActionService.printListOfActions;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GetListOfActionsActionTest {
+class GetListOfActionsActionTest {
 
     List<City> cityList, citiesWithResearchCenter;
     Player player;
@@ -42,7 +42,7 @@ public class GetListOfActionsActionTest {
     }
 
     @Test
-    public void getListOfActions_scenario1() {
+    void getListOfActions_scenario1() {
         //Player is in Atlanta
         //Player without cards
         //Atlanta has research center
@@ -52,7 +52,7 @@ public class GetListOfActionsActionTest {
     }
 
     @Test
-    public void getListOfActions_scenario2() {
+    void getListOfActions_scenario2() {
         //Player is in Atlanta
         //Player with 5 blue cards
         //Atlanta, Algeria has research center

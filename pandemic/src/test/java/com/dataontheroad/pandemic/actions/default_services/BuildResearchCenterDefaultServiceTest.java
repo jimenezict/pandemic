@@ -1,7 +1,7 @@
-package com.dataontheroad.pandemic.actions.defaultServices;
+package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.actionFactory.Action;
+import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.VirusType;
@@ -47,24 +47,24 @@ class BuildResearchCenterDefaultServiceTest {
         player.setListCard(cardList);
     }
     @Test
-    public void isDoable_cityHasAlreadyResearchCenter_thenFalse() {
+    void isDoable_cityHasAlreadyResearchCenter_thenFalse() {
         newyork.setHasCenter(TRUE);
         assertFalse(BuildResearchCenterDefaultService.isDoable(player));
     }
 
     @Test
-    public void isDoable_cityHasNoResearchCenter_HasNoCardForHisPosition_thenFalse() {
+    void isDoable_cityHasNoResearchCenter_HasNoCardForHisPosition_thenFalse() {
         player.setCity(tokio);
         assertFalse(BuildResearchCenterDefaultService.isDoable(player));
     }
 
     @Test
-    public void isDoable_cityHasNoResearchCenter_HasCardForHisPosition_thenFalse() {
+    void isDoable_cityHasNoResearchCenter_HasCardForHisPosition_thenFalse() {
         assertTrue(BuildResearchCenterDefaultService.isDoable(player));
     }
 
     @Test
-    public void doAction_cityHasAlreadyResearchCenter_throwException() {
+    void doAction_cityHasAlreadyResearchCenter_throwException() {
         newyork.setHasCenter(TRUE);
         ActionException exception =
                 assertThrows(ActionException.class,
@@ -75,7 +75,7 @@ class BuildResearchCenterDefaultServiceTest {
     }
 
     @Test
-    public void doAction_cityHasNoResearchCenterAndPlayerIsNotOnSite_throwException() {
+    void doAction_cityHasNoResearchCenterAndPlayerIsNotOnSite_throwException() {
         player.setCity(tokio);
         ActionException exception =
                 assertThrows(ActionException.class,
@@ -86,7 +86,7 @@ class BuildResearchCenterDefaultServiceTest {
     }
 
     @Test
-    public void doAction_cityHasNoResearchCenter_createCenterAndRemoveCard() throws ActionException {
+    void doAction_cityHasNoResearchCenter_createCenterAndRemoveCard() throws ActionException {
         BuildResearchCenterDefaultService.doAction(player);
         assertTrue(newyork.getHasCenter());
         assertFalse(player.getListCard().contains(createCityCard(newyork)));

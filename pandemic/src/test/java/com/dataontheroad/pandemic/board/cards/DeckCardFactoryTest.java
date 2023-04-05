@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class DeckCardFactoryTest {
 
     @Test
-    public void epidemicCardCreation() {
+    void epidemicCardCreation() {
         EpidemicCard epidemicCard= new EpidemicCard();
         assertEquals(CardTypeEnum.EPIDEMIC, epidemicCard.getCardType());
         assertEquals(INCREASE_TEXT, epidemicCard.getIncreaseText());
@@ -26,21 +26,21 @@ class DeckCardFactoryTest {
     }
 
     @Test
-    public void createEpidemicCards_shouldReturnArrayOfThree() {
+    void createEpidemicCards_shouldReturnArrayOfThree() {
         List<EpidemicCard> epidemicCards = createEpidemicCards(3);
         assertEquals(3, epidemicCards.size());
         assertEquals(3,epidemicCards.stream().filter(x -> CardTypeEnum.EPIDEMIC.equals(x.getCardType())).count());
     }
 
     @Test
-    public void createInfectionDeck_shouldCreateOnlyInfectionCards() {
+    void createInfectionDeck_shouldCreateOnlyInfectionCards() {
         List<CityCard> cityCardsList = createInfectionDeck();
         assertEquals(48, cityCardsList.stream().count());
         assertFalse("Atlanta".equals(cityCardsList.get(0).getCity().getName()) && "".equals(cityCardsList.get(47).getCity().getName()));
     }
 
     @Test
-    public void createCityDeck_shouldCreateOnlyInfectionCards() {
+    void createCityDeck_shouldCreateOnlyInfectionCards() {
         List<BaseCard> cityCardsList = createCityDeck(3);
         assertEquals(3, cityCardsList.stream().filter(card -> {
             return card.getCardType().equals(EPIDEMIC);

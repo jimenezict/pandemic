@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.game;
 
-import com.dataontheroad.pandemic.actions.actionFactory.*;
+import com.dataontheroad.pandemic.actions.action_factory.*;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.Virus;
@@ -52,7 +52,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_buildResearchCenter_correct() {
+    void executeAction_buildResearchCenter_correct() {
         //player is in New York
         //New York do NOT have research center
         //Player has DefaultService for BuildResearchCenter
@@ -63,7 +63,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_buildResearchCenter_withoutCard() {
+    void executeAction_buildResearchCenter_withoutCard() {
         //player is in New York
         //New York has NOT research center
         //Player has DefaultService for BuildResearchCenter
@@ -75,7 +75,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_buildResearchCenter_hasResearchCenter() {
+    void executeAction_buildResearchCenter_hasResearchCenter() {
         //player is in New York
         //New York has a research center
         //Player has DefaultService for BuildResearchCenter
@@ -87,7 +87,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_DiscoverCure_correct() {
+    void executeAction_DiscoverCure_correct() {
         //Player is in New York
         //New York has a research center
         //Player has 5 blue cards
@@ -106,7 +106,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_DiscoverCure_cureAlreadyDiscovered() {
+    void executeAction_DiscoverCure_cureAlreadyDiscovered() {
         //Player is in New York
         //New York has a research center
         //Player has 5 blue cards
@@ -126,7 +126,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_DiscoverCure_cityHasNotResearchCenter() {
+    void executeAction_DiscoverCure_cityHasNotResearchCenter() {
         //Player is in New York
         //New York has not a research center
         //Player has 5 blue cards
@@ -145,7 +145,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_DiscoverCure_playerHasNotEnoughCards() {
+    void executeAction_DiscoverCure_playerHasNotEnoughCards() {
         //Player is in New York
         //New York has a research center
         //Player has 2 blue cards
@@ -161,7 +161,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_DriveFerryAction_correct() {
+    void executeAction_DriveFerryAction_correct() {
         //Player is in New York
         //Player goes to Atlanta
         //There is connection between cities
@@ -179,7 +179,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_DriveFerryAction_noConnectionBetweenCities() {
+    void executeAction_DriveFerryAction_noConnectionBetweenCities() {
         //Player is in New York
         //Player goes to Atlanta
         //There is connection between cities
@@ -192,7 +192,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_FlyCharterAction_correct() {
+    void executeAction_FlyCharterAction_correct() {
         //Player is in New York
         //Player goes to Essen
         //Player has New York card
@@ -211,7 +211,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_FlyCharterAction_hasNotEssenCard() {
+    void executeAction_FlyCharterAction_hasNotEssenCard() {
         //Player is in Tokio
         //Player goes to Essen
         //Player has not Tokio card
@@ -230,7 +230,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_FlyDirectAction_correct() {
+    void executeAction_FlyDirectAction_correct() {
         //Player is in New York
         //Player goes to Essen
         //Player has Essen card
@@ -248,7 +248,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_FlyDirectAction_doNotHasDestinationCard() {
+    void executeAction_FlyDirectAction_doNotHasDestinationCard() {
         //Player is in New York
         //Player goes to Tokio
         //Player has Essen card
@@ -265,7 +265,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_FlyShuttleAction_correct() {
+    void executeAction_FlyShuttleAction_correct() {
         //Player is in New York
         //New York has research center
         //Player fly to essen and has research center
@@ -278,7 +278,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_FlyShuttleAction_originWithoutResearchCenter() {
+    void executeAction_FlyShuttleAction_originWithoutResearchCenter() {
         //Player is in New York
         //New York has not research center
         //Player fly to essen and has research center
@@ -290,7 +290,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_FlyShuttleAction_destinationWithoutResearchCenter() {
+    void executeAction_FlyShuttleAction_destinationWithoutResearchCenter() {
         //Player is in New York
         //New York has not research center
         //Player fly to essen and has research center
@@ -303,7 +303,7 @@ class ActionServiceExecuteActionTest {
 
 
     @Test
-    public void executeAction_ShareKnowledge_correct() {
+    void executeAction_ShareKnowledge_correct() {
         //Sender (player) is in New York
         //Receiver is in New York
         //Sender has New York card
@@ -319,7 +319,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_ShareKnowledge_differentCity() {
+    void executeAction_ShareKnowledge_differentCity() {
         //Sender (player) is in New York
         //Receiver is in Tokio
         //Sender has New York card
@@ -333,7 +333,7 @@ class ActionServiceExecuteActionTest {
     }
 
     @Test
-    public void executeAction_ShareKnowledge_incorrectCardToChange() {
+    void executeAction_ShareKnowledge_incorrectCardToChange() {
         //Sender (player) is in New York
         //Receiver is in New York
         //Sender has Tokio card
