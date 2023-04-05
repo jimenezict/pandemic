@@ -19,7 +19,7 @@ import static com.dataontheroad.pandemic.helper.ActionsHelper.playerRemoveCardFr
 
 public class BuildResearchCenterDefaultService {
 
-    public static Boolean isDoable(Player player) {
+    public static boolean isDoable(Player player) {
         City position = player.getCity();
         return !position.getHasCenter() && playerHasCardForHisPosition(player, position);
     }

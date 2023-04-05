@@ -14,7 +14,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERR
 
 public class DriveFerryDefaultService {
 
-    public static Boolean isDoable(Player player, City destination) {
+    public static boolean isDoable(Player player, City destination) {
         return player.getCity().getNodeCityConnection().contains(destination);
     }
 

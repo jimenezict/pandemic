@@ -18,7 +18,7 @@ import static org.springframework.util.CollectionUtils.isEmpty;
 
 public class DiscoverCureDefaultService {
 
-    public static Boolean isDoable(Player player, Virus virus) {
+    public static boolean isDoable(Player player, Virus virus) {
         return player.getCity().getHasCenter()
                 && !virus.getCureDiscovered()
                 && playerHasEnoughCars(player, virus.getVirusType());

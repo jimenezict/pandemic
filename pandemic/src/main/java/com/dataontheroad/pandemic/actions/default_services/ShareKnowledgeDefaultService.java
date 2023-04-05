@@ -15,7 +15,7 @@ import static com.dataontheroad.pandemic.helper.ActionsHelper.playerHasCardForHi
 
 public class ShareKnowledgeDefaultService {
 
-    public static Boolean isDoable(Player sender, Player receiver, CityCard card) {
+    public static boolean isDoable(Player sender, Player receiver, CityCard card) {
         return sender.getCity().equals(receiver.getCity())  // sender and receiver are on the same city
                 && receiver.getListCard().size() < 7        // receiver has space for a new card
                 && sender.getListCard().contains(card)      // sender has the card on his hand

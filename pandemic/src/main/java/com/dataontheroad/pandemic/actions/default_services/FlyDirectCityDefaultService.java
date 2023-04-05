@@ -15,7 +15,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERRO
 
 public class FlyDirectCityDefaultService {
 
-    public static Boolean isDoable(Player player, City destination) {
+    public static boolean isDoable(Player player, City destination) {
         return player.getListCard().contains(createCityCard(destination));
     }
 

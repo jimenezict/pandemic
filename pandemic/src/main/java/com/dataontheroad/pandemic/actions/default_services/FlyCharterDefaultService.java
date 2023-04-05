@@ -16,7 +16,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERR
 
 public class FlyCharterDefaultService {
 
-    public static Boolean isDoable(Player player) {
+    public static boolean isDoable(Player player) {
         return player.getListCard().contains(createCityCard(player.getCity()));
     }
 

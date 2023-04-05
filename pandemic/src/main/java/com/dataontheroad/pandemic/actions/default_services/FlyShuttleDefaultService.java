@@ -14,7 +14,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
 
 public class FlyShuttleDefaultService {
-    public static Boolean isDoable(Player player, City destination) {
+    public static boolean isDoable(Player player, City destination) {
         return player.getCity().getHasCenter() && destination.getHasCenter();
     }
 
