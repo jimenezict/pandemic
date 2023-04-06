@@ -10,13 +10,6 @@ import java.util.List;
 public class Player {
     private List<CityCard> listCard;
     private City city;
-    private BuildResearchCenterDefaultService buildResearchCenter;
-    private DiscoverCureDefaultService discoverCure;
-    private DriveFerryDefaultService driveFerry;
-    private FlyCharterDefaultService flyCharter;
-    private FlyDirectCityDefaultService flyDirectCity;
-    private FlyShuttleDefaultService flyShuttle;
-    private ShareKnowledgeDefaultService shareKnowledge;
 
     public Player() {
         listCard = new ArrayList<>();
@@ -25,13 +18,6 @@ public class Player {
     public Player(City city) {
         listCard = new ArrayList<>();
         this.city = city;
-        buildResearchCenter = new BuildResearchCenterDefaultService();
-        discoverCure = new DiscoverCureDefaultService();
-        driveFerry = new DriveFerryDefaultService();
-        flyCharter = new FlyCharterDefaultService();
-        flyDirectCity = new FlyDirectCityDefaultService();
-        flyShuttle = new FlyShuttleDefaultService();
-        shareKnowledge = new ShareKnowledgeDefaultService();
     }
 
     public List<CityCard> getListCard() {
@@ -51,30 +37,30 @@ public class Player {
     }
 
     public BuildResearchCenterDefaultService getBuildResearchCenter() {
-        return buildResearchCenter;
+        return new BuildResearchCenterDefaultService();
     }
 
     public DiscoverCureDefaultService getDiscoverCure() {
-        return discoverCure;
+        return new DiscoverCureDefaultService();
     }
 
     public DriveFerryDefaultService getDriveFerry() {
-        return driveFerry;
+        return new DriveFerryDefaultService();
     }
 
     public FlyCharterDefaultService getFlyCharter() {
-        return flyCharter;
+        return new FlyCharterDefaultService();
     }
 
     public FlyDirectCityDefaultService getFlyDirectCity() {
-        return flyDirectCity;
+        return new FlyDirectCityDefaultService();
     }
 
     public FlyShuttleDefaultService getFlyShuttle() {
-        return flyShuttle;
+        return new FlyShuttleDefaultService();
     }
 
     public ShareKnowledgeDefaultService getShareKnowledge() {
-        return shareKnowledge;
+        return new ShareKnowledgeDefaultService();
     }
 }
