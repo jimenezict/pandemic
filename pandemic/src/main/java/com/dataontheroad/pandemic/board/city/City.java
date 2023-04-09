@@ -7,7 +7,7 @@ import java.util.List;
 
 public class City {
 
-    private Boolean hasCenter = Boolean.FALSE;
+    private boolean hasCenter = Boolean.FALSE;
     private final VirusType virus;
     private final String name;
     private final List<City> nodeCityConnection;
@@ -27,7 +27,7 @@ public class City {
         virusBoxes = new ArrayList<>();
     }
 
-    public Boolean getHasCenter() {
+    public boolean getHasCenter() {
         return hasCenter;
     }
 

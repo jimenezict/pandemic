@@ -10,11 +10,11 @@ public class ActionsHelper {
         throw new IllegalStateException("Service Class");
     }
 
-    public static final Boolean playerRemoveCardFromDeck(Player player, CityCard card) {
+    public static final boolean playerRemoveCardFromDeck(Player player, CityCard card) {
         return player.getListCard().remove(card);
     }
 
-    public static final Boolean playerHasCardForHisPosition(Player player, City position) {
+    public static final boolean playerHasCardForHisPosition(Player player, City position) {
         return player.getListCard().contains(CityCard.createCityCard(position));
     }
 }

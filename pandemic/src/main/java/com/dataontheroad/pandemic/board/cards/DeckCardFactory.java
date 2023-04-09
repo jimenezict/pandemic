@@ -10,9 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
-import static com.dataontheroad.pandemic.board.cards.model.CityCard.createInfectionCard;
-
 public class DeckCardFactory {
 
     private DeckCardFactory() {
@@ -20,13 +17,13 @@ public class DeckCardFactory {
     }
 
     public static List<CityCard> createInfectionDeck() {
-        List<CityCard> infectionDeck = CityFactory.createCityList().stream().map(city -> createInfectionCard(city)).collect(Collectors.toList());
+        List<CityCard> infectionDeck = CityFactory.createCityList().stream().map(CityCard::createInfectionCard).collect(Collectors.toList());
         Collections.shuffle(infectionDeck);
         return infectionDeck;
     }
 
     public static List<BaseCard> createCityDeck(int numberOfEpidemicCards) {
-        List<BaseCard> cityDeck = CityFactory.createCityList().stream().map(city -> createCityCard(city)).collect(Collectors.toList());
+        List<BaseCard> cityDeck = CityFactory.createCityList().stream().map(CityCard::createCityCard).collect(Collectors.toList());
         cityDeck.addAll(createEpidemicCards(numberOfEpidemicCards));
         cityDeck.addAll(listSpecialAction());
         Collections.shuffle(cityDeck);

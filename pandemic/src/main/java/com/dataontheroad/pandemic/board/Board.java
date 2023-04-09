@@ -9,12 +9,15 @@ import java.util.List;
 
 public class Board {
 
-    private List<CityCard> infectionDeck, infectionDiscardDeck;
-    private List<CityCard> playerDeck, playerDiscardDeck;
+    private List<CityCard> infectionDeck;
+    private List<CityCard> infectionDiscardDeck;
+    private List<CityCard> playerDeck;
+    private List<CityCard> playerDiscardDeck;
     private List<City> boardCities;
     private List<Player> players;
     private List<Virus> virusList;
-    private Integer infectionRate, outbreaks;
+    private Integer infectionRate;
+    private Integer outbreaks;
 
     public Board(int numPlayers) {
         //the board will be initialized with reversing parameters, so will be provided from outside instead

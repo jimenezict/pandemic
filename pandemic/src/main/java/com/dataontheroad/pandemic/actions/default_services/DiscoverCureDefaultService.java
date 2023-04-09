@@ -45,7 +45,7 @@ public class DiscoverCureDefaultService {
         virus.cureHasBeenDiscovered();
     }
 
-    private static Boolean playerHasEnoughCars(Player player, VirusType virusType) {
+    private static boolean playerHasEnoughCars(Player player, VirusType virusType) {
         return player.getListCard().stream().filter(x -> x.getVirus().equals(virusType)).count() == 5;
     }
 

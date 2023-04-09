@@ -23,7 +23,7 @@ public class CityFactory {
     private static List<City> createCityListWithoutConnections() {
         List<City> cityList = new ArrayList<>();
         List<CityEnum> cities = Arrays.asList(CityEnum.values());
-        cities.forEach(cityEnum -> {cityList.add(new City(cityEnum.cityName, cityEnum.virusType));});
+        cities.forEach(cityEnum -> cityList.add(new City(cityEnum.cityName, cityEnum.virusType)));
         return cityList;
     }
 

@@ -23,7 +23,7 @@ public class Virus {
         return virusType;
     }
 
-    public Boolean getCureDiscovered() {
+    public boolean getCureDiscovered() {
         return cureDiscovered;
     }
 

@@ -26,7 +26,8 @@ public enum CityConnectionEnum {
     CON21(NEWYORK.cityName, LONDON.cityName),
     CON22(NEWYORK.cityName, MADRID.cityName),
     ;
-    String city1, city2;
+    String city1;
+    String city2;
 
     CityConnectionEnum(String city1, String city2) {
         this.city1 = city1;

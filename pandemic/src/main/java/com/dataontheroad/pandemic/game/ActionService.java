@@ -27,7 +27,7 @@ public class ActionService {
     }
 
     public static void printListOfActions(List<Action> getListOfActions) {
-        getListOfActions.stream().forEach(action -> {System.out.println(action.actionPrompt());});
+        getListOfActions.stream().forEach(action -> System.out.println(action.actionPrompt()));
     }
 
     public static Boolean executeAction(Action action) {
