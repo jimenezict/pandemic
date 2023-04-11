@@ -18,15 +18,15 @@ import static com.dataontheroad.pandemic.board.city.CityFactory.createCityList;
 
 public class Board {
 
-    private static final int MAX_INFECTIONS = 7;
+    private static final int MAX_INFECTIONS = 6;
     private static final int MAX_OUTBREAKS = 8;
     private List<CityCard> infectionDeck;
     private List<CityCard> infectionDiscardDeck;
     private List<BaseCard> playerDeck;
     private List<CityCard> playerDiscardDeck;
-    private List<City> boardCities;
+    private final List<City> boardCities;
     private List<Player> players;
-    private List<Virus> virusList;
+    private final List<Virus> virusList;
     private Integer infectionRate;
     private Integer outbreaks;
 
@@ -75,7 +75,7 @@ public class Board {
     }
 
     public void increaseInfectionRate() throws EndOfGameException {
-        if(infectionRate <= MAX_INFECTIONS) {
+        if(infectionRate >= MAX_INFECTIONS) {
             throw new EndOfGameException("You had reach the maximal infection rate");
         }
         infectionRate++;
