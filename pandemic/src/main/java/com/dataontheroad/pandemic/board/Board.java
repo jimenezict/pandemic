@@ -1,17 +1,28 @@
 package com.dataontheroad.pandemic.board;
 
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.virus.Virus;
+import com.dataontheroad.pandemic.board.virus.VirusType;
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.dataontheroad.pandemic.board.cards.DeckCardFactory.createCityDeck;
+import static com.dataontheroad.pandemic.board.cards.DeckCardFactory.createInfectionDeck;
+import static com.dataontheroad.pandemic.board.city.CityFactory.createCityList;
 
 public class Board {
 
+    private static final int MAX_INFECTIONS = 7;
+    private static final int MAX_OUTBREAKS = 8;
     private List<CityCard> infectionDeck;
     private List<CityCard> infectionDiscardDeck;
-    private List<CityCard> playerDeck;
+    private List<BaseCard> playerDeck;
     private List<CityCard> playerDiscardDeck;
     private List<City> boardCities;
     private List<Player> players;
@@ -19,26 +30,75 @@ public class Board {
     private Integer infectionRate;
     private Integer outbreaks;
 
-    public Board(int numPlayers) {
-        //the board will be initialized with reversing parameters, so will be provided from outside instead
-        //of being generated on this object.
-        /*
+    public Board(int numberOfInfectionsCards) {
+
         infectionDiscardDeck = new ArrayList<>();
         playerDiscardDeck = new ArrayList<>();
 
-        boardCities = initializedCities();
-        infectionDeck = initializeInfectionDeck(boardCities);
-        playerDeck = initializePlayerDeck(boardCities);
+        boardCities = createCityList();
+        infectionDeck = createInfectionDeck();
+        playerDeck = createCityDeck(numberOfInfectionsCards);
         virusList = initializeVirus();
 
         infectionRate = 0;
         outbreaks = 0;
+    }
 
-        Collections.shuffle(infectionDeck);
-        Collections.shuffle(playerDeck);
+    public List<CityCard> getInfectionDeck() {
+        return infectionDeck;
+    }
 
-        initialCitiesInfection(boardCities);
-        initialPlayersDraw(players, playerDeck);*/
+    public List<BaseCard> getPlayerDeck() {
+        return playerDeck;
+    }
+
+    public List<City> getBoardCities() {
+        return boardCities;
+    }
+
+    public List<Virus> getVirusList() {
+        return virusList;
+    }
+
+    public int getNumberInfectionCard() {
+        switch(infectionRate) {
+            case 0:
+            case 1:
+            case 2:
+                return 2;
+            case 3:
+            case 4:
+                return 3;
+            default:
+                return 4;
+        }
+    }
+
+    public void increaseInfectionRate() throws EndOfGameException {
+        if(infectionRate <= MAX_INFECTIONS) {
+            throw new EndOfGameException("You had reach the maximal infection rate");
+        }
+        infectionRate++;
+    }
+
+    public int getOutBreaks() {
+        return outbreaks;
+    }
+
+    public void increaseOutBreaks() throws EndOfGameException {
+        if(infectionRate <= MAX_OUTBREAKS) {
+            throw new EndOfGameException("You had reach the maximal number of outbreaks");
+        }
+        infectionRate++;
+    }
+
+    private static List<Virus> initializeVirus() {
+        Virus blueVirus = new Virus(VirusType.BLUE);
+        Virus blackVirus = new Virus(VirusType.BLACK);
+        Virus redVirus = new Virus(VirusType.RED);
+        Virus yellowVirus = new Virus(VirusType.YELLOW);
+
+        return Arrays.asList(blueVirus, blackVirus, redVirus, yellowVirus);
     }
 
 }
