@@ -1,8 +1,5 @@
 package com.dataontheroad.pandemic.board;
 
-import com.dataontheroad.pandemic.actions.ActionsType;
-import com.dataontheroad.pandemic.actions.default_services.DiscoverCureDefaultService;
-import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +42,23 @@ class BoardTest {
 
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains("You had reach the maximal infection rate"));
+    }
+
+    @Test
+    void valuesForTheOutbreak() throws EndOfGameException {
+        Board board = new Board(2);
+        for(int i=0; i<8; i++) {
+            assertEquals(i, board.getOutBreaks());
+            board.increaseOutBreaks();
+        }
+        assertEquals(8, board.getOutBreaks());
+
+        EndOfGameException exception =
+                assertThrows(EndOfGameException.class,
+                        () -> board.increaseOutBreaks());
+
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains("You had reach the maximal number of outbreaks"));
     }
 
 }

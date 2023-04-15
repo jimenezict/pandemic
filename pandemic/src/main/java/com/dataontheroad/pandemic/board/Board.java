@@ -86,10 +86,10 @@ public class Board {
     }
 
     public void increaseOutBreaks() throws EndOfGameException {
-        if(infectionRate <= MAX_OUTBREAKS) {
+        if(outbreaks >= MAX_OUTBREAKS) {
             throw new EndOfGameException("You had reach the maximal number of outbreaks");
         }
-        infectionRate++;
+        outbreaks++;
     }
 
     private static List<Virus> initializeVirus() {
