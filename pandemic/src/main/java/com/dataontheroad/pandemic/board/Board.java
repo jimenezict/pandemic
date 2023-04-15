@@ -10,8 +10,11 @@ import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.board.cards.DeckCardFactory.createCityDeck;
 import static com.dataontheroad.pandemic.board.cards.DeckCardFactory.createInfectionDeck;
 import static com.dataontheroad.pandemic.board.city.CityFactory.createCityList;
@@ -23,7 +26,7 @@ public class Board {
     private List<CityCard> infectionDeck;
     private List<CityCard> infectionDiscardDeck;
     private List<BaseCard> playerDeck;
-    private List<CityCard> playerDiscardDeck;
+    private List<BaseCard> playerDiscardDeck;
     private final List<City> boardCities;
     private List<Player> players;
     private final List<Virus> virusList;
@@ -31,9 +34,9 @@ public class Board {
     private Integer outbreaks;
 
     public Board(int numberOfInfectionsCards) {
-
         infectionDiscardDeck = new ArrayList<>();
         playerDiscardDeck = new ArrayList<>();
+        players = new ArrayList<>();
 
         boardCities = createCityList();
         infectionDeck = createInfectionDeck();
@@ -60,6 +63,14 @@ public class Board {
         return virusList;
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public int getOutBreaks() {
+        return outbreaks;
+    }
+
     public int getNumberInfectionCard() {
         switch(infectionRate) {
             case 0:
@@ -81,15 +92,27 @@ public class Board {
         infectionRate++;
     }
 
-    public int getOutBreaks() {
-        return outbreaks;
-    }
-
     public void increaseOutBreaks() throws EndOfGameException {
         if(outbreaks >= MAX_OUTBREAKS) {
             throw new EndOfGameException("You had reach the maximal number of outbreaks");
         }
         outbreaks++;
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public List<CityCard> initialDrawCards(int numberOfPlayers) {
+        List<CityCard> returnCityCards = new ArrayList<>();
+        List<BaseCard> playerCards = playerDeck.stream().
+                filter(x -> CITY.equals(x.getCardType())).
+                collect(Collectors.toList()).
+                subList(0, numberOfCardsToDraw(numberOfPlayers));
+
+        playerCards.clear();
+        Collections.shuffle(playerDeck);
+        return returnCityCards;
     }
 
     private static List<Virus> initializeVirus() {
@@ -101,4 +124,15 @@ public class Board {
         return Arrays.asList(blueVirus, blackVirus, redVirus, yellowVirus);
     }
 
+    private int numberOfCardsToDraw(int numberOfPlayers) {
+        switch(numberOfPlayers) {
+            case 2:
+                return 4;
+            case 3:
+                return 3;
+            case 4:
+                return 2;
+        }
+        return -1;
+    }
 }
