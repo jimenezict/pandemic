@@ -9,19 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
 
     @Test
-    void createBoardWithTwoInfectionCard() {
-        Board board = new Board(2);
+    void createBaseBoard() {
+        Board board = new Board();
         board.getBoardCities().get(0);
         assertEquals(2, board.getNumberInfectionCard());
         assertEquals(48, board.getInfectionDeck().size());
         assertEquals(0, board.getOutBreaks());
-        assertEquals(2, board.getPlayerDeck().stream().filter(x -> EPIDEMIC.equals(x.getCardType())).count());
+        assertEquals(0, board.getPlayerDeck().stream().filter(x -> EPIDEMIC.equals(x.getCardType())).count());
         assertEquals(4, board.getVirusList().size());
     }
 
     @Test
     void valuesForTheNumberInfection() throws EndOfGameException {
-        Board board = new Board(2);
+        Board board = new Board();
         assertEquals(2, board.getNumberInfectionCard());
         board.increaseInfectionRate();
         assertEquals(2, board.getNumberInfectionCard());
@@ -46,7 +46,7 @@ class BoardTest {
 
     @Test
     void valuesForTheOutbreak() throws EndOfGameException {
-        Board board = new Board(2);
+        Board board = new Board();
         for(int i=0; i<8; i++) {
             assertEquals(i, board.getOutBreaks());
             board.increaseOutBreaks();

@@ -30,6 +30,12 @@ public class DeckCardFactory {
         return cityDeck;
     }
 
+    public static List<BaseCard> createCityDeck() {
+        List<BaseCard> cityDeck = CityFactory.createCityList().stream().map(CityCard::createCityCard).collect(Collectors.toList());
+        cityDeck.addAll(listSpecialAction());
+        return cityDeck;
+    }
+
     public static List<BaseCard> listSpecialAction() {
         return new ArrayList<>();
     }

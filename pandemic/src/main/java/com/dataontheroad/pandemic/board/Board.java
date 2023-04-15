@@ -33,14 +33,14 @@ public class Board {
     private Integer infectionRate;
     private Integer outbreaks;
 
-    public Board(int numberOfInfectionsCards) {
+    public Board() {
         infectionDiscardDeck = new ArrayList<>();
         playerDiscardDeck = new ArrayList<>();
         players = new ArrayList<>();
 
         boardCities = createCityList();
         infectionDeck = createInfectionDeck();
-        playerDeck = createCityDeck(numberOfInfectionsCards);
+        playerDeck = createCityDeck();
         virusList = initializeVirus();
 
         infectionRate = 0;
