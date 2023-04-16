@@ -1,12 +1,12 @@
 package com.dataontheroad.pandemic.actions.action_factory;
 
 import com.dataontheroad.pandemic.actions.default_services.*;
-import com.dataontheroad.pandemic.board.cards.model.BaseCard;
-import com.dataontheroad.pandemic.board.cards.model.CityCard;
-import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.virus.Virus;
-import com.dataontheroad.pandemic.board.virus.VirusType;
-import com.dataontheroad.pandemic.board.player.Player;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
+import com.dataontheroad.pandemic.model.cards.model.CityCard;
+import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.virus.Virus;
+import com.dataontheroad.pandemic.model.virus.VirusType;
+import com.dataontheroad.pandemic.model.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.*;
-import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
+import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -3,16 +3,16 @@ package com.dataontheroad.pandemic.actions.default_services;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.FlyDirectAction;
-import com.dataontheroad.pandemic.board.cards.model.CityCard;
-import com.dataontheroad.pandemic.board.city.City;
-import com.dataontheroad.pandemic.board.player.Player;
+import com.dataontheroad.pandemic.model.cards.model.CityCard;
+import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.CITY;
-import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
+import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
 
 public class FlyDirectCityDefaultService {

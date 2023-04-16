@@ -3,10 +3,10 @@ package com.dataontheroad.pandemic.actions.default_services;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DiscoverCureAction;
-import com.dataontheroad.pandemic.board.cards.model.CityCard;
-import com.dataontheroad.pandemic.board.virus.Virus;
-import com.dataontheroad.pandemic.board.virus.VirusType;
-import com.dataontheroad.pandemic.board.player.Player;
+import com.dataontheroad.pandemic.model.cards.model.CityCard;
+import com.dataontheroad.pandemic.model.virus.Virus;
+import com.dataontheroad.pandemic.model.virus.VirusType;
+import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.CITY;
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
