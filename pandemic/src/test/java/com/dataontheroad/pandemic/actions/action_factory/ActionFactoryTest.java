@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.actions.action_factory;
 
 import com.dataontheroad.pandemic.actions.default_services.*;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.Virus;
@@ -67,7 +68,7 @@ class ActionFactoryTest {
 
     @Test
     void discoverCure_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -82,7 +83,7 @@ class ActionFactoryTest {
 
     @Test
     void discoverCure_cityHasNoResearchCenterCureIsNotDiscoveredHas5BlueCards_returnsAction() {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -95,7 +96,7 @@ class ActionFactoryTest {
 
     @Test
     void discoverCure_cityHasResearchCenterCureIsDiscoveredHas5BlueCards_returnsAction() {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -126,7 +127,7 @@ class ActionFactoryTest {
     @Test
     void flyDirect_playerHave3ValidCardsToTravel_returnsActions() {
         //player is new york and has card for essen paris madrid
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.clear();
         listCard.add(createCityCard(essen));
         listCard.add(createCityCard(paris));
@@ -140,7 +141,7 @@ class ActionFactoryTest {
 
     @Test
     void flyDirect_playerHave2ValidCardsToTravel_returnsActions() {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         //player is new york and has card for new york paris madrid
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));

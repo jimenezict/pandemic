@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.*;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.Virus;
@@ -93,7 +94,7 @@ class ActionServiceExecuteActionTest {
         //Player has 5 blue cards
         //Cure not discovered yet
 
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -112,7 +113,7 @@ class ActionServiceExecuteActionTest {
         //Player has 5 blue cards
         //Cure discovered yet
 
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -132,7 +133,7 @@ class ActionServiceExecuteActionTest {
         //Player has 5 blue cards
         //Cure not discovered yet
 
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -151,7 +152,7 @@ class ActionServiceExecuteActionTest {
         //Player has 2 blue cards
         //Cure not discovered yet
 
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
 
         newyork.setHasCenter(TRUE);
@@ -197,7 +198,7 @@ class ActionServiceExecuteActionTest {
         //Player goes to Essen
         //Player has New York card
 
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -217,7 +218,7 @@ class ActionServiceExecuteActionTest {
         //Player has not Tokio card
 
         player.setCity(tokio);
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -235,7 +236,7 @@ class ActionServiceExecuteActionTest {
         //Player goes to Essen
         //Player has Essen card
 
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -253,7 +254,7 @@ class ActionServiceExecuteActionTest {
         //Player goes to Tokio
         //Player has Essen card
 
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(essen));
@@ -311,11 +312,11 @@ class ActionServiceExecuteActionTest {
         Player receiver = new Player();
         receiver.setCity(newyork);
 
-        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver, player.getListCard().get(0));
+        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
         assertTrue(ActionService.executeAction(action));
         assertTrue(player.getListCard().isEmpty());
-        assertEquals(newyork.getName(), receiver.getListCard().get(0).getCity().getName());
+        assertEquals(newyork.getName(), ((CityCard) receiver.getListCard().get(0)).getCity().getName());
     }
 
     @Test
@@ -327,7 +328,7 @@ class ActionServiceExecuteActionTest {
         Player receiver = new Player();
         receiver.setCity(tokio);
 
-        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver, player.getListCard().get(0));
+        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
         assertFalse(ActionService.executeAction(action));
     }
@@ -343,7 +344,7 @@ class ActionServiceExecuteActionTest {
         player.getListCard().remove(0);
         player.getListCard().add(createCityCard(tokio));
 
-        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver, player.getListCard().get(0));
+        ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
         assertFalse(ActionService.executeAction(action));
     }

@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.helper;
 
-import com.dataontheroad.pandemic.board.cards.model.CityCard;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.VirusType;
 import com.dataontheroad.pandemic.board.player.Player;
@@ -31,7 +31,7 @@ class ActionsHelperTest {
     public void setPlayer() {
         player = new Player();
 
-        List<CityCard> cardList = new ArrayList<>();
+        List<BaseCard> cardList = new ArrayList<>();
         cardList.add(createCityCard(newyork));
         cardList.add(createCityCard(calculta));
         cardList.add(createCityCard(essen));

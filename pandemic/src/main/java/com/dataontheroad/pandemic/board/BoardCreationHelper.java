@@ -9,7 +9,7 @@ public class BoardCreationHelper {
     public static void configurePlayersOnBoard(Board board, int numberOfPlayers) {
         IntStream.range(0, numberOfPlayers).forEach($ -> {
             Player player = new Player();
-            player.setListCard(board.initialDrawCards(numberOfPlayers));
+            player.setListCard(board.getInitialDrawCards(numberOfPlayers));
             board.addPlayer(player);
         });
     }

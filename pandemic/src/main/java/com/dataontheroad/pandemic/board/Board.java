@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.board.cards.DeckCardFactory.createCityDeck;
 import static com.dataontheroad.pandemic.board.cards.DeckCardFactory.createInfectionDeck;
 import static com.dataontheroad.pandemic.board.city.CityFactory.createCityList;
@@ -103,16 +101,11 @@ public class Board {
         players.add(player);
     }
 
-    public List<CityCard> initialDrawCards(int numberOfPlayers) {
-        List<CityCard> returnCityCards = new ArrayList<>();
-        List<BaseCard> playerCards = playerDeck.stream().
-                filter(x -> CITY.equals(x.getCardType())).
-                collect(Collectors.toList()).
-                subList(0, numberOfCardsToDraw(numberOfPlayers));
-
-        playerCards.clear();
+    protected List<BaseCard> getInitialDrawCards(int numberOfPlayers) {
         Collections.shuffle(playerDeck);
-        return returnCityCards;
+        List<BaseCard> playerCards = new ArrayList<> (playerDeck.subList(0, numberOfCardsToDraw(numberOfPlayers)));
+        playerDeck.subList(0, numberOfCardsToDraw(numberOfPlayers)).clear();
+        return playerCards;
     }
 
     private static List<Virus> initializeVirus() {
@@ -132,7 +125,8 @@ public class Board {
                 return 3;
             case 4:
                 return 2;
+            default:
+                return -1;
         }
-        return -1;
     }
 }

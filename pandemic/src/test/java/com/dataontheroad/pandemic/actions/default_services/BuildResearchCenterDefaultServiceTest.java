@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.VirusType;
@@ -38,7 +39,7 @@ class BuildResearchCenterDefaultServiceTest {
         player = new Player();
         player.setCity(newyork);
 
-        List<CityCard> cardList = new ArrayList<>();
+        List<BaseCard> cardList = new ArrayList<>();
         cardList.add(createCityCard(newyork));
         cardList.add(createCityCard(calculta));
         cardList.add(createCityCard(essen));

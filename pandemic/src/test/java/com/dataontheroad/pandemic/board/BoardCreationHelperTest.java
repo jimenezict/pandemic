@@ -16,10 +16,44 @@ class BoardCreationHelperTest {
     }
     @Test
     void configurePlayerOnBoard_TwoPlayers_ChecksBothPlayersHave4CardsAndPlayerDeck() {
-        configurePlayersOnBoard(board, 2);
-        board.getPlayerDeck().size();
-        assertEquals(2, board.getPlayers().size());
-        //assertEquals(4, board.getPlayers().get(0).getListCard().size());
+        final int NUMBER_PLAYERS = 2;
+        final int NUMBER_CARDS = 4;
+
+        int initialSize = board.getPlayerDeck().size();
+        configurePlayersOnBoard(board, NUMBER_PLAYERS);
+
+        assertEquals(NUMBER_PLAYERS, board.getPlayers().size());
+        assertEquals(NUMBER_CARDS, board.getPlayers().get(0).getListCard().size());
+        assertEquals(NUMBER_CARDS, board.getPlayers().get(1).getListCard().size());
+        assertEquals(initialSize - NUMBER_CARDS * NUMBER_PLAYERS, board.getPlayerDeck().size());
+    }
+
+    @Test
+    void configurePlayerOnBoard_ThreePlayers_ChecksBothPlayersHave3CardsAndPlayerDeck() {
+        final int NUMBER_PLAYERS = 3;
+        final int NUMBER_CARDS = 3;
+
+        int initialSize = board.getPlayerDeck().size();
+        configurePlayersOnBoard(board, NUMBER_PLAYERS);
+
+        assertEquals(NUMBER_PLAYERS, board.getPlayers().size());
+        assertEquals(NUMBER_CARDS, board.getPlayers().get(0).getListCard().size());
+        assertEquals(NUMBER_CARDS, board.getPlayers().get(1).getListCard().size());
+        assertEquals(initialSize - NUMBER_CARDS * NUMBER_PLAYERS, board.getPlayerDeck().size());
+    }
+
+    @Test
+    void configurePlayerOnBoard_FourPlayers_ChecksBothPlayersHave2CardsAndPlayerDeck() {
+        final int NUMBER_PLAYERS = 4;
+        final int NUMBER_CARDS = 2;
+
+        int initialSize = board.getPlayerDeck().size();
+        configurePlayersOnBoard(board, NUMBER_PLAYERS);
+
+        assertEquals(NUMBER_PLAYERS, board.getPlayers().size());
+        assertEquals(NUMBER_CARDS, board.getPlayers().get(0).getListCard().size());
+        assertEquals(NUMBER_CARDS, board.getPlayers().get(1).getListCard().size());
+        assertEquals(initialSize - NUMBER_CARDS * NUMBER_PLAYERS, board.getPlayerDeck().size());
     }
 
 }

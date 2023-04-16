@@ -1,14 +1,14 @@
 package com.dataontheroad.pandemic.board.player;
 
 import com.dataontheroad.pandemic.actions.default_services.*;
-import com.dataontheroad.pandemic.board.cards.model.CityCard;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.city.City;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private List<CityCard> listCard;
+    private List<BaseCard> listCard;
     private City city;
 
     public Player() {
@@ -20,11 +20,11 @@ public class Player {
         this.city = city;
     }
 
-    public List<CityCard> getListCard() {
+    public List<BaseCard> getListCard() {
         return listCard;
     }
 
-    public void setListCard(List<CityCard> listCard) {
+    public void setListCard(List<BaseCard> listCard) {
         this.listCard = listCard;
     }
 

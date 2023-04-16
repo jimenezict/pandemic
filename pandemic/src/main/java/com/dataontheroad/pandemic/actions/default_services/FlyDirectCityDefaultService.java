@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.actions.default_services;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.FlyDirectAction;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
@@ -10,6 +11,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
 
@@ -21,10 +23,12 @@ public class FlyDirectCityDefaultService {
 
     public static List<Action> returnAvailableActions(Player player) {
         List<Action> actionList = new ArrayList<>();
-        player.getListCard().stream().forEach(destination -> {
-            if(!player.getCity().equals(destination.getCity())) {
-                actionList.add(new FlyDirectAction(player, destination.getCity()));
-            }
+        player.getListCard().stream()
+                .filter(card -> CITY.equals(card.getCardType()))
+                .forEach(destination -> {
+                    if(!player.getCity().equals(((CityCard) destination).getCity())) {
+                        actionList.add(new FlyDirectAction(player, ((CityCard) destination).getCity()));
+                    }
         });
         return actionList;
     }

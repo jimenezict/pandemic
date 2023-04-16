@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
-import com.dataontheroad.pandemic.board.cards.model.CityCard;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.player.Player;
 import com.dataontheroad.pandemic.board.virus.Virus;
@@ -18,7 +18,6 @@ import static com.dataontheroad.pandemic.board.cards.model.CityCard.createCityCa
 import static com.dataontheroad.pandemic.board.city.CityFactory.createCityList;
 import static com.dataontheroad.pandemic.game.ActionService.getListOfActions;
 import static com.dataontheroad.pandemic.game.ActionService.printListOfActions;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GetListOfActionsActionTest {
@@ -59,7 +58,7 @@ class GetListOfActionsActionTest {
         //Player has Atlanta card
         //There is a receiver player with no cards
         citiesWithResearchCenter = cityList.subList(0,2);
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(cityList.get(1)));
         listCard.add(createCityCard(cityList.get(9)));
         listCard.add(createCityCard(cityList.get(11)));

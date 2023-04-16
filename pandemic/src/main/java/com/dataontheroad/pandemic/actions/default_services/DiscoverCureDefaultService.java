@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.actions.default_services;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DiscoverCureAction;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.virus.Virus;
 import com.dataontheroad.pandemic.board.virus.VirusType;
 import com.dataontheroad.pandemic.board.player.Player;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.dataontheroad.pandemic.board.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -46,7 +48,9 @@ public class DiscoverCureDefaultService {
     }
 
     private static boolean playerHasEnoughCars(Player player, VirusType virusType) {
-        return player.getListCard().stream().filter(x -> x.getVirus().equals(virusType)).count() == 5;
+        return player.getListCard().stream()
+                .filter(card -> CITY.equals(card.getCardType()))
+                .filter(card -> ((CityCard) card).getVirus().equals(virusType)).count() == 5;
     }
 
 }

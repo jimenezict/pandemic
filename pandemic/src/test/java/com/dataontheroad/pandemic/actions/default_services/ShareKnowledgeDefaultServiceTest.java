@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.VirusType;
@@ -38,7 +39,7 @@ class ShareKnowledgeDefaultServiceTest {
         sender = new Player();
         sender.setCity(newyork);
 
-        List<CityCard> cardList = new ArrayList<>();
+        List<BaseCard> cardList = new ArrayList<>();
         cardList.add(createCityCard(newyork));
         cardList.add(createCityCard(calculta));
         cardList.add(createCityCard(essen));
@@ -75,7 +76,7 @@ class ShareKnowledgeDefaultServiceTest {
 
     @Test
     void isDoable_sharingRightCardOnRightCityButReceiverIsFull_thenFalse() {
-        List<CityCard> cardList = receiver.getListCard();
+        List<BaseCard> cardList = receiver.getListCard();
         cardList.add(createCityCard(atlanta));
         cardList.add(createCityCard(madrid));
         cardList.add(createCityCard(paris));
@@ -111,7 +112,7 @@ class ShareKnowledgeDefaultServiceTest {
 
     @Test
     void doAction_sharingRightCardOnRightCityButReceiverIsFull_throwException() {
-        List<CityCard> cardList = receiver.getListCard();
+        List<BaseCard> cardList = receiver.getListCard();
         cardList.add(createCityCard(atlanta));
         cardList.add(createCityCard(madrid));
         cardList.add(createCityCard(paris));

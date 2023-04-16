@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.board.cards.model.BaseCard;
 import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.board.city.City;
 import com.dataontheroad.pandemic.board.virus.Virus;
@@ -64,7 +65,7 @@ class DiscoverCureTest {
 
     @Test
     void isDoable_cityHasResearchCenterCureIsNotDiscoveredHas2BlueCards_thenFalse() {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
@@ -73,7 +74,7 @@ class DiscoverCureTest {
 
     @Test
     void isDoable_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_thenTrue() {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(newyork));
@@ -85,7 +86,7 @@ class DiscoverCureTest {
 
     @Test
     void isDoable_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards2Others_thenTrue() {
-         List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(newyork));
@@ -120,7 +121,7 @@ class DiscoverCureTest {
 
     @Test
     void doAction_cityHasResearchCenterCureIsNotDiscoveredHas2BlueCards_throwException() {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
@@ -134,7 +135,7 @@ class DiscoverCureTest {
 
     @Test
     void doAction_cityHasResearchCenterCureIsNotDiscoveredHas5BlueCards_virusIsDiscovered() throws ActionException {
-        List<CityCard> listCard = player.getListCard();
+        List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
         listCard.add(createCityCard(newyork));
