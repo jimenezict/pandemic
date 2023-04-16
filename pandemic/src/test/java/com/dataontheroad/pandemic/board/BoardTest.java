@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.board;
 
 import com.dataontheroad.pandemic.board.cards.model.BaseCard;
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import org.junit.jupiter.api.Test;
 
@@ -89,6 +90,15 @@ class BoardTest {
         List<BaseCard> initialDrawCards = board.getInitialDrawCards(4);
         assertEquals(2, initialDrawCards.size());
         assertEquals(initialSize - 2, board.getPlayerDeck().size());
+    }
+
+    @Test
+    void getInitialDrawInfectionDeck() {
+        Board board = new Board();
+        List<CityCard> initialInfectionDraw = board.getInitialDrawInfectionDeck();
+        assertEquals(9, initialInfectionDraw.size());
+        assertEquals(39, board.getInfectionDeck().size());
+        assertEquals(9, board.getInfectionDiscardDeck().size());
     }
 
 }

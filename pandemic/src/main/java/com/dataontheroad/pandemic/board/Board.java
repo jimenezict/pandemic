@@ -69,6 +69,10 @@ public class Board {
         return outbreaks;
     }
 
+    public List<CityCard> getInfectionDiscardDeck() {
+        return infectionDiscardDeck;
+    }
+
     public int getNumberInfectionCard() {
         switch(infectionRate) {
             case 0:
@@ -106,6 +110,14 @@ public class Board {
         List<BaseCard> playerCards = new ArrayList<> (playerDeck.subList(0, numberOfCardsToDraw(numberOfPlayers)));
         playerDeck.subList(0, numberOfCardsToDraw(numberOfPlayers)).clear();
         return playerCards;
+    }
+
+    protected List<CityCard> getInitialDrawInfectionDeck() {
+        Collections.shuffle(infectionDeck);
+        List<CityCard> initialInfectionDraw = new ArrayList<> (infectionDeck.subList(0, 9));
+        infectionDiscardDeck.addAll(initialInfectionDraw);
+        infectionDeck.subList(0, 9).clear();
+        return initialInfectionDraw;
     }
 
     private static List<Virus> initializeVirus() {
