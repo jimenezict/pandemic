@@ -1,9 +1,14 @@
 package com.dataontheroad.pandemic.board;
 
+import com.dataontheroad.pandemic.board.cards.model.CityCard;
+import com.dataontheroad.pandemic.board.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static com.dataontheroad.pandemic.board.BoardCreationHelper.configurePlayersOnBoard;
+import static com.dataontheroad.pandemic.board.BoardCreationHelper.configureVirusOnBoard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardCreationHelperTest {
@@ -56,4 +61,23 @@ class BoardCreationHelperTest {
         assertEquals(initialSize - NUMBER_CARDS * NUMBER_PLAYERS, board.getPlayerDeck().size());
     }
 
+    @Test
+    void configureVirusOnBoardTest() {
+        List<CityCard> initialDrawInfection = configureVirusOnBoard(board);
+
+        assertEquals(39, board.getInfectionDeck().size());
+        assertEquals(9, board.getInfectionDiscardDeck().size());
+
+        List<VirusType> cityVirusBoxes = board.getCityFromBoardList(initialDrawInfection.get(0).getCity()).getVirusBoxes();
+        assertEquals(3, cityVirusBoxes.size());
+        assertEquals(cityVirusBoxes.get(0), initialDrawInfection.get(0).getVirus());
+
+        cityVirusBoxes = board.getCityFromBoardList(initialDrawInfection.get(3).getCity()).getVirusBoxes();
+        assertEquals(2, cityVirusBoxes.size());
+        assertEquals(cityVirusBoxes.get(0), initialDrawInfection.get(3).getVirus());
+
+        cityVirusBoxes = board.getCityFromBoardList(initialDrawInfection.get(6).getCity()).getVirusBoxes();
+        assertEquals(1, cityVirusBoxes.size());
+        assertEquals(cityVirusBoxes.get(0), initialDrawInfection.get(6).getVirus());
+    }
 }

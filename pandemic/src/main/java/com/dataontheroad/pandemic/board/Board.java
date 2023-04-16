@@ -105,6 +105,10 @@ public class Board {
         players.add(player);
     }
 
+    public City getCityFromBoardList(City inputCity) {
+        return boardCities.stream().filter(city -> city.equals(inputCity)).findFirst().orElse(null);
+    }
+
     protected List<BaseCard> getInitialDrawCards(int numberOfPlayers) {
         Collections.shuffle(playerDeck);
         List<BaseCard> playerCards = new ArrayList<> (playerDeck.subList(0, numberOfCardsToDraw(numberOfPlayers)));

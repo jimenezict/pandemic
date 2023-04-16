@@ -17,21 +17,21 @@ public class BoardCreationHelper {
         });
     }
 
-    public static void configureVirusOnBoard(Board board) {
+    public static List<CityCard> configureVirusOnBoard(Board board) {
         List<CityCard> initialDrawInfection = board.getInitialDrawInfectionDeck();
-        initialDrawInfection.forEach( city -> {
-            City cityOnBoard = board.getBoardCities().get(board.getBoardCities().indexOf(city));
-            cityOnBoard.getVirusBoxes().add(city.getVirus());
+        initialDrawInfection.forEach( cityOnCard -> {
+            City cityOnBoard = board.getCityFromBoardList(cityOnCard.getCity());
+            cityOnBoard.getVirusBoxes().add(cityOnCard.getVirus());
         });
-        initialDrawInfection.subList(0,6).forEach( city -> {
-            City cityOnBoard = board.getBoardCities().get(board.getBoardCities().indexOf(city));
-            cityOnBoard.getVirusBoxes().add(city.getVirus());
+        initialDrawInfection.subList(0,6).forEach( cityOnCard -> {
+            City cityOnBoard = board.getCityFromBoardList(cityOnCard.getCity());
+            cityOnBoard.getVirusBoxes().add(cityOnCard.getVirus());
         });
-        initialDrawInfection.subList(0,3).forEach( city -> {
-            City cityOnBoard = board.getBoardCities().get(board.getBoardCities().indexOf(city));
-            cityOnBoard.getVirusBoxes().add(city.getVirus());
+        initialDrawInfection.subList(0,3).forEach( cityOnCard -> {
+            City cityOnBoard = board.getCityFromBoardList(cityOnCard.getCity());
+            cityOnBoard.getVirusBoxes().add(cityOnCard.getVirus());
         });
-
+        return initialDrawInfection;
     }
 
 }
