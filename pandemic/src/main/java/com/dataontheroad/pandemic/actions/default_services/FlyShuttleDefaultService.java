@@ -12,8 +12,21 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
+import static java.util.Objects.isNull;
 
 public class FlyShuttleDefaultService {
+
+    private static FlyShuttleDefaultService flyShuttleDefaultService;
+
+    private FlyShuttleDefaultService(){}
+
+    public static FlyShuttleDefaultService getInstance() {
+        if(isNull(flyShuttleDefaultService)) {
+            flyShuttleDefaultService = new FlyShuttleDefaultService();
+        }
+        return flyShuttleDefaultService;
+    }
+
     public static boolean isDoable(Player player, City destination) {
         return player.getCity().getHasCenter() && destination.getHasCenter();
     }

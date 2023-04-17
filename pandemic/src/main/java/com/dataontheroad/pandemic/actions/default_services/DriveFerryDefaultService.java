@@ -11,8 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERROR_NO_CONNECTION;
+import static java.util.Objects.isNull;
 
 public class DriveFerryDefaultService {
+
+    private static DriveFerryDefaultService driveFerryDefaultService;
+
+    private DriveFerryDefaultService() {
+    }
+
+    public static DriveFerryDefaultService getInstance() {
+        if(isNull(driveFerryDefaultService)) {
+            driveFerryDefaultService = new DriveFerryDefaultService();
+        }
+        return driveFerryDefaultService;
+    }
 
     public static boolean isDoable(Player player, City destination) {
         return player.getCity().getNodeCityConnection().contains(destination);

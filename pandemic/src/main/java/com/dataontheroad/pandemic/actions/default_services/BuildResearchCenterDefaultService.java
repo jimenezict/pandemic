@@ -16,8 +16,21 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHS
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisPosition;
 import static com.dataontheroad.pandemic.actions.ActionsHelper.playerRemoveCardFromDeck;
+import static java.util.Objects.isNull;
 
 public class BuildResearchCenterDefaultService {
+
+    private static BuildResearchCenterDefaultService buildResearchCenterDefaultService;
+
+    private BuildResearchCenterDefaultService() {
+    }
+
+    public static BuildResearchCenterDefaultService getInstance() {
+        if(isNull(buildResearchCenterDefaultService)) {
+            buildResearchCenterDefaultService = new BuildResearchCenterDefaultService();
+        }
+        return buildResearchCenterDefaultService;
+    }
 
     public static boolean isDoable(Player player) {
         City position = player.getCity();

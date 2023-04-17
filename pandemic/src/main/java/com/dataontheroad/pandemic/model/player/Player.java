@@ -37,30 +37,30 @@ public class Player {
     }
 
     public BuildResearchCenterDefaultService getBuildResearchCenter() {
-        return new BuildResearchCenterDefaultService();
+        return BuildResearchCenterDefaultService.getInstance();
     }
 
     public DiscoverCureDefaultService getDiscoverCure() {
-        return new DiscoverCureDefaultService();
+        return DiscoverCureDefaultService.getInstance();
     }
 
     public DriveFerryDefaultService getDriveFerry() {
-        return new DriveFerryDefaultService();
+        return DriveFerryDefaultService.getInstance();
     }
 
     public FlyCharterDefaultService getFlyCharter() {
-        return new FlyCharterDefaultService();
+        return FlyCharterDefaultService.getInstance();
     }
 
     public FlyDirectCityDefaultService getFlyDirectCity() {
-        return new FlyDirectCityDefaultService();
+        return FlyDirectCityDefaultService.getInstance();
     }
 
     public FlyShuttleDefaultService getFlyShuttle() {
-        return new FlyShuttleDefaultService();
+        return FlyShuttleDefaultService.getInstance();
     }
 
     public ShareKnowledgeDefaultService getShareKnowledge() {
-        return new ShareKnowledgeDefaultService();
+        return ShareKnowledgeDefaultService.getInstance();
     }
 }
