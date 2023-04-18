@@ -1,10 +1,11 @@
 package com.dataontheroad.pandemic.model.board;
 
-import com.dataontheroad.pandemic.model.board.Board;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -66,31 +67,14 @@ class BoardTest {
         assertTrue(actualMessage.contains("You had reach the maximal number of outbreaks"));
     }
 
-    @Test
-    void getInitialDrawCardsWhenNumberOfPlayersIs2() {
+    @ParameterizedTest
+    @ValueSource(ints = {2, 3, 4})
+    void getInitialDrawCardsWhenNumberOfPlayersIsN() {
         Board board = new Board();
         int initialSize = board.getPlayerDeck().size();
         List<BaseCard> initialDrawCards = board.getInitialDrawCards(2);
         assertEquals(4, initialDrawCards.size());
         assertEquals(initialSize - 4, board.getPlayerDeck().size());
-    }
-
-    @Test
-    void getInitialDrawCardsWhenNumberOfPlayersIs3() {
-        Board board = new Board();
-        int initialSize = board.getPlayerDeck().size();
-        List<BaseCard> initialDrawCards = board.getInitialDrawCards(3);
-        assertEquals(3, initialDrawCards.size());
-        assertEquals(initialSize - 3, board.getPlayerDeck().size());
-    }
-
-    @Test
-    void getInitialDrawCardsWhenNumberOfPlayersIs4() {
-        Board board = new Board();
-        int initialSize = board.getPlayerDeck().size();
-        List<BaseCard> initialDrawCards = board.getInitialDrawCards(4);
-        assertEquals(2, initialDrawCards.size());
-        assertEquals(initialSize - 2, board.getPlayerDeck().size());
     }
 
     @Test

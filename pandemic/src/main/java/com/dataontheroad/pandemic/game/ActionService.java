@@ -14,6 +14,10 @@ import static java.lang.Boolean.TRUE;
 
 public class ActionService {
 
+    private ActionService() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static List<Action> getListOfActions(Player player, List<Virus> virusList, List<City> citiesWithResearchCenter, List<Player> otherPlayersOnTheCity) {
         List<Action> allowedActions = new ArrayList<>();
         allowedActions.addAll(player.getBuildResearchCenter().returnAvailableActions(player));
