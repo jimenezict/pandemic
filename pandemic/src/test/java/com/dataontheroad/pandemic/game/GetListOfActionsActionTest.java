@@ -57,6 +57,8 @@ class GetListOfActionsActionTest {
         //Atlanta, Algeria has research center
         //Player has Atlanta card
         //There is a receiver player with no cards
+        //Atlanta has a blue and two black virus
+
         citiesWithResearchCenter = cityList.subList(0,2);
         List<BaseCard> listCard = player.getListCard();
         listCard.add(createCityCard(cityList.get(1)));
@@ -65,10 +67,14 @@ class GetListOfActionsActionTest {
         listCard.add(createCityCard(cityList.get(25)));
         listCard.add(createCityCard(cityList.get(24)));
 
+        player.getCity().addVirusBoxes(blackVirus.getVirusType());
+        player.getCity().addVirusBoxes(blueVirus.getVirusType());
+        player.getCity().addVirusBoxes(blackVirus.getVirusType());
+
         List<Player> otherPlayersOnTheCity = Arrays.asList(new Player(cityList.get(1)));
         List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, otherPlayersOnTheCity);
 
         printListOfActions(actions);
-        assertEquals(11, actions.size());
+        assertEquals(13, actions.size());
     }
 }

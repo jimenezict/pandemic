@@ -250,4 +250,6 @@ class ActionFactoryTest {
         List<Action> availableActions = ShareKnowledgeDefaultService.returnAvailableActions(player1, players);
         assertEquals(0, availableActions.size());
     }
+
+    //TO-DO: ActionTest for TreatDiseaseAction
 }

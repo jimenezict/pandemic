@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.model.city;
 
+import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.util.ArrayList;
@@ -53,6 +54,14 @@ public class City {
 
     public void setVirusBoxes(List<VirusType> virusBoxes) {
         this.virusBoxes = virusBoxes;
+    }
+
+    public boolean addVirusBoxes(VirusType virus) {
+        if(virusBoxes.size() < 3) {
+            virusBoxes.add(virus);
+            return true;
+        }
+        return false;
     }
 
     @Override

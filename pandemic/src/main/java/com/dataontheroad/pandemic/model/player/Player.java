@@ -63,4 +63,6 @@ public class Player {
     public ShareKnowledgeDefaultService getShareKnowledge() {
         return ShareKnowledgeDefaultService.getInstance();
     }
+
+    public TreatDiseaseDefaultService getTreatDisease() { return TreatDiseaseDefaultService.getInstance();}
 }

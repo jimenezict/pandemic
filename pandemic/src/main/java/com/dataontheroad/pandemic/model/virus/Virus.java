@@ -1,5 +1,7 @@
 package com.dataontheroad.pandemic.model.virus;
 
+import com.dataontheroad.pandemic.model.cards.model.CityCard;
+
 public class Virus {
 
     private final VirusType virusType;
@@ -29,5 +31,14 @@ public class Virus {
 
     public Boolean getEradicated() {
         return eradicated;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
+
+        Virus virus = (Virus) obj;
+        return virus.getVirusType().equals(virusType);
     }
 }

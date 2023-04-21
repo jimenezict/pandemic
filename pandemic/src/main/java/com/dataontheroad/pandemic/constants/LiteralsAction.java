@@ -2,6 +2,8 @@ package com.dataontheroad.pandemic.constants;
 
 public class LiteralsAction {
 
+
+
     private LiteralsAction() {
         throw new IllegalStateException("Constant Class");
     }
@@ -43,4 +45,8 @@ public class LiteralsAction {
     public static final String DISCOVERCURE_ERROR_NO_RESEARCH_STATION = "The city do not have a research station";
     public static final String DISCOVERCURE_ERROR_CURE_DISCOVERED = "The city do not have a research station";
     public static final String DISCOVERCURE_ERROR_NO_CARD = "The player do not have enough cards";
+
+    public static final String TREATDISEASE_DESCRIPTION = "Remove 1 disease cube from the city you are in. If this color is cured, remove all cubes of that color from the city";
+    public static final String TREATDISEASE_ACTION = "Treat disease: ";
+    public static final String TREATDISEASE_ERROR_DO_NOT_EXISTS_VIRUS = "There is not this type of virus on current city";
 }

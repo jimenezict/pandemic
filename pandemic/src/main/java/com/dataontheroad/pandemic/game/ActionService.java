@@ -27,6 +27,7 @@ public class ActionService {
         allowedActions.addAll(player.getFlyShuttle().returnAvailableActions(player, citiesWithResearchCenter));
         allowedActions.addAll(player.getDriveFerry().returnAvailableActions(player));
         allowedActions.addAll(player.getShareKnowledge().returnAvailableActions(player, otherPlayersOnTheCity));
+        allowedActions.addAll(player.getTreatDisease().returnAvailableActions(player, virusList));
         return allowedActions;
     }
 
