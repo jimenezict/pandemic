@@ -251,5 +251,35 @@ class ActionFactoryTest {
         assertEquals(0, availableActions.size());
     }
 
-    //TO-DO: ActionTest for TreatDiseaseAction
+    @Test
+    void treatDiseaseAction_oneBlueDiseaseInNewYork_returnActions1Action() {
+        newyork.addVirusBoxes(VirusType.BLUE);
+        List<Action> availableActions = TreatDiseaseDefaultService.returnAvailableActions(player, virusList);
+        assertEquals(1, availableActions.size());
+        assertEquals(TREATDISEASE,availableActions.get(0).getActionsType());
+        assertTrue(availableActions.get(0).actionPrompt().contains("BLUE"));
+    }
+
+    @Test
+    void treatDiseaseAction_twoBlueDiseaseInNewYork_returnActions1Action() {
+        newyork.addVirusBoxes(VirusType.BLUE);
+        newyork.addVirusBoxes(VirusType.BLUE);
+        List<Action> availableActions = TreatDiseaseDefaultService.returnAvailableActions(player, virusList);
+        assertEquals(1, availableActions.size());
+        assertEquals(TREATDISEASE,availableActions.get(0).getActionsType());
+        assertTrue(availableActions.get(0).actionPrompt().contains("BLUE"));
+    }
+
+    @Test
+    void treatDiseaseAction_twoBlueOneBlackDiseaseInNewYork_returnActions1Action() {
+        newyork.addVirusBoxes(VirusType.BLUE);
+        newyork.addVirusBoxes(VirusType.BLUE);
+        newyork.addVirusBoxes(VirusType.BLACK);
+        List<Action> availableActions = TreatDiseaseDefaultService.returnAvailableActions(player, virusList);
+        assertEquals(2, availableActions.size());
+        assertEquals(TREATDISEASE,availableActions.get(0).getActionsType());
+        assertEquals(TREATDISEASE,availableActions.get(1).getActionsType());
+        assertTrue(availableActions.get(0).actionPrompt().contains("BLUE"));
+        assertTrue(availableActions.get(1).actionPrompt().contains("BLACK"));
+    }
 }
