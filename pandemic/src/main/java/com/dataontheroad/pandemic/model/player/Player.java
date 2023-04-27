@@ -10,6 +10,9 @@ import java.util.List;
 public class Player {
     private List<BaseCard> listCard;
     private City city;
+    protected String color;
+    protected String name;
+    protected String description;
 
     public Player() {
         listCard = new ArrayList<>();
