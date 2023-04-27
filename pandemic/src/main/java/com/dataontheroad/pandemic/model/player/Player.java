@@ -13,13 +13,16 @@ public class Player {
     protected String color;
     protected String name;
     protected String description;
+    protected int numOfCardsForDiscoveringCure;
 
     public Player() {
         listCard = new ArrayList<>();
+        numOfCardsForDiscoveringCure = 5;
     }
 
     public Player(City city) {
         listCard = new ArrayList<>();
+        numOfCardsForDiscoveringCure = 5;
         this.city = city;
     }
 
@@ -37,6 +40,9 @@ public class Player {
 
     public void setCity(City city) {
         this.city = city;
+    }
+    public int getNumOfCardsForDiscoveringCure() {
+        return numOfCardsForDiscoveringCure;
     }
 
     public BuildResearchCenterDefaultService getBuildResearchCenter() {

@@ -60,10 +60,10 @@ public class DiscoverCureDefaultService {
         virus.cureHasBeenDiscovered();
     }
 
-    public static boolean playerHasEnoughCars(Player player, VirusType virusType) {
+    private static boolean playerHasEnoughCars(Player player, VirusType virusType) {
         return player.getListCard().stream()
                 .filter(card -> CITY.equals(card.getCardType()))
-                .filter(card -> ((CityCard) card).getVirus().equals(virusType)).count() == 5;
+                .filter(card -> ((CityCard) card).getVirus().equals(virusType)).count() == player.getNumOfCardsForDiscoveringCure();
     }
 
 }
