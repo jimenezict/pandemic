@@ -2,13 +2,15 @@ package com.dataontheroad.pandemic.model.player;
 
 import com.dataontheroad.pandemic.actions.default_services.DiscoverCureDefaultService;
 
+import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
+
 public class ScientistPlayer extends Player {
 
     public ScientistPlayer() {
         super();
-        color = "white";
-        name = "scientist";
-        description = "You need only 4 cards of the same color to do the Discover a Cure action";
+        color = SCIENTIST_COLOR;
+        name = SCIENTIST_NAME;
+        description = SCIENTIST_DESCRIPTION;
         numOfCardsForDiscoveringCure = 4;
     }
 

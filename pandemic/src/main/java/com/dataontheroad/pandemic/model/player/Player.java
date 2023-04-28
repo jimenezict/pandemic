@@ -45,6 +45,18 @@ public class Player {
         return numOfCardsForDiscoveringCure;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public BuildResearchCenterDefaultService getBuildResearchCenter() {
         return BuildResearchCenterDefaultService.getInstance();
     }
