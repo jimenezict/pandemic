@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasEnoughCars;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static java.util.Objects.isNull;
@@ -60,10 +61,6 @@ public class DiscoverCureDefaultService {
         virus.cureHasBeenDiscovered();
     }
 
-    private static boolean playerHasEnoughCars(Player player, VirusType virusType) {
-        return player.getListCard().stream()
-                .filter(card -> CITY.equals(card.getCardType()))
-                .filter(card -> ((CityCard) card).getVirus().equals(virusType)).count() == player.getNumOfCardsForDiscoveringCure();
-    }
+
 
 }
