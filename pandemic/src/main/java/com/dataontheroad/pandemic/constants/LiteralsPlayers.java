@@ -8,4 +8,7 @@ public class LiteralsPlayers {
     public static final String QUARANTINE_COLOR = "Dark Green";
     public static final String QUARANTINE_NAME = "Quarantine Specialist";
     public static final String QUARANTINE_DESCRIPTION = "Prevent all disease cube placements (and outbreaks) in the city you are in and adjacent cities.";
+    public static final String CONTINGENCY_COLOR = "";
+    public static final String CONTINGENCY_NAME = "";
+    public static final String CONTINGENCY_DESCRIPTION = "";
 }

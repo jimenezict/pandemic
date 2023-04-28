@@ -49,4 +49,8 @@ public class LiteralsAction {
     public static final String TREATDISEASE_DESCRIPTION = "Remove 1 disease cube from the city you are in. If this color is cured, remove all cubes of that color from the city";
     public static final String TREATDISEASE_ACTION = "Treat disease: ";
     public static final String TREATDISEASE_ERROR_DO_NOT_EXISTS_VIRUS = "There is not this type of virus on current city";
+
+    public static final String PLAYERACTION_DESCRIPTION = "This is a unique action from your player";
+    public static final String CONTINGENCY_ERROR_HAS_EXTRA_CARD_ALREADY = "Player has already an event card";
+    public static final String CONTINGENCY_ERROR_NO_EVENTS_CARDS = "There are no event cards on the discards desk";
 }
