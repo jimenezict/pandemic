@@ -6,9 +6,9 @@ import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EVENT_ACTION;
 
 public abstract class SpecialCard extends BaseCard {
 
-    private String eventName;
+    protected String eventName;
 
-    private String eventDescription;
+    protected String eventDescription;
 
     protected SpecialCard() {
         super(EVENT_ACTION);

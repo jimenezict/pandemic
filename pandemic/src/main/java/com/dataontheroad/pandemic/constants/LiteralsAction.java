@@ -4,6 +4,7 @@ public class LiteralsAction {
 
 
 
+
     private LiteralsAction() {
         throw new IllegalStateException("Constant Class");
     }
@@ -40,7 +41,7 @@ public class LiteralsAction {
     public static final String FLYCHARTER_ERROR_NO_CARD = "Player has no card to fly to the city";
 
     //Discover Cure
-    public static final String DISCOVERCURE_DESCRIPTION = "At any research station, discard d city cards of the same disease color to cure that disease";
+    public static final String DISCOVERCURE_DESCRIPTION = "At any research station, discard 5 city cards of the same disease color to cure that disease";
     public static final String DISCOVERCURE_ACTION = "Discover a Cure for: ";
     public static final String DISCOVERCURE_ERROR_NO_RESEARCH_STATION = "The city do not have a research station";
     public static final String DISCOVERCURE_ERROR_CURE_DISCOVERED = "The city do not have a research station";
@@ -53,4 +54,6 @@ public class LiteralsAction {
     public static final String PLAYERACTION_DESCRIPTION = "This is a unique action from your player";
     public static final String CONTINGENCY_ERROR_HAS_EXTRA_CARD_ALREADY = "Player has already an event card";
     public static final String CONTINGENCY_ERROR_NO_EVENTS_CARDS = "There are no event cards on the discards desk";
+    public static final String TAKEDISCARDEVENTCARD_DESCRIPTION = "Unique action for Contingency Planner.";
+    public static final String TAKEDISCARDEVENTCARD_ACTION = "You can take a card from city discard deck: ";
 }

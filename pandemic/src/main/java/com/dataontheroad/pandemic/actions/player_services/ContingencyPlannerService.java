@@ -50,7 +50,10 @@ public class ContingencyPlannerService {
         if(isEmpty(availableEvents)) {
             throw new ActionException(ActionsType.PLAYERACTION, CONTINGENCY_ERROR_NO_EVENTS_CARDS);
         }
-
         return null;
+    }
+
+    public static void doAction() {
+
     }
 }

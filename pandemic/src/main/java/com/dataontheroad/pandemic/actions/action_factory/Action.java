@@ -8,7 +8,7 @@ public abstract class Action {
     final ActionsType actionsType;
     final Player player;
 
-    Action(ActionsType actionsType, Player player) {
+    protected Action(ActionsType actionsType, Player player) {
         this.actionsType = actionsType;
         this.player = player;
     }
