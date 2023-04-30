@@ -2,9 +2,13 @@ package com.dataontheroad.pandemic.actions.player_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.actions.action_factory.player_actions.TakeDiscardEventCardAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
+import com.dataontheroad.pandemic.model.cards.model.special_card.SpecialCard;
 import com.dataontheroad.pandemic.model.player.ContingencyPlayer;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +30,7 @@ public class ContingencyPlannerService {
     }
 
     public static boolean isDoable(ContingencyPlayer player, List<BaseCard> discardedCards) {
-        if(!isNull(player.getExtraEventCard())) {
+        if(isNull(player.getExtraEventCard())) {
             if(!isNull(discardedCards)) {
                 if(discardedCards.stream().filter(card -> EVENT_ACTION.equals(card.getCardType())).count() > 0) {
                     return true;
@@ -37,23 +41,26 @@ public class ContingencyPlannerService {
     }
 
     public static List<Action> returnAvailableActions(ContingencyPlayer player, List<BaseCard> discardedCards) throws ActionException {
-        if(isNull(player.getExtraEventCard())) {
+
+        List<Action> availableActions = new ArrayList<>();
+        for (BaseCard card : discardedCards) {
+            if (EVENT_ACTION.equals(card.getCardType())) {
+                availableActions.add(new TakeDiscardEventCardAction(player, (SpecialCard) card));
+            }
+        }
+
+        return availableActions;
+    }
+
+    public static void doAction(ContingencyPlayer player, List<BaseCard> discardedCards, SpecialCard eventCard) throws ActionException {
+        if(!isNull(player.getExtraEventCard())) {
             throw new ActionException(ActionsType.PLAYERACTION, CONTINGENCY_ERROR_HAS_EXTRA_CARD_ALREADY);
         }
 
-        if(isNull(discardedCards)) {
-            throw new ActionException(ActionsType.PLAYERACTION, CONTINGENCY_ERROR_NO_EVENTS_CARDS);
+        int index = discardedCards.indexOf(eventCard);
+        if(index > 0) {
+            discardedCards.remove(discardedCards.indexOf(eventCard));
+            player.setExtraEventCard(eventCard);
         }
-
-        List<BaseCard> availableEvents = discardedCards.stream().filter(card -> EVENT_ACTION.equals(card.getCardType())).collect(Collectors.toList());
-
-        if(isEmpty(availableEvents)) {
-            throw new ActionException(ActionsType.PLAYERACTION, CONTINGENCY_ERROR_NO_EVENTS_CARDS);
-        }
-        return null;
-    }
-
-    public static void doAction() {
-
     }
 }

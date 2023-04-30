@@ -19,6 +19,10 @@ public class ContingencyPlayer extends Player {
         return extraEventCard;
     }
 
+    public void setExtraEventCard(SpecialCard extraEventCard) {
+        this.extraEventCard = extraEventCard;
+    }
+
     public ContingencyPlannerService specialActionService() {
         return ContingencyPlannerService.getInstance();
     }
