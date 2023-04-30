@@ -13,7 +13,6 @@ public class ContingencyPlayer extends Player {
         color = CONTINGENCY_COLOR;
         name = CONTINGENCY_NAME;
         description = CONTINGENCY_DESCRIPTION;
-        numOfCardsForDiscoveringCure = 5;
     }
 
     public SpecialCard getExtraEventCard() {
