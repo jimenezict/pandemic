@@ -1,5 +1,7 @@
 package com.dataontheroad.pandemic.constants;
 
+import static com.dataontheroad.pandemic.constants.LiteralsPlayers.CONTINGENCY_NAME;
+
 public class LiteralsAction {
 
 
@@ -54,6 +56,7 @@ public class LiteralsAction {
     public static final String PLAYERACTION_DESCRIPTION = "This is a unique action from your player";
     public static final String CONTINGENCY_ERROR_HAS_EXTRA_CARD_ALREADY = "Player has already an event card";
     public static final String CONTINGENCY_ERROR_NO_EVENTS_CARDS = "There are no event cards on the discards desk";
+    public static final String CONTINGENCY_ERROR_NO_CONTINGENCY_PLAYER = "Player is not " + CONTINGENCY_NAME;
     public static final String TAKEDISCARDEVENTCARD_DESCRIPTION = "Unique action for Contingency Planner.";
     public static final String TAKEDISCARDEVENTCARD_ACTION = "You can take a card from city discard deck: ";
 }

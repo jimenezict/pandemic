@@ -7,16 +7,19 @@ import com.dataontheroad.pandemic.model.cards.model.special_card.SpecialCard;
 import com.dataontheroad.pandemic.model.player.ContingencyPlayer;
 import com.dataontheroad.pandemic.model.player.Player;
 
+import static com.dataontheroad.pandemic.constants.LiteralsAction.CONTINGENCY_ERROR_NO_CONTINGENCY_PLAYER;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.TAKEDISCARDEVENTCARD_ACTION;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.CONTINGENCY_NAME;
 
 public class TakeDiscardEventCardAction extends Action {
 
-    SpecialCard eventCard;
+    private final SpecialCard eventCard;
 
-    public TakeDiscardEventCardAction(Player player, SpecialCard eventCard) {
+    public TakeDiscardEventCardAction(Player player, SpecialCard eventCard) throws ActionException {
         super(ActionsType.TAKEDISCARDEVENTCARD, player);
-        assert(CONTINGENCY_NAME.equals(player.getName()));
+        if(!CONTINGENCY_NAME.equals(player.getName())){
+            throw new ActionException(ActionsType.TAKEDISCARDEVENTCARD, CONTINGENCY_ERROR_NO_CONTINGENCY_PLAYER);
+        }
         this.eventCard = eventCard;
     }
 
@@ -29,5 +32,9 @@ public class TakeDiscardEventCardAction extends Action {
     public void execute() throws ActionException {
         ContingencyPlayer player = (ContingencyPlayer) getPlayer();
         player.specialActionService().doAction();
+    }
+
+    public SpecialCard getEventCard() {
+        return eventCard;
     }
 }
