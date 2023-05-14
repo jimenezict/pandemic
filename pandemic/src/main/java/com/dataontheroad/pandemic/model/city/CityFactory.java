@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.model.city;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
 
@@ -21,10 +22,10 @@ public class CityFactory {
     }
 
     private static List<City> createCityListWithoutConnections() {
-        List<City> cityList = new ArrayList<>();
-        List<CityEnum> cities = Arrays.asList(CityEnum.values());
-        cities.forEach(cityEnum -> cityList.add(new City(cityEnum.cityName, cityEnum.virusType)));
-        return cityList;
+        return Arrays.asList(CityEnum.values())
+                .stream()
+                .map(cityEnum -> new City(cityEnum.cityName, cityEnum.virusType))
+                .collect(Collectors.toList());
     }
 
     private static List<City> addConnectionCityList(List<City> cityList) {
