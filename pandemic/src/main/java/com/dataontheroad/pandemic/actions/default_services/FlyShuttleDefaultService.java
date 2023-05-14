@@ -9,6 +9,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
@@ -32,16 +33,13 @@ public class FlyShuttleDefaultService {
     }
 
     public static List<Action> returnAvailableActions(Player player, List<City> citiesWithResearchCenterList) {
-        List<Action> actionList = new ArrayList<>();
         if(!player.getCity().getHasCenter()) {
-            return actionList;
+            return new ArrayList<>();
         }
-        citiesWithResearchCenterList.stream().forEach(destination -> {
-            if(!player.getCity().equals(destination)) {
-                actionList.add(new FlyShuttleAction(player, destination));
-            }
-        });
-        return actionList;
+        return citiesWithResearchCenterList.stream()
+                .filter(destination -> !player.getCity().equals(destination))
+                .map(destination -> new FlyShuttleAction(player, destination))
+                .collect(Collectors.toList());
     }
 
     public static void doAction(Player player, City destination) throws ActionException {

@@ -9,6 +9,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERROR_NO_CONNECTION;
 import static java.util.Objects.isNull;
@@ -32,14 +33,10 @@ public class DriveFerryDefaultService {
     }
 
     public static List<Action> returnAvailableActions(Player player) {
-        List<Action> actionList = new ArrayList<>();
-
-        player.getCity().getNodeCityConnection().stream().forEach(destination -> {
-            if(!player.getCity().equals(destination)) {
-                actionList.add(new DriveFerryAction(player, destination));
-            }
-        });
-        return actionList;
+        return player.getCity().getNodeCityConnection().stream()
+                .filter(destination -> !player.getCity().equals(destination))
+                .map(destination -> new DriveFerryAction(player, destination))
+                .collect(Collectors.toList());
     }
 
     public static void doAction(Player player, City destination) throws ActionException {

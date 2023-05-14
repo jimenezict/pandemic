@@ -10,6 +10,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
@@ -34,15 +35,11 @@ public class FlyDirectCityDefaultService {
     }
 
     public static List<Action> returnAvailableActions(Player player) {
-        List<Action> actionList = new ArrayList<>();
-        player.getListCard().stream()
+        return player.getListCard().stream()
                 .filter(card -> CITY.equals(card.getCardType()))
-                .forEach(destination -> {
-                    if(!player.getCity().equals(((CityCard) destination).getCity())) {
-                        actionList.add(new FlyDirectAction(player, ((CityCard) destination).getCity()));
-                    }
-        });
-        return actionList;
+                .filter(destination -> !player.getCity().equals(((CityCard) destination).getCity()))
+                .map(destination -> new FlyDirectAction(player, ((CityCard) destination).getCity()))
+                .collect(Collectors.toList());
     }
 
     public static void doAction(Player player, City destination) throws ActionException {

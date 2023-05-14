@@ -10,13 +10,10 @@ import com.dataontheroad.pandemic.model.player.ContingencyPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.CONTINGENCY_ERROR_HAS_EXTRA_CARD_ALREADY;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.CONTINGENCY_ERROR_NO_EVENTS_CARDS;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EVENT_ACTION;
 import static java.util.Objects.isNull;
-import static org.springframework.util.CollectionUtils.isEmpty;
 
 public class ContingencyPlannerService {
     private static ContingencyPlannerService contingencyPlannerService;
