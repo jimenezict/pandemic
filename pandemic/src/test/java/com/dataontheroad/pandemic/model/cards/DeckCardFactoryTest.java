@@ -35,7 +35,7 @@ class DeckCardFactoryTest {
 
     @Test
     void createInfectionDeck_shouldCreateOnlyInfectionCards() {
-        Deque<CityCard> cityCardsList = createInfectionDeck();
+        Deque<CityCard> cityCardsList = createInfectionDeck().getInfectionDeck();
         assertEquals(48, cityCardsList.size());
         assertFalse("Atlanta".equals(cityCardsList.getFirst().getCity().getName())
                 && "".equals(cityCardsList.getLast().getCity().getName()));

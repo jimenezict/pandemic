@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.model.board;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.decks.InfectionDeck;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
@@ -18,7 +19,7 @@ public class Board {
 
     private static final int MAX_INFECTIONS = 6;
     private static final int MAX_OUTBREAKS = 8;
-    private Deque<CityCard> infectionDeck;
+    private InfectionDeck infectionDeck;
     private List<CityCard> infectionDiscardDeck;
     private List<BaseCard> playerDeck;
     private List<BaseCard> playerDiscardDeck;
@@ -42,7 +43,7 @@ public class Board {
         outbreaks = 0;
     }
 
-    public Deque<CityCard> getInfectionDeck() {
+    public InfectionDeck getInfectionDeck() {
         return infectionDeck;
     }
 
@@ -113,15 +114,6 @@ public class Board {
         return playerCards;
     }
 
-    protected List<CityCard> getInitialDrawInfectionDeck() {
-        List<CityCard> infectionDeckAsList = new ArrayList<> (infectionDeck);
-        List<CityCard> initialInfectionDraw = new ArrayList<> (infectionDeckAsList.subList(0, 9));
-        infectionDiscardDeck.addAll(initialInfectionDraw);
-        infectionDeckAsList.subList(0, 9).clear();
-        infectionDeck = new ArrayDeque<>(infectionDeckAsList);
-        return initialInfectionDraw;
-    }
-
     private static List<Virus> initializeVirus() {
         Virus blueVirus = new Virus(VirusType.BLUE);
         Virus blackVirus = new Virus(VirusType.BLACK);
@@ -142,5 +134,9 @@ public class Board {
             default:
                 return -1;
         }
+    }
+
+    public void setInfectionDiscardDeck(List<CityCard> infectionDiscardDeck) {
+        this.infectionDiscardDeck = infectionDiscardDeck;
     }
 }
