@@ -5,6 +5,7 @@ import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import org.junit.jupiter.api.Test;
 
+import java.util.Deque;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
@@ -34,9 +35,10 @@ class DeckCardFactoryTest {
 
     @Test
     void createInfectionDeck_shouldCreateOnlyInfectionCards() {
-        List<CityCard> cityCardsList = createInfectionDeck();
-        assertEquals(48, cityCardsList.stream().count());
-        assertFalse("Atlanta".equals(cityCardsList.get(0).getCity().getName()) && "".equals(cityCardsList.get(47).getCity().getName()));
+        Deque<CityCard> cityCardsList = createInfectionDeck();
+        assertEquals(48, cityCardsList.size());
+        assertFalse("Atlanta".equals(cityCardsList.getFirst().getCity().getName())
+                && "".equals(cityCardsList.getLast().getCity().getName()));
     }
 
     @Test

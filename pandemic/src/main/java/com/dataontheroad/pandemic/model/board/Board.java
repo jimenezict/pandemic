@@ -8,10 +8,7 @@ import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createCityDeck;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
@@ -21,7 +18,7 @@ public class Board {
 
     private static final int MAX_INFECTIONS = 6;
     private static final int MAX_OUTBREAKS = 8;
-    private List<CityCard> infectionDeck;
+    private Deque<CityCard> infectionDeck;
     private List<CityCard> infectionDiscardDeck;
     private List<BaseCard> playerDeck;
     private List<BaseCard> playerDiscardDeck;
@@ -45,7 +42,7 @@ public class Board {
         outbreaks = 0;
     }
 
-    public List<CityCard> getInfectionDeck() {
+    public Deque<CityCard> getInfectionDeck() {
         return infectionDeck;
     }
 
@@ -117,10 +114,11 @@ public class Board {
     }
 
     protected List<CityCard> getInitialDrawInfectionDeck() {
-        Collections.shuffle(infectionDeck);
-        List<CityCard> initialInfectionDraw = new ArrayList<> (infectionDeck.subList(0, 9));
+        List<CityCard> infectionDeckAsList = new ArrayList<> (infectionDeck);
+        List<CityCard> initialInfectionDraw = new ArrayList<> (infectionDeckAsList.subList(0, 9));
         infectionDiscardDeck.addAll(initialInfectionDraw);
-        infectionDeck.subList(0, 9).clear();
+        infectionDeckAsList.subList(0, 9).clear();
+        infectionDeck = new ArrayDeque<>(infectionDeckAsList);
         return initialInfectionDraw;
     }
 
