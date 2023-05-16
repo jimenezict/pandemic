@@ -9,7 +9,7 @@ import java.util.List;
 
 public class InfectionDeck {
 
-    private Deque infectionDeck;
+    private Deque<CityCard> infectionDeck;
 
     public InfectionDeck(List<CityCard> infectionDeckList) {
         infectionDeck = new ArrayDeque<>(infectionDeckList);
@@ -25,5 +25,13 @@ public class InfectionDeck {
         infectionDeckAsList.subList(0, 9).clear();
         infectionDeck = new ArrayDeque<>(infectionDeckAsList);
         return initialInfectionDraw;
+    }
+
+    public CityCard takeTopCardOfDeck() {
+        return infectionDeck.removeFirst();
+    }
+
+    public CityCard takeBottomCardOfDeck() {
+        return infectionDeck.removeLast();
     }
 }

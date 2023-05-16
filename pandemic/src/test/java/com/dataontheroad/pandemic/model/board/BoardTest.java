@@ -76,13 +76,4 @@ class BoardTest {
         assertEquals(initialSize - 4, board.getPlayerDeck().size());
     }
 
-   /* @Test
-    @Ignore
-    void getInitialDrawInfectionDeck() {
-        Board board = new Board();
-        //List<CityCard> initialInfectionDraw = board.getInfectionDeck().getInitialDrawInfectionDeck();
-        assertEquals(39, board.getInfectionDeck().getInfectionDeck().size());
-        assertEquals(9, board.getInfectionDiscardDeck().size());
-    }*/
-
 }
