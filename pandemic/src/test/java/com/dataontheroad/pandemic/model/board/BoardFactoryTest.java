@@ -29,6 +29,9 @@ class BoardFactoryTest {
         city = board.getCityFromBoardList(board.getInfectionDiscardDeck().get(6).getCity());
         assertEquals(1, city.getVirusBoxes().size());
         assertEquals(city.getVirus(), city.getVirusBoxes().get(0));
+
+        assertEquals(39, board.getInfectionDeck().getInfectionDeck().size());
+        assertEquals(9, board.getInfectionDiscardDeck().size());
     }
 
 }

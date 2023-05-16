@@ -4,10 +4,9 @@ import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import com.dataontheroad.pandemic.model.city.CityFactory;
+import com.dataontheroad.pandemic.model.decks.InfectionDeck;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DeckCardFactory {
@@ -16,10 +15,10 @@ public class DeckCardFactory {
         throw new IllegalStateException("Utility class");
     }
 
-    public static List<CityCard> createInfectionDeck() {
+    public static InfectionDeck createInfectionDeck() {
         List<CityCard> infectionDeck = CityFactory.createCityList().stream().map(CityCard::createInfectionCard).collect(Collectors.toList());
         Collections.shuffle(infectionDeck);
-        return infectionDeck;
+        return new InfectionDeck(infectionDeck);
     }
 
     public static List<BaseCard> createCityDeck(int numberOfEpidemicCards) {
@@ -37,6 +36,7 @@ public class DeckCardFactory {
     }
 
     public static List<BaseCard> listSpecialAction() {
+        //TO-DO when special actions card will be implemented
         return new ArrayList<>();
     }
 

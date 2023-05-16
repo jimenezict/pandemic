@@ -23,7 +23,8 @@ public class BoardCreationHelper {
     }
 
     public static List<CityCard> configureVirusOnBoard(Board board) {
-        List<CityCard> initialDrawInfection = board.getInitialDrawInfectionDeck();
+        List<CityCard> initialDrawInfection = board.getInfectionDeck().getInitialDrawInfectionDeck();
+        board.setInfectionDiscardDeck(initialDrawInfection);
         initialDrawInfection.forEach( cityOnCard -> {
             City cityOnBoard = board.getCityFromBoardList(cityOnCard.getCity());
             cityOnBoard.getVirusBoxes().add(cityOnCard.getVirus());
