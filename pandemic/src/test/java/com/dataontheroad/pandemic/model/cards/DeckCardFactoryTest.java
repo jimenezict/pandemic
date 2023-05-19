@@ -43,7 +43,7 @@ class DeckCardFactoryTest {
 
     @Test
     void createCityDeck_shouldCreateOnlyInfectionCards() {
-        List<BaseCard> cityCardsList = createCityDeck(3);
+        List<BaseCard> cityCardsList = createPlayerQueue(3);
         assertEquals(3, cityCardsList.stream().filter(card -> {
             return card.getCardType().equals(EPIDEMIC);
         }).count());

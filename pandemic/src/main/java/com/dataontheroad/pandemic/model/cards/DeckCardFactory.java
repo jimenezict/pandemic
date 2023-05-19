@@ -23,7 +23,7 @@ public class DeckCardFactory {
         return new InfectionDeck(infectionDeck);
     }
 
-    public static List<BaseCard> createCityDeck(int numberOfEpidemicCards) {
+    public static List<BaseCard> createPlayerQueue(int numberOfEpidemicCards) {
         List<BaseCard> cityDeck = CityFactory.createCityList().stream().map(CityCard::createCityCard).collect(Collectors.toList());
         cityDeck.addAll(createEpidemicCards(numberOfEpidemicCards));
         cityDeck.addAll(listSpecialAction());
@@ -31,7 +31,7 @@ public class DeckCardFactory {
         return cityDeck;
     }
 
-    public static List<BaseCard> createCityDeck() {
+    public static List<BaseCard> createPlayerQueue() {
         List<BaseCard> cityDeck = CityFactory.createCityList().stream().map(CityCard::createCityCard).collect(Collectors.toList());
         cityDeck.addAll(listSpecialAction());
         return cityDeck;

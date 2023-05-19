@@ -14,7 +14,7 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.TAKEDISCARDEVENTCARD_ACTION;
 import static com.dataontheroad.pandemic.constants.LiteralsCard.SPECIAL_EVENT_GOVERNMENT_GRANT_NAME;
-import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createCityDeck;
+import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -50,7 +50,7 @@ class TakeDiscardEventCardActionTest {
         TakeDiscardEventCardAction takeDiscardEventCardAction =
                 new TakeDiscardEventCardAction(contingencyPlayer, eventCard);
 
-        List<BaseCard> discardedCards = createCityDeck(2);
+        List<BaseCard> discardedCards = createPlayerQueue(2);
         discardedCards.add(eventCard);
         Collections.shuffle(discardedCards);
 

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createCityDeck;
+import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
 
@@ -24,7 +24,7 @@ public class Board {
     private static final int MAX_OUTBREAKS = 8;
     private InfectionDeck infectionDeck;
     private List<CityCard> infectionDiscardDeck;
-    private List<BaseCard> playerDeck;
+    private List<BaseCard> playerQueue;
     private List<BaseCard> playerDiscardDeck;
     private final List<City> boardCities;
     private List<Player> players;
@@ -39,7 +39,7 @@ public class Board {
 
         boardCities = createCityList();
         infectionDeck = createInfectionDeck();
-        playerDeck = createCityDeck();
+        playerQueue = createPlayerQueue();
         virusList = initializeVirus();
 
         infectionRate = 0;
@@ -50,8 +50,8 @@ public class Board {
         return infectionDeck;
     }
 
-    public List<BaseCard> getPlayerDeck() {
-        return playerDeck;
+    public List<BaseCard> getPlayerQueue() {
+        return playerQueue;
     }
 
     public List<City> getBoardCities() {
@@ -111,9 +111,9 @@ public class Board {
     }
 
     protected List<BaseCard> getInitialDrawCards(int numberOfPlayers) {
-        Collections.shuffle(playerDeck);
-        List<BaseCard> playerCards = new ArrayList<> (playerDeck.subList(0, numberOfCardsToDraw(numberOfPlayers)));
-        playerDeck.subList(0, numberOfCardsToDraw(numberOfPlayers)).clear();
+        Collections.shuffle(playerQueue);
+        List<BaseCard> playerCards = new ArrayList<> (playerQueue.subList(0, numberOfCardsToDraw(numberOfPlayers)));
+        playerQueue.subList(0, numberOfCardsToDraw(numberOfPlayers)).clear();
         return playerCards;
     }
 

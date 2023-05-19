@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.CONTINGENCY_ERROR_HAS_EXTRA_CARD_ALREADY;
-import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createCityDeck;
+import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -30,7 +30,7 @@ class ContingencyPlannerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        discardedCards = createCityDeck(2);
+        discardedCards = createPlayerQueue(2);
         contingencyPlannerService = ContingencyPlannerService.getInstance();
         player = new ContingencyPlayer();
         eventCard = new GovernmentGrantEventCard();
