@@ -5,13 +5,13 @@ import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.decks.InfectionDeck;
+import com.dataontheroad.pandemic.model.decks.PlayerQueue;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
@@ -24,7 +24,7 @@ public class Board {
     private static final int MAX_OUTBREAKS = 8;
     private InfectionDeck infectionDeck;
     private List<CityCard> infectionDiscardDeck;
-    private List<BaseCard> playerQueue;
+    private PlayerQueue playerQueue;
     private List<BaseCard> playerDiscardDeck;
     private final List<City> boardCities;
     private List<Player> players;
@@ -50,7 +50,7 @@ public class Board {
         return infectionDeck;
     }
 
-    public List<BaseCard> getPlayerQueue() {
+    public PlayerQueue getPlayerQueue() {
         return playerQueue;
     }
 
@@ -110,13 +110,6 @@ public class Board {
         return boardCities.stream().filter(city -> city.equals(inputCity)).findFirst().orElse(null);
     }
 
-    protected List<BaseCard> getInitialDrawCards(int numberOfPlayers) {
-        Collections.shuffle(playerQueue);
-        List<BaseCard> playerCards = new ArrayList<> (playerQueue.subList(0, numberOfCardsToDraw(numberOfPlayers)));
-        playerQueue.subList(0, numberOfCardsToDraw(numberOfPlayers)).clear();
-        return playerCards;
-    }
-
     private static List<Virus> initializeVirus() {
         Virus blueVirus = new Virus(VirusType.BLUE);
         Virus blackVirus = new Virus(VirusType.BLACK);
@@ -124,19 +117,6 @@ public class Board {
         Virus yellowVirus = new Virus(VirusType.YELLOW);
 
         return Arrays.asList(blueVirus, blackVirus, redVirus, yellowVirus);
-    }
-
-    private int numberOfCardsToDraw(int numberOfPlayers) {
-        switch(numberOfPlayers) {
-            case 2:
-                return 4;
-            case 3:
-                return 3;
-            case 4:
-                return 2;
-            default:
-                return -1;
-        }
     }
 
     public void setInfectionDiscardDeck(List<CityCard> infectionDiscardDeck) {

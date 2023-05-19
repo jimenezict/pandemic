@@ -20,7 +20,7 @@ class BoardTest {
         assertEquals(2, board.getNumberInfectionCard());
         assertEquals(48, board.getInfectionDeck().getInfectionDeck().size());
         assertEquals(0, board.getOutBreaks());
-        assertEquals(0, board.getPlayerQueue().stream().filter(x -> EPIDEMIC.equals(x.getCardType())).count());
+        assertEquals(0, board.getPlayerQueue().getPlayerQueue().stream().filter(x -> EPIDEMIC.equals(x.getCardType())).count());
         assertEquals(4, board.getVirusList().size());
     }
 
@@ -70,10 +70,10 @@ class BoardTest {
     @ValueSource(ints = {2, 3, 4})
     void getInitialDrawCardsWhenNumberOfPlayersIsN() {
         Board board = new Board();
-        int initialSize = board.getPlayerQueue().size();
-        List<BaseCard> initialDrawCards = board.getInitialDrawCards(2);
+        int initialSize = board.getPlayerQueue().getPlayerQueue().size();
+        List<BaseCard> initialDrawCards = board.getPlayerQueue().getInitialDrawCards(2);
         assertEquals(4, initialDrawCards.size());
-        assertEquals(initialSize - 4, board.getPlayerQueue().size());
+        assertEquals(initialSize - 4, board.getPlayerQueue().getPlayerQueue().size());
     }
 
 }

@@ -1,26 +1,24 @@
 package com.dataontheroad.pandemic.model.decks;
 
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
-import com.dataontheroad.pandemic.model.cards.model.CityCard;
 
 import java.util.*;
 
 public class PlayerQueue {
 
-    private Queue<CityCard> playerQueue;
+    private Queue<BaseCard> playerQueue;
 
     public PlayerQueue(List<BaseCard> playerQueueList) {
-        playerQueue = new LinkedList<>(playerQueue);
+        playerQueue = new LinkedList<>(playerQueueList);
     }
 
-    public Queue<CityCard> getPlayerQueue() {
+    public Queue<BaseCard> getPlayerQueue() {
         return playerQueue;
     }
 
-    public CityCard getCardFromPlayerQueue() {
+    public BaseCard getCardFromPlayerQueue() {
         return playerQueue.remove();
     }
-
 
     public List<BaseCard> getInitialDrawCards(int numberOfPlayers) {
         List<BaseCard> playerCards = new ArrayList<> ();

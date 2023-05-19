@@ -5,9 +5,12 @@ import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import com.dataontheroad.pandemic.model.city.CityFactory;
 import com.dataontheroad.pandemic.model.decks.InfectionDeck;
+import com.dataontheroad.pandemic.model.decks.PlayerQueue;
+import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,10 +34,10 @@ public class DeckCardFactory {
         return cityDeck;
     }
 
-    public static List<BaseCard> createPlayerQueue() {
+    public static PlayerQueue createPlayerQueue() {
         List<BaseCard> cityDeck = CityFactory.createCityList().stream().map(CityCard::createCityCard).collect(Collectors.toList());
         cityDeck.addAll(listSpecialAction());
-        return cityDeck;
+        return new PlayerQueue(cityDeck);
     }
 
     public static List<BaseCard> listSpecialAction() {
