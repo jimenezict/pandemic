@@ -8,7 +8,8 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 import static com.dataontheroad.pandemic.model.city.CityEnum.*;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class QuarantinePlayerTest {
 

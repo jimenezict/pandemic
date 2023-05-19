@@ -4,11 +4,11 @@ import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Deque;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class InfectionDeckTest {
 

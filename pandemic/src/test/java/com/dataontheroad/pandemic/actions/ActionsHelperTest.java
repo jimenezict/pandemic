@@ -2,9 +2,9 @@ package com.dataontheroad.pandemic.actions;
 
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.player.ScientistPlayer;
 import com.dataontheroad.pandemic.model.virus.VirusType;
-import com.dataontheroad.pandemic.model.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

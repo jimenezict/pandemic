@@ -4,11 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
-
 import static com.dataontheroad.pandemic.model.board.BoardCreationHelper.configurePlayersOnBoard;
-import static com.dataontheroad.pandemic.model.board.BoardCreationHelper.configureVirusOnBoard;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardCreationHelperTest {
 

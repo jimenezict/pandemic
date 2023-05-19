@@ -4,7 +4,7 @@ import com.dataontheroad.pandemic.model.city.City;
 import org.junit.jupiter.api.Test;
 
 import static com.dataontheroad.pandemic.model.board.BoardFactory.createBoardWithNumberOfPlayers;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardFactoryTest {
 

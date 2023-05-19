@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.model.board;
 
-import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

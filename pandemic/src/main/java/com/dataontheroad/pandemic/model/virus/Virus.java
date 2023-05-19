@@ -1,7 +1,5 @@
 package com.dataontheroad.pandemic.model.virus;
 
-import com.dataontheroad.pandemic.model.cards.model.CityCard;
-
 public class Virus {
 
     private final VirusType virusType;

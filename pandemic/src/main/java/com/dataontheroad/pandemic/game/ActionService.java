@@ -1,10 +1,10 @@
 package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
-import com.dataontheroad.pandemic.model.city.City;
-import com.dataontheroad.pandemic.model.virus.Virus;
-import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.Player;
+import com.dataontheroad.pandemic.model.virus.Virus;
 
 import java.util.ArrayList;
 import java.util.List;

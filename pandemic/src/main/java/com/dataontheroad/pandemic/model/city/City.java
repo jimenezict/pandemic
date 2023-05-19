@@ -1,6 +1,5 @@
 package com.dataontheroad.pandemic.model.city;
 
-import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.util.ArrayList;

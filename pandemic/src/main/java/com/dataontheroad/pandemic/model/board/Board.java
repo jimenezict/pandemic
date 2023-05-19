@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.model.board;
 
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
@@ -7,9 +8,11 @@ import com.dataontheroad.pandemic.model.decks.InfectionDeck;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
-import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createCityDeck;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;

@@ -4,14 +4,11 @@ package com.dataontheroad.pandemic.actions.player_services;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.TakeDiscardEventCardAction;
-import com.dataontheroad.pandemic.actions.default_services.DiscoverCureDefaultService;
-import com.dataontheroad.pandemic.actions.default_services.ShareKnowledgeDefaultService;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.special_card.GovernmentGrantEventCard;
 import com.dataontheroad.pandemic.model.cards.model.special_card.SpecialCard;
 import com.dataontheroad.pandemic.model.player.ContingencyPlayer;
-import com.dataontheroad.pandemic.model.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,23 +38,23 @@ class ContingencyPlannerServiceTest {
     }
 
     @Test
-    public void isDoable_falseBecauseThereAreNoEventCards() {
+    void isDoable_falseBecauseThereAreNoEventCards() {
         assertFalse(contingencyPlannerService.isDoable(player, discardedCards));
     }
 
     @Test
-    public void isDoable_trueBecauseThereAreEventCards() {
+    void isDoable_trueBecauseThereAreEventCards() {
         discardedCards.add(eventCard);
         assertTrue(contingencyPlannerService.isDoable(player, discardedCards));
     }
 
     @Test
-    public void returnAvailableActions_returnsEmptyArray() throws ActionException {
+    void returnAvailableActions_returnsEmptyArray() throws ActionException {
         assertTrue(isEmpty(contingencyPlannerService.returnAvailableActions(player, discardedCards)));
     }
 
     @Test
-    public void returnAvailableActions_returnsArray() throws ActionException {
+    void returnAvailableActions_returnsArray() throws ActionException {
         discardedCards.add(eventCard);
         List<Action> actionList = contingencyPlannerService.returnAvailableActions(player, discardedCards);
         assertEquals(1, actionList.size());
@@ -66,14 +63,14 @@ class ContingencyPlannerServiceTest {
     }
 
     @Test
-    public void doAction_isCorrectWhenCardIsOnTheDiscardDeck() throws ActionException {
+    void doAction_isCorrectWhenCardIsOnTheDiscardDeck() throws ActionException {
         discardedCards.add(eventCard);
         contingencyPlannerService.doAction(player, discardedCards, eventCard);
         assertEquals(eventCard, player.getExtraEventCard());
     }
 
     @Test
-    public void doAction_isEmptyWhenCardIsOnTheDiscardDeck() throws ActionException {
+    void doAction_isEmptyWhenCardIsOnTheDiscardDeck() throws ActionException {
         contingencyPlannerService.doAction(player, discardedCards, eventCard);
         assertNull(player.getExtraEventCard());
     }

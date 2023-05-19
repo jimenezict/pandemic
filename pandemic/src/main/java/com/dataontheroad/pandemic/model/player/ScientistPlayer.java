@@ -1,7 +1,5 @@
 package com.dataontheroad.pandemic.model.player;
 
-import com.dataontheroad.pandemic.actions.default_services.DiscoverCureDefaultService;
-
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 
 public class ScientistPlayer extends Player {

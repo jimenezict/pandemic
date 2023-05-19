@@ -2,20 +2,20 @@ package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
-import com.dataontheroad.pandemic.model.virus.VirusType;
 import com.dataontheroad.pandemic.model.player.Player;
-import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_CENTER_CREATED;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_NO_CARD;
+import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,20 +1,20 @@
 package com.dataontheroad.pandemic.actions.default_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
-import com.dataontheroad.pandemic.model.player.Player;
-import com.dataontheroad.pandemic.exceptions.ActionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DiscoverCureTest {

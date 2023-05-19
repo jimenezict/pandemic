@@ -4,7 +4,8 @@ import com.dataontheroad.pandemic.actions.player_services.ContingencyPlannerServ
 import org.junit.jupiter.api.Test;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ContingencyPlayerTest {
 

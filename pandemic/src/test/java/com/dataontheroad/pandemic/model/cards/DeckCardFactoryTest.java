@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import java.util.Deque;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.LiteralsCard.*;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.*;
-import static com.dataontheroad.pandemic.constants.LiteralsCard.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

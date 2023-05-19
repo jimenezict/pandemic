@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.model.cards.model;
 
-import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 import static com.dataontheroad.pandemic.constants.LiteralsCard.*;
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 
 public class EpidemicCard extends BaseCard{
 
