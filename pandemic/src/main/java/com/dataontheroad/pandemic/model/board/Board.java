@@ -12,6 +12,7 @@ import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.util.*;
 
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
@@ -23,7 +24,7 @@ public class Board {
     private InfectionDeck infectionDeck;
     private Set<CityCard> infectionDiscardDeck;
     private PlayerQueue playerQueue;
-    private List<BaseCard> playerDiscardDeck;
+    private Set<BaseCard> playerDiscardDeck;
     private final List<City> boardCities;
     private List<Player> players;
     private final List<Virus> virusList;
@@ -32,7 +33,7 @@ public class Board {
 
     protected Board() {
         infectionDiscardDeck = new HashSet<>();
-        playerDiscardDeck = new ArrayList<>();
+        playerDiscardDeck = new HashSet<>();
         players = new ArrayList<>();
 
         boardCities = createCityList();
@@ -106,6 +107,12 @@ public class Board {
 
     public City getCityFromBoardList(City inputCity) {
         return boardCities.stream().filter(city -> city.equals(inputCity)).findFirst().orElse(null);
+    }
+
+    public void setCardOnPlayerDiscardDeck(BaseCard baseCard) {
+        if(!EPIDEMIC.equals(baseCard.getCardType())) {
+            playerDiscardDeck.add(baseCard);
+        }
     }
 
     private static List<Virus> initializeVirus() {
