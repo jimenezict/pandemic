@@ -2,6 +2,8 @@ package com.dataontheroad.pandemic.model.board;
 
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
+import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
+import com.dataontheroad.pandemic.model.cards.model.special_card.GovernmentGrantEventCard;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -76,4 +78,12 @@ class BoardTest {
         assertEquals(initialSize - 4, board.getPlayerQueue().getPlayerQueue().size());
     }
 
+    @Test
+    void addCardOnPlayerDiscardDeck_doNotAddEpidemicCard_addGovernmentGrantSpecialAction() {
+        Board board = new Board();
+        board.addCardOnPlayerDiscardDeck(new EpidemicCard());
+        assertEquals(0,board.getPlayerDiscardDeck().size());
+        board.addCardOnPlayerDiscardDeck(new GovernmentGrantEventCard());
+        assertEquals(1,board.getPlayerDiscardDeck().size());
+    }
 }

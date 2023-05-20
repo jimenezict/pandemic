@@ -109,10 +109,14 @@ public class Board {
         return boardCities.stream().filter(city -> city.equals(inputCity)).findFirst().orElse(null);
     }
 
-    public void setCardOnPlayerDiscardDeck(BaseCard baseCard) {
+    public void addCardOnPlayerDiscardDeck(BaseCard baseCard) {
         if(!EPIDEMIC.equals(baseCard.getCardType())) {
             playerDiscardDeck.add(baseCard);
         }
+    }
+
+    public Set<BaseCard> getPlayerDiscardDeck() {
+        return playerDiscardDeck;
     }
 
     private static List<Virus> initializeVirus() {
