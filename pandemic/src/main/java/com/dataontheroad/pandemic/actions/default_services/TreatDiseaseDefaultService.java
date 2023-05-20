@@ -29,8 +29,7 @@ public class TreatDiseaseDefaultService {
     }
 
     public static boolean isDoable(Player player) {
-        City position = player.getCity();
-        return !position.getVirusBoxes().isEmpty();
+        return !player.getCity().getVirusBoxes().isEmpty();
     }
 
     public static List<Action> returnAvailableActions(Player player, List<Virus> virusList) {
@@ -47,6 +46,7 @@ public class TreatDiseaseDefaultService {
             throw new ActionException(ActionsType.TREATDISEASE, TREATDISEASE_ERROR_DO_NOT_EXISTS_VIRUS);
         }
         if(virus.getCureDiscovered()) {
+            //When cure is discovered can remove all the boxes of the same color with a unique action
             position.getVirusBoxes().removeIf(virusBox -> virusBox.name().equals(virus.getVirusType().name()));
         } else {
             position.getVirusBoxes().remove(position.getVirusBoxes().indexOf(virus.getVirusType()));

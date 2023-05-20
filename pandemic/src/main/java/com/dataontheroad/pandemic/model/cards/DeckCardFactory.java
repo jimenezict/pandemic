@@ -6,11 +6,9 @@ import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import com.dataontheroad.pandemic.model.city.CityFactory;
 import com.dataontheroad.pandemic.model.decks.InfectionDeck;
 import com.dataontheroad.pandemic.model.decks.PlayerQueue;
-import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 

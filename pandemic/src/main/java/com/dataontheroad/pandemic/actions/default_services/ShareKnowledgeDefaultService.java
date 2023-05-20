@@ -10,7 +10,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisPosition;
+import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisLocation;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static java.util.Objects.isNull;
 
@@ -40,13 +40,13 @@ public class ShareKnowledgeDefaultService {
         List<Action> actionList = new ArrayList<>();
         Player sender;
         CityCard card = CityCard.createCityCard(player.getCity());
-        if(playerHasCardForHisPosition(player, player.getCity())) {
+        if(playerHasCardForHisLocation(player, player.getCity())) {
             sender = player;
         } else {
-            if(playersList.stream().filter(player1 -> playerHasCardForHisPosition(player1, player1.getCity())).count() == 0) {
+            if(playersList.stream().filter(player1 -> playerHasCardForHisLocation(player1, player1.getCity())).count() == 0) {
                 return actionList;
             }
-            sender = playersList.stream().filter(player1 -> playerHasCardForHisPosition(player1, player1.getCity())).findFirst().get();
+            sender = playersList.stream().filter(player1 -> playerHasCardForHisLocation(player1, player1.getCity())).findFirst().get();
             playersList.remove(sender);
             playersList.add(player);
         }

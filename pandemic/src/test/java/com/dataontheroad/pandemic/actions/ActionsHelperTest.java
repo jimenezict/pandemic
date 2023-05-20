@@ -45,32 +45,32 @@ class ActionsHelperTest {
 
     @Test
     void playerRemoveCardFromDeck_whenCardExists(){
-        playerRemoveCardFromDeck(player, createCityCard(newyork));
+        playerRemoveCardFromHand(player, createCityCard(newyork));
         assertEquals(3, player.getListCard().size());
     }
 
     @Test
     void playerRemoveCardFromDeck_whenCardDoNotExists(){
-        playerRemoveCardFromDeck(player, createCityCard(tokio));
+        playerRemoveCardFromHand(player, createCityCard(tokio));
         assertEquals(4, player.getListCard().size());
     }
 
     @Test
     void playerRemoveCardFromDeck_whenCardDoNotExists_BecauseListIsEmpty(){
         player.setListCard(new ArrayList<>());
-        playerRemoveCardFromDeck(player, createCityCard(newyork));
+        playerRemoveCardFromHand(player, createCityCard(newyork));
         assertEquals(0, player.getListCard().size());
     }
 
     @Test
     void playerHasCardForHisPosition_whenHasCardForLima_IsOnLima_ReturnsTrue() {
         
-        assertTrue(playerHasCardForHisPosition(player, lima));
+        assertTrue(playerHasCardForHisLocation(player, lima));
     }
 
     @Test
     void playerHasCardForHisPosition_whenHasNoCardForTokio_IsOnTokio_ReturnsFalse() {
-        assertFalse(playerHasCardForHisPosition(player, tokio));
+        assertFalse(playerHasCardForHisLocation(player, tokio));
     }
 
     @Test
@@ -78,7 +78,7 @@ class ActionsHelperTest {
         List<BaseCard> cardList = player.getListCard();
         cardList.add(createCityCard(madrid));
         cardList.add(createCityCard(london));
-        assertFalse(playerHasEnoughCars(player, VirusType.BLUE));
+        assertFalse(playerHasEnoughCards(player, VirusType.BLUE));
     }
 
     @Test
@@ -87,7 +87,7 @@ class ActionsHelperTest {
         cardList.add(createCityCard(madrid));
         cardList.add(createCityCard(london));
         cardList.add(createCityCard(washington));
-        assertTrue(playerHasEnoughCars(player, VirusType.BLUE));
+        assertTrue(playerHasEnoughCards(player, VirusType.BLUE));
 
     }
 
@@ -102,7 +102,7 @@ class ActionsHelperTest {
         cardList.add(createCityCard(madrid));
 
         scientist.setListCard(cardList);
-        assertFalse(playerHasEnoughCars(scientist, VirusType.BLUE));
+        assertFalse(playerHasEnoughCards(scientist, VirusType.BLUE));
     }
 
     @Test
@@ -117,7 +117,7 @@ class ActionsHelperTest {
         cardList.add(createCityCard(london));
 
         scientist.setListCard(cardList);
-        assertTrue(playerHasEnoughCars(scientist, VirusType.BLUE));
+        assertTrue(playerHasEnoughCards(scientist, VirusType.BLUE));
     }
 
 }

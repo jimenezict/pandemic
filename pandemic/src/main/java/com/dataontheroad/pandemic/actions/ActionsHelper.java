@@ -13,17 +13,18 @@ public class ActionsHelper {
         throw new IllegalStateException("Service Class");
     }
 
-    public static final boolean playerRemoveCardFromDeck(Player player, CityCard card) {
+    public static final boolean playerRemoveCardFromHand(Player player, CityCard card) {
         return player.getListCard().remove(card);
     }
 
-    public static final boolean playerHasCardForHisPosition(Player player, City position) {
+    public static final boolean playerHasCardForHisLocation(Player player, City position) {
         return player.getListCard().contains(CityCard.createCityCard(position));
     }
 
-    public static final boolean playerHasEnoughCars(Player player, VirusType virusType) {
+    public static final boolean playerHasEnoughCards(Player player, VirusType virusType) {
         return player.getListCard().stream()
                 .filter(card -> CITY.equals(card.getCardType()))
-                .filter(card -> ((CityCard) card).getVirus().equals(virusType)).count() == player.getNumOfCardsForDiscoveringCure();
+                .filter(card -> ((CityCard) card).getVirus().equals(virusType))
+                .count() == player.getNumOfCardsForDiscoveringCure();
     }
 }

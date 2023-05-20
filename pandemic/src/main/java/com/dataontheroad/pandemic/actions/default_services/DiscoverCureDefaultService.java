@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasEnoughCars;
+import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasEnoughCards;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static java.util.Objects.isNull;
 import static org.springframework.util.CollectionUtils.isEmpty;
@@ -34,7 +34,7 @@ public class DiscoverCureDefaultService {
     public static boolean isDoable(Player player, Virus virus) {
         return player.getCity().getHasCenter()
                 && !virus.getCureDiscovered()
-                && playerHasEnoughCars(player, virus.getVirusType());
+                && playerHasEnoughCards(player, virus.getVirusType());
     }
 
     public static List<Action> returnAvailableActions(Player player, List<Virus> virusList) {
@@ -51,11 +51,12 @@ public class DiscoverCureDefaultService {
             throw new ActionException(ActionsType.DISCOVERCURE, DISCOVERCURE_ERROR_NO_RESEARCH_STATION);
         } else if (virus.getCureDiscovered()) {
             throw new ActionException(ActionsType.DISCOVERCURE, DISCOVERCURE_ERROR_CURE_DISCOVERED);
-        } else if (!playerHasEnoughCars(player, virus.getVirusType())) {
+        } else if (!playerHasEnoughCards(player, virus.getVirusType())) {
             throw new ActionException(ActionsType.DISCOVERCURE, DISCOVERCURE_ERROR_NO_CARD);
         }
 
         virus.cureHasBeenDiscovered();
+        //TO-DO: remove cards from hand
     }
 
 
