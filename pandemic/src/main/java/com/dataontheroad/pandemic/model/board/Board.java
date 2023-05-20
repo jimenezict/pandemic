@@ -10,9 +10,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
@@ -23,7 +21,7 @@ public class Board {
     private static final int MAX_INFECTIONS = 6;
     private static final int MAX_OUTBREAKS = 8;
     private InfectionDeck infectionDeck;
-    private List<CityCard> infectionDiscardDeck;
+    private Set<CityCard> infectionDiscardDeck;
     private PlayerQueue playerQueue;
     private List<BaseCard> playerDiscardDeck;
     private final List<City> boardCities;
@@ -33,7 +31,7 @@ public class Board {
     private Integer outbreaks;
 
     protected Board() {
-        infectionDiscardDeck = new ArrayList<>();
+        infectionDiscardDeck = new HashSet<>();
         playerDiscardDeck = new ArrayList<>();
         players = new ArrayList<>();
 
@@ -70,7 +68,7 @@ public class Board {
         return outbreaks;
     }
 
-    public List<CityCard> getInfectionDiscardDeck() {
+    public Set<CityCard> getInfectionDiscardDeck() {
         return infectionDiscardDeck;
     }
 
@@ -120,6 +118,6 @@ public class Board {
     }
 
     public void setInfectionDiscardDeck(List<CityCard> infectionDiscardDeck) {
-        this.infectionDiscardDeck = infectionDiscardDeck;
+        this.infectionDiscardDeck = new HashSet<>(infectionDiscardDeck);
     }
 }
