@@ -18,7 +18,7 @@ public class TreatDiseaseDefaultService {
 
     private static TreatDiseaseDefaultService treatDiseaseDefaultService;
 
-    private TreatDiseaseDefaultService() {
+    protected TreatDiseaseDefaultService() {
     }
 
     public static TreatDiseaseDefaultService getInstance() {

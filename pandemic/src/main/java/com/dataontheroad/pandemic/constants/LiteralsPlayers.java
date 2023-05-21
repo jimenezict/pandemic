@@ -11,4 +11,7 @@ public class LiteralsPlayers {
     public static final String CONTINGENCY_COLOR = "";
     public static final String CONTINGENCY_NAME = "";
     public static final String CONTINGENCY_DESCRIPTION = "";
+    public static final String MEDIC_COLOR = "Orange";
+    public static final String MEDIC_NAME = "Medic";
+    public static final String MEDIC_DESCRIPTION = "Remove all cubes of a single color when you treat a city. Administer known cures for free";
 }
