@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.model.player;
 import com.dataontheroad.pandemic.actions.default_services.*;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.virus.Virus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,4 +87,8 @@ public class Player {
     }
 
     public TreatDiseaseDefaultService getTreatDisease() { return TreatDiseaseDefaultService.getInstance();}
+
+    public void executeAfterAction(List<Virus> virusList) {
+
+    }
 }
