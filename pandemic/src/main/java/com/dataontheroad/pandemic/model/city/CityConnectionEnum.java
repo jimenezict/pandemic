@@ -25,6 +25,20 @@ public enum CityConnectionEnum {
     CON20(MIAMI.cityName, BOGOTA.cityName),
     CON21(NEWYORK.cityName, LONDON.cityName),
     CON22(NEWYORK.cityName, MADRID.cityName),
+    CON23(BOGOTA.cityName, LIMA.cityName),
+    CON24(BOGOTA.cityName, BUENOSARIES.cityName),
+    CON25(BOGOTA.cityName, SAOPAULO.cityName),
+    CON26(LIMA.cityName, SANTIAGO.cityName),
+    CON28(BUENOSARIES.cityName, SAOPAULO.cityName),
+    CON29(SAOPAULO.cityName, MADRID.cityName),
+    CON30(SAOPAULO.cityName, LAGOS.cityName),
+    CON31(LAGOS.cityName, KHARTOUM.cityName),
+    CON32(LAGOS.cityName, KINSHASA.cityName),
+    CON33(KINSHASA.cityName, KHARTOUM.cityName),
+    CON34(JOHANNESBURG.cityName, KHARTOUM.cityName),
+    CON35(KHARTOUM.cityName, CAIRO.cityName),
+    CON36(KINSHASA.cityName, JOHANNESBURG.cityName),
+
     ;
     String city1;
     String city2;

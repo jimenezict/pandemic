@@ -26,6 +26,15 @@ class CityFactoryTest {
         assertEquals(5, sizeConnectionByCityName("Mexico City", cityList));
         assertEquals(4, sizeConnectionByCityName("Miami", cityList));
         assertEquals(4, sizeConnectionByCityName("New York", cityList));
+        assertEquals(5, sizeConnectionByCityName("Bogota", cityList));
+        assertEquals(3, sizeConnectionByCityName("Lima", cityList));
+        assertEquals(1, sizeConnectionByCityName("Santiago", cityList));
+        assertEquals(4, sizeConnectionByCityName("Sao Paulo", cityList));
+        assertEquals(2, sizeConnectionByCityName("Buenos Aires", cityList));
+        assertEquals(3, sizeConnectionByCityName("Lagos", cityList));
+        assertEquals(3, sizeConnectionByCityName("Kinshasa", cityList));
+        assertEquals(2, sizeConnectionByCityName("Johannesburg", cityList));
+        assertEquals(4, sizeConnectionByCityName("Khartoum", cityList));
     }
 
     private int sizeConnectionByCityName(String name, List<City> cityList) {

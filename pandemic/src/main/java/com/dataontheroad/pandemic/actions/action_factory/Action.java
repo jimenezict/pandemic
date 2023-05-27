@@ -6,7 +6,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 
 public abstract class Action {
     final ActionsType actionsType;
-    final Player player;
+    protected final Player player;
 
     protected Action(ActionsType actionsType, Player player) {
         this.actionsType = actionsType;

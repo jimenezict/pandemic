@@ -9,7 +9,7 @@ public enum CityEnum {
     BANGKOK("Bangkok",VirusType.RED),
     BEIJING("Beijing",VirusType.RED),
     BOGOTA("Bogota",VirusType.YELLOW),
-    BUENOSARIES("Buenos Aries",VirusType.YELLOW),
+    BUENOSARIES("Buenos Aires",VirusType.YELLOW),
     CAIRO("Cairo",VirusType.BLACK),
     CHENNAI("Chennai",VirusType.BLACK),
     CHICAGO("Chicago",VirusType.BLUE),

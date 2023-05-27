@@ -4,9 +4,6 @@ import static com.dataontheroad.pandemic.constants.LiteralsPlayers.CONTINGENCY_N
 
 public class LiteralsAction {
 
-
-
-
     private LiteralsAction() {
         throw new IllegalStateException("Constant Class");
     }
@@ -59,4 +56,8 @@ public class LiteralsAction {
     public static final String CONTINGENCY_ERROR_NO_CONTINGENCY_PLAYER = "Player is not " + CONTINGENCY_NAME;
     public static final String TAKEDISCARDEVENTCARD_DESCRIPTION = "Unique action for Contingency Planner.";
     public static final String TAKEDISCARDEVENTCARD_ACTION = "You can take a card from city discard deck: ";
+
+
+    public static final String DRIVEFERRYDISPATCHER_DESCRIPTION = DRIVEFERRY_DESCRIPTION + " ordered by the Dispatcher";
+    public static final String DRIVEFERRYDISPATCHER_ACTION =  " player can directly move ordered by the Dispatcher to ";
 }
