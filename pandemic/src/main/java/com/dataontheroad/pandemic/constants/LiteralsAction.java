@@ -60,4 +60,8 @@ public class LiteralsAction {
 
     public static final String DRIVEFERRYDISPATCHER_DESCRIPTION = DRIVEFERRY_DESCRIPTION + " ordered by the Dispatcher";
     public static final String DRIVEFERRYDISPATCHER_ACTION =  " player can directly move ordered by the Dispatcher to ";
+
+    public static final String MOVEPAWNTOPAWN_DESCRIPTION = "As an action, move any pawn to a city with another pawn";
+    public static final String MOVEPAWNTOPAWN_ACTION =  " player can directly move to another pawn, ordered by the Dispatcher to ";
+    public static final String MOVEPAWNTOPAWN_ERROR_DESTINATION_NOT_AVAILABLE = "Movement is not available as there is no pawn on destination";
 }
