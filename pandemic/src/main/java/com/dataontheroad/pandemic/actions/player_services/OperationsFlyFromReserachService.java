@@ -2,20 +2,18 @@ package com.dataontheroad.pandemic.actions.player_services;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
-import com.dataontheroad.pandemic.actions.action_factory.BuildResearchCenterAction;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromResearchCenterAnywhereAction;
 import com.dataontheroad.pandemic.actions.default_services.BuildResearchCenterDefaultService;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
-import com.dataontheroad.pandemic.model.player.Player;
 
 import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisLocation;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.OPERATIONS_NAME;
 import static java.util.Objects.isNull;
@@ -37,10 +35,6 @@ public class OperationsFlyFromReserachService extends BuildResearchCenterDefault
     }
 
     public static boolean isDoable(OperationsPlayer player) {
-        if(!OPERATIONS_NAME.equals(player.getName())){
-            return false;
-        }
-
         return player.getCity().getHasCenter()
                 && player.canPlayerExecuteActionThisTurn()
                 && !isEmpty(player.getListCard());
@@ -52,11 +46,7 @@ public class OperationsFlyFromReserachService extends BuildResearchCenterDefault
     }
 
 
-    public static void doAction(OperationsPlayer player, City destination, Card discardCard) throws ActionException {
-        if(!OPERATIONS_NAME.equals(player.getName())){
-            throw new ActionException(ActionsType.OPERATION_FLY, OPERATIONFLY_ERROR_PLAYERISNOTOPERATIONSEXPERT);
-        }
-
+    public static void doAction(OperationsPlayer player, City destination, BaseCard discardCard) throws ActionException {
         City position = player.getCity();
 
         if(!position.getHasCenter()) {
@@ -68,5 +58,6 @@ public class OperationsFlyFromReserachService extends BuildResearchCenterDefault
         }
         player.setCity(destination);
         player.getListCard().remove(discardCard);
+        player.actionHasBeenExecuted();
     }
 }

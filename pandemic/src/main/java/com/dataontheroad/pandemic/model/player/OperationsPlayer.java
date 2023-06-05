@@ -28,6 +28,11 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
     }
 
     @Override
+    public void actionHasBeenExecuted() {
+        isActionAvailableThisTurn = false;
+    }
+
+    @Override
     public BuildResearchCenterDefaultService getBuildResearchCenter() {
         return OperationsBuildResearchCenterService.getInstance();
     }

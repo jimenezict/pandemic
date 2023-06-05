@@ -3,19 +3,15 @@ package com.dataontheroad.pandemic.actions.action_factory.player_actions;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
-import com.dataontheroad.pandemic.model.player.ContingencyPlayer;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
-import com.dataontheroad.pandemic.model.player.Player;
 
-import javax.smartcardio.Card;
-
-import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ACTION;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.OPERATIONFLY_ACTION;
 
 public class FlyFromResearchCenterAnywhereAction extends Action {
     City destination;
-    Card discardCard;
+    BaseCard discardCard;
 
     public FlyFromResearchCenterAnywhereAction(OperationsPlayer player) {
         super(ActionsType.OPERATION_FLY, player);
@@ -36,7 +32,7 @@ public class FlyFromResearchCenterAnywhereAction extends Action {
         this.destination = destination;
     }
 
-    public void setDiscardCard(Card discardCard) {
+    public void setDiscardCard(BaseCard discardCard) {
         this.discardCard = discardCard;
     }
 }

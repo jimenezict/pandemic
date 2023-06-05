@@ -5,4 +5,6 @@ public interface OneActionPerTurnInterface {
     boolean canPlayerExecuteActionThisTurn();
 
     void resetActionAvailable();
+
+    void actionHasBeenExecuted();
 }
