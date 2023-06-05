@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.model.player;
 
 import com.dataontheroad.pandemic.actions.default_services.BuildResearchCenterDefaultService;
 import com.dataontheroad.pandemic.actions.player_services.OperationsBuildResearchCenterService;
+import com.dataontheroad.pandemic.actions.player_services.OperationsFlyFromReserachService;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 
@@ -31,4 +32,7 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
         return OperationsBuildResearchCenterService.getInstance();
     }
 
+    public OperationsFlyFromReserachService specialActionService() {
+        return OperationsFlyFromReserachService.getInstance();
+    }
 }

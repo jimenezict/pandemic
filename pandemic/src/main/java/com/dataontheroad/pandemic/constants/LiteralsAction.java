@@ -4,6 +4,8 @@ import static com.dataontheroad.pandemic.constants.LiteralsPlayers.CONTINGENCY_N
 
 public class LiteralsAction {
 
+
+
     private LiteralsAction() {
         throw new IllegalStateException("Constant Class");
     }
@@ -64,4 +66,11 @@ public class LiteralsAction {
     public static final String MOVEPAWNTOPAWN_DESCRIPTION = "As an action, move any pawn to a city with another pawn";
     public static final String MOVEPAWNTOPAWN_ACTION =  " player can directly move to another pawn, ordered by the Dispatcher to ";
     public static final String MOVEPAWNTOPAWN_ERROR_DESTINATION_NOT_AVAILABLE = "Movement is not available as there is no pawn on destination";
+
+    public static final String OPERATIONFLY_DESCRIPTION = "";
+    public static final String OPERATIONFLY_ACTION = "";
+    public static final String OPERATIONFLY_ERROR_CITYWITHOUTRESEARCHCENTER = "";
+    public static final String OPERATIONFLY_ERROR_PLAYERISNOTOPERATIONSEXPERT = "";
+    public static final String OPERATIONFLY_ERROR_PLAYERHASALREADYFLYTHISTURN = "";
+    public static final String OPERATIONFLY_ERROR_PLAYERHASNOCARD = "";
 }
