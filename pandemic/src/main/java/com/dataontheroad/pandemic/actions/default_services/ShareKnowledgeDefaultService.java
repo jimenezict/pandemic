@@ -18,7 +18,7 @@ public class ShareKnowledgeDefaultService {
 
     private static ShareKnowledgeDefaultService shareKnowledgeDefaultService;
 
-    private ShareKnowledgeDefaultService(){}
+    protected ShareKnowledgeDefaultService(){}
 
     public static ShareKnowledgeDefaultService getInstance() {
         if(isNull(shareKnowledgeDefaultService)) {
