@@ -7,7 +7,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ACTION;
 
-public class FlyCharterAction extends Action {
+public class FlyCharterAction extends Action implements ICommuting {
     City destination;
 
     public FlyCharterAction(Player player) {
