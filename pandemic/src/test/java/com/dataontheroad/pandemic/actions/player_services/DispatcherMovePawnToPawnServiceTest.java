@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.actions.player_services;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import static com.dataontheroad.pandemic.actions.ActionsType.MOVEPAWNTOPAWN;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 import static com.dataontheroad.pandemic.model.city.CityEnum.*;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DispatcherMovePawnToPawnServiceTest {
@@ -23,6 +25,8 @@ class DispatcherMovePawnToPawnServiceTest {
     ContingencyPlayer contingency;
     DispatcherPlayer dispatcher;
     ScientistPlayer scientist;
+
+    DispatcherMovePawnToPawnService dispatcherMovePawnToPawnService;
 
     @BeforeEach
     public void setUp() {
@@ -41,6 +45,8 @@ class DispatcherMovePawnToPawnServiceTest {
         playerList.add(scientist);
         playerList.add(dispatcher);
         playerList.add(contingency);
+
+        dispatcherMovePawnToPawnService = DispatcherMovePawnToPawnService.getInstance();
     }
 
     private City getCityFromBoardList(City inputCity) {
@@ -65,6 +71,13 @@ class DispatcherMovePawnToPawnServiceTest {
         assertEquals(3, availableActions.stream().filter(action -> CONTINGENCY_NAME.equals(action.getPlayer().getName())).count());
         assertEquals(3, availableActions.stream().filter(action -> DISPATCHER_NAME.equals(action.getPlayer().getName())).count());
         assertEquals(2, availableActions.stream().filter(action -> SCIENTIST_NAME.equals(action.getPlayer().getName())).count());
+    }
+
+    @Test
+    void doAction_successcase() throws ActionException {
+        List<Action> availableActions = DispatcherMovePawnToPawnService.returnAvailableActions(playerList);
+        availableActions.get(0).execute();
+        assertEquals(PARIS.cityName, playerList.get(0).getCity().getName());
     }
 
 
