@@ -2,9 +2,11 @@ package com.dataontheroad.pandemic.game.persistence;
 
 import com.dataontheroad.pandemic.game.persistence.model.Game;
 import com.dataontheroad.pandemic.game.persistence.model.GameHashMapSingleton;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+@Repository
 public class GamePersistenceOnHashMap implements IGamePersistence {
     @Override
     public void insertOrUpdateGame(Game game) {

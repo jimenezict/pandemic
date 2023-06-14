@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game.persistence;
 
 import com.dataontheroad.pandemic.game.persistence.model.Game;
+import com.dataontheroad.pandemic.game.persistence.model.GameHashMapSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,10 @@ class GamePersistenceOnHashMapTest {
         Game game4 = new Game();
 
         assertNull(underTest.getGameById(game4.getUuid()));
+
+        underTest.insertOrUpdateGame(game3);
+
+        assertEquals(3, GameHashMapSingleton.getInstance().size());
     }
 
 }
