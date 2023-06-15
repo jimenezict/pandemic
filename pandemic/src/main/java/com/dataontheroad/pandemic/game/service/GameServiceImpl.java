@@ -1,11 +1,14 @@
 package com.dataontheroad.pandemic.game.service;
 
+import com.dataontheroad.pandemic.game.api.model.GameResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
-import com.dataontheroad.pandemic.game.persistence.model.Game;
+import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static com.dataontheroad.pandemic.game.service.ConvertGamesDTO.convertGameDTO;
 
 public class GameServiceImpl implements IGameService {
 
@@ -14,14 +17,14 @@ public class GameServiceImpl implements IGameService {
 
     @Override
     public UUID createGame(int numEpidemic, int numPlayers) {
-        Game game = new Game();
-        game.setUpdateDateTime(LocalDateTime.now());
-        gamePersistence.insertOrUpdateGame(game);
-        return game.getUuid();
+        GameDTO gameDTO = new GameDTO();
+        gameDTO.setUpdateDateTime(LocalDateTime.now());
+        gamePersistence.insertOrUpdateGame(gameDTO);
+        return gameDTO.getUuid();
     }
 
     @Override
-    public Game getGameById(UUID uuid) {
-        return gamePersistence.getGameById(uuid);
+    public GameResponseDTO getGameById(UUID uuid) {
+        return convertGameDTO(gamePersistence.getGameById(uuid));
     }
 }

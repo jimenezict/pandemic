@@ -7,9 +7,9 @@ import static java.util.Objects.isNull;
 
 public class GameHashMapSingleton {
 
-    private static HashMap<UUID, Game> gameHashMap;
+    private static HashMap<UUID, GameDTO> gameHashMap;
 
-    public static HashMap<UUID, Game> getInstance() {
+    public static HashMap<UUID, GameDTO> getInstance() {
         if(isNull(gameHashMap)) {
             gameHashMap = new HashMap<>();
         }

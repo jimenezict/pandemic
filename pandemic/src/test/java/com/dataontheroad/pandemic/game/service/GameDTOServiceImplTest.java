@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game.service;
 
-import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;import com.dataontheroad.pandemic.game.persistence.model.Game;
+import com.dataontheroad.pandemic.game.api.model.GameResponseDTO;
+import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GameServiceImplTest {
+class GameDTOServiceImplTest {
 
     @InjectMocks
     GameServiceImpl gameService;
@@ -30,7 +31,7 @@ class GameServiceImplTest {
     GamePersistenceOnHashMap gamePersistence;
 
     @Captor
-    ArgumentCaptor<Game> gameCaptor;
+    ArgumentCaptor<GameDTO> gameCaptor;
 
     @Test
     void createGame() {
@@ -39,21 +40,21 @@ class GameServiceImplTest {
         assertTrue(!isNull(uuid));
         verify(gamePersistence).insertOrUpdateGame(any());
         verify(gamePersistence).insertOrUpdateGame(gameCaptor.capture());
-        Game game = gameCaptor.getValue();
-        assertEquals(uuid, game.getUuid());
-        assertTrue(!isNull(game.getLocalDate()));
-        assertTrue(!isNull(game.getUpdateDateTime()));
+        GameDTO gameDTO = gameCaptor.getValue();
+        assertEquals(uuid, gameDTO.getUuid());
+        assertTrue(!isNull(gameDTO.getLocalDate()));
+        assertTrue(!isNull(gameDTO.getUpdateDateTime()));
     }
 
     @Test
     void getGameById() {
-        Game game = new Game();
-        game.setUpdateDateTime(LocalDateTime.now());
+        GameDTO gameDTO = new GameDTO();
+        gameDTO.setUpdateDateTime(LocalDateTime.now());
 
-        when(gamePersistence.getGameById(game.getUuid())).thenReturn(game);
+        when(gamePersistence.getGameById(gameDTO.getUuid())).thenReturn(gameDTO);
 
-        Game testGame = gameService.getGameById(game.getUuid());
-        assertEquals(game.getUuid(), testGame.getUuid());
+        GameResponseDTO testGameDTO = gameService.getGameById(gameDTO.getUuid());
+        assertEquals(gameDTO.getUuid(), testGameDTO.getUuid());
     }
 
 }

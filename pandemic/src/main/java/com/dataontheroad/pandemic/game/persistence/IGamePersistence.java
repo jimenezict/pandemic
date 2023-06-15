@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.game.persistence;
 
-import com.dataontheroad.pandemic.game.persistence.model.Game;
+import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -8,8 +8,8 @@ import java.util.UUID;
 @Repository
 public interface IGamePersistence {
 
-    void insertOrUpdateGame(Game game);
+    void insertOrUpdateGame(GameDTO gameDTO);
 
-    Game getGameById(UUID uuid);
+    GameDTO getGameById(UUID uuid);
 
 }

@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
 
-public class Game {
+public class GameDTO {
 
     private final UUID uuid;
 
@@ -13,7 +13,7 @@ public class Game {
 
     private LocalDateTime updateDateTime;
 
-    public Game() {
+    public GameDTO() {
         this.uuid = randomUUID();
         insertDateTime = LocalDateTime.now();
     }
