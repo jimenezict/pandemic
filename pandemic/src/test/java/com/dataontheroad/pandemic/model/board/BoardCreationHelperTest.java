@@ -1,10 +1,13 @@
 package com.dataontheroad.pandemic.model.board;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static com.dataontheroad.pandemic.model.board.BoardCreationHelper.addEpidemicCards;
 import static com.dataontheroad.pandemic.model.board.BoardCreationHelper.configurePlayersOnBoard;
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardCreationHelperTest {
@@ -32,4 +35,11 @@ class BoardCreationHelperTest {
         assertEquals(initialSize - number_cards * number_player, board.getPlayerQueue().getPlayerQueue().size());
     }
 
+    @Test
+    void addEpidemicCards_addFourCards() {
+        int initialSize = board.getPlayerQueue().getPlayerQueue().size();
+        addEpidemicCards(board, 4);
+        assertEquals(4, board.getPlayerQueue().getPlayerQueue().stream().filter(card -> EPIDEMIC.equals(card.getCardType())).count());
+        assertEquals(4, board.getPlayerQueue().getPlayerQueue().size() - initialSize);
+    }
 }

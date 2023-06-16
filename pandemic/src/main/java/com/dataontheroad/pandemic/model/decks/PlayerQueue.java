@@ -28,6 +28,12 @@ public class PlayerQueue {
         return playerCards;
     }
 
+    public void shuffleQueue() {
+        List<BaseCard> baseCardList = (List<BaseCard>) playerQueue;
+        Collections.shuffle(baseCardList);
+        playerQueue = new LinkedList<>(baseCardList);
+    }
+
     private int numberOfCardsToDraw(int numberOfPlayers) {
         switch(numberOfPlayers) {
             case 2:

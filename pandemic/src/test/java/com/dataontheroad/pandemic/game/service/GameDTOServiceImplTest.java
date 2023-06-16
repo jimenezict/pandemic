@@ -34,7 +34,7 @@ class GameDTOServiceImplTest {
     ArgumentCaptor<GameDTO> gameCaptor;
 
     @Test
-    void createGame() {
+    void createGame() throws Exception {
         UUID uuid = gameService.createGame(4,2);
 
         assertTrue(!isNull(uuid));
@@ -44,11 +44,12 @@ class GameDTOServiceImplTest {
         assertEquals(uuid, gameDTO.getUuid());
         assertTrue(!isNull(gameDTO.getLocalDate()));
         assertTrue(!isNull(gameDTO.getUpdateDateTime()));
+        assertTrue(!isNull(gameDTO.getBoard()));
     }
 
     @Test
-    void getGameById() {
-        GameDTO gameDTO = new GameDTO();
+    void getGameById() throws Exception {
+        GameDTO gameDTO = new GameDTO(2);
         gameDTO.setUpdateDateTime(LocalDateTime.now());
 
         when(gamePersistence.getGameById(gameDTO.getUuid())).thenReturn(gameDTO);

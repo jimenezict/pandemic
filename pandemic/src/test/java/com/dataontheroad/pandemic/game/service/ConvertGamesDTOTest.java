@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConvertGamesDTOTest {
 
     @Test
-    void convertGameDTO() {
-        GameDTO gameDTO = new GameDTO();
+    void convertGameDTO() throws Exception {
+        GameDTO gameDTO = new GameDTO(2);
         GameResponseDTO gameResponseDTO = ConvertGamesDTO.convertGameDTO(gameDTO);
         assertEquals(gameDTO.getUuid(), gameResponseDTO.getUuid());
     }

@@ -11,10 +11,10 @@ class GameDTOPersistenceOnHashMapTest {
     GamePersistenceOnHashMap underTest = new GamePersistenceOnHashMap();
 
     @Test
-    public void createsThreeGames() {
-        GameDTO gameDTO1 = new GameDTO();
-        GameDTO gameDTO2 = new GameDTO();
-        GameDTO gameDTO3 = new GameDTO();
+    public void createsThreeGames() throws Exception {
+        GameDTO gameDTO1 = new GameDTO(4);
+        GameDTO gameDTO2 = new GameDTO(4);
+        GameDTO gameDTO3 = new GameDTO(4);
 
         underTest.insertOrUpdateGame(gameDTO1);
         underTest.insertOrUpdateGame(gameDTO2);
@@ -24,7 +24,7 @@ class GameDTOPersistenceOnHashMapTest {
         assertEquals(underTest.getGameById(gameDTO2.getUuid()), gameDTO2);
         assertEquals(underTest.getGameById(gameDTO3.getUuid()), gameDTO3);
 
-        GameDTO gameDTO4 = new GameDTO();
+        GameDTO gameDTO4 = new GameDTO(4);
 
         assertNull(underTest.getGameById(gameDTO4.getUuid()));
 

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.game.service.ConvertGamesDTO.convertGameDTO;
+import static com.dataontheroad.pandemic.model.board.BoardCreationHelper.addEpidemicCards;
 
 public class GameServiceImpl implements IGameService {
 
@@ -16,9 +17,10 @@ public class GameServiceImpl implements IGameService {
     GamePersistenceOnHashMap gamePersistence;
 
     @Override
-    public UUID createGame(int numEpidemic, int numPlayers) {
-        GameDTO gameDTO = new GameDTO();
+    public UUID createGame(int numEpidemic, int numPlayers) throws Exception {
+        GameDTO gameDTO = new GameDTO(numPlayers);
         gameDTO.setUpdateDateTime(LocalDateTime.now());
+        addEpidemicCards(gameDTO.getBoard(), numEpidemic);
         gamePersistence.insertOrUpdateGame(gameDTO);
         return gameDTO.getUuid();
     }

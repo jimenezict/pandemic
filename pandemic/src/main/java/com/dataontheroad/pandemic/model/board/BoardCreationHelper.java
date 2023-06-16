@@ -1,9 +1,12 @@
 package com.dataontheroad.pandemic.model.board;
 
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
+import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -19,7 +22,10 @@ public class BoardCreationHelper {
     }
 
     public static void addEpidemicCards(Board board, int numberOfEpidemicCards) {
-        // TO-DO
+        IntStream.range(0, numberOfEpidemicCards).forEach($ -> {
+                    board.getPlayerQueue().getPlayerQueue().add(new EpidemicCard());
+                });
+        board.getPlayerQueue().shuffleQueue();
     }
 
     public static List<CityCard> configureVirusOnBoard(Board board) {
