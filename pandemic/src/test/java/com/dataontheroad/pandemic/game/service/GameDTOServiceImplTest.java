@@ -55,7 +55,7 @@ class GameDTOServiceImplTest {
         when(gamePersistence.getGameById(gameDTO.getUuid())).thenReturn(gameDTO);
 
         GameResponseDTO testGameDTO = gameService.getGameById(gameDTO.getUuid());
-        assertEquals(gameDTO.getUuid(), testGameDTO.getUuid());
+        assertEquals(gameDTO.getUuid(), testGameDTO.getGameId());
     }
 
 }
