@@ -4,17 +4,30 @@ import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import com.dataontheroad.pandemic.model.city.City;
-import com.dataontheroad.pandemic.model.player.Player;
+import com.dataontheroad.pandemic.model.player.*;
 
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static com.dataontheroad.pandemic.constants.LiteralsPlayers.DISPATCHER_NAME;
+
 public class BoardCreationHelper {
 
     public static void configurePlayersOnBoard(Board board, int numberOfPlayers) {
-        IntStream.range(0, numberOfPlayers).forEach($ -> {
-            Player player = new Player();
+        List<Player> listPlayers = Arrays.asList(new ContingencyPlayer(),
+                new DispatcherPlayer(),
+                new MedicPlayer(),
+                new OperationsPlayer(),
+                new QuarantinePlayer(),
+                new ResearchPlayer(),
+                new ScientistPlayer());
+        Collections.shuffle(listPlayers);
+
+        IntStream.range(0, numberOfPlayers).forEach(i -> {
+            Player player = listPlayers.get(i);
             player.setListCard(board.getPlayerQueue().getInitialDrawCards(numberOfPlayers));
             player.setCity(board.getBoardCities().get(1));
             board.addPlayer(player);
@@ -26,6 +39,16 @@ public class BoardCreationHelper {
                     board.getPlayerQueue().getPlayerQueue().add(new EpidemicCard());
                 });
         board.getPlayerQueue().shuffleQueue();
+    }
+
+    public static <Set> void giveRolesToPlayers(Board board) {
+
+        board.getPlayers().forEach(player -> {
+            switch(player.getName()) {
+                case DISPATCHER_NAME:
+
+            }
+        });
     }
 
     public static List<CityCard> configureVirusOnBoard(Board board) {
