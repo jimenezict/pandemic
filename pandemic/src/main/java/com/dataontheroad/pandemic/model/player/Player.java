@@ -8,7 +8,7 @@ import com.dataontheroad.pandemic.model.virus.Virus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements IPlayerServices {
     private List<BaseCard> listCard;
     private City city;
     protected String color;
@@ -57,36 +57,6 @@ public class Player {
     public String getDescription() {
         return description;
     }
-
-    public BuildResearchCenterDefaultService getBuildResearchCenter() {
-        return BuildResearchCenterDefaultService.getInstance();
-    }
-
-    public DiscoverCureDefaultService getDiscoverCure() {
-        return DiscoverCureDefaultService.getInstance();
-    }
-
-    public DriveFerryDefaultService getDriveFerry() {
-        return DriveFerryDefaultService.getInstance();
-    }
-
-    public FlyCharterDefaultService getFlyCharter() {
-        return FlyCharterDefaultService.getInstance();
-    }
-
-    public FlyDirectCityDefaultService getFlyDirectCity() {
-        return FlyDirectCityDefaultService.getInstance();
-    }
-
-    public FlyShuttleDefaultService getFlyShuttle() {
-        return FlyShuttleDefaultService.getInstance();
-    }
-
-    public ShareKnowledgeDefaultService getShareKnowledge() {
-        return ShareKnowledgeDefaultService.getInstance();
-    }
-
-    public TreatDiseaseDefaultService getTreatDisease() { return TreatDiseaseDefaultService.getInstance();}
 
     public void executeAfterAction(List<Virus> virusList) {
 
