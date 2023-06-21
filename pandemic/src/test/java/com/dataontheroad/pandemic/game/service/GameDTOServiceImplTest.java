@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.game.service;
 
+import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.GameResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ class GameDTOServiceImplTest {
     ArgumentCaptor<GameDTO> gameCaptor;
 
     @Test
-    void createGame() throws Exception {
+    void createGame() throws GameExecutionException {
         UUID uuid = gameService.createGame(4,2);
 
         assertTrue(!isNull(uuid));
