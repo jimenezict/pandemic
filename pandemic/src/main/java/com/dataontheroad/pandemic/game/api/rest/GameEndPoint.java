@@ -27,4 +27,9 @@ public class GameEndPoint {
         return ResponseEntity.ok().body("created game with id " + uuid);
     }
 
+    @GetMapping("/game/read/{gameId}")
+    ResponseEntity readGame(@PathVariable UUID gameId) {
+        return ResponseEntity.ok().body(gameService.getGameById(gameId));
+    }
+
 }

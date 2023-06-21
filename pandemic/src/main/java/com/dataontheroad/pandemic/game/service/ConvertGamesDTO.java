@@ -1,8 +1,12 @@
 package com.dataontheroad.pandemic.game.service;
 
+import com.dataontheroad.pandemic.game.api.model.GameResponseCard;
+import com.dataontheroad.pandemic.game.api.model.GameResponseCity;
 import com.dataontheroad.pandemic.game.api.model.GameResponseDTO;
 import com.dataontheroad.pandemic.game.api.model.GameResponsePlayer;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
+import com.dataontheroad.pandemic.model.cards.model.CityCard;
+import com.dataontheroad.pandemic.model.cards.model.special_card.SpecialCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.VirusType;
@@ -10,6 +14,9 @@ import com.dataontheroad.pandemic.model.virus.VirusType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EVENT_ACTION;
 
 public class ConvertGamesDTO {
 
@@ -24,8 +31,21 @@ public class ConvertGamesDTO {
 
     private static List<GameResponsePlayer> buildGameResponsePlayerFromGameDTO(List<Player> listPlayers) {
         return listPlayers.stream()
-                .map(player ->
-                        new GameResponsePlayer(player.getListCard(), player.getCity(), player.getName()))
+                .map(player -> {
+
+                    List<GameResponseCard> gameResponseCards = player.getListCard().stream().map(card -> {
+                        switch (card.getCardType()) {
+                            case CITY:
+                                CityCard cityCard = (CityCard) card;
+                                return new GameResponseCard(CITY, cityCard.getCity().getName());
+                            case EVENT_ACTION:
+                                SpecialCard specialCard = (SpecialCard) card;
+                                return new GameResponseCard(EVENT_ACTION, specialCard.getEventName());
+                        }
+                        return null;
+                    }).collect(Collectors.toList());
+                    return new GameResponsePlayer(gameResponseCards, new GameResponseCity(player.getCity()), player.getName());
+                })
                 .collect(Collectors.toList());
     }
 

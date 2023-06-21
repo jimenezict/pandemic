@@ -7,23 +7,23 @@ import java.util.List;
 
 public class GameResponsePlayer {
 
-    private final List<BaseCard> listCard;
+    private final List<GameResponseCard> listCard;
 
-    private final City location;
+    private final GameResponseCity location;
 
     private final String name;
 
-    public GameResponsePlayer(List<BaseCard> listCard, City location, String name) {
+    public GameResponsePlayer(List<GameResponseCard> listCard, GameResponseCity location, String name) {
         this.listCard = listCard;
         this.location = location;
         this.name = name;
     }
 
-    public List<BaseCard> getListCard() {
+    public List<GameResponseCard> getListCard() {
         return listCard;
     }
 
-    public City getLocation() {
+    public GameResponseCity getLocation() {
         return location;
     }
 

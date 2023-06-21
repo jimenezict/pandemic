@@ -42,7 +42,7 @@ class ConvertGamesDTOTest {
             Player gameDTOplayer = gameDTO.getBoard().getPlayers().stream().filter(x -> x.getName().equals(gameResponseDTOplayer.getName())).findFirst().get();
             assertEquals(NUMBER_OF_CARDS, gameResponseDTOplayer.getListCard().size());
             assertEquals(gameResponseDTOplayer.getName(), gameDTOplayer.getName());
-            assertEquals(gameResponseDTOplayer.getLocation(), gameDTOplayer.getCity());
+            assertEquals(gameResponseDTOplayer.getLocation().getName(), gameDTOplayer.getCity().getName());
         });
 
         //Validations about city content
