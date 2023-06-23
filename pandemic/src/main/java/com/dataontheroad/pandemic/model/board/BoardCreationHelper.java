@@ -41,16 +41,6 @@ public class BoardCreationHelper {
         board.getPlayerQueue().shuffleQueue();
     }
 
-    public static <Set> void giveRolesToPlayers(Board board) {
-
-        board.getPlayers().forEach(player -> {
-            switch(player.getName()) {
-                case DISPATCHER_NAME:
-
-            }
-        });
-    }
-
     public static List<CityCard> configureVirusOnBoard(Board board) {
         List<CityCard> initialDrawInfection = board.getInfectionDeck().getInitialDrawInfectionDeck();
         board.setInfectionDiscardDeck(initialDrawInfection);
