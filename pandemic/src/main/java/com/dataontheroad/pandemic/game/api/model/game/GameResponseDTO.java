@@ -1,6 +1,5 @@
-package com.dataontheroad.pandemic.game.api.model;
+package com.dataontheroad.pandemic.game.api.model.game;
 
-import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.time.LocalDateTime;

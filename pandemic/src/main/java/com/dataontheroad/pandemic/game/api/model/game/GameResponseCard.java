@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.game.api.model;
+package com.dataontheroad.pandemic.game.api.model.game;
 
 import com.dataontheroad.pandemic.model.cards.CardTypeEnum;
 

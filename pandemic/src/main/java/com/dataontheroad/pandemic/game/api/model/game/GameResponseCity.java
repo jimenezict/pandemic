@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.game.api.model;
+package com.dataontheroad.pandemic.game.api.model.game;
 
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.virus.VirusType;

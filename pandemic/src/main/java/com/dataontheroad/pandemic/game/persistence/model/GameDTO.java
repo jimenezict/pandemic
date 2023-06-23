@@ -17,11 +17,14 @@ public class GameDTO {
     private final Board board;
 
     private LocalDateTime updateDateTime;
+    
+    private final TurnInformation turnInformation;
 
     public GameDTO(int numOfPlayers) throws Exception {
         this.uuid = randomUUID();
         insertDateTime = LocalDateTime.now();
         board = createBoardWithNumberOfPlayers(numOfPlayers);
+        turnInformation = new TurnInformation(board.getPlayers().get(0));
     }
 
     public UUID getUuid() {
@@ -42,5 +45,9 @@ public class GameDTO {
 
     public Board getBoard() {
         return board;
+    }
+
+    public TurnInformation getTurnInformation() {
+        return turnInformation;
     }
 }

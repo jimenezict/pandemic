@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
 
-import com.dataontheroad.pandemic.game.api.model.GameResponseDTO;
+import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.service.GameServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

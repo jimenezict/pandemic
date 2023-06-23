@@ -1,9 +1,9 @@
 package com.dataontheroad.pandemic.game.service;
 
-import com.dataontheroad.pandemic.game.api.model.GameResponseCard;
-import com.dataontheroad.pandemic.game.api.model.GameResponseCity;
-import com.dataontheroad.pandemic.game.api.model.GameResponseDTO;
-import com.dataontheroad.pandemic.game.api.model.GameResponsePlayer;
+import com.dataontheroad.pandemic.game.api.model.game.GameResponseCard;
+import com.dataontheroad.pandemic.game.api.model.game.GameResponseCity;
+import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
+import com.dataontheroad.pandemic.game.api.model.game.GameResponsePlayer;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.cards.model.special_card.SpecialCard;

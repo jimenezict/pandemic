@@ -1,7 +1,4 @@
-package com.dataontheroad.pandemic.game.api.model;
-
-import com.dataontheroad.pandemic.model.cards.model.BaseCard;
-import com.dataontheroad.pandemic.model.city.City;
+package com.dataontheroad.pandemic.game.api.model.game;
 
 import java.util.List;
 
