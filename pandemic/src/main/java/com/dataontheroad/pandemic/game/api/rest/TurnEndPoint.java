@@ -25,7 +25,7 @@ public class TurnEndPoint {
         if(isNull(turnResponseDTO)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(gameId + "Not Found");
         }
-        return ResponseEntity.ok(turnResponseDTO);
+        return ResponseEntity.ok().body(turnResponseDTO);
     }
 
 }

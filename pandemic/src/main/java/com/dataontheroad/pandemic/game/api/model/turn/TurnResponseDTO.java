@@ -14,10 +14,22 @@ public class TurnResponseDTO {
     private List<Action> actionList;
 
     public void setTurnInformation(TurnInformation turnInformation, List<Action> actionList
-
-
      ) {
         this.missingTurns = turnInformation.getMissingTurns();
         this.activePlayer = turnInformation.getActivePlayer();
+        this.actionList = actionList;
     }
+
+    public int getMissingTurns() {
+        return missingTurns;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
+    public List<Action> getActionList() {
+        return actionList;
+    }
+
 }
