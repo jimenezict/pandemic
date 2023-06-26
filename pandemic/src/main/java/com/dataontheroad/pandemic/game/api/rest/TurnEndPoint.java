@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
-import com.dataontheroad.pandemic.game.service.TurnServiceImpl;
+import com.dataontheroad.pandemic.game.service.interfaces.TurnServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class TurnEndPoint {
     ResponseEntity getTurn(@PathVariable UUID gameId) {
         TurnResponseDTO turnResponseDTO = turnService.getTurnServiceInformation(gameId);
         if(isNull(turnResponseDTO)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(gameId + "Not Found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(gameId + ": Not Found");
         }
         return ResponseEntity.ok().body(turnResponseDTO);
     }

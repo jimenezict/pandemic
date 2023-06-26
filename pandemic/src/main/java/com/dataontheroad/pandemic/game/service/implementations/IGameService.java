@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.game.service;
+package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;

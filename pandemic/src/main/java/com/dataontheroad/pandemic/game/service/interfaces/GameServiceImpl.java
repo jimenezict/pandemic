@@ -1,16 +1,17 @@
-package com.dataontheroad.pandemic.game.service;
+package com.dataontheroad.pandemic.game.service.interfaces;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
+import com.dataontheroad.pandemic.game.service.implementations.IGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static com.dataontheroad.pandemic.game.service.ConvertGamesDTO.convertGameDTO;
+import static com.dataontheroad.pandemic.game.service.converters.ConvertGamesDTO.convertGameDTO;
 import static com.dataontheroad.pandemic.model.board.BoardCreationHelper.addEpidemicCards;
 import static java.util.Objects.isNull;
 

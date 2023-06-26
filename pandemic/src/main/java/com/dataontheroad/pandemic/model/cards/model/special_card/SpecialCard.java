@@ -21,4 +21,9 @@ public abstract class SpecialCard extends BaseCard {
     public String getEventDescription() {
         return eventDescription;
     }
+
+    @Override
+    public String toString() {
+        return "Type: " + cardTypeEnum.name() + "Event: " + eventName;
+    }
 }

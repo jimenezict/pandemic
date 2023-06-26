@@ -43,4 +43,9 @@ public class CityCard extends BaseCard{
     public int hashCode() {
         return this.city.getName().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "Type: " + cardTypeEnum.name() + " City: " + city.getName();
+    }
 }

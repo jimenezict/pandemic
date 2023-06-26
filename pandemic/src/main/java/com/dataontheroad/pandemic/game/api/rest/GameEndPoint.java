@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
-import com.dataontheroad.pandemic.game.service.GameServiceImpl;
+import com.dataontheroad.pandemic.game.service.interfaces.GameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

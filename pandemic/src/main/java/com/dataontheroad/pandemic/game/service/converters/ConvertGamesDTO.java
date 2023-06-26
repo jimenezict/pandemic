@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.game.service;
+package com.dataontheroad.pandemic.game.service.converters;
 
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseCard;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseCity;

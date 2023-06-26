@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.game.api.rest;
 
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
-import com.dataontheroad.pandemic.game.service.GameServiceImpl;
+import com.dataontheroad.pandemic.game.service.interfaces.GameServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
