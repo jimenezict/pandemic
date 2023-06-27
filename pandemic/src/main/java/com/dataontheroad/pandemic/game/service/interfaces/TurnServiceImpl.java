@@ -40,15 +40,15 @@ public class TurnServiceImpl implements ITurnService {
         }
     }
 
-    private static List<Player> getOtherPlayersOnTheCity(GameDTO gameDTO) {
+    public static List<Player> getOtherPlayersOnTheCity(GameDTO gameDTO) {
         return gameDTO.getBoard().getPlayers()
                 .stream()
                 .filter(player -> !player.getName().equals(gameDTO.getTurnInformation().getActivePlayer().getName()))
-                .filter(player -> player.getCity().equals(gameDTO.getTurnInformation().getActivePlayer()))
+                .filter(player -> player.getCity().equals(gameDTO.getTurnInformation().getActivePlayer().getCity()))
                 .collect(Collectors.toList());
     }
 
-    private static List<City> getCitiesWithResearchCenter(GameDTO gameDTO) {
+    public static List<City> getCitiesWithResearchCenter(GameDTO gameDTO) {
         return gameDTO.getBoard().getBoardCities().stream().filter(city -> city.getHasCenter()).collect(Collectors.toList());
     }
 }

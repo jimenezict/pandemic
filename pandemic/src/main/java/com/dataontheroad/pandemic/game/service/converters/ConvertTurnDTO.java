@@ -2,7 +2,6 @@ package com.dataontheroad.pandemic.game.service.converters;
 
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseCity;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponsePlayer;
-import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.List;
