@@ -5,6 +5,8 @@ import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.service.implementations.ITurnService;
+import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +31,24 @@ public class TurnServiceImpl implements ITurnService {
         if(!isNull(gameDTO)) {
             List<Action> actionList = getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
                     gameDTO.getBoard().getVirusList(),
-                    gameDTO.getBoard().getBoardCities().stream().filter(city -> city.getHasCenter()).collect(Collectors.toList()),
-                    gameDTO.getBoard().getPlayers().stream().filter(player -> player.getCity().equals(gameDTO.getTurnInformation().getActivePlayer())).collect(Collectors.toList()));
+                    getCitiesWithResearchCenter(gameDTO),
+                    getOtherPlayersOnTheCity(gameDTO));
             turnResponseDTO.setTurnInformation(gameDTO.getTurnInformation(), actionList);
+            return turnResponseDTO;
         } else {
-            turnResponseDTO = null;
+            return null;
         }
-        return turnResponseDTO;
+    }
+
+    private static List<Player> getOtherPlayersOnTheCity(GameDTO gameDTO) {
+        return gameDTO.getBoard().getPlayers()
+                .stream()
+                .filter(player -> !player.getName().equals(gameDTO.getTurnInformation().getActivePlayer().getName()))
+                .filter(player -> player.getCity().equals(gameDTO.getTurnInformation().getActivePlayer()))
+                .collect(Collectors.toList());
+    }
+
+    private static List<City> getCitiesWithResearchCenter(GameDTO gameDTO) {
+        return gameDTO.getBoard().getBoardCities().stream().filter(city -> city.getHasCenter()).collect(Collectors.toList());
     }
 }
