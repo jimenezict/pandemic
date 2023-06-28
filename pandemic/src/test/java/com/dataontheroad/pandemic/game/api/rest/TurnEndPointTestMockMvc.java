@@ -1,6 +1,11 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
+import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
+import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
+import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.Player;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
@@ -26,6 +32,7 @@ class TurnEndPointTestMockMvc {
 
         @Autowired
         private MockMvc mvc;
+        private City atlanta = new City("Atlanta", VirusType.BLUE);
 
         @MockBean
         TurnServiceImpl turnService;
@@ -43,10 +50,10 @@ class TurnEndPointTestMockMvc {
                         .andExpect(status().isNotFound());
         }
 
-        /*
+
         @Test
         void getTurn_success() throws Exception {
-                TurnInformation turnInformation = new TurnInformation(new Player());
+                TurnInformation turnInformation = new TurnInformation(new Player(atlanta));
                 TurnResponseDTO turnResponseDTO = new TurnResponseDTO();
                 turnResponseDTO.setTurnInformation(turnInformation, new ArrayList<>());
 
@@ -58,7 +65,7 @@ class TurnEndPointTestMockMvc {
                         .andDo(print())
                         .andExpect(status().isOk());
         }
-        */
+
 
 }
 
