@@ -16,13 +16,21 @@ class TurnInformationTest {
     void constructor() {
         turnInformation = new TurnInformation(player);
 
-        assertEquals(2, turnInformation.getMissingTurns());
+        assertEquals(4, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
     }
 
     @Test
     void executesTwiceAndReleaseToOtherPlayer() {
         turnInformation = new TurnInformation(player);
+
+        assertTrue(turnInformation.canDoNextAction());
+        assertEquals(3, turnInformation.getMissingTurns());
+        assertEquals(player, turnInformation.getActivePlayer());
+
+        assertTrue(turnInformation.canDoNextAction());
+        assertEquals(2, turnInformation.getMissingTurns());
+        assertEquals(player, turnInformation.getActivePlayer());
 
         assertTrue(turnInformation.canDoNextAction());
         assertEquals(1, turnInformation.getMissingTurns());
@@ -32,8 +40,10 @@ class TurnInformationTest {
         assertEquals(0, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
 
+        assertFalse(turnInformation.canDoNextAction());
+
         turnInformation.setNewTurn(new ScientistPlayer());
-        assertEquals(2, turnInformation.getMissingTurns());
+        assertEquals(4, turnInformation.getMissingTurns());
     }
 
 }

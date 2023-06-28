@@ -6,15 +6,16 @@ public class TurnInformation {
 
     private int missingTurns;
     private Player activePlayer;
+    private static final int NUM_MISSING_ACTIONS = 4;
 
     public TurnInformation(Player activePlayer) {
         this.activePlayer = activePlayer;
-        missingTurns = 2;
+        missingTurns = NUM_MISSING_ACTIONS;
     }
 
     public void setNewTurn(Player activePlayer) {
         this.activePlayer = activePlayer;
-        missingTurns = 2;
+        missingTurns = NUM_MISSING_ACTIONS;
     }
 
     public boolean canDoNextAction() {

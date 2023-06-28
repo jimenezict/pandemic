@@ -1,10 +1,10 @@
-package com.dataontheroad.pandemic.game.service.interfaces;
+package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
-import com.dataontheroad.pandemic.game.service.implementations.ITurnService;
+import com.dataontheroad.pandemic.game.service.interfaces.ITurnService;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;

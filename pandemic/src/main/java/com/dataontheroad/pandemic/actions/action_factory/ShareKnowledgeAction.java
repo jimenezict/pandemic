@@ -28,7 +28,7 @@ public class ShareKnowledgeAction extends Action {
 
     @Override
     public String actionPrompt() {
-        return SHAREKNOWLEDGE_ACTION + player;
+        return card.toString() + " -> " + SHAREKNOWLEDGE_ACTION + player.getName() + " and goes to " + receiver.getName();
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.dataontheroad.pandemic.game.service.interfaces;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
-import com.dataontheroad.pandemic.game.service.interfaces.GameServiceImpl;
+import com.dataontheroad.pandemic.game.service.implementations.GameServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -44,7 +44,7 @@ class GameDTOServiceImplTest {
         verify(gamePersistence).insertOrUpdateGame(gameCaptor.capture());
         GameDTO gameDTO = gameCaptor.getValue();
         assertEquals(gameDTO.getBoard().getPlayers().get(0).getName(), gameDTO.getTurnInformation().getActivePlayer().getName());
-        assertEquals(2, gameDTO.getTurnInformation().getMissingTurns());
+        assertEquals(4, gameDTO.getTurnInformation().getMissingTurns());
         assertEquals(uuid, gameDTO.getUuid());
         assertTrue(!isNull(gameDTO.getLocalDate()));
         assertTrue(!isNull(gameDTO.getUpdateDateTime()));

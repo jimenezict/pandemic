@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.game.service.converters;
 
+import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseCity;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponsePlayer;
 import com.dataontheroad.pandemic.model.player.Player;
@@ -16,5 +17,9 @@ public class ConvertTurnDTO {
                 new TurnResponsePlayer(cardsList, new TurnResponseCity(playerTurnInformation.getCity()), playerTurnInformation.getName());
 
         return turnResponsePlayer;
+    }
+
+    public static List<String> convertListActionsToString(List<Action> actionList) {
+        return actionList.stream().map(action -> action.getActionsType() + ":" + action.actionPrompt()).collect(Collectors.toList());
     }
 }

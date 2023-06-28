@@ -1,6 +1,6 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
-import com.dataontheroad.pandemic.game.service.interfaces.TurnServiceImpl;
+import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

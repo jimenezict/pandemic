@@ -1,7 +1,7 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
-import com.dataontheroad.pandemic.game.service.interfaces.TurnServiceImpl;
+import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

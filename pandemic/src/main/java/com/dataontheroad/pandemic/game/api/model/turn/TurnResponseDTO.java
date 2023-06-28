@@ -5,19 +5,20 @@ import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 
 import java.util.List;
 
+import static com.dataontheroad.pandemic.game.service.converters.ConvertTurnDTO.convertListActionsToString;
 import static com.dataontheroad.pandemic.game.service.converters.ConvertTurnDTO.convertTurnResponsePlayer;
 
 public class TurnResponseDTO {
 
     private int missingTurns;
     private TurnResponsePlayer activePlayer;
-    private List<Action> actionList;
+    private List<String> actionList;
 
     public void setTurnInformation(TurnInformation turnInformation, List<Action> actionList
      ) {
         this.missingTurns = turnInformation.getMissingTurns();
         this.activePlayer = convertTurnResponsePlayer(turnInformation.getActivePlayer());
-        this.actionList = actionList;
+        this.actionList = convertListActionsToString(actionList);
     }
 
     public int getMissingTurns() {
@@ -28,7 +29,7 @@ public class TurnResponseDTO {
         return activePlayer;
     }
 
-    public List<Action> getActionList() {
+    public List<String> getActionList() {
         return actionList;
     }
 
