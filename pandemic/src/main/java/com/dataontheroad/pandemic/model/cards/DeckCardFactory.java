@@ -35,6 +35,7 @@ public class DeckCardFactory {
     public static PlayerQueue createPlayerQueue() {
         List<BaseCard> cityDeck = CityFactory.createCityList().stream().map(CityCard::createCityCard).collect(Collectors.toList());
         cityDeck.addAll(listSpecialAction());
+        Collections.shuffle(cityDeck);
         return new PlayerQueue(cityDeck);
     }
 
