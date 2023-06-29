@@ -3,7 +3,7 @@ package com.dataontheroad.pandemic.model.player;
 import org.junit.jupiter.api.Test;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DispatcherPlayerTest {
 

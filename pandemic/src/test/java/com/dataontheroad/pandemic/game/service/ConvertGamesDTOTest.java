@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.model.virus.VirusType.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConvertGamesDTOTest {
 

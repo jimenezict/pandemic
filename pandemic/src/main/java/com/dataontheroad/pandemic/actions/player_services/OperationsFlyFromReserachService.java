@@ -6,7 +6,6 @@ import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromR
 import com.dataontheroad.pandemic.actions.default_services.BuildResearchCenterDefaultService;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
-import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 

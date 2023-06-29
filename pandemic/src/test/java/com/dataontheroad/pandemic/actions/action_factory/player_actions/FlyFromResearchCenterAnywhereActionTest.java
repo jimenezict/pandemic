@@ -2,22 +2,20 @@ package com.dataontheroad.pandemic.actions.action_factory.player_actions;
 
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
-import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.OPERATIONFLY_ACTION;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static java.lang.Boolean.TRUE;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FlyFromResearchCenterAnywhereActionTest {
 

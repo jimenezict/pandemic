@@ -14,7 +14,6 @@ import static com.dataontheroad.pandemic.actions.ActionsType.MOVEPAWNTOPAWN;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 import static com.dataontheroad.pandemic.model.city.CityEnum.*;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DispatcherMovePawnToPawnServiceTest {

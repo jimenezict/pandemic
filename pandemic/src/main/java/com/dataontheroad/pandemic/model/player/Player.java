@@ -1,6 +1,5 @@
 package com.dataontheroad.pandemic.model.player;
 
-import com.dataontheroad.pandemic.actions.default_services.*;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.virus.Virus;
@@ -59,6 +58,6 @@ public class Player implements IPlayerServices {
     }
 
     public void executeAfterAction(List<Virus> virusList) {
-
+        // default implementation ignored
     }
 }

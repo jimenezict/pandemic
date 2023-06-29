@@ -2,7 +2,8 @@ package com.dataontheroad.pandemic.game.service.interfaces;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
-import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
+import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
+import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.service.implementations.GameServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,13 +13,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static java.util.Objects.isNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

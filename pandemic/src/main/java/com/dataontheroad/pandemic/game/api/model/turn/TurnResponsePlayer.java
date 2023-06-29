@@ -1,8 +1,5 @@
 package com.dataontheroad.pandemic.game.api.model.turn;
 
-import com.dataontheroad.pandemic.game.api.model.game.GameResponseCard;
-import com.dataontheroad.pandemic.game.api.model.game.GameResponseCity;
-
 import java.util.List;
 
 public class TurnResponsePlayer {

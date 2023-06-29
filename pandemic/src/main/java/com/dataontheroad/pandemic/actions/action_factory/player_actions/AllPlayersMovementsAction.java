@@ -6,7 +6,8 @@ import com.dataontheroad.pandemic.actions.player_services.DispatcherAllPlayerMov
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+
+import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRYDISPATCHER_ACTION;
 
 public class AllPlayersMovementsAction extends Action {
     City destination;

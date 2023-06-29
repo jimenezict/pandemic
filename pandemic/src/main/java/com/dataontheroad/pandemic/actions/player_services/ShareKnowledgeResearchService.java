@@ -6,15 +6,12 @@ import com.dataontheroad.pandemic.actions.action_factory.ShareKnowledgeAction;
 import com.dataontheroad.pandemic.actions.default_services.ShareKnowledgeDefaultService;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
-import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.player.ResearchPlayer;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisLocation;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 import static java.util.Objects.isNull;

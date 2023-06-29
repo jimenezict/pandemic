@@ -41,8 +41,9 @@ public class ConvertGamesDTO {
                             case EVENT_ACTION:
                                 SpecialCard specialCard = (SpecialCard) card;
                                 return new GameResponseCard(EVENT_ACTION, specialCard.getEventName());
+                            default:
+                                return null;
                         }
-                        return null;
                     }).collect(Collectors.toList());
                     return new GameResponsePlayer(gameResponseCards, new GameResponseCity(player.getCity()), player.getName());
                 })

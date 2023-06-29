@@ -6,12 +6,10 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
-import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,13 +52,13 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void isDoable_false_cityWithoutResearchCenter() {
+    void isDoable_false_cityWithoutResearchCenter() {
         operationsPlayer.setCity(lagos);
         assertFalse(operationsFlyFromReserachService.isDoable(operationsPlayer));
     }
 
     @Test
-    public void isDoable_false_playerHasNoCards() {
+    void isDoable_false_playerHasNoCards() {
         operationsPlayer.setListCard(new ArrayList<>());
 
         assertTrue(operationsPlayer.canPlayerExecuteActionThisTurn());
@@ -68,7 +66,7 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void isDoable_false_playerAlreadyPlayed() {
+    void isDoable_false_playerAlreadyPlayed() {
         operationsPlayer.actionHasBeenExecuted();
 
         assertFalse(operationsPlayer.canPlayerExecuteActionThisTurn());
@@ -76,18 +74,18 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void isDoable_true_allConditionsAcomplished() {
+    void isDoable_true_allConditionsAcomplished() {
         assertTrue(operationsFlyFromReserachService.isDoable(operationsPlayer));
     }
 
     @Test
-    public void availableAction_isEmpty_cityWithoutResearchCenter() {
+    void availableAction_isEmpty_cityWithoutResearchCenter() {
         operationsPlayer.setCity(lagos);
         assertTrue(operationsFlyFromReserachService.returnAvailableActions(operationsPlayer).isEmpty());
     }
 
     @Test
-    public void availableAction_isEmpty_playerHasNoCards() {
+    void availableAction_isEmpty_playerHasNoCards() {
         operationsPlayer.setListCard(new ArrayList<>());
 
         assertTrue(operationsPlayer.canPlayerExecuteActionThisTurn());
@@ -95,7 +93,7 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void availableAction_isEmpty_playerAlreadyPlayed() {
+    void availableAction_isEmpty_playerAlreadyPlayed() {
         operationsPlayer.actionHasBeenExecuted();
 
         assertFalse(operationsPlayer.canPlayerExecuteActionThisTurn());
@@ -103,7 +101,7 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void availableAction_allConditionsAcomplished() {
+    void availableAction_allConditionsAcomplished() {
         List<Action> list = operationsFlyFromReserachService.returnAvailableActions(operationsPlayer);
         assertEquals(1, list.size());
         assertEquals(OPERATION_FLY, list.get(0).getActionsType());
@@ -111,7 +109,7 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void doAction_exception_cityWithoutResearchCenter() {
+    void doAction_exception_cityWithoutResearchCenter() {
         operationsPlayer.setCity(lagos);
 
         ActionException exception =
@@ -124,7 +122,7 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void doAction_exception_playerHasNoCards() {
+    void doAction_exception_playerHasNoCards() {
         operationsPlayer.setListCard(new ArrayList<>());
 
         ActionException exception =
@@ -137,7 +135,7 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void doAction_exception_playerAlreadyFlyThisTurn() {
+    void doAction_exception_playerAlreadyFlyThisTurn() {
         operationsPlayer.actionHasBeenExecuted();
         ActionException exception =
                 assertThrows(ActionException.class,
@@ -150,7 +148,7 @@ class OperationsFlyFromReserachServiceTest {
     }
 
     @Test
-    public void doAction_actionIsDoable() throws ActionException {
+    void doAction_actionIsDoable() throws ActionException {
         operationsFlyFromReserachService.doAction(operationsPlayer, lagos, operationsPlayer.getListCard().get(0));
         assertEquals(lagos, operationsPlayer.getCity());
         assertEquals(3, operationsPlayer.getListCard().size());

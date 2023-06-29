@@ -1,6 +1,5 @@
 package com.dataontheroad.pandemic.game.service.converters;
 
-import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseCity;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponsePlayer;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
@@ -9,8 +8,6 @@ import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.game.service.converters.ConvertTurnDTO.convertTurnResponsePlayer;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,18 +1,14 @@
 package com.dataontheroad.pandemic.model.board;
 
-import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.*;
 
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
-
-import static com.dataontheroad.pandemic.constants.LiteralsPlayers.DISPATCHER_NAME;
 
 public class BoardCreationHelper {
 

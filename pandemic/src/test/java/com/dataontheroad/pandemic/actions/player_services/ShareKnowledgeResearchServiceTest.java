@@ -1,6 +1,5 @@
 package com.dataontheroad.pandemic.actions.player_services;
 
-import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.default_services.ShareKnowledgeDefaultService;
 import com.dataontheroad.pandemic.exceptions.ActionException;
@@ -19,7 +18,6 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.SHAREKNOWLEDGE;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.SHAREKNOWLEDGE_ERROR_NOT_SAME_CITY;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -145,7 +143,12 @@ class ShareKnowledgeResearchServiceTest {
     // TO-DO CONVERT TO POSSITIVE TEST CASE
     @Test
     void doAction_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity() throws ActionException {
+        int initialNumberResearcPlayer = researchPlayer.getListCard().size();
+        int initialNumberReceiver = receiver.getListCard().size();
         ShareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(calculta));
+
+        assertEquals(initialNumberResearcPlayer - 1, researchPlayer.getListCard().size());
+        assertEquals(initialNumberReceiver + 1, receiver.getListCard().size());
     }
 
     @Test

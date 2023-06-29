@@ -76,7 +76,7 @@ class ContingencyPlannerServiceTest {
     }
 
     @Test
-    public void doAction_throwExceptionWhenPlayerHasAlreadyCard() throws ActionException {
+    void doAction_throwExceptionWhenPlayerHasAlreadyCard() throws ActionException {
         player.setExtraEventCard(eventCard);
 
         ActionException exception =

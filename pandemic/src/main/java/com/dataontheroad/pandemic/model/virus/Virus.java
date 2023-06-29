@@ -1,5 +1,7 @@
 package com.dataontheroad.pandemic.model.virus;
 
+import java.util.Objects;
+
 public class Virus {
 
     private final VirusType virusType;
@@ -38,5 +40,10 @@ public class Virus {
 
         Virus virus = (Virus) obj;
         return virus.getVirusType().equals(virusType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(virusType, cureDiscovered, eradicated);
     }
 }

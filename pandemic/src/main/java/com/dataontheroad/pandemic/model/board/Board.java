@@ -13,8 +13,8 @@ import com.dataontheroad.pandemic.model.virus.VirusType;
 import java.util.*;
 
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
-import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
+import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
 
 public class Board {
