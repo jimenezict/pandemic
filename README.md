@@ -55,6 +55,65 @@ Returns a JSON with the state of the game
 Errors:
 * 404 (Not found): when gameID could not be found as a valid game
 
+### Turn end-point
+
+On this end-point it is provided the information about missing number of actions and available actions for the active player.
+
+Status brings all the information active player needs for taking a decission on the next movement
+
+#### Status
+
+GET /turn/status/{gameId}
+
+Parameters:
+* gameId: identifier of the game
+
+Curl example:
+```
+curl --location --request GET 'localhost:8080/turn/status/812bc794-d6fb-4c9b-b35a-6b32e51d2c77'
+```
+
+Positive result:
+
+Returns a JSON with the state of the turn. Contains:
+* missingTurns
+* active player: available cards, location and name of the player
+* available actions
+
+As example:
+
+```
+{
+    "missingTurns": 4,
+    "activePlayer": {
+        "listCard": [
+            "Type: CITY City: Bangkok",
+            "Type: CITY City: Madrid",
+            "Type: CITY City: Riyadh",
+            "Type: CITY City: Tehran"
+        ],
+        "location": {
+            "hasCenter": true,
+            "virus": "BLUE",
+            "name": "Atlanta"
+        },
+        "name": "Researcher"
+    },
+    "actionList": [
+        "FLYDIRECT:You can directly fly to: Bangkok",
+        "FLYDIRECT:You can directly fly to: Madrid",
+        "FLYDIRECT:You can directly fly to: Riyadh",
+        "FLYDIRECT:You can directly fly to: Tehran",
+        "DRIVEFERRY:You can drive to: Chicago",
+        "DRIVEFERRY:You can drive to: Washington",
+        "DRIVEFERRY:You can drive to: Miami"
+    ]
+}
+```
+
+Errors:
+* 404 (Not found): when gameID could not be found as a valid game
+
 
 ## Sonar Commands
 
