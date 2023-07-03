@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
+import com.dataontheroad.pandemic.game.api.model.commons.SuccessResponse;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.service.implementations.GameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class GameEndPoint {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 
-        return ResponseEntity.ok().body("created game with id " + uuid);
+        SuccessResponse successResponse = new SuccessResponse(GAME_ENDPOINT_NAME, uuid, SUCCESS_GAME);
+        return ResponseEntity.ok().body(successResponse);
     }
 
     @GetMapping("/game/read/{gameId}")

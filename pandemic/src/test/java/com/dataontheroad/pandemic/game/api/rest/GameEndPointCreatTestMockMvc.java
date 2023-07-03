@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
+import com.dataontheroad.pandemic.game.api.model.commons.SuccessResponse;
 import com.dataontheroad.pandemic.game.service.implementations.GameServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -100,11 +101,19 @@ class GameEndPointCreatTestMockMvc {
     @Test
     void create_success() throws GameExecutionException, Exception {
         when(gameService.createGame(anyInt(), anyInt())).thenReturn(uuid);
-        mvc.perform(MockMvcRequestBuilders
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                         .get(getCreateURL(3,4))
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
+
+        MvcResult result = resultActions.andReturn();
+        String contentAsString = result.getResponse().getContentAsString();
+
+        SuccessResponse response = objectMapper.readValue(contentAsString, SuccessResponse.class);
+        assertEquals(GAME_ENDPOINT_NAME, response.getEndpoint());
+        assertEquals(uuid, response.getGameID());
+        assertEquals(SUCCESS_GAME, response.getMessage());
     }
 
 
