@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
+import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.service.implementations.GameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static java.util.Objects.isNull;
 
 @RestController
@@ -21,17 +23,19 @@ public class GameEndPoint {
     GameServiceImpl gameService;
 
     @GetMapping("/game/create/players/{numPlayers}/pandemic/{numPandemics}")
-    ResponseEntity<?> createGame(@PathVariable int numPlayers, @PathVariable int numPandemics) {
+    ResponseEntity createGame(@PathVariable int numPlayers, @PathVariable int numPandemics) {
         UUID uuid;
 
         if(numPandemics < 0 || numPandemics > 6) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating game, epidemic cards should be between 0 and 6");
+            ErrorResponse errorResponse = new ErrorResponse(GAME_ENDPOINT_NAME, null, WRONG_EPIDEMIC_CARDS);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 
         try {
             uuid = gameService.createGame(numPandemics, numPlayers);
         } catch (GameExecutionException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating game, players should be between 2 and 4");
+            ErrorResponse errorResponse = new ErrorResponse(GAME_ENDPOINT_NAME, null, WRONG_PLAYERS);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 
         return ResponseEntity.ok().body("created game with id " + uuid);
@@ -41,7 +45,8 @@ public class GameEndPoint {
     ResponseEntity readGame(@PathVariable UUID gameId) {
         GameResponseDTO gameResponseDTO = gameService.getGameById(gameId);
         if(isNull(gameResponseDTO)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            ErrorResponse errorResponse = new ErrorResponse(GAME_ENDPOINT_NAME, gameId, GAME_NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         return ResponseEntity.ok().body(gameResponseDTO);
     }
