@@ -6,32 +6,32 @@ import java.util.*;
 
 public class PlayerQueue {
 
-    private Queue<BaseCard> playerQueue;
+    private Queue<BaseCard> queue;
 
     public PlayerQueue(List<BaseCard> playerQueueList) {
-        playerQueue = new LinkedList<>(playerQueueList);
+        queue = new LinkedList<>(playerQueueList);
     }
 
-    public Queue<BaseCard> getPlayerQueue() {
-        return playerQueue;
+    public Queue<BaseCard> getQueue() {
+        return queue;
     }
 
     public BaseCard getCardFromPlayerQueue() {
-        return playerQueue.remove();
+        return queue.remove();
     }
 
     public List<BaseCard> getInitialDrawCards(int numberOfPlayers) {
         List<BaseCard> playerCards = new ArrayList<> ();
         for(int i = 0; i < numberOfCardsToDraw(numberOfPlayers); i++) {
-            playerCards.add(playerQueue.remove());
+            playerCards.add(queue.remove());
         }
         return playerCards;
     }
 
     public void shuffleQueue() {
-        List<BaseCard> baseCardList = (List<BaseCard>) playerQueue;
+        List<BaseCard> baseCardList = (List<BaseCard>) queue;
         Collections.shuffle(baseCardList);
-        playerQueue = new LinkedList<>(baseCardList);
+        queue = new LinkedList<>(baseCardList);
     }
 
     private int numberOfCardsToDraw(int numberOfPlayers) {

@@ -9,29 +9,29 @@ import java.util.List;
 
 public class InfectionDeck {
 
-    private Deque<CityCard> infectionDeck;
+    private Deque<CityCard> deck;
 
     public InfectionDeck(List<CityCard> infectionDeckList) {
-        infectionDeck = new ArrayDeque<>(infectionDeckList);
+        deck = new ArrayDeque<>(infectionDeckList);
     }
 
-    public Deque getInfectionDeck() {
-        return infectionDeck;
+    public Deque getDeck() {
+        return deck;
     }
 
     public List<CityCard> getInitialDrawInfectionDeck() {
-        List<CityCard> infectionDeckAsList = new ArrayList<>(infectionDeck);
+        List<CityCard> infectionDeckAsList = new ArrayList<>(deck);
         List<CityCard> initialInfectionDraw = new ArrayList<> (infectionDeckAsList.subList(0, 9));
         infectionDeckAsList.subList(0, 9).clear();
-        infectionDeck = new ArrayDeque<>(infectionDeckAsList);
+        deck = new ArrayDeque<>(infectionDeckAsList);
         return initialInfectionDraw;
     }
 
     public CityCard takeTopCardOfDeck() {
-        return infectionDeck.removeFirst();
+        return deck.removeFirst();
     }
 
     public CityCard takeBottomCardOfDeck() {
-        return infectionDeck.removeLast();
+        return deck.removeLast();
     }
 }

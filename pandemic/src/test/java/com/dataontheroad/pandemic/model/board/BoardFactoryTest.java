@@ -33,7 +33,7 @@ class BoardFactoryTest {
         city = board.getCityFromBoardList(infectionDesk.get(6).getCity());
         assertEquals(city.getVirus(), city.getVirusBoxes().get(0));
 
-        assertEquals(39, board.getInfectionDeck().getInfectionDeck().size());
+        assertEquals(39, board.getInfectionDeck().getDeck().size());
         assertEquals(9, board.getInfectionDiscardDeck().size());
     }
 

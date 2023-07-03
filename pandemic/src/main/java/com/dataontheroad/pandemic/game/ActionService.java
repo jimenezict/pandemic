@@ -31,10 +31,6 @@ public class ActionService {
         return allowedActions;
     }
 
-    public static void printListOfActions(List<Action> getListOfActions) {
-        getListOfActions.stream().forEach(action -> System.out.println(action.actionPrompt()));
-    }
-
     public static Boolean executeAction(Action action) {
         try {
             action.execute();

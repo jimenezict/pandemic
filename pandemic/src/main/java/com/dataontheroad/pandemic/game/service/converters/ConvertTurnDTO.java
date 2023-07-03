@@ -11,12 +11,9 @@ import java.util.stream.Collectors;
 public class ConvertTurnDTO {
 
     public static TurnResponsePlayer convertTurnResponsePlayer(Player playerTurnInformation) {
-        List<String> cardsList = playerTurnInformation.getListCard().stream().map(card -> card.toString()).collect(Collectors.toList());
+        List<String> cardsList = playerTurnInformation.getListCard().stream().map(Object::toString).collect(Collectors.toList());
 
-        TurnResponsePlayer turnResponsePlayer =
-                new TurnResponsePlayer(cardsList, new TurnResponseCity(playerTurnInformation.getCity()), playerTurnInformation.getName());
-
-        return turnResponsePlayer;
+        return new TurnResponsePlayer(cardsList, new TurnResponseCity(playerTurnInformation.getCity()), playerTurnInformation.getName());
     }
 
     public static List<String> convertListActionsToString(List<Action> actionList) {

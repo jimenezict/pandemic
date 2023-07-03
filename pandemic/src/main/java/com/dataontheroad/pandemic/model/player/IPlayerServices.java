@@ -4,33 +4,33 @@ import com.dataontheroad.pandemic.actions.default_services.*;
 
 public interface IPlayerServices {
 
-    public default BuildResearchCenterDefaultService getBuildResearchCenter() {
+    default BuildResearchCenterDefaultService getBuildResearchCenter() {
         return BuildResearchCenterDefaultService.getInstance();
     }
 
-    public default DiscoverCureDefaultService getDiscoverCure() {
+    default DiscoverCureDefaultService getDiscoverCure() {
         return DiscoverCureDefaultService.getInstance();
     }
 
-    public default DriveFerryDefaultService getDriveFerry() {
+    default DriveFerryDefaultService getDriveFerry() {
         return DriveFerryDefaultService.getInstance();
     }
 
-    public default FlyCharterDefaultService getFlyCharter() {
+    default FlyCharterDefaultService getFlyCharter() {
         return FlyCharterDefaultService.getInstance();
     }
 
-    public default FlyDirectCityDefaultService getFlyDirectCity() {
+    default FlyDirectCityDefaultService getFlyDirectCity() {
         return FlyDirectCityDefaultService.getInstance();
     }
 
-    public default FlyShuttleDefaultService getFlyShuttle() {
+    default FlyShuttleDefaultService getFlyShuttle() {
         return FlyShuttleDefaultService.getInstance();
     }
 
-    public default ShareKnowledgeDefaultService getShareKnowledge() {
+    default ShareKnowledgeDefaultService getShareKnowledge() {
         return ShareKnowledgeDefaultService.getInstance();
     }
 
-    public default TreatDiseaseDefaultService getTreatDisease() { return TreatDiseaseDefaultService.getInstance();}
+    default TreatDiseaseDefaultService getTreatDisease() { return TreatDiseaseDefaultService.getInstance();}
 }

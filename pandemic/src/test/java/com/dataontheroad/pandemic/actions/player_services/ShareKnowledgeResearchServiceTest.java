@@ -140,7 +140,6 @@ class ShareKnowledgeResearchServiceTest {
         assertTrue(receiver.getListCard().contains(newyorkCard));
     }
 
-    // TO-DO CONVERT TO POSSITIVE TEST CASE
     @Test
     void doAction_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity() throws ActionException {
         int initialNumberResearcPlayer = researchPlayer.getListCard().size();

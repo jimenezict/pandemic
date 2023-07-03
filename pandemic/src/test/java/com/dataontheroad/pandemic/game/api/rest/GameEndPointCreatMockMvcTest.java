@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(GameEndPoint.class)
-class GameEndPointCreatTestMockMvc {
+class GameEndPointCreatMockMvcTest {
 
     @Autowired
     private MockMvc mvc;

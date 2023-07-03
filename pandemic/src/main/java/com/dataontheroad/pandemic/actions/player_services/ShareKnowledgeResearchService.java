@@ -42,22 +42,22 @@ public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService 
 
         //when researchPlayer is the sender and any of the others on the same city are the receivers
         playersList.stream()
-                .forEach(receiver -> {
+                .forEach(receiver ->
                     researchPlayer.getListCard().stream()
                             .filter(card -> CITY.equals(card.getCardType()))
                             .filter(card -> isDoable(researchPlayer, receiver, (CityCard) card))
-                            .forEach(card -> actionList.add(new ShareKnowledgeAction(researchPlayer, receiver, (CityCard) card)));
-                });
+                            .forEach(card -> actionList.add(new ShareKnowledgeAction(researchPlayer, receiver, (CityCard) card)))
+                );
 
         //when any of the others on the same city are the senders and the researchPlayer is the receiver
         playersList.stream()
-                .forEach(sender -> {
+                .forEach(sender ->
                     sender.getListCard().stream()
                             .filter(card -> CITY.equals(card.getCardType()))
                             .filter(card -> isDoable(sender, researchPlayer, (CityCard) card))
-                            .forEach(card -> actionList.add(new ShareKnowledgeAction(sender, researchPlayer, (CityCard) card)));
+                            .forEach(card -> actionList.add(new ShareKnowledgeAction(sender, researchPlayer, (CityCard) card)))
 
-                });
+                );
 
         return actionList;
     }

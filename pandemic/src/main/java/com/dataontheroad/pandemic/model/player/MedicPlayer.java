@@ -23,7 +23,7 @@ public class MedicPlayer extends Player {
     @Override
     public void executeAfterAction(List<Virus> virusList) {
         virusList.stream()
-                .filter(virus -> virus.getCureDiscovered())
+                .filter(Virus::getCureDiscovered)
                 .forEach(virus -> getCity().getVirusBoxes().removeIf(boxVirus -> virus.getVirusType().equals(boxVirus)));
     }
 

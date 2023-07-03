@@ -31,9 +31,9 @@ public class BoardCreationHelper {
     }
 
     public static void addEpidemicCards(Board board, int numberOfEpidemicCards) {
-        IntStream.range(0, numberOfEpidemicCards).forEach($ -> {
-                    board.getPlayerQueue().getPlayerQueue().add(new EpidemicCard());
-                });
+        IntStream.range(0, numberOfEpidemicCards).forEach($ ->
+                    board.getPlayerQueue().getQueue().add(new EpidemicCard())
+                );
         board.getPlayerQueue().shuffleQueue();
     }
 

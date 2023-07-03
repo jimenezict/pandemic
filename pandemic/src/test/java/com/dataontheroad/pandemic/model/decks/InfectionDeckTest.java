@@ -21,28 +21,28 @@ class InfectionDeckTest {
 
     @Test
     void validatesInitialization() {
-        assertEquals(48 , infectionDeck.getInfectionDeck().size());
+        assertEquals(48 , infectionDeck.getDeck().size());
     }
 
     @Test
     void getInitialDrawInfectionDeck() {
         List<CityCard> cardsList = infectionDeck.getInitialDrawInfectionDeck();
         assertEquals(9 , cardsList.size());
-        assertEquals(39 , infectionDeck.getInfectionDeck().size());
+        assertEquals(39 , infectionDeck.getDeck().size());
     }
 
     @Test
     void takeTopCardOfDeck() {
         CityCard cardsList = infectionDeck.takeTopCardOfDeck();
         assertNotNull(cardsList);
-        assertEquals(47 , infectionDeck.getInfectionDeck().size());
+        assertEquals(47 , infectionDeck.getDeck().size());
     }
 
     @Test
     void takeBottomCardOfDeck() {
         CityCard cardsList = infectionDeck.takeBottomCardOfDeck();
         assertNotNull(cardsList);
-        assertEquals(47 , infectionDeck.getInfectionDeck().size());
+        assertEquals(47 , infectionDeck.getDeck().size());
     }
 
 }

@@ -15,7 +15,6 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.DRIVEFERRY;
 import static com.dataontheroad.pandemic.game.ActionService.getListOfActions;
-import static com.dataontheroad.pandemic.game.ActionService.printListOfActions;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -74,7 +73,6 @@ class GetListOfActionsActionTest {
         List<Player> otherPlayersOnTheCity = Arrays.asList(new Player(cityList.get(1)));
         List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, otherPlayersOnTheCity);
 
-        printListOfActions(actions);
         assertEquals(13, actions.size());
     }
 }

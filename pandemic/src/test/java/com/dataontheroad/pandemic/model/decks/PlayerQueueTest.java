@@ -16,18 +16,18 @@ class PlayerQueueTest {
     @ValueSource(ints = {2, 3, 4})
     void getInitialDrawCardsWhenNumberOfPlayersIsN() {
         PlayerQueue playerQueue = createPlayerQueue();
-        int initialSize = playerQueue.getPlayerQueue().size();
+        int initialSize = playerQueue.getQueue().size();
         List<BaseCard> initialDrawCards = playerQueue.getInitialDrawCards(2);
         assertEquals(4, initialDrawCards.size());
-        assertEquals(initialSize - 4, playerQueue.getPlayerQueue().size());
+        assertEquals(initialSize - 4, playerQueue.getQueue().size());
     }
 
     @Test
     void getCardFromPlayerQueue() {
         PlayerQueue playerQueue = createPlayerQueue();
-        int initialSize = playerQueue.getPlayerQueue().size();
+        int initialSize = playerQueue.getQueue().size();
         BaseCard baseCard = playerQueue.getCardFromPlayerQueue();
-        assertEquals(initialSize - 1, playerQueue.getPlayerQueue().size());
+        assertEquals(initialSize - 1, playerQueue.getQueue().size());
     }
 
 }

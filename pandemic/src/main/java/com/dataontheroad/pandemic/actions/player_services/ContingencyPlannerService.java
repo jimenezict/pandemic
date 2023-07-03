@@ -19,6 +19,10 @@ import static java.util.Objects.isNull;
 public class ContingencyPlannerService {
     private static ContingencyPlannerService contingencyPlannerService;
 
+    private ContingencyPlannerService() {
+
+    }
+
     public static ContingencyPlannerService getInstance() {
         if(isNull(contingencyPlannerService)) {
             contingencyPlannerService = new ContingencyPlannerService();
@@ -36,14 +40,9 @@ public class ContingencyPlannerService {
      * @return the boolean
      */
     public static boolean isDoable(ContingencyPlayer player, List<BaseCard> discardedCards) {
-        if(isNull(player.getExtraEventCard())) {
-            if(!isNull(discardedCards)) {
-                if(discardedCards.stream().filter(card -> EVENT_ACTION.equals(card.getCardType())).count() > 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return isNull(player.getExtraEventCard())
+                && !isNull(discardedCards)
+                && discardedCards.stream().filter(card -> EVENT_ACTION.equals(card.getCardType())).count() > 0;
     }
 
     /**
@@ -54,7 +53,7 @@ public class ContingencyPlannerService {
      * @return a list of TAKEDISCARDEVENTCARD Available actions
      * @throws ActionException the action exception
      */
-    public static List<Action> returnAvailableActions(ContingencyPlayer player, List<BaseCard> discardedCards) throws ActionException {
+    public static List<Action> returnAvailableActions(ContingencyPlayer player, List<BaseCard> discardedCards) {
 
         List<Action> availableActions = new ArrayList<>();
         if(isNull(player.getExtraEventCard())) {

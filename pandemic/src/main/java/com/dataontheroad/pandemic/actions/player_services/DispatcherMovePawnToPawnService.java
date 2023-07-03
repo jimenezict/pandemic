@@ -16,6 +16,9 @@ import static java.util.Objects.isNull;
 public class DispatcherMovePawnToPawnService {
     private static DispatcherMovePawnToPawnService dispatcherMovePawnToPawnService;
 
+    private DispatcherMovePawnToPawnService() {
+    }
+
     public static DispatcherMovePawnToPawnService getInstance() {
         if(isNull(dispatcherMovePawnToPawnService)) {
             dispatcherMovePawnToPawnService = new DispatcherMovePawnToPawnService();
@@ -30,12 +33,12 @@ public class DispatcherMovePawnToPawnService {
 
     public static List<Action> returnAvailableActions(List<Player> players) {
         List<Action> availableMovePawnToPawnAction = new ArrayList<>();
-        players.stream().forEach(playerOrigin -> {
+        players.stream().forEach(playerOrigin ->
             players.stream()
                     .filter(playerDestination -> isDoable(players, playerOrigin, playerDestination.getCity()))
                     .forEach(playerDestination -> availableMovePawnToPawnAction.add(new MovePawnToPawnAction(players, playerOrigin, playerDestination.getCity()))
-            );
-        });
+
+        ));
         return availableMovePawnToPawnAction;
     }
 

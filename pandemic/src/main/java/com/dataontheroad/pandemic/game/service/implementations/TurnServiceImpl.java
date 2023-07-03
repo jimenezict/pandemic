@@ -49,6 +49,6 @@ public class TurnServiceImpl implements ITurnService {
     }
 
     public static List<City> getCitiesWithResearchCenter(GameDTO gameDTO) {
-        return gameDTO.getBoard().getBoardCities().stream().filter(city -> city.getHasCenter()).collect(Collectors.toList());
+        return gameDTO.getBoard().getBoardCities().stream().filter(City::getHasCenter).collect(Collectors.toList());
     }
 }

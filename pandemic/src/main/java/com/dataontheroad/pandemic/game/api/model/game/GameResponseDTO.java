@@ -3,8 +3,8 @@ package com.dataontheroad.pandemic.game.api.model.game;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class GameResponseDTO {
@@ -13,7 +13,7 @@ public class GameResponseDTO {
     private LocalDateTime insertDateTime;
     private LocalDateTime updateDateTime;
     private List<GameResponsePlayer> gameResponsePlayerList;
-    private HashMap<String, List<VirusType>> gameResponseCityList;
+    private Map<String, List<VirusType>> gameResponseCityList;
 
     public GameResponseDTO(UUID gameId) {
         this.gameId = gameId;
@@ -47,11 +47,11 @@ public class GameResponseDTO {
         this.gameResponsePlayerList = gameResponsePlayerList;
     }
 
-    public HashMap<String, List<VirusType>> getGameResponseCityList() {
+    public Map<String, List<VirusType>> getGameResponseCityList() {
         return gameResponseCityList;
     }
 
-    public void setGameResponseCityList(HashMap<String, List<VirusType>> gameResponseCityList) {
+    public void setGameResponseCityList(Map<String, List<VirusType>> gameResponseCityList) {
         this.gameResponseCityList = gameResponseCityList;
     }
 }

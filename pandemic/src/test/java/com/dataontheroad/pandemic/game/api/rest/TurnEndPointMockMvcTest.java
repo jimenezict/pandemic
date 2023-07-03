@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TurnEndPoint.class)
-class TurnEndPointTestMockMvc {
+class TurnEndPointMockMvcTest {
 
         @Autowired
         private MockMvc mvc;
