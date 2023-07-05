@@ -73,4 +73,17 @@ class TurnServiceImplTest {
         List<City> citiesWithResearchCenter = getCitiesWithResearchCenter(gameDTO);
         assertEquals(3, citiesWithResearchCenter.size());
     }
+
+
+    @Test
+    void executeAction() throws Exception {
+        GameDTO gameDTO = new GameDTO(3);
+        City originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
+        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        turnService.executeAction(gameDTO.getUuid(), 0);
+        City finalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
+        assertNotEquals(originalCity.getName(), finalCity.getName());
+    }
+
+
 }
