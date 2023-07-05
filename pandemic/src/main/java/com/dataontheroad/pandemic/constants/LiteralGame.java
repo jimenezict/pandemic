@@ -11,5 +11,8 @@ public class LiteralGame {
     public static final String WRONG_PLAYERS = "Error creating game, epidemic cards should be between 0 and 6";
     public static final String WRONG_EPIDEMIC_CARDS = "Error creating game, players should be between 2 and 4";
     public static final String SUCCESS_GAME = "Game created";
+    public static final String SUCCESS_ACTION = "Game created";
+    public static final String TURN_WRONG_PLAYER = "Error executing action, requester is not the active player";
+    public static final String TURN_WRONG_ACTION = "Error executing action, requester is not executing correct action";
 
 }

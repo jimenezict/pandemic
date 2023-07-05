@@ -1,14 +1,15 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
+import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
+import com.dataontheroad.pandemic.game.api.model.commons.SuccessResponse;
+import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -30,6 +31,32 @@ public class TurnEndPoint {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         return ResponseEntity.ok().body(turnResponseDTO);
+    }
+
+    @PostMapping("/turn/execute")
+    ResponseEntity executeTurn(@RequestBody TurnRequestDTO turnRequestDTO) {
+        TurnResponseDTO turnResponseDTO = turnService.getTurnServiceInformation(turnRequestDTO.getUuid());
+        if(isNull(turnResponseDTO)) {
+            return getErrorResponse(turnRequestDTO.getUuid(), GAME_NOT_FOUND);
+        } else if (!turnResponseDTO.getActivePlayer().getName().equals(turnRequestDTO.getPlayerName())) {
+            return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_PLAYER);
+        } else if(turnRequestDTO.getActionPosition() >= turnResponseDTO.getActionList().size()) {
+            return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_ACTION);
+        }
+
+        try {
+            turnService.executeAction(turnRequestDTO.getUuid(), turnRequestDTO.getActionPosition());
+        } catch (ActionException e) {
+            return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
+        }
+
+        SuccessResponse successResponse = new SuccessResponse(TURN_ENDPOINT_NAME, turnRequestDTO.getUuid(), SUCCESS_ACTION);
+        return ResponseEntity.ok().body(successResponse);
+    }
+
+    private static ResponseEntity<ErrorResponse> getErrorResponse(UUID uuid, String errorMessage) {
+        ErrorResponse errorResponse = new ErrorResponse(TURN_ENDPOINT_NAME, uuid, errorMessage);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
 }

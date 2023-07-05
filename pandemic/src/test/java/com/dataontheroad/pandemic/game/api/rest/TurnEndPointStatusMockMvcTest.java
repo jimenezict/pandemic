@@ -26,7 +26,6 @@ import java.util.UUID;
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -35,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TurnEndPoint.class)
-class TurnEndPointMockMvcTest {
+class TurnEndPointStatusMockMvcTest {
 
         @Autowired
         private MockMvc mvc;

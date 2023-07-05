@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
@@ -37,6 +38,21 @@ public class TurnServiceImpl implements ITurnService {
             return turnResponseDTO;
         } else {
             return null;
+        }
+    }
+
+    @Override
+    public void executeAction(UUID gameId, int actionPosition) throws ActionException {
+        GameDTO gameDTO = gamePersistence.getGameById(gameId);
+        TurnResponseDTO turnResponseDTO = new TurnResponseDTO();
+
+        if(!isNull(gameDTO)) {
+            List<Action> actionList = getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
+                    gameDTO.getBoard().getVirusList(),
+                    getCitiesWithResearchCenter(gameDTO),
+                    getOtherPlayersOnTheCity(gameDTO));
+            turnResponseDTO.setTurnInformation(gameDTO.getTurnInformation(), actionList);
+            actionList.get(actionPosition).execute();
         }
     }
 
