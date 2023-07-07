@@ -36,11 +36,9 @@ class TurnInformationTest {
         assertEquals(1, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
 
-        assertTrue(turnInformation.canDoNextActionAndReduceMissingTurns());
+        assertFalse(turnInformation.canDoNextActionAndReduceMissingTurns());
         assertEquals(0, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
-
-        assertFalse(turnInformation.canDoNextActionAndReduceMissingTurns());
 
         turnInformation.setNewTurn(new ScientistPlayer());
         assertEquals(4, turnInformation.getMissingTurns());

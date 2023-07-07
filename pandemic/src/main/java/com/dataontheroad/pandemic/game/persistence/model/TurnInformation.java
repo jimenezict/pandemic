@@ -19,12 +19,8 @@ public class TurnInformation {
     }
 
     public boolean canDoNextActionAndReduceMissingTurns() {
-        if(missingTurns==0)
-            return false;
-        else {
-            this.missingTurns = this.missingTurns - 1;
-            return true;
-        }
+        this.missingTurns = this.missingTurns - 1;
+        return missingTurns!=0;
     }
 
     public int getMissingTurns() {

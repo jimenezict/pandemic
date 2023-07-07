@@ -26,7 +26,6 @@ import java.util.UUID;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERROR_NO_CONNECTION;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.SCIENTIST_NAME;
 import static com.dataontheroad.pandemic.game.modelBuilder.buildTurnResponseDTOWithActionList;
 import static java.util.UUID.randomUUID;
