@@ -24,23 +24,23 @@ class TurnInformationTest {
     void executesTwiceAndReleaseToOtherPlayer() {
         turnInformation = new TurnInformation(player);
 
-        assertTrue(turnInformation.canDoNextAction());
+        assertTrue(turnInformation.canDoNextActionAndReduceMissingTurns());
         assertEquals(3, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
 
-        assertTrue(turnInformation.canDoNextAction());
+        assertTrue(turnInformation.canDoNextActionAndReduceMissingTurns());
         assertEquals(2, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
 
-        assertTrue(turnInformation.canDoNextAction());
+        assertTrue(turnInformation.canDoNextActionAndReduceMissingTurns());
         assertEquals(1, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
 
-        assertTrue(turnInformation.canDoNextAction());
+        assertTrue(turnInformation.canDoNextActionAndReduceMissingTurns());
         assertEquals(0, turnInformation.getMissingTurns());
         assertEquals(player, turnInformation.getActivePlayer());
 
-        assertFalse(turnInformation.canDoNextAction());
+        assertFalse(turnInformation.canDoNextActionAndReduceMissingTurns());
 
         turnInformation.setNewTurn(new ScientistPlayer());
         assertEquals(4, turnInformation.getMissingTurns());

@@ -18,7 +18,7 @@ public class TurnInformation {
         missingTurns = NUM_MISSING_ACTIONS;
     }
 
-    public boolean canDoNextAction() {
+    public boolean canDoNextActionAndReduceMissingTurns() {
         if(missingTurns==0)
             return false;
         else {

@@ -44,16 +44,25 @@ public class TurnServiceImpl implements ITurnService {
     @Override
     public void executeAction(UUID gameId, int actionPosition) throws ActionException {
         GameDTO gameDTO = gamePersistence.getGameById(gameId);
-        TurnResponseDTO turnResponseDTO = new TurnResponseDTO();
 
         if(!isNull(gameDTO)) {
             List<Action> actionList = getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
                     gameDTO.getBoard().getVirusList(),
                     getCitiesWithResearchCenter(gameDTO),
                     getOtherPlayersOnTheCity(gameDTO));
-            turnResponseDTO.setTurnInformation(gameDTO.getTurnInformation(), actionList);
             actionList.get(actionPosition).execute();
+            if(!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
+                Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
+                        gameDTO.getTurnInformation().getActivePlayer());
+                gameDTO.getTurnInformation().setNewTurn(player);
+                gamePersistence.insertOrUpdateGame(gameDTO);
+            }
         }
+    }
+
+    public static Player getNextActivePlayer(List<Player> playerList, Player activePlayer) {
+        int pos = playerList.indexOf(activePlayer);
+        return playerList.get((pos + 1) % 4);
     }
 
     public static List<Player> getOtherPlayersOnTheCity(GameDTO gameDTO) {
