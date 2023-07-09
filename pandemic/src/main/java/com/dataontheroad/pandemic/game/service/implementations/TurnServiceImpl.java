@@ -5,6 +5,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
+import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.interfaces.ITurnService;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
@@ -42,7 +43,7 @@ public class TurnServiceImpl implements ITurnService {
     }
 
     @Override
-    public void executeAction(UUID gameId, int actionPosition) throws ActionException {
+    public TurnInformation executeAction(UUID gameId, int actionPosition) throws ActionException {
         GameDTO gameDTO = gamePersistence.getGameById(gameId);
 
         if(!isNull(gameDTO)) {
@@ -58,6 +59,7 @@ public class TurnServiceImpl implements ITurnService {
                 gamePersistence.insertOrUpdateGame(gameDTO);
             }
         }
+        return gameDTO.getTurnInformation();
     }
 
     public static Player getNextActivePlayer(List<Player> playerList, Player activePlayer) {

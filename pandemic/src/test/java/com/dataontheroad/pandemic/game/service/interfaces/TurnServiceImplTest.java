@@ -78,7 +78,7 @@ class TurnServiceImplTest {
 
     @Test
     void executeAction() throws Exception {
-        GameDTO gameDTO = new GameDTO(3);
+        GameDTO gameDTO = new GameDTO(2);
         Player originalActivePlayer = gameDTO.getTurnInformation().getActivePlayer();
 
         City originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();

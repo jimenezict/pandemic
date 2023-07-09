@@ -2,9 +2,10 @@ package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
-import com.dataontheroad.pandemic.game.api.model.commons.SuccessResponse;
+import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
+import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,7 @@ public class TurnEndPoint {
     @PostMapping("/turn/execute")
     ResponseEntity executeTurn(@RequestBody TurnRequestDTO turnRequestDTO) {
         TurnResponseDTO turnResponseDTO = turnService.getTurnServiceInformation(turnRequestDTO.getUuid());
+        TurnInformation turnInformation;
         if(isNull(turnResponseDTO)) {
             return getErrorResponse(turnRequestDTO.getUuid(), GAME_NOT_FOUND);
         } else if (!turnResponseDTO.getActivePlayer().getName().equals(turnRequestDTO.getPlayerName())) {
@@ -45,12 +47,16 @@ public class TurnEndPoint {
         }
 
         try {
-            turnService.executeAction(turnRequestDTO.getUuid(), turnRequestDTO.getActionPosition());
+            turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), turnRequestDTO.getActionPosition());
         } catch (ActionException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
         }
 
-        SuccessResponse successResponse = new SuccessResponse(TURN_ENDPOINT_NAME, turnRequestDTO.getUuid(), SUCCESS_ACTION);
+        ExecutionSuccessResponse successResponse =
+                new ExecutionSuccessResponse(TURN_ENDPOINT_NAME,
+                        turnRequestDTO.getUuid(), SUCCESS_ACTION,
+                        turnInformation.getActivePlayer().getName(),
+                        turnInformation.getActivePlayer().getCity().getName());
         return ResponseEntity.ok().body(successResponse);
     }
 

@@ -3,11 +3,13 @@ package com.dataontheroad.pandemic.game.api.rest;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
-import com.dataontheroad.pandemic.game.api.model.commons.SuccessResponse;
+import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
+import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
+import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.player.ScientistPlayer;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -127,8 +129,11 @@ class TurnEndPointExecuteMockMvcTest {
 
         @Test
         void getTurnExecute_success() throws Exception {
+                Player activePlayer = new ScientistPlayer();
                 when(turnService.getTurnServiceInformation(any()))
-                        .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
+                        .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
+                when(turnService.executeAction(any(), anyInt())).thenReturn(new TurnInformation(activePlayer));
+
 
                 TurnRequestDTO turnRequestDTO =
                         new TurnRequestDTO(uuid, SCIENTIST_NAME, 2);
@@ -143,10 +148,11 @@ class TurnEndPointExecuteMockMvcTest {
                 MvcResult result = resultActions.andReturn();
                 String contentAsString = result.getResponse().getContentAsString();
 
-                SuccessResponse response = objectMapper.readValue(contentAsString, SuccessResponse.class);
+                ExecutionSuccessResponse response = objectMapper.readValue(contentAsString, ExecutionSuccessResponse.class);
                 assertEquals(TURN_ENDPOINT_NAME, response.getEndpoint());
                 assertEquals(uuid, response.getGameID());
                 assertEquals(SUCCESS_ACTION, response.getMessage());
+                assertEquals(SCIENTIST_NAME, response.getPlayerName());
         }
 
         @Test
