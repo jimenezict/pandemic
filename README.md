@@ -114,6 +114,44 @@ As example:
 Errors:
 * 404 (Not found): when gameID could not be found as a valid game
 
+#### Execute
+
+POST /turn/execute/
+
+body:
+
+{
+    "uuid": gameId,
+    "playerName": name of the player e.g.: Researcher,
+    "actionPosition": integer position counting from 0
+}
+
+Curl example:
+```
+curl --location --request POST 'localhost:8080/turn/execute/' \
+--header 'Content-Type: application/json' \
+--data-raw '{"uuid":"6dff8fb2-c5ee-45df-b5ea-c8c869900138","playerName":"Researcher","actionPosition":0}'
+```
+Positive result:
+
+Returns a JSON with the state of the turn. Contains:
+* end point
+* gameID: 
+* message
+* player name 
+* player location
+
+
+As example:
+```
+{
+    "endpoint": "Turn End Point",
+    "gameID": "6dff8fb2-c5ee-45df-b5ea-c8c869900138",
+    "message": "Action executed correctly",
+    "playerName": "Researcher",
+    "playerLocation": "Montreal"
+}
+```
 
 ## Sonar Commands
 
