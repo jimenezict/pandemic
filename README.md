@@ -153,6 +153,11 @@ As example:
 }
 ```
 
+Errors:
+* 404 (Not found): when gameID could not be found as a valid game
+* 404 (Not found): when requester is not the valid player
+* 404 (Not found): when requester is not executing the correct action
+
 ## Sonar Commands
 
 gradle test jacocoTestReport sonarqube
