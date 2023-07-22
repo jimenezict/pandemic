@@ -64,7 +64,7 @@ public class TurnServiceImpl implements ITurnService {
 
     public static Player getNextActivePlayer(List<Player> playerList, Player activePlayer) {
         int pos = playerList.indexOf(activePlayer);
-        return playerList.get((pos + 1) % 4);
+        return playerList.get((pos + 1) % playerList.size());
     }
 
     public static List<Player> getOtherPlayersOnTheCity(GameDTO gameDTO) {
