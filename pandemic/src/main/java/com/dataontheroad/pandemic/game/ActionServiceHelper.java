@@ -12,9 +12,9 @@ import java.util.List;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-public class ActionService {
+public class ActionServiceHelper {
 
-    private ActionService() {
+    private ActionServiceHelper() {
         throw new IllegalStateException("Utility class");
     }
 

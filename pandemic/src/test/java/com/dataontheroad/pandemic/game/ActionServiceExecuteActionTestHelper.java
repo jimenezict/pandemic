@@ -19,7 +19,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ActionServiceExecuteActionTest {
+class ActionServiceExecuteActionTestHelper {
 
     // All the test in this class use a player with regular services, with no customization by role.
 
@@ -59,7 +59,7 @@ class ActionServiceExecuteActionTest {
         //Player has DefaultService for BuildResearchCenter
         //Player has the card of New York
         BuildResearchCenterAction action = new BuildResearchCenterAction(player);
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertTrue(player.getCity().getHasCenter());
     }
 
@@ -71,7 +71,7 @@ class ActionServiceExecuteActionTest {
         //Player has not the card of New York
         player.getListCard().remove(0);
         BuildResearchCenterAction action = new BuildResearchCenterAction(player);
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
         assertFalse(player.getCity().getHasCenter());
     }
 
@@ -83,7 +83,7 @@ class ActionServiceExecuteActionTest {
         //Player has the card of New York
         newyork.setHasCenter(TRUE);
         BuildResearchCenterAction action = new BuildResearchCenterAction(player);
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
         assertTrue(player.getCity().getHasCenter());
     }
 
@@ -102,7 +102,7 @@ class ActionServiceExecuteActionTest {
 
         newyork.setHasCenter(TRUE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertTrue(blueVirus.getCureDiscovered());
     }
 
@@ -122,7 +122,7 @@ class ActionServiceExecuteActionTest {
 
         newyork.setHasCenter(TRUE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
         assertTrue(blueVirus.getCureDiscovered());
     }
 
@@ -141,7 +141,7 @@ class ActionServiceExecuteActionTest {
 
         newyork.setHasCenter(FALSE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
         assertFalse(blueVirus.getCureDiscovered());
     }
 
@@ -157,7 +157,7 @@ class ActionServiceExecuteActionTest {
 
         newyork.setHasCenter(TRUE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
         assertFalse(blueVirus.getCureDiscovered());
     }
 
@@ -171,11 +171,11 @@ class ActionServiceExecuteActionTest {
         atlanta.getNodeCityConnection().add(newyork);
 
         DriveFerryAction action = new DriveFerryAction(player, atlanta);
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertEquals(atlanta, player.getCity());
 
         action = new DriveFerryAction(player, newyork);
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertEquals(newyork, player.getCity());
     }
 
@@ -189,7 +189,7 @@ class ActionServiceExecuteActionTest {
         atlanta.getNodeCityConnection().add(newyork);
 
         DriveFerryAction action = new DriveFerryAction(player, tokio);
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
     }
 
     @Test
@@ -207,7 +207,7 @@ class ActionServiceExecuteActionTest {
         FlyCharterAction action = new FlyCharterAction(player);
         action.setDestination(essen);
 
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertEquals(essen, player.getCity());
     }
 
@@ -227,7 +227,7 @@ class ActionServiceExecuteActionTest {
         FlyCharterAction action = new FlyCharterAction(player);
         action.setDestination(essen);
 
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
     }
 
     @Test
@@ -244,7 +244,7 @@ class ActionServiceExecuteActionTest {
 
         FlyDirectAction action = new FlyDirectAction(player, essen);
 
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertEquals(essen, player.getCity());
     }
 
@@ -262,7 +262,7 @@ class ActionServiceExecuteActionTest {
 
         FlyDirectAction action = new FlyDirectAction(player, tokio);
 
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
     }
 
     @Test
@@ -274,7 +274,7 @@ class ActionServiceExecuteActionTest {
         essen.setHasCenter(TRUE);
         FlyShuttleAction action = new FlyShuttleAction(player, essen);
 
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertEquals(essen, player.getCity());
     }
 
@@ -287,7 +287,7 @@ class ActionServiceExecuteActionTest {
         essen.setHasCenter(TRUE);
         FlyShuttleAction action = new FlyShuttleAction(player, essen);
 
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
     }
 
     @Test
@@ -299,7 +299,7 @@ class ActionServiceExecuteActionTest {
         essen.setHasCenter(FALSE);
         FlyShuttleAction action = new FlyShuttleAction(player, essen);
 
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
     }
 
 
@@ -314,7 +314,7 @@ class ActionServiceExecuteActionTest {
 
         ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
-        assertTrue(ActionService.executeAction(action));
+        assertTrue(ActionServiceHelper.executeAction(action));
         assertTrue(player.getListCard().isEmpty());
         assertEquals(newyork.getName(), ((CityCard) receiver.getListCard().get(0)).getCity().getName());
     }
@@ -330,7 +330,7 @@ class ActionServiceExecuteActionTest {
 
         ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
     }
 
     @Test
@@ -346,6 +346,6 @@ class ActionServiceExecuteActionTest {
 
         ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
-        assertFalse(ActionService.executeAction(action));
+        assertFalse(ActionServiceHelper.executeAction(action));
     }
 }

@@ -7,16 +7,15 @@ import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.interfaces.ITurnService;
-import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import static com.dataontheroad.pandemic.game.ActionService.getListOfActions;
+import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
+import static com.dataontheroad.pandemic.game.TurnServiceHelper.*;
 import static java.util.Objects.isNull;
 
 @Service
@@ -62,20 +61,5 @@ public class TurnServiceImpl implements ITurnService {
         return gameDTO.getTurnInformation();
     }
 
-    public static Player getNextActivePlayer(List<Player> playerList, Player activePlayer) {
-        int pos = playerList.indexOf(activePlayer);
-        return playerList.get((pos + 1) % playerList.size());
-    }
 
-    public static List<Player> getOtherPlayersOnTheCity(GameDTO gameDTO) {
-        return gameDTO.getBoard().getPlayers()
-                .stream()
-                .filter(player -> !player.getName().equals(gameDTO.getTurnInformation().getActivePlayer().getName()))
-                .filter(player -> player.getCity().equals(gameDTO.getTurnInformation().getActivePlayer().getCity()))
-                .collect(Collectors.toList());
-    }
-
-    public static List<City> getCitiesWithResearchCenter(GameDTO gameDTO) {
-        return gameDTO.getBoard().getBoardCities().stream().filter(City::getHasCenter).collect(Collectors.toList());
-    }
 }
