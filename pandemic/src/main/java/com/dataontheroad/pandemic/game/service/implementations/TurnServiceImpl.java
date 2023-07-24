@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
@@ -52,6 +53,13 @@ public class TurnServiceImpl implements ITurnService {
                     getOtherPlayersOnTheCity(gameDTO));
             actionList.get(actionPosition).execute();
             if(!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
+                try {
+                    if(playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
+                        playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
+                    }
+                    //infectionPhase(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
+                } catch (EndOfGameException e) {
+                }
                 Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
                         gameDTO.getTurnInformation().getActivePlayer());
                 gameDTO.getTurnInformation().setNewTurn(player);
@@ -60,6 +68,8 @@ public class TurnServiceImpl implements ITurnService {
         }
         return gameDTO.getTurnInformation();
     }
+
+
 
 
 }

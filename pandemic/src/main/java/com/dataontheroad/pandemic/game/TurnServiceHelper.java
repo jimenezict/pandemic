@@ -1,11 +1,17 @@
 package com.dataontheroad.pandemic.game;
 
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.decks.PlayerQueue;
 import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
+import static java.util.Objects.isNull;
 
 public class TurnServiceHelper {
 
@@ -28,5 +34,16 @@ public class TurnServiceHelper {
 
     public static List<City> getCitiesWithResearchCenter(GameDTO gameDTO) {
         return gameDTO.getBoard().getBoardCities().stream().filter(City::getHasCenter).collect(Collectors.toList());
+    }
+
+    public static boolean playerGetNewCardsIfIsNotEpidemic(PlayerQueue playerQueue, Player activePlayer) throws EndOfGameException {
+        BaseCard cardToAdd = playerQueue.getCardFromPlayerQueue();
+        if(isNull(cardToAdd)) {
+            throw new EndOfGameException("Player Deck has no more cards");
+        } else if(EPIDEMIC.name().equals(cardToAdd.getCardType())) {
+            return false;
+        }
+        activePlayer.getListCard().add(cardToAdd);
+        return true;
     }
 }
