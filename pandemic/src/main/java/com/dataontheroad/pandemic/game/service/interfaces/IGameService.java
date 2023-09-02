@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface IGameService {
 
-    UUID createGame(int numEpidemic, int numPlayers) throws Exception, GameExecutionException;
+    UUID createGame(int numEpidemic, int numPlayers) throws GameExecutionException;
 
     GameResponseDTO getGameById(UUID uuid);
 }

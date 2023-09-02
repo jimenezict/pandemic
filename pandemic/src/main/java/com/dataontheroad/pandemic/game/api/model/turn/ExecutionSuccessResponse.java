@@ -1,7 +1,6 @@
 package com.dataontheroad.pandemic.game.api.model.turn;
 
 import com.dataontheroad.pandemic.game.api.model.commons.SuccessResponse;
-import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 
 import java.util.UUID;
 

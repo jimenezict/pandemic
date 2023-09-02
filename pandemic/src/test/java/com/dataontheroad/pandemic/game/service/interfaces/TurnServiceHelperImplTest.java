@@ -1,5 +1,7 @@
 package com.dataontheroad.pandemic.game.service.interfaces;
 
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
+import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
@@ -14,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
+import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_NOT_FOUND;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -51,6 +54,17 @@ class TurnServiceHelperImplTest {
         assertFalse(turnResponseDTO.getActivePlayer().getListCard().isEmpty());
     }
 
+    @Test
+    void executeAction_returnNullValue() throws Exception {
+        GameDTO gameDTO = new GameDTO(2);
+        when(gamePersistence.getGameById(any())).thenReturn(null);
+
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.executeAction(gameDTO.getUuid(), 0));
+
+        assertTrue(exception.getMessage().contains(GAME_NOT_FOUND));
+    }
     @Test
     void executeAction() throws Exception {
         GameDTO gameDTO = new GameDTO(2);

@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
@@ -156,7 +157,7 @@ class TurnEndPointExecuteMockMvcTest {
         }
 
         @Test
-        void getTurnExecute_executeThrowException() throws Exception {
+        void getTurnExecute_executeThrowException_actionIsNotValid() throws Exception {
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
 
@@ -182,6 +183,32 @@ class TurnEndPointExecuteMockMvcTest {
                 assertTrue(response.getMessage().contains("Action Move to a city connected by a white line ordered by the Dispatcher got Exception with message: Destinition is not available for the origin city"));
         }
 
+        @Test
+        void getTurnExecute_executeThrowException_gameDoNotExists() throws Exception {
+                when(turnService.getTurnServiceInformation(any()))
+                        .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
+
+                doThrow(new GameExecutionException(GAME_NOT_FOUND)).
+                        when(turnService).executeAction(any(UUID.class), anyInt());
+
+                TurnRequestDTO turnRequestDTO =
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 0);
+
+                ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
+                                .post("/turn/execute")
+                                .content(objectMapper.writeValueAsString(turnRequestDTO))
+                                .contentType("application/json;charset=UTF-8"))
+                        .andDo(print())
+                        .andExpect(status().isNotFound());
+
+                MvcResult result = resultActions.andReturn();
+                String contentAsString = result.getResponse().getContentAsString();
+
+                ErrorResponse response = objectMapper.readValue(contentAsString, ErrorResponse.class);
+                assertEquals(TURN_ENDPOINT_NAME, response.getEndpoint());
+                assertEquals(uuid, response.getGameID());
+                assertTrue(response.getMessage().contains(GAME_NOT_FOUND));
+        }
 
 }
 

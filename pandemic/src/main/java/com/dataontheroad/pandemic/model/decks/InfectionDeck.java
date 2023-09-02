@@ -15,7 +15,7 @@ public class InfectionDeck {
         deck = new ArrayDeque<>(infectionDeckList);
     }
 
-    public Deque getDeck() {
+    public Deque<CityCard> getDeck() {
         return deck;
     }
 

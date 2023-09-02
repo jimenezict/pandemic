@@ -19,7 +19,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ActionServiceExecuteActionTestHelper {
+class ActionServiceExecuteActionHelperTest {
 
     // All the test in this class use a player with regular services, with no customization by role.
 
