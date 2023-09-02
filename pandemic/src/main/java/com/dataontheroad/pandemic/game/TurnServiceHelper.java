@@ -10,6 +10,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_EMPTY_DECK;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 import static java.util.Objects.isNull;
 
@@ -39,8 +40,8 @@ public class TurnServiceHelper {
     public static boolean playerGetNewCardsIfIsNotEpidemic(PlayerQueue playerQueue, Player activePlayer) throws EndOfGameException {
         BaseCard cardToAdd = playerQueue.getCardFromPlayerQueue();
         if(isNull(cardToAdd)) {
-            throw new EndOfGameException("Player Deck has no more cards");
-        } else if(EPIDEMIC.name().equals(cardToAdd.getCardType())) {
+            throw new EndOfGameException(END_OF_GAME_EMPTY_DECK);
+        } else if(EPIDEMIC.equals(cardToAdd.getCardType())) {
             return false;
         }
         activePlayer.getListCard().add(cardToAdd);

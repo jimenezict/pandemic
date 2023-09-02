@@ -14,5 +14,6 @@ public class LiteralGame {
     public static final String SUCCESS_ACTION = "Action executed correctly";
     public static final String TURN_WRONG_PLAYER = "Error executing action, requester is not the active player";
     public static final String TURN_WRONG_ACTION = "Error executing action, requester is not executing correct action";
+    public static final String END_OF_GAME_EMPTY_DECK = "Player Deck is empty";
 
 }

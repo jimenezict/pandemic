@@ -17,7 +17,7 @@ public class PlayerQueue {
     }
 
     public BaseCard getCardFromPlayerQueue() {
-        return queue.remove();
+        return queue.poll();
     }
 
     public List<BaseCard> getInitialDrawCards(int numberOfPlayers) {
