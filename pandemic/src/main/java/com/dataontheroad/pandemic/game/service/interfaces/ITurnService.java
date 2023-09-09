@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.game.service.interfaces;
 
+import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
@@ -12,4 +13,6 @@ public interface ITurnService {
     TurnResponseDTO getTurnServiceInformation(UUID gameId);
 
     TurnInformation executeAction(UUID uuid, int actionPosition) throws ActionException, GameExecutionException, EndOfGameException;
+
+    Action getSelectedAction(UUID uuid, int actionPosition) throws GameExecutionException;
 }

@@ -72,5 +72,19 @@ public class TurnServiceImpl implements ITurnService {
         return gameDTO.getTurnInformation();
     }
 
+    @Override
+    public Action getSelectedAction(UUID gameId, int actionPosition) throws GameExecutionException {
+        GameDTO gameDTO = gamePersistence.getGameById(gameId);
+
+        if (isNull(gameDTO)) {
+            throw new GameExecutionException(GAME_NOT_FOUND);
+        }
+
+        return getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
+                gameDTO.getBoard().getVirusList(),
+                getCitiesWithResearchCenter(gameDTO),
+                getOtherPlayersOnTheCity(gameDTO)).get(actionPosition);
+    }
+
 
 }

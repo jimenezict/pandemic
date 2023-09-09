@@ -54,13 +54,13 @@ class TurnServiceHelperImplTest {
     }
 
     @Test
-    void executeAction_returnNullValue() throws Exception {
+    void getSelectedAction_returnNullValue() throws Exception {
         GameDTO gameDTO = new GameDTO(2);
         when(gamePersistence.getGameById(any())).thenReturn(null);
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.executeAction(gameDTO.getUuid(), 0));
+                        () -> turnService.getSelectedAction(gameDTO.getUuid(), 0));
 
         assertTrue(exception.getMessage().contains(GAME_NOT_FOUND));
     }
