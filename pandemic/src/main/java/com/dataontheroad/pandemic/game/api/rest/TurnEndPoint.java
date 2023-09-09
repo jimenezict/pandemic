@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
@@ -49,12 +50,8 @@ public class TurnEndPoint {
 
         try {
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), turnRequestDTO.getActionPosition());
-        } catch (ActionException e) {
+        } catch (ActionException | GameExecutionException | EndOfGameException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
-        } catch (GameExecutionException e) {
-            return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
-        } catch (com.dataontheroad.pandemic.exceptions.EndOfGameException e) {
-            throw new RuntimeException(e);
         }
 
         ExecutionSuccessResponse successResponse =
