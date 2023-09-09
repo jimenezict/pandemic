@@ -15,6 +15,8 @@ public class GameResponseDTO {
     private List<GameResponsePlayer> gameResponsePlayerList;
     private Map<String, List<VirusType>> gameResponseCityList;
 
+    private List<String> citiesWithLab;
+
     public GameResponseDTO(UUID gameId) {
         this.gameId = gameId;
     }
@@ -53,5 +55,13 @@ public class GameResponseDTO {
 
     public void setGameResponseCityList(Map<String, List<VirusType>> gameResponseCityList) {
         this.gameResponseCityList = gameResponseCityList;
+    }
+
+    public List<String> getCitiesWithLab() {
+        return citiesWithLab;
+    }
+
+    public void setCitiesWithLab(List<String> citiesWithLab) {
+        this.citiesWithLab = citiesWithLab;
     }
 }

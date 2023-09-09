@@ -30,6 +30,7 @@ public class ConvertGamesDTO {
         gameResponseDTO.setGameResponsePlayerList(buildGameResponsePlayerFromGameDTO(gameDTO.getBoard().getPlayers()));
         gameResponseDTO.setInsertDateTime(gameDTO.getLocalDate());
         gameResponseDTO.setUpdateDateTime(gameDTO.getUpdateDateTime());
+        gameResponseDTO.setCitiesWithLab(buildGameResponseCitiesWithLab(gameDTO.getBoard().getBoardCities()));
         return gameResponseDTO;
     }
 
@@ -62,5 +63,12 @@ public class ConvertGamesDTO {
                 .forEach(city -> responseCity.put(city.getName(), city.getVirusBoxes()));
 
         return responseCity;
+    }
+
+    private static List<String> buildGameResponseCitiesWithLab(List<City> cityList) {
+        return cityList.stream()
+                .filter(city -> city.getHasCenter())
+                .map(city -> city.getName())
+                .collect(Collectors.toList());
     }
 }

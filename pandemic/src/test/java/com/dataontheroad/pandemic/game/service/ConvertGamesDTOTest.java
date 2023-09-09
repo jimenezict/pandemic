@@ -60,6 +60,7 @@ class ConvertGamesDTOTest {
                     virusTypeOnCityGameDTO.stream().filter(virusType -> YELLOW.equals(virusType)).count());
         });
 
+        assertEquals(1, gameResponseDTO.getCitiesWithLab().size());
     }
 
 }
