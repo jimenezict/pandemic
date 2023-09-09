@@ -45,7 +45,7 @@ public class TurnServiceImpl implements ITurnService {
     }
 
     @Override
-    public TurnInformation executeAction(UUID gameId, int actionPosition) throws ActionException, GameExecutionException {
+    public TurnInformation executeAction(UUID gameId, int actionPosition) throws ActionException, GameExecutionException, EndOfGameException {
         GameDTO gameDTO = gamePersistence.getGameById(gameId);
 
         if (isNull(gameDTO)) {
@@ -58,13 +58,11 @@ public class TurnServiceImpl implements ITurnService {
                 getOtherPlayersOnTheCity(gameDTO));
         actionList.get(actionPosition).execute();
         if (!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
-            try {
-                if (playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
-                    playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
-                }
-                //infectionPhase(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
-            } catch (EndOfGameException e) {
+            if (playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
+                playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
             }
+            //infectionPhase(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
+
             Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
                     gameDTO.getTurnInformation().getActivePlayer());
             gameDTO.getTurnInformation().setNewTurn(player);

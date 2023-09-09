@@ -1,6 +1,5 @@
 package com.dataontheroad.pandemic.game.service.interfaces;
 
-import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;

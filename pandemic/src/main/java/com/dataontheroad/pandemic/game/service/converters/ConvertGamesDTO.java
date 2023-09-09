@@ -20,6 +20,10 @@ import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EVENT_ACTION;
 
 public class ConvertGamesDTO {
 
+    private ConvertGamesDTO() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static GameResponseDTO convertGameDTO(GameDTO gameDTO) {
         GameResponseDTO gameResponseDTO = new GameResponseDTO(gameDTO.getUuid());
         gameResponseDTO.setGameResponseCityList(buildGameResponseCityFromGameDTO(gameDTO.getBoard().getBoardCities()));

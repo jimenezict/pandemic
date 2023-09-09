@@ -53,6 +53,8 @@ public class TurnEndPoint {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
         } catch (GameExecutionException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
+        } catch (com.dataontheroad.pandemic.exceptions.EndOfGameException e) {
+            throw new RuntimeException(e);
         }
 
         ExecutionSuccessResponse successResponse =

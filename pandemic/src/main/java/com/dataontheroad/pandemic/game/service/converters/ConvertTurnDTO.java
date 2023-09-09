@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 public class ConvertTurnDTO {
 
+    private ConvertTurnDTO() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static TurnResponsePlayer convertTurnResponsePlayer(Player playerTurnInformation) {
         List<String> cardsList = playerTurnInformation.getListCard().stream().map(Object::toString).collect(Collectors.toList());
 

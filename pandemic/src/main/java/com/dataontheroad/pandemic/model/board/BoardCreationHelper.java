@@ -12,6 +12,10 @@ import java.util.stream.IntStream;
 
 public class BoardCreationHelper {
 
+    private BoardCreationHelper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void configurePlayersOnBoard(Board board, int numberOfPlayers) {
         List<Player> listPlayers = Arrays.asList(new ContingencyPlayer(),
                 new DispatcherPlayer(),
@@ -31,7 +35,7 @@ public class BoardCreationHelper {
     }
 
     public static void addEpidemicCards(Board board, int numberOfEpidemicCards) {
-        IntStream.range(0, numberOfEpidemicCards).forEach($ ->
+        IntStream.range(0, numberOfEpidemicCards).forEach(x ->
                     board.getPlayerQueue().getQueue().add(new EpidemicCard())
                 );
         board.getPlayerQueue().shuffleQueue();
