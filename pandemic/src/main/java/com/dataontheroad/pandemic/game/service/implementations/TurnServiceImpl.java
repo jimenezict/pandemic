@@ -45,18 +45,14 @@ public class TurnServiceImpl implements ITurnService {
     }
 
     @Override
-    public TurnInformation executeAction(UUID gameId, int actionPosition) throws ActionException, GameExecutionException, EndOfGameException {
+    public TurnInformation executeAction(UUID gameId, Action action) throws ActionException, GameExecutionException, EndOfGameException {
         GameDTO gameDTO = gamePersistence.getGameById(gameId);
 
         if (isNull(gameDTO)) {
             throw new GameExecutionException(GAME_NOT_FOUND);
         }
 
-        List<Action> actionList = getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
-                gameDTO.getBoard().getVirusList(),
-                getCitiesWithResearchCenter(gameDTO),
-                getOtherPlayersOnTheCity(gameDTO));
-        actionList.get(actionPosition).execute();
+        action.execute();
         if (!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
             if (playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
                 playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());

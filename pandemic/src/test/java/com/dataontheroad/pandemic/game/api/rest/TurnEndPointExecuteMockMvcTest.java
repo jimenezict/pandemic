@@ -133,7 +133,7 @@ class TurnEndPointExecuteMockMvcTest {
                 Player activePlayer = new ScientistPlayer();
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
-                when(turnService.executeAction(any(), anyInt())).thenReturn(new TurnInformation(activePlayer));
+                when(turnService.executeAction(any(), any())).thenReturn(new TurnInformation(activePlayer));
 
 
                 TurnRequestDTO turnRequestDTO =
@@ -162,7 +162,7 @@ class TurnEndPointExecuteMockMvcTest {
                         .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
 
                 doThrow(new ActionException(ActionsType.DRIVEFERRYDISPATCHER, DRIVEFERRY_ERROR_NO_CONNECTION)).
-                        when(turnService).executeAction(any(UUID.class), anyInt());
+                        when(turnService).executeAction(any(UUID.class), any());
 
                 TurnRequestDTO turnRequestDTO =
                         new TurnRequestDTO(uuid, SCIENTIST_NAME, 2);
@@ -189,7 +189,7 @@ class TurnEndPointExecuteMockMvcTest {
                         .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
 
                 doThrow(new GameExecutionException(GAME_NOT_FOUND)).
-                        when(turnService).executeAction(any(UUID.class), anyInt());
+                        when(turnService).executeAction(any(UUID.class), any());
 
                 TurnRequestDTO turnRequestDTO =
                         new TurnRequestDTO(uuid, SCIENTIST_NAME, 0);

@@ -1,5 +1,7 @@
 package com.dataontheroad.pandemic.game.service.interfaces;
 
+import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.actions.action_factory.DriveFerryAction;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
@@ -7,6 +9,7 @@ import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.*;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
+import static com.dataontheroad.pandemic.actions.ActionsType.DRIVEFERRY;
 import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_NOT_FOUND;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,33 +73,37 @@ class TurnServiceHelperImplTest {
         GameDTO gameDTO = new GameDTO(2);
         Player originalActivePlayer = gameDTO.getTurnInformation().getActivePlayer();
 
+        Action actionTest = new DriveFerryAction(originalActivePlayer, originalActivePlayer.getCity().getNodeCityConnection().get(0));
         City originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
-        turnService.executeAction(gameDTO.getUuid(), 0);
+        turnService.executeAction(gameDTO.getUuid(), actionTest);
         City finalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         assertNotEquals(originalCity.getName(), finalCity.getName());
         assertEquals(3, gameDTO.getTurnInformation().getMissingTurns());
         assertEquals(originalActivePlayer, gameDTO.getTurnInformation().getActivePlayer());
 
         originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
+        actionTest = new DriveFerryAction(originalActivePlayer, originalCity.getNodeCityConnection().get(0));
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
-        turnService.executeAction(gameDTO.getUuid(), 0);
+        turnService.executeAction(gameDTO.getUuid(), actionTest);
         finalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         assertNotEquals(originalCity.getName(), finalCity.getName());
         assertEquals(2, gameDTO.getTurnInformation().getMissingTurns());
         assertEquals(originalActivePlayer, gameDTO.getTurnInformation().getActivePlayer());
 
         originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
+        actionTest = new DriveFerryAction(originalActivePlayer, originalCity.getNodeCityConnection().get(0));
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
-        turnService.executeAction(gameDTO.getUuid(), 0);
+        turnService.executeAction(gameDTO.getUuid(), actionTest);
         finalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         assertNotEquals(originalCity.getName(), finalCity.getName());
         assertEquals(1, gameDTO.getTurnInformation().getMissingTurns());
         assertEquals(originalActivePlayer, gameDTO.getTurnInformation().getActivePlayer());
 
         originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
+        actionTest = new DriveFerryAction(originalActivePlayer, originalCity.getNodeCityConnection().get(0));
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
-        turnService.executeAction(gameDTO.getUuid(), 0);
+        turnService.executeAction(gameDTO.getUuid(), actionTest);
         finalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         assertNotEquals(originalCity.getName(), finalCity.getName());
         assertEquals(4, gameDTO.getTurnInformation().getMissingTurns());

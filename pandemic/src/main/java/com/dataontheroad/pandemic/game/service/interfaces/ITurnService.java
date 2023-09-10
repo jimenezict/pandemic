@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface ITurnService {
     TurnResponseDTO getTurnServiceInformation(UUID gameId);
 
-    TurnInformation executeAction(UUID uuid, int actionPosition) throws ActionException, GameExecutionException, EndOfGameException;
+    TurnInformation executeAction(UUID gameId, Action actionPosition) throws ActionException, GameExecutionException, EndOfGameException;
 
     Action getSelectedAction(UUID uuid, int actionPosition) throws GameExecutionException;
 }
