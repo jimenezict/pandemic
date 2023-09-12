@@ -33,6 +33,11 @@ public class FlyFromResearchCenterAnywhereAction extends Action implements IComm
         this.destination = destination;
     }
 
+    @Override
+    public City getDestination() {
+        return destination;
+    }
+
     public void setDiscardCard(BaseCard discardCard) {
         this.discardCard = discardCard;
     }

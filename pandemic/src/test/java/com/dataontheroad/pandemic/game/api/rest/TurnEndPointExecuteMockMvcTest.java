@@ -1,11 +1,14 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
+import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
@@ -25,6 +28,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
@@ -62,7 +66,7 @@ class TurnEndPointExecuteMockMvcTest {
                 when(turnService.getTurnServiceInformation(any())).thenReturn(null);
 
                 TurnRequestDTO turnRequestDTO =
-                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 5);
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 5, null);
 
                 ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                                 .post("/turn/execute")
@@ -86,7 +90,7 @@ class TurnEndPointExecuteMockMvcTest {
                         .thenReturn(buildTurnResponseDTOWithActionList(new OperationsPlayer()));
 
                 TurnRequestDTO turnRequestDTO =
-                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 5);
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 5, null);
 
                 ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                                 .post("/turn/execute")
@@ -110,7 +114,7 @@ class TurnEndPointExecuteMockMvcTest {
                         .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
 
                 TurnRequestDTO turnRequestDTO =
-                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 10);
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 10, null);
 
                 ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                                 .post("/turn/execute")
@@ -137,7 +141,7 @@ class TurnEndPointExecuteMockMvcTest {
 
 
                 TurnRequestDTO turnRequestDTO =
-                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 2);
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 2, null);
 
                 ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                                 .post("/turn/execute")
@@ -165,7 +169,7 @@ class TurnEndPointExecuteMockMvcTest {
                         when(turnService).executeAction(any(UUID.class), any());
 
                 TurnRequestDTO turnRequestDTO =
-                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 2);
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 2, null);
 
                 ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                                 .post("/turn/execute")
@@ -192,7 +196,7 @@ class TurnEndPointExecuteMockMvcTest {
                         when(turnService).executeAction(any(UUID.class), any());
 
                 TurnRequestDTO turnRequestDTO =
-                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 0);
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 0, null);
 
                 ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                                 .post("/turn/execute")
@@ -210,5 +214,26 @@ class TurnEndPointExecuteMockMvcTest {
                 assertTrue(response.getMessage().contains(GAME_NOT_FOUND));
         }
 
+        @Test
+        void getTurnExecute_executeFlyCharter_withDestinationExtraValue() throws Exception {
+                Player activePlayer = new ScientistPlayer();
+                when(turnService.getTurnServiceInformation(any()))
+                        .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
+                when(turnService.executeAction(any(), any())).thenReturn(new TurnInformation(activePlayer));
+                FlyCharterAction flyCharterAction = new FlyCharterAction(activePlayer);
+                when(turnService.getSelectedAction(any(), anyInt())).thenReturn(flyCharterAction);
+                HashMap<String, String> additionalFields = new HashMap<>();
+                additionalFields.put("destination", "Paris");
+
+                TurnRequestDTO turnRequestDTO =
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 0, additionalFields);
+
+                ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
+                                .post("/turn/execute")
+                                .content(objectMapper.writeValueAsString(turnRequestDTO))
+                                .contentType("application/json;charset=UTF-8"))
+                        .andDo(print())
+                        .andExpect(status().isOk());
+        }
 }
 

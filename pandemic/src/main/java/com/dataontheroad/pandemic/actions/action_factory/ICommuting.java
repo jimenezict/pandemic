@@ -5,4 +5,5 @@ import com.dataontheroad.pandemic.model.city.City;
 public interface ICommuting {
 
     void setDestination(City destination);
+    City getDestination();
 }

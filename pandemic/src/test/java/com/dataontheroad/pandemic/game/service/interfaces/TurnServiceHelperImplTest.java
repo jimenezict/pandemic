@@ -2,6 +2,8 @@ package com.dataontheroad.pandemic.game.service.interfaces;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DriveFerryAction;
+import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
+import com.dataontheroad.pandemic.actions.action_factory.FlyDirectAction;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
@@ -16,9 +18,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.DRIVEFERRY;
+import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
 import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_NOT_FOUND;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.*;
@@ -109,6 +113,55 @@ class TurnServiceHelperImplTest {
         assertEquals(4, gameDTO.getTurnInformation().getMissingTurns());
         assertNotEquals(originalActivePlayer, gameDTO.getTurnInformation().getActivePlayer());
         verify(gamePersistence).insertOrUpdateGame(gameDTO);
+    }
+
+    @Test
+    void actionFormatValidation_destinationCity_isValidFlyCharter() throws Exception {
+        String city = "Paris";
+        GameDTO gameDTO = new GameDTO(3);
+        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+
+        Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+        additionalFields.put("destination", city);
+
+        turnService.actionFormatValidation(uuid, action, additionalFields);
+
+        assertEquals(city, ((FlyCharterAction) action).getDestination().getName());
+        assertEquals(FLYCHARTER, action.getActionsType());
+    }
+
+    @Test
+    void actionFormatValidation_destinationCity_isInvalidFlyCharter() throws Exception {
+        String city = "SVH";
+        GameDTO gameDTO = new GameDTO(3);
+        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+
+        Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+        additionalFields.put("destination", city);
+
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.actionFormatValidation(uuid, action, additionalFields));
+
+        assertTrue(exception.getMessage().contains("destination is not a valid city on action " + FLYCHARTER.name()));
+    }
+
+    @Test
+    void actionFormatValidation_destinationCityIsMissing() throws Exception {
+        String city = "SVH";
+        GameDTO gameDTO = new GameDTO(3);
+        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+
+        Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.actionFormatValidation(uuid, action, additionalFields));
+
+        assertTrue(exception.getMessage().contains("destination field is mandatory when action is " + FLYCHARTER.name()));
     }
 
 }

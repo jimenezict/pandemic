@@ -24,7 +24,13 @@ public class FlyCharterAction extends Action implements ICommuting {
         this.player.getFlyCharter().doAction(player, destination);
     }
 
+    @Override
     public void setDestination(City destination) {
         this.destination = destination;
+    }
+
+    @Override
+    public City getDestination() {
+        return destination;
     }
 }

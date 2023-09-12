@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.game.api.model.turn;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class TurnRequestDTO {
@@ -8,10 +9,13 @@ public class TurnRequestDTO {
     private final String playerName;
     private final int actionPosition;
 
-    public TurnRequestDTO(UUID uuid, String playerName, int actionPosition) {
+    private final HashMap<String, String> additionalFields;
+
+    public TurnRequestDTO(UUID uuid, String playerName, int actionPosition, HashMap<String, String> additionalFields) {
         this.uuid = uuid;
         this.playerName = playerName;
         this.actionPosition = actionPosition;
+        this.additionalFields = additionalFields;
     }
 
     public UUID getUuid() {
@@ -24,5 +28,9 @@ public class TurnRequestDTO {
 
     public int getActionPosition() {
         return actionPosition;
+    }
+
+    public HashMap<String, String> getAdditionalFields() {
+        return additionalFields;
     }
 }

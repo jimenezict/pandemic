@@ -7,6 +7,7 @@ import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public interface ITurnService {
@@ -15,4 +16,6 @@ public interface ITurnService {
     TurnInformation executeAction(UUID gameId, Action actionPosition) throws ActionException, GameExecutionException, EndOfGameException;
 
     Action getSelectedAction(UUID uuid, int actionPosition) throws GameExecutionException;
+
+    Action actionFormatValidation(UUID uuid, Action action, HashMap<String, String> additionalFields) throws GameExecutionException;
 }

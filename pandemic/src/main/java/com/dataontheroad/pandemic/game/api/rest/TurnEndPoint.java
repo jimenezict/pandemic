@@ -51,6 +51,7 @@ public class TurnEndPoint {
 
         try {
             Action action = turnService.getSelectedAction(turnRequestDTO.getUuid(), turnRequestDTO.getActionPosition());
+            turnService.actionFormatValidation(turnRequestDTO.getUuid(), action, turnRequestDTO.getAdditionalFields());
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), action);
         } catch (ActionException | GameExecutionException | EndOfGameException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
