@@ -93,7 +93,7 @@ public class TurnServiceImpl implements ITurnService {
             throw new GameExecutionException(GAME_NOT_FOUND);
         }
         if(FLYCHARTER.equals(action.getActionsType())) {
-            if(additionalFields.containsKey("destination")) {
+            if(!isNull(additionalFields) && additionalFields.containsKey("destination")) {
                 City city = gameDTO.getBoard().getCityFromBoardList(new City(additionalFields.get("destination"), null));
                 if(isNull(city)) {
                     throw new GameExecutionException("destination is not a valid city on action " + FLYCHARTER.name());

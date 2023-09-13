@@ -164,4 +164,20 @@ class TurnServiceHelperImplTest {
         assertTrue(exception.getMessage().contains("destination field is mandatory when action is " + FLYCHARTER.name()));
     }
 
+    @Test
+    void actionFormatValidation_additionalFieldsIsMissing() throws Exception {
+        String city = "SVH";
+        GameDTO gameDTO = new GameDTO(3);
+        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+
+        Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.actionFormatValidation(uuid, action, null));
+
+        assertTrue(exception.getMessage().contains("destination field is mandatory when action is " + FLYCHARTER.name()));
+    }
+
 }
