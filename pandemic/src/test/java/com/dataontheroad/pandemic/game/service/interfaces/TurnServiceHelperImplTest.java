@@ -23,7 +23,7 @@ import java.util.UUID;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.DRIVEFERRY;
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
-import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_NOT_FOUND;
+import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -123,7 +123,7 @@ class TurnServiceHelperImplTest {
 
         Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
         HashMap<String, String> additionalFields = new HashMap<>();
-        additionalFields.put("destination", city);
+        additionalFields.put(ADDITIONAL_FIELD_DESTINATION, city);
 
         turnService.actionFormatValidation(uuid, action, additionalFields);
 
@@ -139,18 +139,17 @@ class TurnServiceHelperImplTest {
 
         Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
         HashMap<String, String> additionalFields = new HashMap<>();
-        additionalFields.put("destination", city);
+        additionalFields.put(ADDITIONAL_FIELD_DESTINATION, city);
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
                         () -> turnService.actionFormatValidation(uuid, action, additionalFields));
 
-        assertTrue(exception.getMessage().contains("destination is not a valid city on action " + FLYCHARTER.name()));
+        assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_INVALID_DESTINATION_CITY));
     }
 
     @Test
     void actionFormatValidation_destinationCityIsMissing() throws Exception {
-        String city = "SVH";
         GameDTO gameDTO = new GameDTO(3);
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
 
@@ -161,12 +160,11 @@ class TurnServiceHelperImplTest {
                 assertThrows(GameExecutionException.class,
                         () -> turnService.actionFormatValidation(uuid, action, additionalFields));
 
-        assertTrue(exception.getMessage().contains("destination field is mandatory when action is " + FLYCHARTER.name()));
+        assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD));
     }
 
     @Test
     void actionFormatValidation_additionalFieldsIsMissing() throws Exception {
-        String city = "SVH";
         GameDTO gameDTO = new GameDTO(3);
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
 
@@ -177,7 +175,7 @@ class TurnServiceHelperImplTest {
                 assertThrows(GameExecutionException.class,
                         () -> turnService.actionFormatValidation(uuid, action, null));
 
-        assertTrue(exception.getMessage().contains("destination field is mandatory when action is " + FLYCHARTER.name()));
+        assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD));
     }
 
 }

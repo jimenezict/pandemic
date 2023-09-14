@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
-import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_NOT_FOUND;
+import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
 import static com.dataontheroad.pandemic.game.TurnServiceHelper.*;
 import static java.util.Objects.isNull;
@@ -93,14 +93,14 @@ public class TurnServiceImpl implements ITurnService {
             throw new GameExecutionException(GAME_NOT_FOUND);
         }
         if(FLYCHARTER.equals(action.getActionsType())) {
-            if(!isNull(additionalFields) && additionalFields.containsKey("destination")) {
-                City city = gameDTO.getBoard().getCityFromBoardList(new City(additionalFields.get("destination"), null));
+            if(!isNull(additionalFields) && additionalFields.containsKey(ADDITIONAL_FIELD_DESTINATION)) {
+                City city = gameDTO.getBoard().getCityFromBoardList(new City(additionalFields.get(ADDITIONAL_FIELD_DESTINATION), null));
                 if(isNull(city)) {
-                    throw new GameExecutionException("destination is not a valid city on action " + FLYCHARTER.name());
+                    throw new GameExecutionException(TURN_WRONG_FLYCHARTER_INVALID_DESTINATION_CITY);
                 }
                 ((FlyCharterAction) action).setDestination(city);
             } else {
-                throw new GameExecutionException("destination field is mandatory when action is " + FLYCHARTER.name());
+                throw new GameExecutionException(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD);
             }
         }
         return action;

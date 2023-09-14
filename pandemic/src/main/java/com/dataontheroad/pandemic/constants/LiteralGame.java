@@ -1,5 +1,7 @@
 package com.dataontheroad.pandemic.constants;
 
+import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
+
 public class LiteralGame {
 
     private LiteralGame() {
@@ -14,6 +16,9 @@ public class LiteralGame {
     public static final String SUCCESS_ACTION = "Action executed correctly";
     public static final String TURN_WRONG_PLAYER = "Error executing action, requester is not the active player";
     public static final String TURN_WRONG_ACTION = "Error executing action, requester is not executing correct action";
+    public static final String TURN_WRONG_FLYCHARTER_INVALID_DESTINATION_CITY = "destination is not a valid city on action " + FLYCHARTER.name();
+    public static final String TURN_WRONG_FLYCHARTER_DESTINATION_FIELD = "destination field is mandatory when action is " + FLYCHARTER.name();
     public static final String END_OF_GAME_EMPTY_DECK = "Player Deck is empty";
+    public static final String ADDITIONAL_FIELD_DESTINATION = "destination";
 
 }

@@ -223,7 +223,7 @@ class TurnEndPointExecuteMockMvcTest {
                 FlyCharterAction flyCharterAction = new FlyCharterAction(activePlayer);
                 when(turnService.getSelectedAction(any(), anyInt())).thenReturn(flyCharterAction);
                 HashMap<String, String> additionalFields = new HashMap<>();
-                additionalFields.put("destination", "Paris");
+                additionalFields.put(ADDITIONAL_FIELD_DESTINATION, "Paris");
 
                 TurnRequestDTO turnRequestDTO =
                         new TurnRequestDTO(uuid, SCIENTIST_NAME, 0, additionalFields);
