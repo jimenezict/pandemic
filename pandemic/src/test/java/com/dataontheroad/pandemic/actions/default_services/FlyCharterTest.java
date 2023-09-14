@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERROR_INCORRECT_DESTINATION;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,6 +61,18 @@ class FlyCharterTest {
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
         assertTrue(actualMessage.contains(FLYCHARTER_ERROR_NO_CARD));
+    }
+
+    @Test
+    void doAction_playerInAtlantaFlyToAtlanta_throwException() {
+        player.getListCard().add(createCityCard(atlanta));
+
+        ActionException exception =
+                assertThrows(ActionException.class,
+                        () -> FlyCharterDefaultService.doAction(player, atlanta));
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
+        assertTrue(actualMessage.contains(FLYCHARTER_ERROR_INCORRECT_DESTINATION));
     }
 
     @Test

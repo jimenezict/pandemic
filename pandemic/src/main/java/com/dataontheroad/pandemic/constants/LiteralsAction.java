@@ -40,7 +40,7 @@ public class LiteralsAction {
     public static final String FLYCHARTER_DESCRIPTION = "Discard the City card that matches the city you are in to move to any city";
     public static final String FLYCHARTER_ACTION = "You own cities card, where do you want to fly?";
     public static final String FLYCHARTER_ERROR_NO_CARD = "Player has no card to fly to the city";
-
+    public static final String FLYCHARTER_ERROR_INCORRECT_DESTINATION = "Player is already on the destination: ";
     //Discover Cure
     public static final String DISCOVERCURE_DESCRIPTION = "At any research station, discard 5 city cards of the same disease color to cure that disease";
     public static final String DISCOVERCURE_ACTION = "Discover a Cure for: ";
