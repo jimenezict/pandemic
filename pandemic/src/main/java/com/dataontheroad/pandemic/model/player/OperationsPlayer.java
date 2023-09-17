@@ -33,7 +33,7 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
     }
 
     @Override
-    public BuildResearchCenterDefaultService getBuildResearchCenter() {
+    public OperationsBuildResearchCenterService getBuildResearchCenter() {
         return OperationsBuildResearchCenterService.getInstance();
     }
 

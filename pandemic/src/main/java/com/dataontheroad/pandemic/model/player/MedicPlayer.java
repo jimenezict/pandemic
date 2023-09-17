@@ -18,7 +18,7 @@ public class MedicPlayer extends Player {
     }
 
     @Override
-    public TreatDiseaseDefaultService getTreatDisease() { return TreatDiseaseMedicService.getInstance();}
+    public TreatDiseaseMedicService getTreatDisease() { return TreatDiseaseMedicService.getInstance();}
 
     @Override
     public void executeAfterAction(List<Virus> virusList) {

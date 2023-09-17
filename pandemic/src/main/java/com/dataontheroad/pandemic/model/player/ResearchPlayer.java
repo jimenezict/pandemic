@@ -15,7 +15,7 @@ public class ResearchPlayer extends Player {
     }
 
     @Override
-    public ShareKnowledgeDefaultService getShareKnowledge() {
+    public ShareKnowledgeResearchService getShareKnowledge() {
         return ShareKnowledgeResearchService.getInstance();
     }
 

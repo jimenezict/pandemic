@@ -4,6 +4,7 @@ import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
+import com.dataontheroad.pandemic.model.player.ResearchPlayer;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,5 +75,12 @@ class GetListOfActionsActionTest {
         List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, otherPlayersOnTheCity);
 
         assertEquals(13, actions.size());
+    }
+
+    @Test
+    void validateInstanceOfPlayerGetPlayersService() {
+        Player researcher = new ResearchPlayer();
+        researcher.setCity(cityList.get(1));
+        getListOfActions(researcher, virusList, citiesWithResearchCenter, new ArrayList<>());
     }
 }
