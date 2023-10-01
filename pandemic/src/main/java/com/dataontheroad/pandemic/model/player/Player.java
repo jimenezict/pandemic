@@ -84,15 +84,10 @@ public class Player implements IPlayerServices {
         return description;
     }
 
-    public void executeAfterAction(List<Virus> virusList) {
-        // default implementation ignored
-    }
-
     @Override
     public BuildResearchCenterDefaultService getBuildResearchCenter() {
         return buildResearchCenterDefaultService;
     }
-
     @Override
     public DiscoverCureDefaultService getDiscoverCure() {
         return discoverCureDefaultService;
@@ -112,7 +107,6 @@ public class Player implements IPlayerServices {
     public FlyDirectCityDefaultService getFlyDirectCity() {
         return flyDirectCityDefaultService;
     }
-
     @Override
     public FlyShuttleDefaultService getFlyShuttle() {
         return flyShuttleDefaultService;

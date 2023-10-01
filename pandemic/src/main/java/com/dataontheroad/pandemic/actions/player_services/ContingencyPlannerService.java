@@ -17,18 +17,6 @@ import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EVENT_ACTION;
 import static java.util.Objects.isNull;
 
 public class ContingencyPlannerService {
-    private static ContingencyPlannerService contingencyPlannerService;
-
-    private ContingencyPlannerService() {
-
-    }
-
-    public static ContingencyPlannerService getInstance() {
-        if(isNull(contingencyPlannerService)) {
-            contingencyPlannerService = new ContingencyPlannerService();
-        }
-        return contingencyPlannerService;
-    }
 
     /**
      * Based on the status of the game, will decide if Contingency Player can get a discarded Card

@@ -31,7 +31,7 @@ class ContingencyPlannerServiceTest {
     @BeforeEach
     public void setUp() {
         discardedCards = createPlayerQueue(2);
-        contingencyPlannerService = ContingencyPlannerService.getInstance();
+        contingencyPlannerService = new ContingencyPlannerService();
         player = new ContingencyPlayer();
         eventCard = new GovernmentGrantEventCard();
         Collections.shuffle(discardedCards);

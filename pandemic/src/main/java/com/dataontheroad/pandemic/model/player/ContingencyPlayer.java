@@ -8,11 +8,13 @@ import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 public class ContingencyPlayer extends Player {
 
     SpecialCard extraEventCard = null;
+    private final ContingencyPlannerService contingencyPlannerService;
     public ContingencyPlayer() {
         super();
         color = CONTINGENCY_COLOR;
         name = CONTINGENCY_NAME;
         description = CONTINGENCY_DESCRIPTION;
+        contingencyPlannerService = new ContingencyPlannerService();
     }
 
     public SpecialCard getExtraEventCard() {
@@ -24,7 +26,7 @@ public class ContingencyPlayer extends Player {
     }
 
     public ContingencyPlannerService specialActionService() {
-        return ContingencyPlannerService.getInstance();
+        return contingencyPlannerService;
     }
 
 }

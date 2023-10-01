@@ -18,7 +18,6 @@ public class MedicPlayer extends Player {
         treatDiseaseDefaultService = new TreatDiseaseMedicService();
     }
 
-    @Override
     public void executeAfterAction(List<Virus> virusList) {
         virusList.stream()
                 .filter(Virus::getCureDiscovered)
