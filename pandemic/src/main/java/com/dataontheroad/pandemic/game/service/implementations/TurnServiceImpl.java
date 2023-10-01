@@ -40,7 +40,8 @@ public class TurnServiceImpl implements ITurnService {
             List<Action> actionList = getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
                     gameDTO.getBoard().getVirusList(),
                     getCitiesWithResearchCenter(gameDTO),
-                    getOtherPlayersOnTheCity(gameDTO));
+                    getOtherPlayersOnTheCity(gameDTO),
+                    gameDTO.getBoard().getBoardCities());
             turnResponseDTO.setTurnInformation(gameDTO.getTurnInformation(), actionList);
             return turnResponseDTO;
         } else {
@@ -83,7 +84,8 @@ public class TurnServiceImpl implements ITurnService {
         return getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
                 gameDTO.getBoard().getVirusList(),
                 getCitiesWithResearchCenter(gameDTO),
-                getOtherPlayersOnTheCity(gameDTO)).get(actionPosition);
+                getOtherPlayersOnTheCity(gameDTO),
+                gameDTO.getBoard().getBoardCities()).get(actionPosition);
     }
 
     @Override

@@ -44,7 +44,7 @@ class GetListOfActionsActionTest {
         //Player is in Atlanta
         //Player without cards
         //Atlanta has research center
-        List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, new ArrayList());
+        List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, new ArrayList(), new ArrayList<>());
         assertEquals(3, actions.size());
         assertEquals(DRIVEFERRY, actions.get(0).getActionsType());
     }
@@ -71,7 +71,7 @@ class GetListOfActionsActionTest {
         player.getCity().addVirusBoxes(blackVirus.getVirusType());
 
         List<Player> otherPlayersOnTheCity = Arrays.asList(new Player(cityList.get(1)));
-        List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, otherPlayersOnTheCity);
+        List<Action> actions = getListOfActions(player, virusList, citiesWithResearchCenter, otherPlayersOnTheCity, cityList);
 
         assertEquals(13, actions.size());
     }

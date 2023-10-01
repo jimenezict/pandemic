@@ -18,12 +18,12 @@ public class ActionServiceHelper {
         throw new IllegalStateException("Utility class");
     }
 
-    public static List<Action> getListOfActions(Player player, List<Virus> virusList, List<City> citiesWithResearchCenter, List<Player> otherPlayersOnTheCity) {
+    public static List<Action> getListOfActions(Player player, List<Virus> virusList, List<City> citiesWithResearchCenter, List<Player> otherPlayersOnTheCity, List<City> boardCities) {
         List<Action> allowedActions = new ArrayList<>();
         allowedActions.addAll(player.getBuildResearchCenter().returnAvailableActions(player));
         allowedActions.addAll(player.getDiscoverCure().returnAvailableActions(player, virusList));
         allowedActions.addAll(player.getFlyCharter().returnAvailableActions(player));
-        allowedActions.addAll(player.getFlyDirectCity().returnAvailableActions(player));
+        allowedActions.addAll(player.getFlyDirectCity().returnAvailableActions(player, boardCities));
         allowedActions.addAll(player.getFlyShuttle().returnAvailableActions(player, citiesWithResearchCenter));
         allowedActions.addAll(player.getDriveFerry().returnAvailableActions(player));
         allowedActions.addAll(player.getShareKnowledge().returnAvailableActions(player, otherPlayersOnTheCity));

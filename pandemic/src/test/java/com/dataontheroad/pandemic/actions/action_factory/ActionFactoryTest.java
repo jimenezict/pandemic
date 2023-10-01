@@ -38,6 +38,7 @@ class ActionFactoryTest {
     private Virus redVirus = new Virus(VirusType.RED);
     private Virus yellowVirus = new Virus(VirusType.YELLOW);
     List<Virus> virusList;
+    List<City> boardCities = Arrays.asList(newyork, calcuta, essen, madrid, paris, tokio, atlanta);
 
     BuildResearchCenterDefaultService buildResearchCenterDefaultService = new BuildResearchCenterDefaultService();
     DiscoverCureDefaultService discoverCureDefaultService = new DiscoverCureDefaultService();
@@ -142,7 +143,7 @@ class ActionFactoryTest {
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
-        List<Action> availableActions = flyDirectCityDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = flyDirectCityDefaultService.returnAvailableActions(player, boardCities);
         assertEquals(3, availableActions.size());
         assertEquals(FLYDIRECT, availableActions.get(0).actionsType);
         assertEquals(FLYDIRECT_ACTION + "Essen", availableActions.get(0).actionPrompt());
@@ -155,7 +156,7 @@ class ActionFactoryTest {
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
-        List<Action> availableActions = flyDirectCityDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = flyDirectCityDefaultService.returnAvailableActions(player, boardCities);
         assertEquals(2, availableActions.size());
         assertEquals(FLYDIRECT, availableActions.get(0).actionsType);
         assertEquals(FLYDIRECT_ACTION + "Paris", availableActions.get(0).actionPrompt());

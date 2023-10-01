@@ -4,6 +4,7 @@ import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.FlyDirectAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
@@ -14,7 +15,6 @@ import java.util.stream.Collectors;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
-import static java.util.Objects.isNull;
 
 public class FlyDirectCityDefaultService {
 
@@ -22,12 +22,19 @@ public class FlyDirectCityDefaultService {
         return player.getListCard().contains(createCityCard(destination));
     }
 
-    public List<Action> returnAvailableActions(Player player) {
+    public List<Action> returnAvailableActions(Player player, List<City> boardCities) {
         return player.getListCard().stream()
                 .filter(card -> CITY.equals(card.getCardType()))
                 .filter(destination -> !player.getCity().equals(((CityCard) destination).getCity()))
-                .map(destination -> new FlyDirectAction(player, ((CityCard) destination).getCity()))
+                .map(destination -> {
+                    City boardCity = getBoardCity(boardCities, ((CityCard) destination).getCity());
+                    return new FlyDirectAction(player, boardCity);
+                })
                 .collect(Collectors.toList());
+    }
+
+    private static City getBoardCity(List<City> boardCities, City destination) {
+        return boardCities.stream().filter(city -> city.equals(destination)).findFirst().get();
     }
 
     public void doAction(Player player, City destination) throws ActionException {
