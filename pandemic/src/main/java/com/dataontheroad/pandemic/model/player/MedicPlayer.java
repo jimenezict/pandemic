@@ -1,6 +1,5 @@
 package com.dataontheroad.pandemic.model.player;
 
-import com.dataontheroad.pandemic.actions.default_services.TreatDiseaseDefaultService;
 import com.dataontheroad.pandemic.actions.player_services.TreatDiseaseMedicService;
 import com.dataontheroad.pandemic.model.virus.Virus;
 

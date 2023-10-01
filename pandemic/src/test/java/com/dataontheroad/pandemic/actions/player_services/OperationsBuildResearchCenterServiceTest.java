@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_CENTER_CREATED;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;

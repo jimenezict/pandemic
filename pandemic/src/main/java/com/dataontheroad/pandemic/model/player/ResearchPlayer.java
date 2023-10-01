@@ -1,6 +1,5 @@
 package com.dataontheroad.pandemic.model.player;
 
-import com.dataontheroad.pandemic.actions.default_services.ShareKnowledgeDefaultService;
 import com.dataontheroad.pandemic.actions.player_services.ShareKnowledgeResearchService;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;

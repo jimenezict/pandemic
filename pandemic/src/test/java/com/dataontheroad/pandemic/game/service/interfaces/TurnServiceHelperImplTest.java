@@ -3,15 +3,13 @@ package com.dataontheroad.pandemic.game.service.interfaces;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DriveFerryAction;
 import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
-import com.dataontheroad.pandemic.actions.action_factory.FlyDirectAction;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
-import com.dataontheroad.pandemic.model.player.*;
-import com.dataontheroad.pandemic.model.virus.VirusType;
+import com.dataontheroad.pandemic.model.player.Player;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,13 +19,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HashMap;
 import java.util.UUID;
 
-import static com.dataontheroad.pandemic.actions.ActionsType.DRIVEFERRY;
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TurnServiceHelperImplTest {

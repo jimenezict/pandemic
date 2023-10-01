@@ -12,10 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisLocation;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_CENTER_CREATED;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_NO_CARD;
-import static java.util.Objects.isNull;
 
 public class OperationsBuildResearchCenterService extends BuildResearchCenterDefaultService {
 

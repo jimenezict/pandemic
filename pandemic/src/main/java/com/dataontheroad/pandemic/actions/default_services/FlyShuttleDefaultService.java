@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
-import static java.util.Objects.isNull;
 
 public class FlyShuttleDefaultService {
 

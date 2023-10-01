@@ -1,7 +1,5 @@
 package com.dataontheroad.pandemic.game;
 
-import com.dataontheroad.pandemic.actions.default_services.BuildResearchCenterDefaultService;
-import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
@@ -17,7 +15,6 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_EMPTY_DECK;
 import static com.dataontheroad.pandemic.game.TurnServiceHelper.*;
-import static com.dataontheroad.pandemic.game.TurnServiceHelper.getNextActivePlayer;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 

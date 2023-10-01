@@ -8,7 +8,6 @@ import com.dataontheroad.pandemic.model.player.MedicPlayer;
 import com.dataontheroad.pandemic.model.virus.Virus;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.TREATDISEASE_ERROR_DO_NOT_EXISTS_VIRUS;
-import static java.util.Objects.isNull;
 
 public class TreatDiseaseMedicService extends TreatDiseaseDefaultService{
 

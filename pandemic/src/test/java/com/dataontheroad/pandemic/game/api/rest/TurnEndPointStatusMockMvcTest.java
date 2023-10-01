@@ -23,7 +23,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import static com.dataontheroad.pandemic.constants.LiteralGame.*;
+import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_NOT_FOUND;
+import static com.dataontheroad.pandemic.constants.LiteralGame.TURN_ENDPOINT_NAME;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

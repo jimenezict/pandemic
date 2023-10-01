@@ -19,10 +19,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.UUID;
 
-import static com.dataontheroad.pandemic.constants.LiteralGame.*;
+import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_ENDPOINT_NAME;
+import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_NOT_FOUND;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

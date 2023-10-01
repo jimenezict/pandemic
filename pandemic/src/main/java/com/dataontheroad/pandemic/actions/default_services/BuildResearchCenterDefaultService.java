@@ -16,7 +16,6 @@ import static com.dataontheroad.pandemic.actions.ActionsHelper.playerRemoveCardF
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_CENTER_CREATED;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
-import static java.util.Objects.isNull;
 
 /**
  * Default Service for Building Research Center. A research center can be created when player is on a city

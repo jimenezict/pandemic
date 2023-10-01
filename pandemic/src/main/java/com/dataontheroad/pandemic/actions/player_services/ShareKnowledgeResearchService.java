@@ -14,7 +14,6 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
-import static java.util.Objects.isNull;
 
 public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService {
 

@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisLocation;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
-import static java.util.Objects.isNull;
 
 public class ShareKnowledgeDefaultService {
 
