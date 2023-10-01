@@ -18,22 +18,11 @@ import static java.util.Objects.isNull;
 
 public class FlyDirectCityDefaultService {
 
-    private static FlyDirectCityDefaultService flyDirectCityDefaultService;
-
-    private FlyDirectCityDefaultService(){}
-
-    public static FlyDirectCityDefaultService getInstance() {
-        if(isNull(flyDirectCityDefaultService)) {
-            flyDirectCityDefaultService = new FlyDirectCityDefaultService();
-        }
-        return flyDirectCityDefaultService;
-    }
-
-    public static boolean isDoable(Player player, City destination) {
+    public boolean isDoable(Player player, City destination) {
         return player.getListCard().contains(createCityCard(destination));
     }
 
-    public static List<Action> returnAvailableActions(Player player) {
+    public List<Action> returnAvailableActions(Player player) {
         return player.getListCard().stream()
                 .filter(card -> CITY.equals(card.getCardType()))
                 .filter(destination -> !player.getCity().equals(((CityCard) destination).getCity()))
@@ -41,7 +30,7 @@ public class FlyDirectCityDefaultService {
                 .collect(Collectors.toList());
     }
 
-    public static void doAction(Player player, City destination) throws ActionException {
+    public void doAction(Player player, City destination) throws ActionException {
         if(!player.getListCard().contains(createCityCard(destination))) {
             throw new ActionException(ActionsType.FLYDIRECT, FLYDIRECT_ERROR_NO_CARD);
         }

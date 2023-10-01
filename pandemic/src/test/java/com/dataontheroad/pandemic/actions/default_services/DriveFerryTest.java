@@ -24,6 +24,8 @@ class DriveFerryTest {
     private City lima = new City("Lima", VirusType.YELLOW, new ArrayList<City>(Arrays.asList(santiago, mexico, bogota)));
     private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
     Player player;
+    private DriveFerryDefaultService driveFerryDefaultService = new DriveFerryDefaultService();
+
 
     @BeforeEach
     public void setPlayer() {
@@ -33,19 +35,19 @@ class DriveFerryTest {
 
     @Test
     void isDoable_calcutaIsNotNearToLima_thenFalse() {
-        assertFalse(DriveFerryDefaultService.isDoable(player, calculta));
+        assertFalse(driveFerryDefaultService.isDoable(player, calculta));
     }
 
     @Test
     void isDoable_bogotaIsNearToLima_thenFalse() {
-        assertTrue(DriveFerryDefaultService.isDoable(player, bogota));
+        assertTrue(driveFerryDefaultService.isDoable(player, bogota));
     }
 
     @Test
     void doAction_calcutaIsNotNearToLima_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> DriveFerryDefaultService.doAction(player, calculta));
+                        () -> driveFerryDefaultService.doAction(player, calculta));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DRIVEFERRY.label));
         assertTrue(actualMessage.contains(DRIVEFERRY_ERROR_NO_CONNECTION));
@@ -53,7 +55,7 @@ class DriveFerryTest {
 
     @Test
     void doAction_playerHasMoveToBogota() throws ActionException  {
-        DriveFerryDefaultService.doAction(player, bogota);
+        driveFerryDefaultService.doAction(player, bogota);
         assertEquals(player.getCity(), bogota);
     }
 }

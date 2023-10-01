@@ -21,6 +21,7 @@ class TreatDiseaseDefaultServiceTest {
     Virus cureVirus;
     Virus uncureVirus;
     List<Virus> virusList;
+    TreatDiseaseDefaultService treatDiseaseDefaultService = new TreatDiseaseDefaultService();
 
     @BeforeEach
     public void setUp() {
@@ -35,13 +36,13 @@ class TreatDiseaseDefaultServiceTest {
 
     @Test
     void isDoable_TreatDiseaseDefaultService_EmptyCity_ThenFalse() {
-        assertFalse(TreatDiseaseDefaultService.isDoable(player));
+        assertFalse(treatDiseaseDefaultService.isDoable(player));
     }
 
     @Test
     void isDoable_TreatDiseaseDefaultService_BlackVirus_ThenTrue() {
         player.getCity().addVirusBoxes(uncureVirus.getVirusType());
-        assertTrue(TreatDiseaseDefaultService.isDoable(player));
+        assertTrue(treatDiseaseDefaultService.isDoable(player));
     }
 
     @Test
@@ -49,25 +50,25 @@ class TreatDiseaseDefaultServiceTest {
         player.getCity().addVirusBoxes(uncureVirus.getVirusType());
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
-        assertTrue(TreatDiseaseDefaultService.isDoable(player));
+        assertTrue(treatDiseaseDefaultService.isDoable(player));
     }
 
     @Test
     void returnAvailableActions_TreatDiseaseDefaultService_Empty() {
-        assertEquals(0, TreatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
+        assertEquals(0, treatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
     }
 
     @Test
     void returnAvailableActions_TreatDiseaseDefaultService_Blue() {
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
-        assertEquals(1, TreatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
+        assertEquals(1, treatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
     }
 
     @Test
     void returnAvailableActions_TreatDiseaseDefaultService_BlueBlue() {
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
-        assertEquals(1, TreatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
+        assertEquals(1, treatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
     }
 
     @Test
@@ -75,13 +76,13 @@ class TreatDiseaseDefaultServiceTest {
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(uncureVirus.getVirusType());
-        assertEquals(2, TreatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
+        assertEquals(2, treatDiseaseDefaultService.returnAvailableActions(player, virusList).size());
     }
 
     @Test
     void doAction_TreatDiseaseDefaultService_doAction_SuccessWhenHasOneBlue() throws ActionException {
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
-        TreatDiseaseDefaultService.doAction(player, cureVirus);
+        treatDiseaseDefaultService.doAction(player, cureVirus);
         assertEquals(0, player.getCity().getVirusBoxes().size());
     }
 
@@ -90,7 +91,7 @@ class TreatDiseaseDefaultServiceTest {
         // As the virus is researched, then removes all the virus boxes
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
-        TreatDiseaseDefaultService.doAction(player, cureVirus);
+        treatDiseaseDefaultService.doAction(player, cureVirus);
         assertEquals(0, player.getCity().getVirusBoxes().size());
     }
 
@@ -100,7 +101,7 @@ class TreatDiseaseDefaultServiceTest {
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(uncureVirus.getVirusType());
-        TreatDiseaseDefaultService.doAction(player, cureVirus);
+        treatDiseaseDefaultService.doAction(player, cureVirus);
         assertEquals(1, player.getCity().getVirusBoxes().size());
     }
 
@@ -110,7 +111,7 @@ class TreatDiseaseDefaultServiceTest {
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(cureVirus.getVirusType());
         player.getCity().addVirusBoxes(uncureVirus.getVirusType());
-        TreatDiseaseDefaultService.doAction(player, uncureVirus);
+        treatDiseaseDefaultService.doAction(player, uncureVirus);
         assertEquals(2, player.getCity().getVirusBoxes().size());
     }
 
@@ -120,7 +121,7 @@ class TreatDiseaseDefaultServiceTest {
         player.getCity().addVirusBoxes(VirusType.BLUE);
         player.getCity().addVirusBoxes(VirusType.BLACK);
         player.getCity().addVirusBoxes(VirusType.BLACK);
-        TreatDiseaseDefaultService.doAction(player, uncureVirus);
+        treatDiseaseDefaultService.doAction(player, uncureVirus);
         assertEquals(2, player.getCity().getVirusBoxes().size());
     }
 

@@ -16,6 +16,7 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
         name = OPERATIONS_NAME;
         description = OPERATIONS_DESCRIPTION;
         isActionAvailableThisTurn = true;
+        buildResearchCenterDefaultService = new OperationsBuildResearchCenterService();
     }
     @Override
     public boolean canPlayerExecuteActionThisTurn() {
@@ -30,11 +31,6 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
     @Override
     public void actionHasBeenExecuted() {
         isActionAvailableThisTurn = false;
-    }
-
-    @Override
-    public BuildResearchCenterDefaultService getBuildResearchCenter() {
-        return OperationsBuildResearchCenterService.getInstance();
     }
 
     public OperationsFlyFromReserachService specialActionService() {

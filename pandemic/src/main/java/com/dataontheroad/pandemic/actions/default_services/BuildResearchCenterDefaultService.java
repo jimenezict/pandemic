@@ -29,17 +29,6 @@ import static java.util.Objects.isNull;
  */
 public class BuildResearchCenterDefaultService {
 
-    private static BuildResearchCenterDefaultService buildResearchCenterDefaultService;
-
-    protected BuildResearchCenterDefaultService() {
-    }
-
-    public static BuildResearchCenterDefaultService getInstance() {
-        if(isNull(buildResearchCenterDefaultService)) {
-            buildResearchCenterDefaultService = new BuildResearchCenterDefaultService();
-        }
-        return buildResearchCenterDefaultService;
-    }
 
     /**
      * Action will be doable when there is no research center and player has the city card of its location
@@ -47,7 +36,7 @@ public class BuildResearchCenterDefaultService {
      * @param player Player who executes the action
      * @return returns true is a research center can be constructed
      */
-    public static boolean isDoable(Player player) {
+    public boolean isDoable(Player player) {
         City location = player.getCity();
         return !location.getHasCenter() && playerHasCardForHisLocation(player, location);
     }
@@ -57,7 +46,7 @@ public class BuildResearchCenterDefaultService {
      * @param player Player who executes the action
      * @return Returns an action in a list if player can build a research center
      */
-    public static List<Action> returnAvailableActions(Player player) {
+    public List<Action> returnAvailableActions(Player player) {
         return isDoable(player)? new ArrayList<>(Arrays.asList(new BuildResearchCenterAction(player))) : new ArrayList<>();
     }
 
@@ -67,7 +56,7 @@ public class BuildResearchCenterDefaultService {
      * @param player the player
      * @throws ActionException the action exception
      */
-    public static void doAction(Player player) throws ActionException {
+    public void doAction(Player player) throws ActionException {
         City position = player.getCity();
         if(position.getHasCenter()) {
             throw new ActionException(ActionsType.BUILDRESEARCHSTATION, BUILDRESEARCHSTATION_ERROR_CENTER_CREATED);

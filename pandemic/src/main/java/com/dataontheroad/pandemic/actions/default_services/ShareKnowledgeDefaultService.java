@@ -16,18 +16,7 @@ import static java.util.Objects.isNull;
 
 public class ShareKnowledgeDefaultService {
 
-    private static ShareKnowledgeDefaultService shareKnowledgeDefaultService;
-
-    protected ShareKnowledgeDefaultService(){}
-
-    public static ShareKnowledgeDefaultService getInstance() {
-        if(isNull(shareKnowledgeDefaultService)) {
-            shareKnowledgeDefaultService = new ShareKnowledgeDefaultService();
-        }
-        return shareKnowledgeDefaultService;
-    }
-
-    public static boolean isDoable(Player sender, Player receiver, CityCard card) {
+    public boolean isDoable(Player sender, Player receiver, CityCard card) {
         return sender.getCity().equals(receiver.getCity())  // sender and receiver are on the same city
                 && receiver.getListCard().size() < 7        // receiver has space for a new card
                 && sender.getListCard().contains(card)      // sender has the card on his hand
@@ -35,7 +24,7 @@ public class ShareKnowledgeDefaultService {
 
     }
 
-    public static List<Action> returnAvailableActions(Player player, List<Player> playersList) {
+    public List<Action> returnAvailableActions(Player player, List<Player> playersList) {
         // player is not on the playersList
         List<Action> actionList = new ArrayList<>();
         Player sender;
@@ -60,7 +49,7 @@ public class ShareKnowledgeDefaultService {
         return actionList;
     }
 
-    public static void doAction(Player sender, Player receiver, CityCard card) throws ActionException {
+    public void doAction(Player sender, Player receiver, CityCard card) throws ActionException {
         if(!sender.getListCard().contains(card)) {
             throw new ActionException(ActionsType.SHAREKNOWLEDGE, SHAREKNOWLEDGE_ERROR_NO_CARD);
         } else if (receiver.getListCard().size() == 7) {

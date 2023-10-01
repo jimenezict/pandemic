@@ -28,6 +28,8 @@ class FlyCharterTest {
     private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
     Player player;
 
+    FlyCharterDefaultService flyCharterDefaultService = new FlyCharterDefaultService();
+
     @BeforeEach
     public void setPlayer() {
         player = new Player();
@@ -44,20 +46,20 @@ class FlyCharterTest {
 
     @Test
     void isDoable_atlantaIsNotOnPlayerHand_thenFalse() {
-        assertFalse(FlyCharterDefaultService.isDoable(player));
+        assertFalse(flyCharterDefaultService.isDoable(player));
     }
 
     @Test
     void isDoable_atlantaIsOnPlayerHand_thenTrue() {
         player.getListCard().add(createCityCard(atlanta));
-        assertTrue(FlyCharterDefaultService.isDoable(player));
+        assertTrue(flyCharterDefaultService.isDoable(player));
     }
 
     @Test
     void doAction_atlantaIsNotOnPlayerHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyCharterDefaultService.doAction(player, tokio));
+                        () -> flyCharterDefaultService.doAction(player, tokio));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
         assertTrue(actualMessage.contains(FLYCHARTER_ERROR_NO_CARD));
@@ -69,7 +71,7 @@ class FlyCharterTest {
 
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyCharterDefaultService.doAction(player, atlanta));
+                        () -> flyCharterDefaultService.doAction(player, atlanta));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYCHARTER.label));
         assertTrue(actualMessage.contains(FLYCHARTER_ERROR_INCORRECT_DESTINATION));
@@ -78,7 +80,7 @@ class FlyCharterTest {
     @Test
     void doAction_playerHasMoveToTokioAndAtlantaCardIsNotOnHand() throws ActionException  {
         player.getListCard().add(createCityCard(atlanta));
-        FlyCharterDefaultService.doAction(player, tokio);
+        flyCharterDefaultService.doAction(player, tokio);
         assertEquals(player.getCity(), tokio);
         assertFalse(player.getListCard().contains(createCityCard(atlanta)));
     }

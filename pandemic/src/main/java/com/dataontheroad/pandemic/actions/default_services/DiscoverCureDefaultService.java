@@ -19,25 +19,13 @@ import static org.springframework.util.CollectionUtils.isEmpty;
 
 public class DiscoverCureDefaultService {
 
-    private static DiscoverCureDefaultService discoverCureDefaultService;
-
-    protected DiscoverCureDefaultService() {
-    }
-
-    public static DiscoverCureDefaultService getInstance() {
-        if(isNull(discoverCureDefaultService)) {
-            discoverCureDefaultService = new DiscoverCureDefaultService();
-        }
-        return discoverCureDefaultService;
-    }
-
-    public static boolean isDoable(Player player, Virus virus) {
+    public boolean isDoable(Player player, Virus virus) {
         return player.getCity().getHasCenter()
                 && !virus.getCureDiscovered()
                 && playerHasEnoughCards(player, virus.getVirusType());
     }
 
-    public static List<Action> returnAvailableActions(Player player, List<Virus> virusList) {
+    public List<Action> returnAvailableActions(Player player, List<Virus> virusList) {
         List<Virus> virus = virusList
                 .stream()
                 .filter(x -> isDoable(player, x))
@@ -46,7 +34,7 @@ public class DiscoverCureDefaultService {
         return !isEmpty(virus) ? new ArrayList<>(Arrays.asList(new DiscoverCureAction(player, virus.get(0)))) : new ArrayList<>();
     }
 
-    public static void doAction(Player player, Virus virus) throws ActionException {
+    public void doAction(Player player, Virus virus) throws ActionException {
         if(!player.getCity().getHasCenter()) {
             throw new ActionException(ActionsType.DISCOVERCURE, DISCOVERCURE_ERROR_NO_RESEARCH_STATION);
         } else if (virus.getCureDiscovered()) {
