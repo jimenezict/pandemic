@@ -12,11 +12,7 @@ public class ResearchPlayer extends Player {
         color = RESEARCHER_COLOR;
         name = RESEARCHER_NAME;
         description = RESEARCHER_DESCRIPTION;
-    }
-
-    @Override
-    public ShareKnowledgeDefaultService getShareKnowledge() {
-        return ShareKnowledgeResearchService.getInstance();
+        shareKnowledgeDefaultService = new ShareKnowledgeResearchService();
     }
 
 }

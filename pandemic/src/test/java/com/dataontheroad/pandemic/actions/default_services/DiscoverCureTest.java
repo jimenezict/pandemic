@@ -34,6 +34,8 @@ class DiscoverCureTest {
     private Virus virusNotDiscovered = new Virus(VirusType.BLUE);
     private Virus virusDiscovered = new Virus(VirusType.BLACK);
 
+    private DiscoverCureDefaultService discoverCureDefaultService = new DiscoverCureDefaultService();
+
     @BeforeEach
     public void setPlayer() {
         player = new Player();
@@ -49,17 +51,17 @@ class DiscoverCureTest {
     @Test
     void isDoable_cityHasNoResearchCenter_thenFalse() {
         player.setCity(calcuta);
-        assertFalse(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
+        assertFalse(discoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
     void isDoable_cityHasResearchCenterCureIsDiscovered_thenFalse() {
-        assertFalse(DiscoverCureDefaultService.isDoable(player, virusDiscovered));
+        assertFalse(discoverCureDefaultService.isDoable(player, virusDiscovered));
     }
 
     @Test
     void isDoable_cityHasResearchCenterCureIsNotDiscoveredHasNoCards_thenFalse() {
-        assertFalse(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
+        assertFalse(discoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -68,7 +70,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
-        assertFalse(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
+        assertFalse(discoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -80,7 +82,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(essen));
         listCard.add(createCityCard(atlanta));
 
-        assertTrue(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
+        assertTrue(discoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -94,7 +96,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(tokio));
         listCard.add(createCityCard(calcuta));
 
-        assertTrue(DiscoverCureDefaultService.isDoable(player, virusNotDiscovered));
+        assertTrue(discoverCureDefaultService.isDoable(player, virusNotDiscovered));
     }
 
     @Test
@@ -102,7 +104,7 @@ class DiscoverCureTest {
         player.setCity(calcuta);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> DiscoverCureDefaultService.doAction(player, virusNotDiscovered));
+                        () -> discoverCureDefaultService.doAction(player, virusNotDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
         assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_NO_RESEARCH_STATION));
@@ -112,7 +114,7 @@ class DiscoverCureTest {
     void doAction_originCityHasResearchCenterVirusDiscovered_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> DiscoverCureDefaultService.doAction(player, virusDiscovered));
+                        () -> discoverCureDefaultService.doAction(player, virusDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
         assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_CURE_DISCOVERED));
@@ -126,7 +128,7 @@ class DiscoverCureTest {
 
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> DiscoverCureDefaultService.doAction(player, virusNotDiscovered));
+                        () -> discoverCureDefaultService.doAction(player, virusNotDiscovered));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DISCOVERCURE.label));
         assertTrue(actualMessage.contains(DISCOVERCURE_ERROR_NO_CARD));
@@ -141,7 +143,7 @@ class DiscoverCureTest {
         listCard.add(createCityCard(essen));
         listCard.add(createCityCard(atlanta));
 
-        DiscoverCureDefaultService.doAction(player, virusNotDiscovered);
+        discoverCureDefaultService.doAction(player, virusNotDiscovered);
         assertTrue(virusDiscovered.getCureDiscovered());
     }
 }

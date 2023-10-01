@@ -15,10 +15,8 @@ public class MedicPlayer extends Player {
         color = MEDIC_COLOR;
         name = MEDIC_NAME;
         description = MEDIC_DESCRIPTION;
+        treatDiseaseDefaultService = new TreatDiseaseMedicService();
     }
-
-    @Override
-    public TreatDiseaseDefaultService getTreatDisease() { return TreatDiseaseMedicService.getInstance();}
 
     @Override
     public void executeAfterAction(List<Virus> virusList) {

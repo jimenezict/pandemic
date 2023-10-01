@@ -16,23 +16,11 @@ import static java.util.Objects.isNull;
 
 public class TreatDiseaseDefaultService {
 
-    private static TreatDiseaseDefaultService treatDiseaseDefaultService;
-
-    protected TreatDiseaseDefaultService() {
-    }
-
-    public static TreatDiseaseDefaultService getInstance() {
-        if(isNull(treatDiseaseDefaultService)) {
-            treatDiseaseDefaultService = new TreatDiseaseDefaultService();
-        }
-        return treatDiseaseDefaultService;
-    }
-
-    public static boolean isDoable(Player player) {
+    public boolean isDoable(Player player) {
         return !player.getCity().getVirusBoxes().isEmpty();
     }
 
-    public static List<Action> returnAvailableActions(Player player, List<Virus> virusList) {
+    public List<Action> returnAvailableActions(Player player, List<Virus> virusList) {
         City position = player.getCity();
         return position.getVirusBoxes().stream().distinct().map(virus -> {
             Virus virusToReturn = virusList.get(virusList.indexOf(new Virus(virus)));
@@ -40,7 +28,7 @@ public class TreatDiseaseDefaultService {
         }).collect(Collectors.toList());
     }
 
-    public static void doAction(Player player, Virus virus) throws ActionException {
+    public void doAction(Player player, Virus virus) throws ActionException {
         City position = player.getCity();
         if(!position.getVirusBoxes().contains(virus.getVirusType())) {
             throw new ActionException(ActionsType.TREATDISEASE, TREATDISEASE_ERROR_DO_NOT_EXISTS_VIRUS);

@@ -16,7 +16,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlyBetweenResearchCenterTest {
+class   FlyBetweenResearchCenterTest {
 
     Player player;
 
@@ -24,6 +24,7 @@ class FlyBetweenResearchCenterTest {
 
     private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
     private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    FlyShuttleDefaultService flyShuttleDefaultService = new FlyShuttleDefaultService();
 
     @BeforeEach
     public void setPlayer() {
@@ -33,27 +34,27 @@ class FlyBetweenResearchCenterTest {
 
     @Test
     void isDoable_originCityHasNoResearchCenter_thenFalse() {
-        assertFalse(FlyShuttleDefaultService.isDoable(player, calculta));
+        assertFalse(flyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
     void isDoable_originCityHasResearchCenterButNotDestiny_thenFalse() {
         newyork.setHasCenter(TRUE);
-        assertFalse(FlyShuttleDefaultService.isDoable(player, calculta));
+        assertFalse(flyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
     void isDoable_originCityHasResearchCenterAndDestiny_thenTrue() {
         newyork.setHasCenter(TRUE);
         calculta.setHasCenter(TRUE);
-        assertTrue(FlyShuttleDefaultService.isDoable(player, calculta));
+        assertTrue(flyShuttleDefaultService.isDoable(player, calculta));
     }
 
     @Test
     void doAction_originCityHasNoResearchCenter_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyShuttleDefaultService.doAction(player, calculta));
+                        () -> flyShuttleDefaultService.doAction(player, calculta));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHUTTLEFLIGHT.label));
         assertTrue(actualMessage.contains(SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION));
@@ -64,7 +65,7 @@ class FlyBetweenResearchCenterTest {
         newyork.setHasCenter(TRUE);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyShuttleDefaultService.doAction(player, calculta));
+                        () -> flyShuttleDefaultService.doAction(player, calculta));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.SHUTTLEFLIGHT.label));
         assertTrue(actualMessage.contains(SHUTTLEFLIGHT_ERROR_DESTINY_NO_RESEARCH_STATION));

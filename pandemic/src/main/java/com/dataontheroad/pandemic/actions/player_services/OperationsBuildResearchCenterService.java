@@ -19,35 +19,21 @@ import static java.util.Objects.isNull;
 
 public class OperationsBuildResearchCenterService extends BuildResearchCenterDefaultService {
 
-    private static OperationsBuildResearchCenterService operationsBuildResearchCenterService;
 
-    private OperationsBuildResearchCenterService() {
-        super();
-    }
-
-    public static OperationsBuildResearchCenterService getInstance() {
-        if(isNull(operationsBuildResearchCenterService)) {
-            operationsBuildResearchCenterService = new OperationsBuildResearchCenterService();
-        }
-        return operationsBuildResearchCenterService;
-    }
-
-    public static boolean isDoable(Player player) {
+    public boolean isDoable(Player player) {
         return !player.getCity().getHasCenter();
     }
 
 
-    public static List<Action> returnAvailableActions(Player player) {
+    public List<Action> returnAvailableActions(Player player) {
         return isDoable(player)? new ArrayList<>(Arrays.asList(new BuildResearchCenterAction(player))) : new ArrayList<>();
     }
 
 
-    public static void doAction(Player player) throws ActionException {
+    public void doAction(Player player) throws ActionException {
         City position = player.getCity();
         if(position.getHasCenter()) {
             throw new ActionException(ActionsType.BUILDRESEARCHSTATION, BUILDRESEARCHSTATION_ERROR_CENTER_CREATED);
-        } else if (!playerHasCardForHisLocation(player, position)) {
-            throw new ActionException(ActionsType.BUILDRESEARCHSTATION, BUILDRESEARCHSTATION_ERROR_NO_CARD);
         }
         position.setHasCenter(Boolean.TRUE);
     }

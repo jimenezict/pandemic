@@ -17,28 +17,15 @@ import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCa
 import static java.util.Objects.isNull;
 
 public class FlyCharterDefaultService {
-
-    private static FlyCharterDefaultService flyCharterDefaultService;
-
-    private FlyCharterDefaultService() {
-    }
-
-    public static FlyCharterDefaultService getInstance() {
-        if(isNull(flyCharterDefaultService)) {
-            flyCharterDefaultService = new FlyCharterDefaultService();
-        }
-        return flyCharterDefaultService;
-    }
-
-    public static boolean isDoable(Player player) {
+    public boolean isDoable(Player player) {
         return player.getListCard().contains(createCityCard(player.getCity()));
     }
 
-    public static List<Action> returnAvailableActions(Player player) {
+    public List<Action> returnAvailableActions(Player player) {
         return isDoable(player) ? new ArrayList<>(Arrays.asList(new FlyCharterAction(player))) : new ArrayList<>();
     }
 
-    public static void doAction(Player player, City destination) throws ActionException {
+    public void doAction(Player player, City destination) throws ActionException {
         if(!player.getListCard().contains(createCityCard(player.getCity()))) {
             throw new ActionException(ActionsType.FLYCHARTER, FLYCHARTER_ERROR_NO_CARD);
         } else if(player.getCity().equals(destination)) {

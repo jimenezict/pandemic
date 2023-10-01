@@ -12,20 +12,7 @@ import static java.util.Objects.isNull;
 
 public class TreatDiseaseMedicService extends TreatDiseaseDefaultService{
 
-    private static TreatDiseaseMedicService treatDiseaseMedicService;
-
-    private TreatDiseaseMedicService() {
-        super();
-    }
-
-    public static TreatDiseaseMedicService getInstance() {
-        if(isNull(treatDiseaseMedicService)) {
-            treatDiseaseMedicService = new TreatDiseaseMedicService();
-        }
-        return treatDiseaseMedicService;
-    }
-
-    public static void doAction(MedicPlayer player, Virus virus) throws ActionException {
+    public void doAction(MedicPlayer player, Virus virus) throws ActionException {
         City position = player.getCity();
         if(!position.getVirusBoxes().contains(virus.getVirusType())) {
             throw new ActionException(ActionsType.TREATDISEASE, TREATDISEASE_ERROR_DO_NOT_EXISTS_VIRUS);

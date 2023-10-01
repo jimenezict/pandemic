@@ -27,6 +27,8 @@ class FlyDirectCityDefaultServiceTest {
     private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
     Player player;
 
+    FlyDirectCityDefaultService flyDirectCityDefaultService = new FlyDirectCityDefaultService();
+
     @BeforeEach
     public void setPlayer() {
         player = new Player();
@@ -43,19 +45,19 @@ class FlyDirectCityDefaultServiceTest {
 
     @Test
     void isDoable_tokioIsNotOnPlayerHand_thenFalse() {
-        assertFalse(FlyDirectCityDefaultService.isDoable(player, tokio));
+        assertFalse(flyDirectCityDefaultService.isDoable(player, tokio));
     }
 
     @Test
     void isDoable_limaIsOnPlayerHand_thenTrue() {
-        assertTrue(FlyDirectCityDefaultService.isDoable(player, lima));
+        assertTrue(flyDirectCityDefaultService.isDoable(player, lima));
     }
 
     @Test
     void doAction_tokioIsNotOnPlayerHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> FlyDirectCityDefaultService.doAction(player, tokio));
+                        () -> flyDirectCityDefaultService.doAction(player, tokio));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.FLYDIRECT.label));
         assertTrue(actualMessage.contains(FLYDIRECT_ERROR_NO_CARD));
@@ -63,7 +65,7 @@ class FlyDirectCityDefaultServiceTest {
 
     @Test
     void doAction_playerHasMoveToLima() throws ActionException  {
-        FlyDirectCityDefaultService.doAction(player, lima);
+        flyDirectCityDefaultService.doAction(player, lima);
         assertEquals(player.getCity(), lima);
         assertFalse(player.getListCard().contains(createCityCard(lima)));
     }

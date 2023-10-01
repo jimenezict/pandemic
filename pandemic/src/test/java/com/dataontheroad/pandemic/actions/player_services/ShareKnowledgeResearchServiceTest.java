@@ -39,6 +39,8 @@ class ShareKnowledgeResearchServiceTest {
     private City paris = new City("Paris", VirusType.BLUE, emptyNodeCityConnection);
     private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
 
+    ShareKnowledgeResearchService shareKnowledgeResearchService = new ShareKnowledgeResearchService();
+
     @BeforeEach
     public void setPlayer() {
         researchPlayer = new ResearchPlayer();
@@ -66,17 +68,17 @@ class ShareKnowledgeResearchServiceTest {
 
     @Test
     void isDoable_sharingRightCardOnRightCity_thenTrue() {
-        assertTrue(ShareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(newyork)));
+        assertTrue(shareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(newyork)));
     }
 
     @Test
     void isDoable_sharingCardWhichIsNotOnTheSendersHand_thenFalse() {
-        assertFalse(ShareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(cairo)));
+        assertFalse(shareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(cairo)));
     }
 
     @Test
     void isDoable_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity_thenFalse() {
-        assertTrue(ShareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(calculta)));
+        assertTrue(shareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(calculta)));
     }
 
     @Test
@@ -86,20 +88,20 @@ class ShareKnowledgeResearchServiceTest {
         cardList.add(createCityCard(madrid));
         cardList.add(createCityCard(paris));
 
-        assertFalse(ShareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(newyork)));
+        assertFalse(shareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(newyork)));
     }
 
     @Test
     void isDoable_sharingRightCardOnRightCityButReceiverIsOnAnotherCity_thenFalse() {
         receiver.setCity(madrid);
-        assertFalse(ShareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(newyork)));
+        assertFalse(shareKnowledgeResearchService.isDoable(researchPlayer, receiver, createCityCard(newyork)));
     }
 
     @Test
     void doAction_sharingCardWhichIsNotOnTheSendersHand_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> ShareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(cairo)));
+                        () -> shareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(cairo)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(SHAREKNOWLEDGE.label));
         assertTrue(actualMessage.contains(SHAREKNOWLEDGE_ERROR_NO_CARD));
@@ -115,7 +117,7 @@ class ShareKnowledgeResearchServiceTest {
 
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> ShareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(newyork)));
+                        () -> shareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(newyork)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(SHAREKNOWLEDGE.label));
         assertTrue(actualMessage.contains(SHAREKNOWLEDGE_ERROR_OVERCAPACITY));
@@ -126,7 +128,7 @@ class ShareKnowledgeResearchServiceTest {
         receiver.setCity(madrid);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> ShareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(newyork)));
+                        () -> shareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(newyork)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(SHAREKNOWLEDGE.label));
         assertTrue(actualMessage.contains(SHAREKNOWLEDGE_ERROR_NOT_SAME_CITY));
@@ -135,7 +137,7 @@ class ShareKnowledgeResearchServiceTest {
     @Test
     void doAction_transferCard() throws ActionException {
         CityCard newyorkCard = createCityCard(newyork);
-        ShareKnowledgeDefaultService.doAction(researchPlayer, receiver, newyorkCard);
+        shareKnowledgeResearchService.doAction(researchPlayer, receiver, newyorkCard);
         assertFalse(researchPlayer.getListCard().contains(newyorkCard));
         assertTrue(receiver.getListCard().contains(newyorkCard));
     }
@@ -144,7 +146,7 @@ class ShareKnowledgeResearchServiceTest {
     void doAction_sharingCardWhichIsOnTheSendersHandButIsNotOnCurrentCity() throws ActionException {
         int initialNumberResearcPlayer = researchPlayer.getListCard().size();
         int initialNumberReceiver = receiver.getListCard().size();
-        ShareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(calculta));
+        shareKnowledgeResearchService.doAction(researchPlayer, receiver, createCityCard(calculta));
 
         assertEquals(initialNumberResearcPlayer - 1, researchPlayer.getListCard().size());
         assertEquals(initialNumberReceiver + 1, receiver.getListCard().size());
@@ -153,7 +155,7 @@ class ShareKnowledgeResearchServiceTest {
     @Test
     void returnAvailableActions() {
         //both in NewYork, with 4 cards each one
-        List<Action> actionsAvailable = ShareKnowledgeResearchService.returnAvailableActions(researchPlayer, Arrays.asList(receiver));
+        List<Action> actionsAvailable = shareKnowledgeResearchService.returnAvailableActions(researchPlayer, Arrays.asList(receiver));
         assertEquals(8, actionsAvailable.stream().filter(action -> SHAREKNOWLEDGE.equals(action.getActionsType())).count());
         assertEquals(4, actionsAvailable.stream().filter(action -> receiver.equals(action.getPlayer())).count());
         assertEquals(4, actionsAvailable.stream().filter(action -> researchPlayer.equals(action.getPlayer())).count());

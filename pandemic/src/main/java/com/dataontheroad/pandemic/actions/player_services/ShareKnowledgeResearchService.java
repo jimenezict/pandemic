@@ -18,26 +18,13 @@ import static java.util.Objects.isNull;
 
 public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService {
 
-    private static ShareKnowledgeResearchService shareKnowledgeResearchService;
-
-    private ShareKnowledgeResearchService(){
-        super();
-    }
-
-    public static ShareKnowledgeResearchService getInstance() {
-        if(isNull(shareKnowledgeResearchService)) {
-            shareKnowledgeResearchService = new ShareKnowledgeResearchService();
-        }
-        return shareKnowledgeResearchService;
-    }
-
-    public static boolean isDoable(Player sender, Player receiver, CityCard card) {
+    public boolean isDoable(Player sender, Player receiver, CityCard card) {
         return sender.getCity().equals(receiver.getCity())  // sender and receiver are on the same city
                 && receiver.getListCard().size() < 7        // receiver has space for a new card
                 && sender.getListCard().contains(card);     // sender has the card on his hand
     }
 
-    public static List<Action> returnAvailableActions(ResearchPlayer researchPlayer, List<Player> playersList) {
+    public List<Action> returnAvailableActions(ResearchPlayer researchPlayer, List<Player> playersList) {
         List<Action> actionList = new ArrayList<>();
 
         //when researchPlayer is the sender and any of the others on the same city are the receivers
@@ -62,7 +49,7 @@ public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService 
         return actionList;
     }
 
-    public static void doAction(Player sender, Player receiver, CityCard card) throws ActionException {
+    public void doAction(Player sender, Player receiver, CityCard card) throws ActionException {
         if(!sender.getListCard().contains(card)) {
             throw new ActionException(ActionsType.SHAREKNOWLEDGE, SHAREKNOWLEDGE_ERROR_NO_CARD);
         } else if (receiver.getListCard().size() == 7) {

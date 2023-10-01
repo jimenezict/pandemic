@@ -33,6 +33,8 @@ class BuildResearchCenterDefaultServiceTest {
 
     Action action;
 
+    private BuildResearchCenterDefaultService buildResearchCenterDefaultService= new BuildResearchCenterDefaultService();
+
     @BeforeEach
     public void setPlayer() {
         player = new Player();
@@ -49,18 +51,18 @@ class BuildResearchCenterDefaultServiceTest {
     @Test
     void isDoable_cityHasAlreadyResearchCenter_thenFalse() {
         newyork.setHasCenter(TRUE);
-        assertFalse(BuildResearchCenterDefaultService.isDoable(player));
+        assertFalse(buildResearchCenterDefaultService.isDoable(player));
     }
 
     @Test
     void isDoable_cityHasNoResearchCenter_HasNoCardForHisPosition_thenFalse() {
         player.setCity(tokio);
-        assertFalse(BuildResearchCenterDefaultService.isDoable(player));
+        assertFalse(buildResearchCenterDefaultService.isDoable(player));
     }
 
     @Test
     void isDoable_cityHasNoResearchCenter_HasCardForHisPosition_thenFalse() {
-        assertTrue(BuildResearchCenterDefaultService.isDoable(player));
+        assertTrue(buildResearchCenterDefaultService.isDoable(player));
     }
 
     @Test
@@ -68,7 +70,7 @@ class BuildResearchCenterDefaultServiceTest {
         newyork.setHasCenter(TRUE);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> BuildResearchCenterDefaultService.doAction(player));
+                        () -> buildResearchCenterDefaultService.doAction(player));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHSTATION.label));
         assertTrue(actualMessage.contains(BUILDRESEARCHSTATION_ERROR_CENTER_CREATED));
@@ -79,7 +81,7 @@ class BuildResearchCenterDefaultServiceTest {
         player.setCity(tokio);
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> BuildResearchCenterDefaultService.doAction(player));
+                        () -> buildResearchCenterDefaultService.doAction(player));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.BUILDRESEARCHSTATION.label));
         assertTrue(actualMessage.contains(BUILDRESEARCHSTATION_ERROR_NO_CARD));
@@ -87,7 +89,7 @@ class BuildResearchCenterDefaultServiceTest {
 
     @Test
     void doAction_cityHasNoResearchCenter_createCenterAndRemoveCard() throws ActionException {
-        BuildResearchCenterDefaultService.doAction(player);
+        buildResearchCenterDefaultService.doAction(player);
         assertTrue(newyork.getHasCenter());
         assertFalse(player.getListCard().contains(createCityCard(newyork)));
     }

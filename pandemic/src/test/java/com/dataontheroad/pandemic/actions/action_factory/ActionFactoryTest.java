@@ -39,6 +39,15 @@ class ActionFactoryTest {
     private Virus yellowVirus = new Virus(VirusType.YELLOW);
     List<Virus> virusList;
 
+    BuildResearchCenterDefaultService buildResearchCenterDefaultService = new BuildResearchCenterDefaultService();
+    DiscoverCureDefaultService discoverCureDefaultService = new DiscoverCureDefaultService();
+    FlyCharterDefaultService flyCharterDefaultService = new FlyCharterDefaultService();
+    FlyDirectCityDefaultService flyDirectCityDefaultService = new FlyDirectCityDefaultService();
+    FlyShuttleDefaultService flyShuttleDefaultService = new FlyShuttleDefaultService();
+    DriveFerryDefaultService driveFerryDefaultService = new DriveFerryDefaultService();
+    ShareKnowledgeDefaultService shareKnowledgeDefaultService = new ShareKnowledgeDefaultService();
+    TreatDiseaseDefaultService treatDiseaseDefaultService = new TreatDiseaseDefaultService();
+
 
     @BeforeEach
     public void setUp() {
@@ -53,7 +62,7 @@ class ActionFactoryTest {
 
     @Test
     void buildResearchCenterAction_isDoable_returnsAction() {
-        List<Action> availableActions = BuildResearchCenterDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = buildResearchCenterDefaultService.returnAvailableActions(player);
         assertEquals(1, availableActions.size());
         assertEquals(BUILDRESEARCHSTATION, availableActions.get(0).actionsType);
         assertEquals(BUILDRESEARCHSTATION_ACTION + "New York", availableActions.get(0).actionPrompt());
@@ -62,7 +71,7 @@ class ActionFactoryTest {
     @Test
     void buildResearchCenterAction_isNotDoable_returnsAction() {
         player.getCity().setHasCenter(Boolean.TRUE);
-        List<Action> availableActions = BuildResearchCenterDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = buildResearchCenterDefaultService.returnAvailableActions(player);
         assertTrue(isEmpty(availableActions));
     }
 
@@ -75,7 +84,7 @@ class ActionFactoryTest {
         listCard.add(createCityCard(atlanta));
         player.getCity().setHasCenter(Boolean.TRUE);
 
-        List<Action> availableActions = DiscoverCureDefaultService.returnAvailableActions(player, virusList);
+        List<Action> availableActions = discoverCureDefaultService.returnAvailableActions(player, virusList);
         assertEquals(1, availableActions.size());
         assertEquals(DISCOVERCURE, availableActions.get(0).actionsType);
         assertEquals(DISCOVERCURE_ACTION + "BLUE", availableActions.get(0).actionPrompt());
@@ -90,7 +99,7 @@ class ActionFactoryTest {
         listCard.add(createCityCard(atlanta));
         player.getCity().setHasCenter(Boolean.FALSE);
 
-        List<Action> availableActions = DiscoverCureDefaultService.returnAvailableActions(player, virusList);
+        List<Action> availableActions = discoverCureDefaultService.returnAvailableActions(player, virusList);
         assertEquals(0, availableActions.size());
     }
 
@@ -104,13 +113,13 @@ class ActionFactoryTest {
         player.getCity().setHasCenter(Boolean.TRUE);
         virusList.get(0).cureHasBeenDiscovered();
 
-        List<Action> availableActions = DiscoverCureDefaultService.returnAvailableActions(player, virusList);
+        List<Action> availableActions = discoverCureDefaultService.returnAvailableActions(player, virusList);
         assertEquals(0, availableActions.size());
     }
 
     @Test
     void flyCharter_playerHasCityCardThenCanFlyAnywhere_returnsAction() {
-        List<Action> availableActions = FlyCharterDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = flyCharterDefaultService.returnAvailableActions(player);
         assertEquals(1, availableActions.size());
         assertEquals(FLYCHARTER, availableActions.get(0).actionsType);
         assertEquals(FLYCHARTER_ACTION, availableActions.get(0).actionPrompt());
@@ -119,7 +128,7 @@ class ActionFactoryTest {
     @Test
     void flyCharter_playerHasNoCityCardThenCannotFlyAnywhere_returnsAction() {
         player.setCity(madrid);
-        List<Action> availableActions = FlyCharterDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = flyCharterDefaultService.returnAvailableActions(player);
         assertEquals(0, availableActions.size());
     }
 
@@ -133,7 +142,7 @@ class ActionFactoryTest {
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
-        List<Action> availableActions = FlyDirectCityDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = flyDirectCityDefaultService.returnAvailableActions(player);
         assertEquals(3, availableActions.size());
         assertEquals(FLYDIRECT, availableActions.get(0).actionsType);
         assertEquals(FLYDIRECT_ACTION + "Essen", availableActions.get(0).actionPrompt());
@@ -146,7 +155,7 @@ class ActionFactoryTest {
         listCard.add(createCityCard(paris));
         listCard.add(createCityCard(madrid));
 
-        List<Action> availableActions = FlyDirectCityDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = flyDirectCityDefaultService.returnAvailableActions(player);
         assertEquals(2, availableActions.size());
         assertEquals(FLYDIRECT, availableActions.get(0).actionsType);
         assertEquals(FLYDIRECT_ACTION + "Paris", availableActions.get(0).actionPrompt());
@@ -158,7 +167,7 @@ class ActionFactoryTest {
         newyork.setHasCenter(Boolean.FALSE);
         essen.setHasCenter(Boolean.TRUE);
         List<City> citiesWithLabs = Arrays.asList(calcuta, essen);
-        List<Action> availableActions = FlyShuttleDefaultService.returnAvailableActions(player, citiesWithLabs);
+        List<Action> availableActions = flyShuttleDefaultService.returnAvailableActions(player, citiesWithLabs);
         assertEquals(0, availableActions.size());
     }
 
@@ -168,17 +177,17 @@ class ActionFactoryTest {
         newyork.setHasCenter(Boolean.TRUE);
         essen.setHasCenter(Boolean.TRUE);
         List<City> citiesWithLabs = Arrays.asList(calcuta, essen);
-        List<Action> availableActions = FlyShuttleDefaultService.returnAvailableActions(player, citiesWithLabs);
+        List<Action> availableActions = flyShuttleDefaultService.returnAvailableActions(player, citiesWithLabs);
         assertEquals(2, availableActions.size());
         assertEquals(SHUTTLEFLIGHT, availableActions.get(0).actionsType);
         assertEquals(SHUTTLEFLIGHT_ACTION + "Calcuta", availableActions.get(0).actionPrompt());
     }
 
     @Test
-    void moveNodeCity_returnsActions() {
+    void driveFerry_returnsActions() {
         // player is in Paris and can travel to madrid or essen
         player.setCity(paris);
-        List<Action> availableActions = DriveFerryDefaultService.returnAvailableActions(player);
+        List<Action> availableActions = driveFerryDefaultService.returnAvailableActions(player);
         assertEquals(2, availableActions.size());
         assertEquals(DRIVEFERRY, availableActions.get(0).actionsType);
         assertEquals(DRIVEFERRY_ACTION + "Essen", availableActions.get(0).actionPrompt());
@@ -199,7 +208,7 @@ class ActionFactoryTest {
         players.add(player2);
         players.add(player3);
 
-        List<Action> availableActions = ShareKnowledgeDefaultService.returnAvailableActions(player1, players);
+        List<Action> availableActions = shareKnowledgeDefaultService.returnAvailableActions(player1, players);
         assertEquals(2, availableActions.size());
         assertEquals(SHAREKNOWLEDGE, availableActions.get(0).actionsType);
         assertEquals(player1, ((ShareKnowledgeAction) availableActions.get(0)).getSender());
@@ -224,7 +233,7 @@ class ActionFactoryTest {
         players.add(player2);
         players.add(player3);
 
-        List<Action> availableActions = ShareKnowledgeDefaultService.returnAvailableActions(player1, players);
+        List<Action> availableActions = shareKnowledgeDefaultService.returnAvailableActions(player1, players);
         assertEquals(2, availableActions.size());
         assertEquals(SHAREKNOWLEDGE, availableActions.get(0).actionsType);
         assertEquals(player3, ((ShareKnowledgeAction) availableActions.get(0)).getSender());
@@ -247,14 +256,14 @@ class ActionFactoryTest {
         players.add(player2);
         players.add(player3);
 
-        List<Action> availableActions = ShareKnowledgeDefaultService.returnAvailableActions(player1, players);
+        List<Action> availableActions = shareKnowledgeDefaultService.returnAvailableActions(player1, players);
         assertEquals(0, availableActions.size());
     }
 
     @Test
     void treatDiseaseAction_oneBlueDiseaseInNewYork_returnActions1Action() {
         newyork.addVirusBoxes(VirusType.BLUE);
-        List<Action> availableActions = TreatDiseaseDefaultService.returnAvailableActions(player, virusList);
+        List<Action> availableActions = treatDiseaseDefaultService.returnAvailableActions(player, virusList);
         assertEquals(1, availableActions.size());
         assertEquals(TREATDISEASE,availableActions.get(0).getActionsType());
         assertTrue(availableActions.get(0).actionPrompt().contains("BLUE"));
@@ -264,7 +273,7 @@ class ActionFactoryTest {
     void treatDiseaseAction_twoBlueDiseaseInNewYork_returnActions1Action() {
         newyork.addVirusBoxes(VirusType.BLUE);
         newyork.addVirusBoxes(VirusType.BLUE);
-        List<Action> availableActions = TreatDiseaseDefaultService.returnAvailableActions(player, virusList);
+        List<Action> availableActions = treatDiseaseDefaultService.returnAvailableActions(player, virusList);
         assertEquals(1, availableActions.size());
         assertEquals(TREATDISEASE,availableActions.get(0).getActionsType());
         assertTrue(availableActions.get(0).actionPrompt().contains("BLUE"));
@@ -275,7 +284,7 @@ class ActionFactoryTest {
         newyork.addVirusBoxes(VirusType.BLUE);
         newyork.addVirusBoxes(VirusType.BLUE);
         newyork.addVirusBoxes(VirusType.BLACK);
-        List<Action> availableActions = TreatDiseaseDefaultService.returnAvailableActions(player, virusList);
+        List<Action> availableActions = treatDiseaseDefaultService.returnAvailableActions(player, virusList);
         assertEquals(2, availableActions.size());
         assertEquals(TREATDISEASE,availableActions.get(0).getActionsType());
         assertEquals(TREATDISEASE,availableActions.get(1).getActionsType());

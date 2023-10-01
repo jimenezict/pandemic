@@ -15,30 +15,18 @@ import static java.util.Objects.isNull;
 
 public class DriveFerryDefaultService {
 
-    private static DriveFerryDefaultService driveFerryDefaultService;
-
-    private DriveFerryDefaultService() {
-    }
-
-    public static DriveFerryDefaultService getInstance() {
-        if(isNull(driveFerryDefaultService)) {
-            driveFerryDefaultService = new DriveFerryDefaultService();
-        }
-        return driveFerryDefaultService;
-    }
-
-    public static boolean isDoable(Player player, City destination) {
+    public boolean isDoable(Player player, City destination) {
         return player.getCity().getNodeCityConnection().contains(destination);
     }
 
-    public static List<Action> returnAvailableActions(Player player) {
+    public List<Action> returnAvailableActions(Player player) {
         return player.getCity().getNodeCityConnection().stream()
                 .filter(destination -> !player.getCity().equals(destination))
                 .map(destination -> new DriveFerryAction(player, destination))
                 .collect(Collectors.toList());
     }
 
-    public static void doAction(Player player, City destination) throws ActionException {
+    public void doAction(Player player, City destination) throws ActionException {
         if(!player.getCity().getNodeCityConnection().contains(destination)) {
             throw new ActionException(ActionsType.DRIVEFERRY, DRIVEFERRY_ERROR_NO_CONNECTION);
         }

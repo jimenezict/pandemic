@@ -17,7 +17,7 @@ class TreatDiseaseMedicServiceTest {
 
     private MedicPlayer medic;
     private City atlanta = new City("Atlanta", VirusType.BLUE);
-    private static TreatDiseaseMedicService treatDiseaseMedicService;
+    private TreatDiseaseMedicService treatDiseaseMedicService = new TreatDiseaseMedicService();
 
     @BeforeEach
     void setUp() {
@@ -29,14 +29,14 @@ class TreatDiseaseMedicServiceTest {
 
     @Test
     void doAction_remove2BlueVirus() throws ActionException {
-        TreatDiseaseMedicService.doAction(medic, new Virus(VirusType.BLUE));
+        treatDiseaseMedicService.doAction(medic, new Virus(VirusType.BLUE));
         assertEquals(1, atlanta.getVirusBoxes().size());
         assertEquals(VirusType.BLACK, atlanta.getVirusBoxes().get(0));
     }
 
     @Test
     void doAction_remove1BlackVirus() throws ActionException {
-        TreatDiseaseMedicService.doAction(medic, new Virus(VirusType.BLACK));
+        treatDiseaseMedicService.doAction(medic, new Virus(VirusType.BLACK));
         assertEquals(2, atlanta.getVirusBoxes().size());
         assertEquals(VirusType.BLUE, atlanta.getVirusBoxes().get(0));
         assertEquals(VirusType.BLUE, atlanta.getVirusBoxes().get(1));

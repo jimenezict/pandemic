@@ -17,22 +17,11 @@ import static java.util.Objects.isNull;
 
 public class FlyShuttleDefaultService {
 
-    private static FlyShuttleDefaultService flyShuttleDefaultService;
-
-    private FlyShuttleDefaultService(){}
-
-    public static FlyShuttleDefaultService getInstance() {
-        if(isNull(flyShuttleDefaultService)) {
-            flyShuttleDefaultService = new FlyShuttleDefaultService();
-        }
-        return flyShuttleDefaultService;
-    }
-
-    public static boolean isDoable(Player player, City destination) {
+    public boolean isDoable(Player player, City destination) {
         return player.getCity().getHasCenter() && destination.getHasCenter();
     }
 
-    public static List<Action> returnAvailableActions(Player player, List<City> citiesWithResearchCenterList) {
+    public List<Action> returnAvailableActions(Player player, List<City> citiesWithResearchCenterList) {
         if(!player.getCity().getHasCenter()) {
             return new ArrayList<>();
         }
@@ -42,7 +31,7 @@ public class FlyShuttleDefaultService {
                 .collect(Collectors.toList());
     }
 
-    public static void doAction(Player player, City destination) throws ActionException {
+    public void doAction(Player player, City destination) throws ActionException {
         if(!player.getCity().getHasCenter()) {
             throw new ActionException(ActionsType.SHUTTLEFLIGHT, SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION);
         } else if (!destination.getHasCenter()) {
