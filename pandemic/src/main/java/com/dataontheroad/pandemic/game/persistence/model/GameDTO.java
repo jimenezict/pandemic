@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.game.persistence.model;
 
+import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.model.board.Board;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class GameDTO {
     
     private final TurnInformation turnInformation;
 
-    public GameDTO(int numOfPlayers) throws Exception {
+    public GameDTO(int numOfPlayers) throws GameExecutionException {
         this.uuid = randomUUID();
         insertDateTime = LocalDateTime.now();
         board = createBoardWithNumberOfPlayers(numOfPlayers);

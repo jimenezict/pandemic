@@ -17,6 +17,7 @@ import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 
 public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService {
 
+    @Override
     public boolean isDoable(Player sender, Player receiver, CityCard card) {
         return sender.getCity().equals(receiver.getCity())  // sender and receiver are on the same city
                 && receiver.getListCard().size() < 7        // receiver has space for a new card
@@ -48,6 +49,7 @@ public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService 
         return actionList;
     }
 
+    @Override
     public void doAction(Player sender, Player receiver, CityCard card) throws ActionException {
         if(!sender.getListCard().contains(card)) {
             throw new ActionException(ActionsType.SHAREKNOWLEDGE, SHAREKNOWLEDGE_ERROR_NO_CARD);

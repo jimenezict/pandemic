@@ -27,7 +27,7 @@ public class ContingencyPlannerService {
      * @param discardedCards Discarded cards deck, to validate that there are available actions
      * @return the boolean
      */
-    public static boolean isDoable(ContingencyPlayer player, List<BaseCard> discardedCards) {
+    public boolean isDoable(ContingencyPlayer player, List<BaseCard> discardedCards) {
         return isNull(player.getExtraEventCard())
                 && !isNull(discardedCards)
                 && discardedCards.stream().filter(card -> EVENT_ACTION.equals(card.getCardType())).count() > 0;
@@ -41,7 +41,7 @@ public class ContingencyPlannerService {
      * @return a list of TAKEDISCARDEVENTCARD Available actions
      * @throws ActionException the action exception
      */
-    public static List<Action> returnAvailableActions(ContingencyPlayer player, List<BaseCard> discardedCards) {
+    public List<Action> returnAvailableActions(ContingencyPlayer player, List<BaseCard> discardedCards) {
 
         List<Action> availableActions = new ArrayList<>();
         if(isNull(player.getExtraEventCard())) {
@@ -70,7 +70,7 @@ public class ContingencyPlannerService {
      * @param eventCard      Event card that will be collected by the Contingency Planner. E.g: "Government Grant"
      * @throws ActionException In case that the player has already an extra card on his hand
      */
-    public static void doAction(ContingencyPlayer player, List<BaseCard> discardedCards, SpecialCard eventCard) throws ActionException {
+    public void doAction(ContingencyPlayer player, List<BaseCard> discardedCards, SpecialCard eventCard) throws ActionException {
         if(!isNull(player.getExtraEventCard())) {
             throw new ActionException(ActionsType.PLAYERACTION, CONTINGENCY_ERROR_HAS_EXTRA_CARD_ALREADY);
         }

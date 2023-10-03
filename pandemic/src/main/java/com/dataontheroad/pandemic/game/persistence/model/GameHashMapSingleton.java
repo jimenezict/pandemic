@@ -8,6 +8,9 @@ import static java.util.Objects.isNull;
 
 public class GameHashMapSingleton {
 
+    private GameHashMapSingleton() {
+        throw new IllegalStateException("Utility class");
+    }
     private static HashMap<UUID, GameDTO> gameHashMap;
 
     public static Map<UUID, GameDTO> getInstance() {

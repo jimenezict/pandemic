@@ -67,8 +67,8 @@ public class ConvertGamesDTO {
 
     private static List<String> buildGameResponseCitiesWithLab(List<City> cityList) {
         return cityList.stream()
-                .filter(city -> city.getHasCenter())
-                .map(city -> city.getName())
+                .filter(City::getHasCenter)
+                .map(City::getName)
                 .collect(Collectors.toList());
     }
 }

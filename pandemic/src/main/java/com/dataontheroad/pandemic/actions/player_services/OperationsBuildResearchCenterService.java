@@ -17,16 +17,17 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHS
 public class OperationsBuildResearchCenterService extends BuildResearchCenterDefaultService {
 
 
+    @Override
     public boolean isDoable(Player player) {
         return !player.getCity().getHasCenter();
     }
 
-
+    @Override
     public List<Action> returnAvailableActions(Player player) {
         return isDoable(player)? new ArrayList<>(Arrays.asList(new BuildResearchCenterAction(player))) : new ArrayList<>();
     }
 
-
+    @Override
     public void doAction(Player player) throws ActionException {
         City position = player.getCity();
         if(position.getHasCenter()) {
