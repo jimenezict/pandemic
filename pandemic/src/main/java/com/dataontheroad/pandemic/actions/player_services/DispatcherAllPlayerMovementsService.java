@@ -17,18 +17,6 @@ import static java.util.Objects.isNull;
 
 public class DispatcherAllPlayerMovementsService {
 
-    private static DispatcherAllPlayerMovementsService dispatcherAllPlayerMovementsService;
-
-    private DispatcherAllPlayerMovementsService() {
-    }
-
-    public static DispatcherAllPlayerMovementsService getInstance() {
-        if(isNull(dispatcherAllPlayerMovementsService)) {
-            dispatcherAllPlayerMovementsService = new DispatcherAllPlayerMovementsService();
-        }
-        return dispatcherAllPlayerMovementsService;
-    }
-
     public static boolean isDoable(Player player, City destination) {
         return player.getCity().getNodeCityConnection().contains(destination);
     }

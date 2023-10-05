@@ -2,12 +2,14 @@ package com.dataontheroad.pandemic.model.player;
 
 import com.dataontheroad.pandemic.actions.player_services.OperationsBuildResearchCenterService;
 import com.dataontheroad.pandemic.actions.player_services.OperationsFlyFromReserachService;
+import com.dataontheroad.pandemic.actions.player_services.SpecialActionInterface;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 
-public class OperationsPlayer extends Player implements OneActionPerTurnInterface {
+public class OperationsPlayer extends Player implements OneActionPerTurnInterface, SpecialActionInterface {
 
     private boolean isActionAvailableThisTurn;
+    private OperationsFlyFromReserachService operationsFlyFromReserachService;
 
     public OperationsPlayer() {
         super();
@@ -16,6 +18,7 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
         description = OPERATIONS_DESCRIPTION;
         isActionAvailableThisTurn = true;
         buildResearchCenterDefaultService = new OperationsBuildResearchCenterService();
+        operationsFlyFromReserachService = new OperationsFlyFromReserachService();
     }
     @Override
     public boolean canPlayerExecuteActionThisTurn() {
@@ -33,6 +36,6 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
     }
 
     public OperationsFlyFromReserachService specialActionService() {
-        return OperationsFlyFromReserachService.getInstance();
+        return operationsFlyFromReserachService;
     }
 }

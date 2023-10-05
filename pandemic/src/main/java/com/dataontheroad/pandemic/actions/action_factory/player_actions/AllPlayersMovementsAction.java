@@ -24,7 +24,8 @@ public class AllPlayersMovementsAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        DispatcherAllPlayerMovementsService.doAction(player, destination);
+        DispatcherAllPlayerMovementsService dispatcherAllPlayerMovementsService = new DispatcherAllPlayerMovementsService();
+        dispatcherAllPlayerMovementsService.doAction(player, destination);
     }
 
 }

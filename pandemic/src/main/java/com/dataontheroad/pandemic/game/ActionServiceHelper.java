@@ -1,14 +1,20 @@
 package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.actions.player_services.DispatcherAllPlayerMovementsService;
+import com.dataontheroad.pandemic.actions.player_services.DispatcherMovePawnToPawnService;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.ContingencyPlayer;
+import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -31,6 +37,24 @@ public class ActionServiceHelper {
         return allowedActions;
     }
 
+    public static List<Action> getListOfSpecialActions(Player player, List<Player> listOfPlayers, List<BaseCard> discardedCards) {
+
+        switch (player.getName()) {
+            case OPERATIONS_NAME:
+                OperationsPlayer operationsPlayer = (OperationsPlayer) player;
+                return operationsPlayer.specialActionService().returnAvailableActions(operationsPlayer);
+            case CONTINGENCY_NAME:
+                ContingencyPlayer contingencyPlayer = (ContingencyPlayer) player;
+                return contingencyPlayer.specialActionService().returnAvailableActions(contingencyPlayer, discardedCards);
+            case DISPATCHER_NAME:
+                List<Action> allowedActions = new ArrayList<>();
+                allowedActions.addAll(DispatcherMovePawnToPawnService.returnAvailableActions(listOfPlayers));
+                allowedActions.addAll(DispatcherAllPlayerMovementsService.returnAvailableActions(listOfPlayers));
+                return allowedActions;
+            default:
+                return new ArrayList<>();
+        }
+    }
     public static Boolean executeAction(Action action) {
         try {
             action.execute();

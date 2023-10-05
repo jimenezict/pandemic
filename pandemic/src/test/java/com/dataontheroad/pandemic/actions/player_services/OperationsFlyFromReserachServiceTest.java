@@ -35,7 +35,7 @@ class OperationsFlyFromReserachServiceTest {
 
     @BeforeEach
     public void setUp() {
-        operationsFlyFromReserachService = OperationsFlyFromReserachService.getInstance();
+        operationsFlyFromReserachService = new OperationsFlyFromReserachService();
         operationsPlayer = new OperationsPlayer();
         atlanta.setHasCenter(Boolean.TRUE);
         lagos.setHasCenter(Boolean.FALSE);
