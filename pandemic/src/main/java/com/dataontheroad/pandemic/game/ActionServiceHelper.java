@@ -13,6 +13,7 @@ import com.dataontheroad.pandemic.model.virus.Virus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 import static java.lang.Boolean.FALSE;
@@ -39,7 +40,7 @@ public class ActionServiceHelper {
 
     public static List<Action> getListOfSpecialActions(Player player, List<Player> listOfPlayers, List<BaseCard> discardedCards) {
 
-        switch (player.getName()) {
+        switch (Optional.ofNullable(player.getName()).orElse("")) {
             case OPERATIONS_NAME:
                 OperationsPlayer operationsPlayer = (OperationsPlayer) player;
                 return operationsPlayer.specialActionService().returnAvailableActions(operationsPlayer);
