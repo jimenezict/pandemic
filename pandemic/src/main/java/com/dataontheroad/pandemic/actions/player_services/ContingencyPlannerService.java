@@ -50,7 +50,7 @@ public class ContingencyPlannerService {
                     .filter(card -> EVENT_ACTION.equals(card.getCardType()))
                     .map(card -> {
                         try {
-                            return new TakeDiscardEventCardAction(player, (SpecialCard) card);
+                            return new TakeDiscardEventCardAction(player, (SpecialCard) card, discardedCards);
                         } catch (ActionException e) {
                             throw new RuntimeException(e);
                         }

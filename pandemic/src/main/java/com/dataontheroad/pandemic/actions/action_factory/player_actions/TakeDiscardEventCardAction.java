@@ -28,12 +28,13 @@ public class TakeDiscardEventCardAction extends Action {
      * @param eventCard Event card that will be collected by the Contingency Planner. E.g: "Government Grant"
      * @throws ActionException When player is not a Contingency Planner
      */
-    public TakeDiscardEventCardAction(ContingencyPlayer player, SpecialCard eventCard) throws ActionException {
+    public TakeDiscardEventCardAction(ContingencyPlayer player, SpecialCard eventCard, List<BaseCard> discardedCards) throws ActionException {
         super(TAKEDISCARDEVENTCARD, player);
         if(!CONTINGENCY_NAME.equals(player.getName())){
             throw new ActionException(TAKEDISCARDEVENTCARD, CONTINGENCY_ERROR_NO_CONTINGENCY_PLAYER);
         }
         this.eventCard = eventCard;
+        this.discardedCards = discardedCards;
     }
 
     @Override
@@ -45,10 +46,6 @@ public class TakeDiscardEventCardAction extends Action {
     public void execute() throws ActionException {
         ContingencyPlayer player = (ContingencyPlayer) getPlayer();
         player.specialActionService().doAction(player, discardedCards, eventCard);
-    }
-
-    public void setDiscardedCards(List<BaseCard> discardedCards) {
-        this.discardedCards = discardedCards;
     }
 
     public SpecialCard getEventCard() {

@@ -2,9 +2,12 @@ package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromResearchCenterAnywhereAction;
+import com.dataontheroad.pandemic.actions.action_factory.player_actions.TakeDiscardEventCardAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
+import com.dataontheroad.pandemic.model.cards.model.special_card.GovernmentGrantEventCard;
+import com.dataontheroad.pandemic.model.cards.model.special_card.SpecialCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.*;
 import com.dataontheroad.pandemic.model.virus.Virus;
@@ -17,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.OPERATION_FLY;
+import static com.dataontheroad.pandemic.actions.ActionsType.TAKEDISCARDEVENTCARD;
+import static com.dataontheroad.pandemic.constants.LiteralsCard.SPECIAL_EVENT_GOVERNMENT_GRANT_NAME;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.OPERATIONS_NAME;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfSpecialActions;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
@@ -96,7 +101,7 @@ class GetListOfActionsSpecialActionTest {
     }
 
     @Test
-    void getListOfActions_ExecutesActionAndValidateCanNotExecuteTwice() throws ActionException {
+    void getListOfActions_OperationExecutesActionAndValidateCanNotExecuteTwice() throws ActionException {
 
         OperationsPlayer operationsPlayer = new OperationsPlayer();
         operationsPlayer.setCity(cityList.get(1));
@@ -126,6 +131,39 @@ class GetListOfActionsSpecialActionTest {
         actions = getListOfSpecialActions(operationsPlayer, new ArrayList(), new ArrayList());
         assertEquals(0, actions.size());
 
+    }
+
+    @Test
+    void getListOfActions_ContingencyHaveDiscardedCardsButNotEvents() {
+        ContingencyPlayer contingencyPlayer = new ContingencyPlayer();
+        List<BaseCard> cardList = new ArrayList<>();
+        cardList.add(createCityCard(cityList.get(24)));
+        cardList.add(createCityCard(cityList.get(25)));
+
+        List<Action> actions = getListOfSpecialActions(contingencyPlayer, new ArrayList(), cardList);
+        assertEquals(0, actions.size());
+    }
+
+    @Test
+    void getListOfActions_ContingencyHaveEventsOnDiscardedCards() throws ActionException {
+        ContingencyPlayer contingencyPlayer = new ContingencyPlayer();
+        List<BaseCard> cardList = new ArrayList<>();
+        cardList.add(createCityCard(cityList.get(24)));
+        cardList.add(createCityCard(cityList.get(25)));
+        cardList.add(new GovernmentGrantEventCard());
+        cardList.add(new GovernmentGrantEventCard());
+
+        List<Action> actions = getListOfSpecialActions(contingencyPlayer, new ArrayList(), cardList);
+        assertEquals(2, actions.size());
+
+        TakeDiscardEventCardAction action = (TakeDiscardEventCardAction) actions.get(0);
+        action.execute();
+
+        assertEquals(3, cardList.size());
+        assertEquals(SPECIAL_EVENT_GOVERNMENT_GRANT_NAME, contingencyPlayer.getExtraEventCard().getEventName());
+
+        actions = getListOfSpecialActions(contingencyPlayer, new ArrayList(), cardList);
+        assertEquals(0, actions.size());
     }
 
 }
