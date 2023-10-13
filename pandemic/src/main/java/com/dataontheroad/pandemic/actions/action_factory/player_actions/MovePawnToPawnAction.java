@@ -30,4 +30,8 @@ public class MovePawnToPawnAction extends Action {
     public void execute() throws ActionException {
         DispatcherMovePawnToPawnService.doAction(playerList, player, destination);
     }
+
+    public City getDestination() {
+        return destination;
+    }
 }

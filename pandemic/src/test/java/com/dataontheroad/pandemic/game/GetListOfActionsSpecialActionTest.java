@@ -2,12 +2,11 @@ package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromResearchCenterAnywhereAction;
+import com.dataontheroad.pandemic.actions.action_factory.player_actions.MovePawnToPawnAction;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.TakeDiscardEventCardAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
-import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.cards.model.special_card.GovernmentGrantEventCard;
-import com.dataontheroad.pandemic.model.cards.model.special_card.SpecialCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.*;
 import com.dataontheroad.pandemic.model.virus.Virus;
@@ -18,18 +17,19 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static com.dataontheroad.pandemic.actions.ActionsType.MOVEPAWNTOPAWN;
 import static com.dataontheroad.pandemic.actions.ActionsType.OPERATION_FLY;
-import static com.dataontheroad.pandemic.actions.ActionsType.TAKEDISCARDEVENTCARD;
 import static com.dataontheroad.pandemic.constants.LiteralsCard.SPECIAL_EVENT_GOVERNMENT_GRANT_NAME;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.OPERATIONS_NAME;
+import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfSpecialActions;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.model.city.CityEnum.MADRID;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
-import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GetListOfActionsSpecialActionTest {
 
@@ -42,6 +42,10 @@ class GetListOfActionsSpecialActionTest {
     private Virus blackVirus = new Virus(VirusType.BLACK);
     private Virus redVirus = new Virus(VirusType.RED);
     private Virus yellowVirus = new Virus(VirusType.YELLOW);
+
+    private City newyork = new City("New York", VirusType.BLUE);
+    private City essen = new City("Essen", VirusType.BLUE);
+    private City atlanta = new City("Atlanta", VirusType.BLUE);
 
     @BeforeEach
     public void setUp() {
@@ -166,4 +170,37 @@ class GetListOfActionsSpecialActionTest {
         assertEquals(0, actions.size());
     }
 
+    @Test
+    void getListOfActions_DispatcherThereIs4Pawn2onSameCity() throws ActionException {
+        Player player1 = new Player(atlanta);
+        Player player2 = new Player(atlanta);
+        Player player3 = new Player(essen);
+        Player dispatcherPlayer = new DispatcherPlayer();
+        dispatcherPlayer.setCity(newyork);
+
+        List<Player> listOfPlayer = Arrays.asList(player1, player2, player3, dispatcherPlayer);
+        List<Action> listOfSpecialActions = getListOfSpecialActions(dispatcherPlayer, listOfPlayer, new ArrayList<>());
+        List<Action> pawnToPawnAction = filterPawnToPawn(listOfSpecialActions);
+
+        assertEquals(10, pawnToPawnAction.size());
+        assertEquals(2, pawnToPawnAction.stream().filter(action -> action.getPlayer() == player1).count());
+        assertEquals(2, pawnToPawnAction.stream().filter(action -> action.getPlayer() == player2).count());
+        assertEquals(3, pawnToPawnAction.stream().filter(action -> action.getPlayer() == player3).count());
+        assertEquals(3, pawnToPawnAction.stream().filter(action -> action.getPlayer() == dispatcherPlayer).count());
+
+        pawnToPawnAction.forEach(action -> {
+            MovePawnToPawnAction pawnAction = (MovePawnToPawnAction) action;
+            assertNotNull(pawnAction.getDestination());
+            assertNotEquals(pawnAction.getDestination(), pawnAction.getPlayer().getCity());
+        });
+
+        MovePawnToPawnAction actionExecute = (MovePawnToPawnAction) pawnToPawnAction.get(0);
+        Player playerExecute = actionExecute.getPlayer();
+        actionExecute.execute();
+        assertEquals(actionExecute.getDestination(), playerExecute.getCity());
+    }
+
+    private List<Action> filterPawnToPawn(List<Action> listOfSpecialActions) {
+        return listOfSpecialActions.stream().filter(action -> MOVEPAWNTOPAWN.equals(action.getActionsType())).collect(Collectors.toList());
+    }
 }
