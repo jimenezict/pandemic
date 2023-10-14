@@ -28,4 +28,7 @@ public class AllPlayersMovementsAction extends Action {
         dispatcherAllPlayerMovementsService.doAction(player, destination);
     }
 
+    public City getDestination() {
+        return destination;
+    }
 }

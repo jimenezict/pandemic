@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.actions.action_factory.player_actions.AllPlayersMovementsAction;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromResearchCenterAnywhereAction;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.MovePawnToPawnAction;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.TakeDiscardEventCardAction;
@@ -19,8 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.dataontheroad.pandemic.actions.ActionsType.MOVEPAWNTOPAWN;
-import static com.dataontheroad.pandemic.actions.ActionsType.OPERATION_FLY;
+import static com.dataontheroad.pandemic.actions.ActionsType.*;
 import static com.dataontheroad.pandemic.constants.LiteralsCard.SPECIAL_EVENT_GOVERNMENT_GRANT_NAME;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.OPERATIONS_NAME;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
@@ -171,7 +171,7 @@ class GetListOfActionsSpecialActionTest {
     }
 
     @Test
-    void getListOfActions_DispatcherThereIs4Pawn2onSameCity() throws ActionException {
+    void getListOfActions_DispatcherMovePawnThereIs4Pawn2onSameCity() throws ActionException {
         Player player1 = new Player(atlanta);
         Player player2 = new Player(atlanta);
         Player player3 = new Player(essen);
@@ -200,7 +200,43 @@ class GetListOfActionsSpecialActionTest {
         assertEquals(actionExecute.getDestination(), playerExecute.getCity());
     }
 
+    @Test
+    void getListOfActions_DispatcherAllPlayerMovement() throws ActionException {
+        Player player1 = new Player(cityList.get(1));
+        Player player2 = new Player(cityList.get(1));
+        Player player3 = new Player(cityList.get(11)); //essen
+        Player dispatcherPlayer = new DispatcherPlayer();
+        dispatcherPlayer.setCity(cityList.get(32)); // new york
+
+        List<Player> listOfPlayer = Arrays.asList(player1, player2, player3, dispatcherPlayer);
+        List<Action> listOfSpecialActions = getListOfSpecialActions(dispatcherPlayer, listOfPlayer, new ArrayList<>());
+        List<Action> dispatcherAllPlayerAction = filterAllPlayer(listOfSpecialActions);
+
+        assertEquals(10, dispatcherAllPlayerAction.size());
+        assertEquals(3, dispatcherAllPlayerAction.stream().filter(action -> action.getPlayer() == player1).count());
+        assertEquals(3, dispatcherAllPlayerAction.stream().filter(action -> action.getPlayer() == player2).count());
+        assertEquals(4, dispatcherAllPlayerAction.stream().filter(action -> action.getPlayer() == player3).count());
+        assertEquals(0, dispatcherAllPlayerAction.stream().filter(action -> action.getPlayer() == dispatcherPlayer).count()); //dispatcher cannot move to himself
+
+        dispatcherAllPlayerAction.forEach(action -> {
+            AllPlayersMovementsAction allPlayersMovementsAction = (AllPlayersMovementsAction) action;
+            assertEquals(DRIVEFERRYDISPATCHER, allPlayersMovementsAction.getActionsType());
+            assertNotNull(allPlayersMovementsAction.getDestination());
+            assertNotEquals(allPlayersMovementsAction.getDestination(), allPlayersMovementsAction.getPlayer().getCity());
+        });
+
+        AllPlayersMovementsAction actionExecute = (AllPlayersMovementsAction) dispatcherAllPlayerAction.get(0);
+        Player playerExecute = actionExecute.getPlayer();
+        actionExecute.execute();
+        assertEquals(actionExecute.getDestination(), playerExecute.getCity());
+    }
+
+
     private List<Action> filterPawnToPawn(List<Action> listOfSpecialActions) {
         return listOfSpecialActions.stream().filter(action -> MOVEPAWNTOPAWN.equals(action.getActionsType())).collect(Collectors.toList());
+    }
+
+    private List<Action> filterAllPlayer(List<Action> listOfSpecialActions) {
+        return listOfSpecialActions.stream().filter(action -> DRIVEFERRYDISPATCHER.equals(action.getActionsType())).collect(Collectors.toList());
     }
 }
