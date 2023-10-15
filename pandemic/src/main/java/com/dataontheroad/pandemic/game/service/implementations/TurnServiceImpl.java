@@ -5,6 +5,7 @@ import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
+import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
@@ -59,16 +60,16 @@ public class TurnServiceImpl implements ITurnService {
 
         action.execute();
         if (!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
+            Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
+                    gameDTO.getTurnInformation().getActivePlayer());
+            gameDTO.getTurnInformation().setNewTurn(player);
+
             if (playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer()) &&
                 playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
             } else {
                 //runEpidemic()
             }
             //infectionPhase(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
-
-            Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
-                    gameDTO.getTurnInformation().getActivePlayer());
-            gameDTO.getTurnInformation().setNewTurn(player);
             gamePersistence.insertOrUpdateGame(gameDTO);
         }
 
@@ -76,29 +77,21 @@ public class TurnServiceImpl implements ITurnService {
     }
 
     @Override
-    public Action getSelectedAction(UUID gameId, int actionPosition) throws GameExecutionException {
-        GameDTO gameDTO = gamePersistence.getGameById(gameId);
+    public Action getSelectedAction(TurnExecuteDTO turnExecuteDTO, int actionPosition) throws GameExecutionException {
 
-        if (isNull(gameDTO)) {
-            throw new GameExecutionException(GAME_NOT_FOUND);
-        }
-
-        return getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
-                gameDTO.getBoard().getVirusList(),
-                getCitiesWithResearchCenter(gameDTO),
-                getOtherPlayersOnTheCity(gameDTO),
-                gameDTO.getBoard().getBoardCities()).get(actionPosition);
+        return getListOfActions(turnExecuteDTO.getActivePlayer(),
+                turnExecuteDTO.getVirusList(),
+                turnExecuteDTO.getResearchCenter(),
+                turnExecuteDTO.getOtherPlayersOnTheCity(),
+                turnExecuteDTO.getBoardCities()).get(actionPosition);
     }
 
     @Override
-    public Action actionFormatValidation(UUID gameId, Action action, HashMap<String, String> additionalFields) throws GameExecutionException {
-        GameDTO gameDTO = gamePersistence.getGameById(gameId);
-        if (isNull(gameDTO)) {
-            throw new GameExecutionException(GAME_NOT_FOUND);
-        }
+    public Action actionFormatValidation(TurnExecuteDTO turnExecuteDTO, Action action, HashMap<String, String> additionalFields) throws GameExecutionException {
+
         if(FLYCHARTER.equals(action.getActionsType())) {
             if(!isNull(additionalFields) && additionalFields.containsKey(ADDITIONAL_FIELD_DESTINATION)) {
-                City city = gameDTO.getBoard().getCityFromBoardList(new City(additionalFields.get(ADDITIONAL_FIELD_DESTINATION), null));
+                City city = turnExecuteDTO.getBoard().getCityFromBoardList(new City(additionalFields.get(ADDITIONAL_FIELD_DESTINATION), null));
                 if(isNull(city)) {
                     throw new GameExecutionException(TURN_WRONG_FLYCHARTER_INVALID_DESTINATION_CITY);
                 }
@@ -108,6 +101,15 @@ public class TurnServiceImpl implements ITurnService {
             }
         }
         return action;
+    }
+
+    @Override
+    public TurnExecuteDTO getTurnExecuteDTO(UUID gameId) throws GameExecutionException {
+        GameDTO gameDTO = gamePersistence.getGameById(gameId);
+        if (isNull(gameDTO)) {
+            throw new GameExecutionException(GAME_NOT_FOUND);
+        }
+        return new TurnExecuteDTO(gameDTO);
     }
 
 

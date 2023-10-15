@@ -4,6 +4,7 @@ import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DriveFerryAction;
 import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
+import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
@@ -59,18 +60,7 @@ class TurnServiceHelperImplTest {
         assertFalse(turnResponseDTO.getActivePlayer().getListCard().isEmpty());
     }
 
-    @Test
-    void getSelectedAction_returnNullValue() throws Exception {
-        GameDTO gameDTO = new GameDTO(2);
-        when(gamePersistence.getGameById(any())).thenReturn(null);
-
-        GameExecutionException exception =
-                assertThrows(GameExecutionException.class,
-                        () -> turnService.getSelectedAction(gameDTO.getUuid(), 0));
-
-        assertTrue(exception.getMessage().contains(GAME_NOT_FOUND));
-    }
-    @Test
+        @Test
     void executeAction() throws Exception {
         GameDTO gameDTO = new GameDTO(2);
         Player originalActivePlayer = gameDTO.getTurnInformation().getActivePlayer();
@@ -117,13 +107,13 @@ class TurnServiceHelperImplTest {
     void actionFormatValidation_destinationCity_isValidFlyCharter() throws Exception {
         String city = "Paris";
         GameDTO gameDTO = new GameDTO(3);
-        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
         Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
         HashMap<String, String> additionalFields = new HashMap<>();
         additionalFields.put(ADDITIONAL_FIELD_DESTINATION, city);
 
-        turnService.actionFormatValidation(uuid, action, additionalFields);
+        turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields);
 
         assertEquals(city, ((FlyCharterAction) action).getDestination().getName());
         assertEquals(FLYCHARTER, action.getActionsType());
@@ -133,7 +123,7 @@ class TurnServiceHelperImplTest {
     void actionFormatValidation_destinationCity_isInvalidFlyCharter() throws Exception {
         String city = "SVH";
         GameDTO gameDTO = new GameDTO(3);
-        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
         Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
         HashMap<String, String> additionalFields = new HashMap<>();
@@ -141,7 +131,7 @@ class TurnServiceHelperImplTest {
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(uuid, action, additionalFields));
+                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_INVALID_DESTINATION_CITY));
     }
@@ -149,14 +139,14 @@ class TurnServiceHelperImplTest {
     @Test
     void actionFormatValidation_destinationCityIsMissing() throws Exception {
         GameDTO gameDTO = new GameDTO(3);
-        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
         Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
         HashMap<String, String> additionalFields = new HashMap<>();
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(uuid, action, additionalFields));
+                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD));
     }
@@ -164,14 +154,14 @@ class TurnServiceHelperImplTest {
     @Test
     void actionFormatValidation_additionalFieldsIsMissing() throws Exception {
         GameDTO gameDTO = new GameDTO(3);
-        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
         Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
         HashMap<String, String> additionalFields = new HashMap<>();
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(uuid, action, null));
+                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, null));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD));
     }

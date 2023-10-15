@@ -6,6 +6,7 @@ import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
+import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
@@ -40,7 +41,7 @@ public class TurnEndPoint {
     @PostMapping("/turn/execute")
     ResponseEntity executeTurn(@RequestBody TurnRequestDTO turnRequestDTO) {
         TurnResponseDTO turnResponseDTO = turnService.getTurnServiceInformation(turnRequestDTO.getUuid());
-        TurnInformation turnInformation;
+
         if(isNull(turnResponseDTO)) {
             return getErrorResponse(turnRequestDTO.getUuid(), GAME_NOT_FOUND);
         } else if (!turnResponseDTO.getActivePlayer().getName().equals(turnRequestDTO.getPlayerName())) {
@@ -49,9 +50,13 @@ public class TurnEndPoint {
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_ACTION);
         }
 
+        TurnInformation turnInformation;
+        TurnExecuteDTO turnExecuteDTO;
+
         try {
-            Action action = turnService.getSelectedAction(turnRequestDTO.getUuid(), turnRequestDTO.getActionPosition());
-            turnService.actionFormatValidation(turnRequestDTO.getUuid(), action, turnRequestDTO.getAdditionalFields());
+            turnExecuteDTO = turnService.getTurnExecuteDTO(turnRequestDTO.getUuid());
+            Action action = turnService.getSelectedAction(turnExecuteDTO, turnRequestDTO.getActionPosition());
+            turnService.actionFormatValidation(turnExecuteDTO, action, turnRequestDTO.getAdditionalFields());
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), action);
         } catch (ActionException | GameExecutionException | EndOfGameException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
