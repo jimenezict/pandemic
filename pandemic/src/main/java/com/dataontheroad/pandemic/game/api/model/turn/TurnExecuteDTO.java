@@ -3,10 +3,12 @@ package com.dataontheroad.pandemic.game.api.model.turn;
 import com.dataontheroad.pandemic.game.TurnServiceHelper;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.model.board.Board;
+import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.game.TurnServiceHelper.getCitiesWithResearchCenter;
@@ -39,5 +41,13 @@ public class TurnExecuteDTO {
 
     public Board getBoard() {
         return gameDTO.getBoard();
+    }
+
+    public List<Player> getBoardPlayers() {
+        return gameDTO.getBoard().getPlayers();
+    }
+
+    public List<BaseCard> getDiscardDeck() {
+        return new ArrayList<>(gameDTO.getBoard().getPlayerDiscardDeck());
     }
 }

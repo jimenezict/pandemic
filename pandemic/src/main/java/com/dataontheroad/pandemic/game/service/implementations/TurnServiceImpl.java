@@ -16,6 +16,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +24,7 @@ import java.util.UUID;
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
+import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfSpecialActions;
 import static com.dataontheroad.pandemic.game.TurnServiceHelper.*;
 import static java.util.Objects.isNull;
 
@@ -38,16 +40,34 @@ public class TurnServiceImpl implements ITurnService {
         TurnResponseDTO turnResponseDTO = new TurnResponseDTO();
 
         if (!isNull(gameDTO)) {
-            List<Action> actionList = getListOfActions(gameDTO.getTurnInformation().getActivePlayer(),
+            Player player = gameDTO.getTurnInformation().getActivePlayer();
+            List<Action> actionList = getListOfActions(player,
                     gameDTO.getBoard().getVirusList(),
                     getCitiesWithResearchCenter(gameDTO),
                     getOtherPlayersOnTheCity(gameDTO),
                     gameDTO.getBoard().getBoardCities());
+
+            actionList.addAll(getListOfSpecialActions(player, gameDTO.getBoard().getPlayers(), new ArrayList<>(gameDTO.getBoard().getPlayerDiscardDeck())));
             turnResponseDTO.setTurnInformation(gameDTO.getTurnInformation(), actionList);
             return turnResponseDTO;
         } else {
             return null;
         }
+    }
+
+    @Override
+    public Action getSelectedAction(TurnExecuteDTO turnExecuteDTO, int actionPosition) throws GameExecutionException {
+
+        List<Action> actionList = getListOfActions(turnExecuteDTO.getActivePlayer(),
+                turnExecuteDTO.getVirusList(),
+                turnExecuteDTO.getResearchCenter(),
+                turnExecuteDTO.getOtherPlayersOnTheCity(),
+                turnExecuteDTO.getBoardCities());
+        actionList.addAll(getListOfSpecialActions(turnExecuteDTO.getActivePlayer(),
+                turnExecuteDTO.getBoardPlayers(),
+                turnExecuteDTO.getDiscardDeck()));
+
+        return actionList.get(actionPosition);
     }
 
     @Override
@@ -77,16 +97,6 @@ public class TurnServiceImpl implements ITurnService {
     }
 
     @Override
-    public Action getSelectedAction(TurnExecuteDTO turnExecuteDTO, int actionPosition) throws GameExecutionException {
-
-        return getListOfActions(turnExecuteDTO.getActivePlayer(),
-                turnExecuteDTO.getVirusList(),
-                turnExecuteDTO.getResearchCenter(),
-                turnExecuteDTO.getOtherPlayersOnTheCity(),
-                turnExecuteDTO.getBoardCities()).get(actionPosition);
-    }
-
-    @Override
     public Action actionFormatValidation(TurnExecuteDTO turnExecuteDTO, Action action, HashMap<String, String> additionalFields) throws GameExecutionException {
 
         if(FLYCHARTER.equals(action.getActionsType())) {
@@ -111,6 +121,5 @@ public class TurnServiceImpl implements ITurnService {
         }
         return new TurnExecuteDTO(gameDTO);
     }
-
 
 }
