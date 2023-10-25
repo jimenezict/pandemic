@@ -157,6 +157,30 @@ Errors:
 * 404 (Not found): when gameID could not be found as a valid game
 * 404 (Not found): when requester is not the valid player
 * 404 (Not found): when requester is not executing the correct action
+___
+
+**Executions with additional fields**
+
+Additional fields are placed at the request body as an array of pair-values, as example
+
+```
+{
+    "uuid":"{{gameId}}",
+    "playerName":"Dispatcher",
+    "actionPosition":2,
+    "additionalFields":{"destination":"Paris"}
+}
+```
+In case a required missing field for a specific action is missing, then it will return an error response.
+___
+
+#### General for all type of Player
+
+When action is FlyCharter it is needs to place as key "destination" and as value the name of the city.
+
+#### Operation Expert
+
+When action is Operation Fly it is needs to place as key "destination" and as value the name of the city.
 
 ## Sonar Commands
 
