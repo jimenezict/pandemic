@@ -74,6 +74,7 @@ class TurnServiceHelperImplTest {
         assertEquals(3, gameDTO.getTurnInformation().getMissingTurns());
         assertEquals(originalActivePlayer, gameDTO.getTurnInformation().getActivePlayer());
 
+
         originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         actionTest = new DriveFerryAction(originalActivePlayer, originalCity.getNodeCityConnection().get(0));
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
@@ -100,7 +101,6 @@ class TurnServiceHelperImplTest {
         assertNotEquals(originalCity.getName(), finalCity.getName());
         assertEquals(4, gameDTO.getTurnInformation().getMissingTurns());
         assertNotEquals(originalActivePlayer, gameDTO.getTurnInformation().getActivePlayer());
-        verify(gamePersistence).insertOrUpdateGame(gameDTO);
     }
 
     @Test

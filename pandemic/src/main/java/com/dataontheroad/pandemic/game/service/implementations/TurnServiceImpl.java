@@ -80,18 +80,18 @@ public class TurnServiceImpl implements ITurnService {
 
         action.execute();
         if (!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
-            Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
-                    gameDTO.getTurnInformation().getActivePlayer());
-            gameDTO.getTurnInformation().setNewTurn(player);
 
             if (playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer()) &&
                 playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
             } else {
                 //runEpidemic()
             }
+            Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
+                    gameDTO.getTurnInformation().getActivePlayer());
+            gameDTO.getTurnInformation().setNewTurn(player);
             //infectionPhase(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
-            gamePersistence.insertOrUpdateGame(gameDTO);
         }
+        gamePersistence.insertOrUpdateGame(gameDTO);
 
         return gameDTO.getTurnInformation();
     }
