@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
+import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromResearchCenterAnywhereAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
+import static com.dataontheroad.pandemic.actions.ActionsType.OPERATION_FLY;
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfSpecialActions;
@@ -108,6 +110,16 @@ public class TurnServiceImpl implements ITurnService {
                 ((FlyCharterAction) action).setDestination(city);
             } else {
                 throw new GameExecutionException(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD);
+            }
+        } else if(OPERATION_FLY.equals(action.getActionsType())) {
+            if(!isNull(additionalFields) && additionalFields.containsKey(ADDITIONAL_FIELD_DESTINATION)) {
+                City city = turnExecuteDTO.getBoard().getCityFromBoardList(new City(additionalFields.get(ADDITIONAL_FIELD_DESTINATION), null));
+                if(isNull(city)) {
+                    throw new GameExecutionException(TURN_WRONG_OPERATION_INVALID_DESTINATION_CITY);
+                }
+                ((FlyFromResearchCenterAnywhereAction) action).setDestination(city);
+            } else {
+                throw new GameExecutionException(TURN_WRONG_OPERATION_DESTINATION_FIELD);
             }
         }
         return action;

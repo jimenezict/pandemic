@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.game.service.interfaces;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DriveFerryAction;
 import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
+import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromResearchCenterAnywhereAction;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
@@ -10,6 +11,7 @@ import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 import com.dataontheroad.pandemic.model.player.Player;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
+import static com.dataontheroad.pandemic.actions.ActionsType.OPERATION_FLY;
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.*;
@@ -120,6 +123,22 @@ class TurnServiceHelperImplTest {
     }
 
     @Test
+    void actionFormatValidation_destinationCity_isValidOperationPlayerFlyFromResearchCenterAnywhere() throws Exception {
+        String city = "Paris";
+        GameDTO gameDTO = new GameDTO(3);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
+
+        Action action = new FlyFromResearchCenterAnywhereAction(new OperationsPlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+        additionalFields.put(ADDITIONAL_FIELD_DESTINATION, city);
+
+        turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields);
+
+        assertEquals(city, ((FlyFromResearchCenterAnywhereAction) action).getDestination().getName());
+        assertEquals(OPERATION_FLY, action.getActionsType());
+    }
+
+    @Test
     void actionFormatValidation_destinationCity_isInvalidFlyCharter() throws Exception {
         String city = "SVH";
         GameDTO gameDTO = new GameDTO(3);
@@ -137,7 +156,24 @@ class TurnServiceHelperImplTest {
     }
 
     @Test
-    void actionFormatValidation_destinationCityIsMissing() throws Exception {
+    void actionFormatValidation_destinationCity_isInvalidOperationPlayerFlyFromResearchCenterAnywhere() throws Exception {
+        String city = "SVH";
+        GameDTO gameDTO = new GameDTO(3);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
+
+        Action action = new FlyFromResearchCenterAnywhereAction(new OperationsPlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+        additionalFields.put(ADDITIONAL_FIELD_DESTINATION, city);
+
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
+
+        assertTrue(exception.getMessage().contains(TURN_WRONG_OPERATION_INVALID_DESTINATION_CITY));
+    }
+
+    @Test
+    void actionFormatValidation_destinationCityIsMissing_isInvalidFlyCharter() throws Exception {
         GameDTO gameDTO = new GameDTO(3);
         TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
@@ -152,7 +188,22 @@ class TurnServiceHelperImplTest {
     }
 
     @Test
-    void actionFormatValidation_additionalFieldsIsMissing() throws Exception {
+    void actionFormatValidation_destinationCityIsMissing_isInvalidOperationPlayerFlyFromResearchCenterAnywhere() throws Exception {
+        GameDTO gameDTO = new GameDTO(3);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
+
+        Action action = new FlyFromResearchCenterAnywhereAction(new OperationsPlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
+
+        assertTrue(exception.getMessage().contains(TURN_WRONG_OPERATION_DESTINATION_FIELD));
+    }
+
+    @Test
+    void actionFormatValidation_additionalFieldsIsMissing_isInvalidFlyCharter() throws Exception {
         GameDTO gameDTO = new GameDTO(3);
         TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
@@ -166,4 +217,18 @@ class TurnServiceHelperImplTest {
         assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD));
     }
 
+    @Test
+    void actionFormatValidation_additionalFieldsIsMissing_isInvalidOperationPlayerFlyFromResearchCenterAnywhere() throws Exception {
+        GameDTO gameDTO = new GameDTO(3);
+        TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
+
+        Action action = new FlyFromResearchCenterAnywhereAction(new OperationsPlayer());
+        HashMap<String, String> additionalFields = new HashMap<>();
+
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, null));
+
+        assertTrue(exception.getMessage().contains(TURN_WRONG_OPERATION_DESTINATION_FIELD));
+    }
 }
