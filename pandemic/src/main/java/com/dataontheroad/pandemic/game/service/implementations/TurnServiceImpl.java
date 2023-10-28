@@ -17,10 +17,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
 import static com.dataontheroad.pandemic.actions.ActionsType.OPERATION_FLY;
@@ -35,6 +32,9 @@ public class TurnServiceImpl implements ITurnService {
 
     @Autowired
     GamePersistenceOnHashMap gamePersistence;
+
+    @Autowired
+    InfectionServiceImpl infectionService;
 
     @Override
     public TurnResponseDTO getTurnServiceInformation(UUID gameId) {
@@ -86,12 +86,13 @@ public class TurnServiceImpl implements ITurnService {
             if (playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer()) &&
                 playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
             } else {
-                //runEpidemic()
+                City cityToInfect = infectionService.getCardFromBottomInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
             }
             Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
                     gameDTO.getTurnInformation().getActivePlayer());
             gameDTO.getTurnInformation().setNewTurn(player);
-            //infectionPhase(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
+            City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
+            infectionService.infectCity(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
         }
         gamePersistence.insertOrUpdateGame(gameDTO);
 
