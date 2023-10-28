@@ -14,6 +14,7 @@ import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.interfaces.ITurnService;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,8 +92,15 @@ public class TurnServiceImpl implements ITurnService {
             Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
                     gameDTO.getTurnInformation().getActivePlayer());
             gameDTO.getTurnInformation().setNewTurn(player);
+
             City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
-            infectionService.infectCity(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
+            if(infectionService.canCityBeInfected(gameDTO.getBoard().getVirusList(), gameDTO.getBoard().getPlayers())) {
+                VirusType virusType = infectionService.infectCity(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
+                if(!isNull(virusType)) {
+                    infectionService.spreadOutbreak(gameDTO.getBoard().getPlayers(), cityToInfect.getNodeCityConnection());
+                    gameDTO.getBoard().increaseOutBreaks();
+                }
+            }
         }
         gamePersistence.insertOrUpdateGame(gameDTO);
 

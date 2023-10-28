@@ -9,6 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.dataontheroad.pandemic.model.board.BoardFactory.createBaseBoard;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,10 +64,24 @@ class InfectionServiceImplTest {
 
     @Test
     void shuffleAndAtToTheTopOfDeck() {
-        City city1 = infectionService.getCardFromBottomInfectionDesk(board.getInfectionDeck(), board.getInfectionDiscardDeck());
-        City city2 = infectionService.getCardFromBottomInfectionDesk(board.getInfectionDeck(), board.getInfectionDiscardDeck());
-        City city3 = infectionService.getCardFromBottomInfectionDesk(board.getInfectionDeck(), board.getInfectionDiscardDeck());
+        City city1 = infectionService.getCardFromTopInfectionDesk(board.getInfectionDeck(), board.getInfectionDiscardDeck());
+        City city2 = infectionService.getCardFromTopInfectionDesk(board.getInfectionDeck(), board.getInfectionDiscardDeck());
+        City city3 = infectionService.getCardFromTopInfectionDesk(board.getInfectionDeck(), board.getInfectionDiscardDeck());
 
+        City cityBottom = infectionService.getCardFromBottomInfectionDesk(board.getInfectionDeck(), board.getInfectionDiscardDeck());
+
+        List<City> listOfCities = Arrays.asList(city1, city2, city3, cityBottom);
+
+        infectionService.shuffleAndAtToTheTopOfDeck(board.getInfectionDeck(), board.getInfectionDiscardDeck());
+
+        assertTrue(board.getInfectionDiscardDeck().isEmpty());
+
+        assertTrue(listOfCities.contains(board.getInfectionDeck().takeTopCardOfDeck().getCity()));
+        assertTrue(listOfCities.contains(board.getInfectionDeck().takeTopCardOfDeck().getCity()));
+        assertTrue(listOfCities.contains(board.getInfectionDeck().takeTopCardOfDeck().getCity()));
+        assertTrue(listOfCities.contains(board.getInfectionDeck().takeTopCardOfDeck().getCity()));
+
+        assertFalse(listOfCities.contains(board.getInfectionDeck().takeTopCardOfDeck().getCity()));
     }
 
 }
