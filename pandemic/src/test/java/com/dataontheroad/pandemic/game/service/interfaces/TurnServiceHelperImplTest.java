@@ -9,6 +9,7 @@ import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
+import com.dataontheroad.pandemic.game.service.implementations.InfectionServiceImpl;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
@@ -38,6 +39,9 @@ class TurnServiceHelperImplTest {
 
     @Mock
     GamePersistenceOnHashMap gamePersistence;
+
+    @Mock
+    InfectionServiceImpl infectionService;
 
     private static UUID uuid = randomUUID();
 
@@ -99,6 +103,8 @@ class TurnServiceHelperImplTest {
         originalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         actionTest = new DriveFerryAction(originalActivePlayer, originalCity.getNodeCityConnection().get(0));
         when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        when(infectionService.getCardFromTopInfectionDesk(any(), any())).thenReturn(originalCity);
+        when(infectionService.canCityBeInfected(any(), any(), any())).thenReturn(false);
         turnService.executeAction(gameDTO.getUuid(), actionTest);
         finalCity = gameDTO.getTurnInformation().getActivePlayer().getCity();
         assertNotEquals(originalCity.getName(), finalCity.getName());
