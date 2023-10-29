@@ -1,13 +1,14 @@
 package com.dataontheroad.pandemic.model.player;
 
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 
-public class QuarantinePlayer extends Player {
+public class QuarantinePlayer extends Player implements PreventPropagationOfVirusInterface {
 
     public QuarantinePlayer() {
         super();
@@ -16,7 +17,8 @@ public class QuarantinePlayer extends Player {
         description = QUARANTINE_DESCRIPTION;
     }
 
-    public List<City> getCitiesWherePreventsToPropagate() {
+    @Override
+    public List<City> getCitiesWherePreventsToPropagate(List<VirusType> listOfVirus) {
         List<City> cityList = new ArrayList<>();
         cityList.addAll(this.getCity().getNodeCityConnection());
         cityList.add(this.getCity());

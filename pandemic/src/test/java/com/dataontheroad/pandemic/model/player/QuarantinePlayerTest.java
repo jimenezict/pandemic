@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.model.player;
 import com.dataontheroad.pandemic.model.city.City;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
@@ -28,7 +29,7 @@ class QuarantinePlayerTest {
         QuarantinePlayer quarantinePlayer = new QuarantinePlayer();
         quarantinePlayer.setCity(cityList.get(1));
 
-        List<City> citiesToValidate = quarantinePlayer.getCitiesWherePreventsToPropagate();
+        List<City> citiesToValidate = quarantinePlayer.getCitiesWherePreventsToPropagate(new ArrayList<>());
         assertTrue(citiesToValidate.contains(new City(ATLANTA.cityName, ATLANTA.virusType)));
         assertTrue(citiesToValidate.contains(new City(CHICAGO.cityName, CHICAGO.virusType)));
         assertTrue(citiesToValidate.contains(new City(MIAMI.cityName, MIAMI.virusType)));

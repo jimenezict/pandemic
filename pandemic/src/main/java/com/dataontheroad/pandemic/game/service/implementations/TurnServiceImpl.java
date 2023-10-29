@@ -94,7 +94,7 @@ public class TurnServiceImpl implements ITurnService {
             gameDTO.getTurnInformation().setNewTurn(player);
 
             City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
-            if(infectionService.canCityBeInfected(gameDTO.getBoard().getVirusList(), gameDTO.getBoard().getPlayers())) {
+            if(infectionService.canCityBeInfected(cityToInfect, gameDTO.getBoard().getVirusList(), gameDTO.getBoard().getPlayers())) {
                 VirusType virusType = infectionService.infectCity(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
                 if(!isNull(virusType)) {
                     infectionService.spreadOutbreak(gameDTO.getBoard().getPlayers(), cityToInfect.getNodeCityConnection());

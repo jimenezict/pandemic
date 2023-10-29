@@ -21,7 +21,7 @@ public interface IInfectionService {
 
     VirusType infectCity(City cityFromBoardList);
 
-    boolean canCityBeInfected(List<Virus> virusList, List<Player> players);
+    boolean canCityBeInfected(City cityToInfect, List<Virus> virusList, List<Player> players);
 
     void spreadOutbreak(List<Player> players, List<City> nodeCityConnection);
 }

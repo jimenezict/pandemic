@@ -1,19 +1,22 @@
 package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.model.board.Board;
-import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.model.board.BoardFactory.createBaseBoard;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
+import static com.dataontheroad.pandemic.model.city.CityEnum.ATLANTA;
+import static com.dataontheroad.pandemic.model.virus.VirusType.BLUE;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -84,4 +87,29 @@ class InfectionServiceImplTest {
         assertFalse(listOfCities.contains(board.getInfectionDeck().takeTopCardOfDeck().getCity()));
     }
 
+    @Test
+    void infectCity() {
+        City atlanta = board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE));
+        atlanta.setVirusBoxes(new ArrayList<>());
+        infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE)));
+        assertEquals(1, atlanta.getVirusBoxes().size());
+
+        assertNull(infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
+        assertEquals(2, atlanta.getVirusBoxes().size());
+
+        assertNull(infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
+        assertEquals(3, atlanta.getVirusBoxes().size());
+
+        assertEquals(VirusType.BLUE, infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
+        assertEquals(3, atlanta.getVirusBoxes().size());
+
+    }
+
+    @Test
+    void canCityBeInfected() {
+    }
+
+    @Test
+    void spreadOutbreak() {
+    }
 }

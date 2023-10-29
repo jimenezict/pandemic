@@ -1,13 +1,16 @@
 package com.dataontheroad.pandemic.model.player;
 
 import com.dataontheroad.pandemic.actions.player_services.TreatDiseaseMedicService;
+import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.virus.Virus;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 
-public class MedicPlayer extends Player {
+public class MedicPlayer extends Player implements PreventPropagationOfVirusInterface {
 
     public MedicPlayer() {
         super();
@@ -21,6 +24,11 @@ public class MedicPlayer extends Player {
         virusList.stream()
                 .filter(Virus::getCureDiscovered)
                 .forEach(virus -> getCity().getVirusBoxes().removeIf(boxVirus -> virus.getVirusType().equals(boxVirus)));
+    }
+
+    @Override
+    public List<City> getCitiesWherePreventsToPropagate(List<VirusType> listOfVirus) {
+        return Arrays.asList(this.getCity());
     }
 
 }
