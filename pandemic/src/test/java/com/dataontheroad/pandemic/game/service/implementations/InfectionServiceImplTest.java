@@ -2,6 +2,7 @@ package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.model.board.Board;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import java.util.List;
 import static com.dataontheroad.pandemic.model.board.BoardFactory.createBaseBoard;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.model.city.CityEnum.ATLANTA;
+import static com.dataontheroad.pandemic.model.city.CityEnum.PARIS;
 import static com.dataontheroad.pandemic.model.virus.VirusType.BLUE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -106,10 +108,18 @@ class InfectionServiceImplTest {
     }
 
     @Test
-    void canCityBeInfected() {
+    void canCityBeInfected_virusIsEradicated() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        List<Virus> virusList = board.getVirusList();
+        Virus blueVirus = virusList.stream().filter(virus -> BLUE.equals(virus.getVirusType())).findFirst().orElse(null);
+        blueVirus.virusHasBeenEradicated();
+
+        assertFalse(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));
     }
 
     @Test
     void spreadOutbreak() {
     }
+
+
 }
