@@ -72,8 +72,7 @@ public class InfectionServiceImpl implements IInfectionService {
         // if research is done, virus cannot be extended to the city with the medic
         MedicPlayer medicPlayer = (MedicPlayer) players.stream().filter(player -> MEDIC_NAME.equals(player.getName())).findFirst().orElse(null);
         if(!isNull(medicPlayer)) {
-            Virus medicCityVirus = virusList.stream().filter(virusLocal -> virusLocal.getVirusType().equals(cityToInfect.getVirus())).findFirst().get();
-            return !medicCityVirus.getCureDiscovered();
+            return !(medicPlayer.getCity().equals(cityToInfect) && cityVirus.getCureDiscovered());
         }
 
         return true;

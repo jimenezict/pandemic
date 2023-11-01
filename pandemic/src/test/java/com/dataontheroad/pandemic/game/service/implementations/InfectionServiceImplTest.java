@@ -2,6 +2,8 @@ package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.model.board.Board;
 import com.dataontheroad.pandemic.model.city.City;
+import com.dataontheroad.pandemic.model.player.MedicPlayer;
+import com.dataontheroad.pandemic.model.player.ScientistPlayer;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,8 +18,7 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.model.board.BoardFactory.createBaseBoard;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
-import static com.dataontheroad.pandemic.model.city.CityEnum.ATLANTA;
-import static com.dataontheroad.pandemic.model.city.CityEnum.PARIS;
+import static com.dataontheroad.pandemic.model.city.CityEnum.*;
 import static com.dataontheroad.pandemic.model.virus.VirusType.BLUE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -115,6 +116,54 @@ class InfectionServiceImplTest {
         blueVirus.virusHasBeenEradicated();
 
         assertFalse(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));
+    }
+
+    @Test
+    void canCityBeInfected_virusIsCuredAndMedicIsNotOnTheCity_propagate() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        board.getPlayers().clear();
+        MedicPlayer medicPlayer = new MedicPlayer();
+        medicPlayer.setCity(board.getCityFromBoardList(new City(WASHINGTON.cityName, BLUE)));
+        board.getPlayers().add(medicPlayer);
+        List<Virus> virusList = board.getVirusList();
+        Virus blueVirus = virusList.stream().filter(virus -> BLUE.equals(virus.getVirusType())).findFirst().orElse(null);
+        blueVirus.cureHasBeenDiscovered();
+        assertTrue(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));
+    }
+
+    @Test
+    void canCityBeInfected_virusIsCuredAndMedicIsOnTheCity_notPropagate() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        board.getPlayers().clear();
+        MedicPlayer medicPlayer = new MedicPlayer();
+        medicPlayer.setCity(paris);
+        board.getPlayers().add(medicPlayer);
+        List<Virus> virusList = board.getVirusList();
+        Virus blueVirus = virusList.stream().filter(virus -> BLUE.equals(virus.getVirusType())).findFirst().orElse(null);
+        blueVirus.cureHasBeenDiscovered();
+        assertFalse(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));
+    }
+
+    @Test
+    void canCityBeInfected_virusIsNotCuredAndMedicIsOnTheCity_propagate() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        board.getPlayers().clear();
+        MedicPlayer medicPlayer = new MedicPlayer();
+        medicPlayer.setCity(board.getCityFromBoardList(new City(WASHINGTON.cityName, BLUE)));
+        board.getPlayers().add(medicPlayer);
+        List<Virus> virusList = board.getVirusList();
+        assertTrue(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));
+    }
+
+    @Test
+    void canCityBeInfected_virusIsNotCuredAndMedicIsNotOnTheCity_propagate() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        board.getPlayers().clear();
+        MedicPlayer medicPlayer = new MedicPlayer();
+        medicPlayer.setCity(board.getCityFromBoardList(new City(WASHINGTON.cityName, BLUE)));
+        board.getPlayers().add(medicPlayer);
+        List<Virus> virusList = board.getVirusList();
+        assertTrue(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));
     }
 
     @Test
