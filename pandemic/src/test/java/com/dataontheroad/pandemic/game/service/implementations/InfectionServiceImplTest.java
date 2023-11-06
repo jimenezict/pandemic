@@ -3,6 +3,7 @@ package com.dataontheroad.pandemic.game.service.implementations;
 import com.dataontheroad.pandemic.model.board.Board;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.MedicPlayer;
+import com.dataontheroad.pandemic.model.player.QuarantinePlayer;
 import com.dataontheroad.pandemic.model.player.ScientistPlayer;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
@@ -164,6 +165,38 @@ class InfectionServiceImplTest {
         board.getPlayers().add(medicPlayer);
         List<Virus> virusList = board.getVirusList();
         assertTrue(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));
+    }
+
+    @Test
+    void canCityBeInfected_virusIsNotCuredAndQuarantineIsOnTheCity_notPropagate() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        board.getPlayers().clear();
+        QuarantinePlayer quarantinePlayer = new QuarantinePlayer();
+        quarantinePlayer.setCity(paris);
+        board.getPlayers().add(quarantinePlayer);
+        assertFalse(infectionService.canCityBeInfected(paris, board.getVirusList(), board.getPlayers()));
+    }
+
+    @Test
+    void canCityBeInfected_virusIsNotCuredAndQuarantineIsOnNearCity_notPropagate() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        City madrid = board.getCityFromBoardList(new City(MADRID.cityName, BLUE));
+        board.getPlayers().clear();
+        QuarantinePlayer quarantinePlayer = new QuarantinePlayer();
+        quarantinePlayer.setCity(madrid);
+        board.getPlayers().add(quarantinePlayer);
+        assertFalse(infectionService.canCityBeInfected(paris, board.getVirusList(), board.getPlayers()));
+    }
+
+    @Test
+    void canCityBeInfected_virusIsNotCuredAndQuarantineIsFarCity_notPropagate() {
+        City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
+        City atlanta = board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE));
+        board.getPlayers().clear();
+        QuarantinePlayer quarantinePlayer = new QuarantinePlayer();
+        quarantinePlayer.setCity(atlanta);
+        board.getPlayers().add(quarantinePlayer);
+        assertTrue(infectionService.canCityBeInfected(paris, board.getVirusList(), board.getPlayers()));
     }
 
     @Test
