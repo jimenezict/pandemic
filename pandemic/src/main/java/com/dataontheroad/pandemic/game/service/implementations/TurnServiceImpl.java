@@ -88,23 +88,32 @@ public class TurnServiceImpl implements ITurnService {
                 playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
             } else {
                 City cityToInfect = infectionService.getCardFromBottomInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
+                infectCityIfPosible(gameDTO, cityToInfect);
             }
+
+            int numberCardToInfect = gameDTO.getBoard().getNumberInfectionCard();
+            for(int i=0; i < numberCardToInfect; i++) {
+                City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
+                infectCityIfPosible(gameDTO, cityToInfect);
+            }
+
             Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
                     gameDTO.getTurnInformation().getActivePlayer());
             gameDTO.getTurnInformation().setNewTurn(player);
-
-            City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
-            if(infectionService.canCityBeInfected(cityToInfect, gameDTO.getBoard().getVirusList(), gameDTO.getBoard().getPlayers())) {
-                VirusType virusType = infectionService.infectCity(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
-                if(!isNull(virusType)) {
-                    infectionService.spreadOutbreak(gameDTO.getBoard().getPlayers(), cityToInfect.getNodeCityConnection());
-                    gameDTO.getBoard().increaseOutBreaks();
-                }
-            }
         }
         gamePersistence.insertOrUpdateGame(gameDTO);
 
         return gameDTO.getTurnInformation();
+    }
+
+    private void infectCityIfPosible(GameDTO gameDTO, City cityToInfect) throws EndOfGameException {
+        if (infectionService.canCityBeInfected(cityToInfect, gameDTO.getBoard().getVirusList(), gameDTO.getBoard().getPlayers())) {
+            VirusType virusType = infectionService.infectCity(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
+            if (!isNull(virusType)) {
+                infectionService.spreadOutbreak(gameDTO.getBoard().getPlayers(), cityToInfect.getNodeCityConnection());
+                gameDTO.getBoard().increaseOutBreaks();
+            }
+        }
     }
 
     @Override
