@@ -37,6 +37,9 @@ public class TurnServiceImpl implements ITurnService {
     @Autowired
     InfectionServiceImpl infectionService;
 
+    @Autowired
+    EpidemicServiceImpl epidemicService;
+
     @Override
     public TurnResponseDTO getTurnServiceInformation(UUID gameId) {
         GameDTO gameDTO = gamePersistence.getGameById(gameId);
@@ -84,13 +87,13 @@ public class TurnServiceImpl implements ITurnService {
         action.execute();
         if (!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
 
-            if (playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer()) &&
-                playerGetNewCardsIfIsNotEpidemic(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer())) {
-            } else {
+            // gets the cards from the player queue where could appear EPIDEMIC, CITY or ACTION cards
+            if (epidemicService.playerGetNewCardsIfIsNotEpidemicAsTimesAsManyTimesAsInfectionsCards(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer(), gameDTO.getBoard().getNumberInfectionCard())) {
                 City cityToInfect = infectionService.getCardFromBottomInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
                 infectCityIfPosible(gameDTO, cityToInfect);
             }
 
+            // gets the cards from the infection queue where could appear only city cards
             int numberCardToInfect = gameDTO.getBoard().getNumberInfectionCard();
             for(int i=0; i < numberCardToInfect; i++) {
                 City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());

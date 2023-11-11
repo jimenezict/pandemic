@@ -9,6 +9,7 @@ import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
+import com.dataontheroad.pandemic.game.service.implementations.EpidemicServiceImpl;
 import com.dataontheroad.pandemic.game.service.implementations.InfectionServiceImpl;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
@@ -33,7 +34,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class TurnServiceHelperImplTest {
+class TurnServiceImplTest {
     @InjectMocks
     TurnServiceImpl turnService;
 
@@ -42,6 +43,9 @@ class TurnServiceHelperImplTest {
 
     @Mock
     InfectionServiceImpl infectionService;
+
+    @Mock
+    EpidemicServiceImpl epidemicService;
 
     private static UUID uuid = randomUUID();
 
