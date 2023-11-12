@@ -198,9 +198,5 @@ class InfectionServiceImplTest {
         assertTrue(infectionService.canCityBeInfected(paris, board.getVirusList(), board.getPlayers()));
     }
 
-    @Test
-    void spreadOutbreak() {
-    }
-
 
 }

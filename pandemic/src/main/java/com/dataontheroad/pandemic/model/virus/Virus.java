@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Virus {
 
     private final VirusType virusType;
-    private Boolean cureDiscovered = Boolean.FALSE;
-    private Boolean eradicated = Boolean.FALSE;
+    private boolean cureDiscovered = Boolean.FALSE;
+    private boolean eradicated = Boolean.FALSE;
 
 
     public Virus(VirusType virusType) {
@@ -29,7 +29,7 @@ public class Virus {
         return cureDiscovered;
     }
 
-    public Boolean getEradicated() {
+    public boolean getEradicated() {
         return eradicated;
     }
 

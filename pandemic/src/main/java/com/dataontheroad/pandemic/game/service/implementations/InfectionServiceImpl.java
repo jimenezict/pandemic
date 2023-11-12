@@ -11,10 +11,7 @@ import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.MEDIC_NAME;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.QUARANTINE_NAME;
@@ -58,7 +55,12 @@ public class InfectionServiceImpl implements IInfectionService {
 
     @Override
     public boolean canCityBeInfected(City cityToInfect, List<Virus> virusList, List<Player> players) {
-        Virus cityVirus = virusList.stream().filter(virusLocal -> virusLocal.getVirusType().equals(cityToInfect.getVirus())).findFirst().get();
+        Optional<Virus> cityVirusOptional = virusList.stream().filter(virusLocal -> virusLocal.getVirusType().equals(cityToInfect.getVirus())).findFirst();
+        if(!cityVirusOptional.isPresent()) {
+            return false;
+        }
+        Virus cityVirus = cityVirusOptional.get();
+
         // if virus has been eradicated cannot be extended
         if(cityVirus.getEradicated())
             return false;
@@ -80,6 +82,6 @@ public class InfectionServiceImpl implements IInfectionService {
 
     @Override
     public void spreadOutbreak(List<Player> players, List<City> nodeCityConnection) {
-
+        // method to be implemented
     }
 }

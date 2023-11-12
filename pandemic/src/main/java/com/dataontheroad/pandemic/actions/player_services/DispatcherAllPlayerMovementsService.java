@@ -13,9 +13,11 @@ import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERROR_NO_CONNECTION;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.DISPATCHER_NAME;
-import static java.util.Objects.isNull;
 
 public class DispatcherAllPlayerMovementsService {
+
+    private DispatcherAllPlayerMovementsService() {
+    }
 
     public static boolean isDoable(Player player, City destination) {
         return player.getCity().getNodeCityConnection().contains(destination);

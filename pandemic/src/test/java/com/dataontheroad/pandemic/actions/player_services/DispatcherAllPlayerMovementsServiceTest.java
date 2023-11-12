@@ -26,8 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DispatcherAllPlayerMovementsServiceTest {
 
     List<City> cityList = createCityList();
-
-    DispatcherAllPlayerMovementsService dispatcherAllPlayerMovementsService = new DispatcherAllPlayerMovementsService();
     Player player;
 
     private City getCityFromBoardList(City inputCity) {
@@ -42,19 +40,19 @@ class DispatcherAllPlayerMovementsServiceTest {
 
     @Test
     void isDoable_limaIsNotNearToAtlanta_thenFalse () {
-        assertFalse(dispatcherAllPlayerMovementsService.isDoable(player, getCityFromBoardList(new City(LIMA.cityName, LIMA.virusType))));
+        assertFalse(DispatcherAllPlayerMovementsService.isDoable(player, getCityFromBoardList(new City(LIMA.cityName, LIMA.virusType))));
     }
 
     @Test
     void isDoable_chicagoIsNearToAtlanta_thenTrue() {
-        assertTrue(dispatcherAllPlayerMovementsService.isDoable(player, getCityFromBoardList(new City(CHICAGO.cityName, CHICAGO.virusType))));
+        assertTrue(DispatcherAllPlayerMovementsService.isDoable(player, getCityFromBoardList(new City(CHICAGO.cityName, CHICAGO.virusType))));
     }
 
     @Test
     void doAction_limaIsNotNearToAtlanta_throwException() {
         ActionException exception =
                 assertThrows(ActionException.class,
-                        () -> dispatcherAllPlayerMovementsService.doAction(player, new City(LIMA.cityName, LIMA.virusType)));
+                        () -> DispatcherAllPlayerMovementsService.doAction(player, new City(LIMA.cityName, LIMA.virusType)));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(ActionsType.DRIVEFERRY.label));
         assertTrue(actualMessage.contains(DRIVEFERRY_ERROR_NO_CONNECTION));
@@ -62,7 +60,7 @@ class DispatcherAllPlayerMovementsServiceTest {
 
     @Test
     void doAction_chicagoIsNearToAtlanta() throws ActionException  {
-        dispatcherAllPlayerMovementsService.doAction(player, new City(CHICAGO.cityName, CHICAGO.virusType));
+        DispatcherAllPlayerMovementsService.doAction(player, new City(CHICAGO.cityName, CHICAGO.virusType));
         assertEquals(player.getCity(), new City(CHICAGO.cityName, CHICAGO.virusType));
     }
 
@@ -75,7 +73,7 @@ class DispatcherAllPlayerMovementsServiceTest {
         QuarantinePlayer quarantine = new QuarantinePlayer();
         quarantine.setCity(getCityFromBoardList(new City(LAGOS.cityName, LAGOS.virusType)));
 
-        List<Action> actionsToValidate = dispatcherAllPlayerMovementsService.returnAvailableActions(new ArrayList<>(Arrays.asList(medic, dispatcher, quarantine)));
+        List<Action> actionsToValidate = DispatcherAllPlayerMovementsService.returnAvailableActions(new ArrayList<>(Arrays.asList(medic, dispatcher, quarantine)));
 
         assertEquals(6, actionsToValidate.size());
         assertEquals(6, actionsToValidate.stream().filter(x -> DRIVEFERRYDISPATCHER.equals(x.getActionsType())).count());

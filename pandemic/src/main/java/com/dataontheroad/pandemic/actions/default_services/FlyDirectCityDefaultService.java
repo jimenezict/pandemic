@@ -9,6 +9,7 @@ import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
@@ -33,7 +34,11 @@ public class FlyDirectCityDefaultService {
     }
 
     private static City getBoardCity(List<City> boardCities, City destination) {
-        return boardCities.stream().filter(city -> city.equals(destination)).findFirst().get();
+        Optional<City> optional = boardCities.stream().filter(city -> city.equals(destination)).findFirst();
+        if(optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
     }
 
     public void doAction(Player player, City destination) throws ActionException {
