@@ -4,7 +4,6 @@ import com.dataontheroad.pandemic.model.board.Board;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.MedicPlayer;
 import com.dataontheroad.pandemic.model.player.QuarantinePlayer;
-import com.dataontheroad.pandemic.model.player.ScientistPlayer;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.BeforeEach;
@@ -95,16 +94,16 @@ class InfectionServiceImplTest {
     void infectCity() {
         City atlanta = board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE));
         atlanta.setVirusBoxes(new ArrayList<>());
-        infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE)));
+        infectionService.infectCityAndReturnCityVirusTypeIfOverpassOutbreak(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE)));
         assertEquals(1, atlanta.getVirusBoxes().size());
 
-        assertNull(infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
+        assertNull(infectionService.infectCityAndReturnCityVirusTypeIfOverpassOutbreak(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
         assertEquals(2, atlanta.getVirusBoxes().size());
 
-        assertNull(infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
+        assertNull(infectionService.infectCityAndReturnCityVirusTypeIfOverpassOutbreak(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
         assertEquals(3, atlanta.getVirusBoxes().size());
 
-        assertEquals(VirusType.BLUE, infectionService.infectCity(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
+        assertEquals(VirusType.BLUE, infectionService.infectCityAndReturnCityVirusTypeIfOverpassOutbreak(board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE))));
         assertEquals(3, atlanta.getVirusBoxes().size());
 
     }

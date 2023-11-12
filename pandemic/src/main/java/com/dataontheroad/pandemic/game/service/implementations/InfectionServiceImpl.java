@@ -48,7 +48,7 @@ public class InfectionServiceImpl implements IInfectionService {
     }
 
     @Override
-    public VirusType infectCity(City cityFromBoardList) {
+    public VirusType infectCityAndReturnCityVirusTypeIfOverpassOutbreak(City cityFromBoardList) {
         if(cityFromBoardList.getVirusBoxes().size() < 3) {
             cityFromBoardList.addVirusBoxes(cityFromBoardList.getVirus());
             return null;

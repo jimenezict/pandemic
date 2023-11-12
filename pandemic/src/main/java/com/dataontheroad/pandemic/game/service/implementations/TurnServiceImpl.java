@@ -111,8 +111,8 @@ public class TurnServiceImpl implements ITurnService {
 
     private void infectCityIfPosible(GameDTO gameDTO, City cityToInfect) throws EndOfGameException {
         if (infectionService.canCityBeInfected(cityToInfect, gameDTO.getBoard().getVirusList(), gameDTO.getBoard().getPlayers())) {
-            VirusType virusType = infectionService.infectCity(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
-            if (!isNull(virusType)) {
+            VirusType virusTypeToOutbreak = infectionService.infectCityAndReturnCityVirusTypeIfOverpassOutbreak(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
+            if (!isNull(virusTypeToOutbreak)) {
                 infectionService.spreadOutbreak(gameDTO.getBoard().getPlayers(), cityToInfect.getNodeCityConnection());
                 gameDTO.getBoard().increaseOutBreaks();
             }

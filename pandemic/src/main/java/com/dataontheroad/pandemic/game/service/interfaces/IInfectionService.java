@@ -19,7 +19,7 @@ public interface IInfectionService {
 
     void shuffleAndAtToTheTopOfDeck(InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck);
 
-    VirusType infectCity(City cityFromBoardList);
+    VirusType infectCityAndReturnCityVirusTypeIfOverpassOutbreak(City cityFromBoardList);
 
     boolean canCityBeInfected(City cityToInfect, List<Virus> virusList, List<Player> players);
 
