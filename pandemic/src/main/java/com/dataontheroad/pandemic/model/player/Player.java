@@ -39,16 +39,7 @@ public class Player implements IPlayerServices {
     }
 
     public Player(City city) {
-        listCard = new ArrayList<>();
-        numOfCardsForDiscoveringCure = 5;
-        buildResearchCenterDefaultService = new BuildResearchCenterDefaultService();
-        discoverCureDefaultService = new DiscoverCureDefaultService();
-        driveFerryDefaultService = new DriveFerryDefaultService();
-        flyCharterDefaultService = new FlyCharterDefaultService();
-        flyDirectCityDefaultService = new FlyDirectCityDefaultService();
-        flyShuttleDefaultService = new FlyShuttleDefaultService();
-        shareKnowledgeDefaultService = new ShareKnowledgeDefaultService();
-        treatDiseaseDefaultService = new TreatDiseaseDefaultService();
+        this();
         this.city = city;
     }
 
