@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
@@ -56,7 +57,7 @@ public class TurnEndPoint {
         try {
             turnExecuteDTO = turnService.getTurnExecuteDTO(turnRequestDTO.getUuid());
             Action action = turnService.getSelectedAction(turnExecuteDTO, turnRequestDTO.getActionPosition());
-            turnService.actionFormatValidation(turnExecuteDTO, action, turnRequestDTO.getAdditionalFields());
+            turnService.actionFormatValidation(turnExecuteDTO, action, (HashMap<String, String>) turnRequestDTO.getAdditionalFields());
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), action);
         } catch (ActionException | GameExecutionException | EndOfGameException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());

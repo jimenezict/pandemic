@@ -13,7 +13,7 @@ public class EndOfGameServiceImpl implements IGameService.IEndOfGameService {
 
     @Override
     public boolean allVirusHadBeenEradicated(List<Virus> virusList) {
-        return virusList.stream().filter(virus -> virus.getEradicated()).count() == virusList.size();
+        return virusList.stream().filter(Virus::getEradicated).count() == virusList.size();
     }
 
     @Override
