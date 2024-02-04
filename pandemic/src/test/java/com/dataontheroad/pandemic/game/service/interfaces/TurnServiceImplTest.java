@@ -126,7 +126,7 @@ class TurnServiceImplTest {
         HashMap<String, String> additionalFields = new HashMap<>();
         additionalFields.put(ADDITIONAL_FIELD_DESTINATION, city);
 
-        turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields);
+        turnService.validateActionFormat(turnExecuteDTO, action, additionalFields);
 
         assertEquals(city, ((FlyCharterAction) action).getDestination().getName());
         assertEquals(FLYCHARTER, action.getActionsType());
@@ -142,7 +142,7 @@ class TurnServiceImplTest {
         HashMap<String, String> additionalFields = new HashMap<>();
         additionalFields.put(ADDITIONAL_FIELD_DESTINATION, city);
 
-        turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields);
+        turnService.validateActionFormat(turnExecuteDTO, action, additionalFields);
 
         assertEquals(city, ((FlyFromResearchCenterAnywhereAction) action).getDestination().getName());
         assertEquals(OPERATION_FLY, action.getActionsType());
@@ -160,7 +160,7 @@ class TurnServiceImplTest {
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
+                        () -> turnService.validateActionFormat(turnExecuteDTO, action, additionalFields));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_INVALID_DESTINATION_CITY));
     }
@@ -177,7 +177,7 @@ class TurnServiceImplTest {
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
+                        () -> turnService.validateActionFormat(turnExecuteDTO, action, additionalFields));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_OPERATION_INVALID_DESTINATION_CITY));
     }
@@ -192,7 +192,7 @@ class TurnServiceImplTest {
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
+                        () -> turnService.validateActionFormat(turnExecuteDTO, action, additionalFields));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD));
     }
@@ -207,7 +207,7 @@ class TurnServiceImplTest {
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, additionalFields));
+                        () -> turnService.validateActionFormat(turnExecuteDTO, action, additionalFields));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_OPERATION_DESTINATION_FIELD));
     }
@@ -222,7 +222,7 @@ class TurnServiceImplTest {
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, null));
+                        () -> turnService.validateActionFormat(turnExecuteDTO, action, null));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_FLYCHARTER_DESTINATION_FIELD));
     }
@@ -237,7 +237,7 @@ class TurnServiceImplTest {
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
-                        () -> turnService.actionFormatValidation(turnExecuteDTO, action, null));
+                        () -> turnService.validateActionFormat(turnExecuteDTO, action, null));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_OPERATION_DESTINATION_FIELD));
     }

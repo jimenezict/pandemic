@@ -6,4 +6,5 @@ import com.dataontheroad.pandemic.model.player.Player;
 
 public interface IEpidemicService {
     boolean playerGetNewCardsIfIsNotEpidemicAsTimesAsManyTimesAsInfectionsCards(PlayerQueue playerQueue, Player activePlayer, int numberInfectionCard) throws EndOfGameException;
+
 }

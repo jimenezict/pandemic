@@ -92,12 +92,17 @@ public class TurnServiceImpl implements ITurnService {
         if (!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
 
             // gets the cards from the player queue where could appear EPIDEMIC, CITY or ACTION cards
+            // in case that PlayerQueue gets empty, it throws an end of game exception which is captured by the controller
+            // in case that is EPIDEMIC takes the bottom card from Infection Desk and infect that city
+            // if had overpass the outbreaks, then, it drops an End Of Game exception
+            // should shuffle the Discarded Infection Desk and put on the top (TBD)
             if (epidemicService.playerGetNewCardsIfIsNotEpidemicAsTimesAsManyTimesAsInfectionsCards(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer(), gameDTO.getBoard().getNumberInfectionCard())) {
                 City cityToInfect = infectionService.getCardFromBottomInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
                 infectCityIfPosible(gameDTO, cityToInfect);
             }
 
-            // gets the cards from the infection queue where could appear only city cards
+            // gets the cards from the infection queue where could appear only CITY cards
+            // in case that the InfectionDeck gets empty, then through an end of Game Exception
             int numberCardToInfect = gameDTO.getBoard().getNumberInfectionCard();
             for(int i=0; i < numberCardToInfect; i++) {
                 City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
@@ -124,7 +129,7 @@ public class TurnServiceImpl implements ITurnService {
     }
 
     @Override
-    public Action actionFormatValidation(TurnExecuteDTO turnExecuteDTO, Action action, HashMap<String, String> additionalFields) throws GameExecutionException {
+    public Action validateActionFormat(TurnExecuteDTO turnExecuteDTO, Action action, HashMap<String, String> additionalFields) throws GameExecutionException {
 
         if(FLYCHARTER.equals(action.getActionsType())) {
             if(!isNull(additionalFields) && additionalFields.containsKey(ADDITIONAL_FIELD_DESTINATION)) {
