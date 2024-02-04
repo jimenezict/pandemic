@@ -5,7 +5,6 @@ import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.service.interfaces.IGameService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,8 +17,11 @@ import static java.util.Objects.isNull;
 @Service
 public class GameServiceImpl implements IGameService {
 
-    @Autowired
-    GamePersistenceOnHashMap gamePersistence;
+    private final GamePersistenceOnHashMap gamePersistence;
+
+    public GameServiceImpl(GamePersistenceOnHashMap gamePersistence) {
+        this.gamePersistence = gamePersistence;
+    }
 
     @Override
     public UUID createGame(int numEpidemic, int numPlayers) throws GameExecutionException {

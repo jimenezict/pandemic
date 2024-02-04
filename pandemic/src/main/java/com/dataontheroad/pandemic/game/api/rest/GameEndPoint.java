@@ -5,7 +5,6 @@ import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.commons.SuccessResponse;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.service.implementations.GameServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,12 @@ import static java.util.Objects.isNull;
 @RestController
 public class GameEndPoint {
 
-    @Autowired
-    GameServiceImpl gameService;
+    private final GameServiceImpl gameService;
+
+    public GameEndPoint(GameServiceImpl gameService) {
+        this.gameService = gameService;
+    }
+
 
     @GetMapping("/game/create/players/{numPlayers}/pandemic/{numPandemics}")
     ResponseEntity createGame(@PathVariable int numPlayers, @PathVariable int numPandemics) {

@@ -31,14 +31,19 @@ import static java.util.Objects.isNull;
 @Service
 public class TurnServiceImpl implements ITurnService {
 
-    @Autowired
-    GamePersistenceOnHashMap gamePersistence;
+    private final GamePersistenceOnHashMap gamePersistence;
 
-    @Autowired
-    InfectionServiceImpl infectionService;
+    private final InfectionServiceImpl infectionService;
 
-    @Autowired
-    EpidemicServiceImpl epidemicService;
+    private final EpidemicServiceImpl epidemicService;
+
+    public TurnServiceImpl(GamePersistenceOnHashMap gamePersistence,
+                           InfectionServiceImpl infectionService,
+                           EpidemicServiceImpl epidemicService) {
+        this.gamePersistence = gamePersistence;
+        this.infectionService = infectionService;
+        this.epidemicService = epidemicService;
+    }
 
     @Override
     public TurnResponseDTO getTurnServiceInformation(UUID gameId) {

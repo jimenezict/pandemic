@@ -11,7 +11,6 @@ import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +24,11 @@ import static java.util.Objects.isNull;
 @RestController
 public class TurnEndPoint {
 
+    private final TurnServiceImpl turnService;
 
-    @Autowired
-    TurnServiceImpl turnService;
+    public TurnEndPoint(TurnServiceImpl turnService) {
+        this.turnService = turnService;
+    }
 
     @GetMapping("/turn/status/{gameId}")
     ResponseEntity getTurn(@PathVariable UUID gameId) {
