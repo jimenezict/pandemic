@@ -14,7 +14,6 @@ import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.interfaces.ITurnService;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
-import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -32,16 +31,12 @@ public class TurnServiceImpl implements ITurnService {
 
     private final GamePersistenceOnHashMap gamePersistence;
 
-    private final InfectionServiceImpl infectionService;
-
-    private final EpidemicServiceImpl epidemicService;
+    private final EndOfTurnServiceImpl endOfTurnService;
 
     public TurnServiceImpl(GamePersistenceOnHashMap gamePersistence,
-                           InfectionServiceImpl infectionService,
-                           EpidemicServiceImpl epidemicService) {
+                           EndOfTurnServiceImpl endOfTurnService) {
         this.gamePersistence = gamePersistence;
-        this.infectionService = infectionService;
-        this.epidemicService = epidemicService;
+        this.endOfTurnService = endOfTurnService;
     }
 
     @Override
@@ -90,42 +85,14 @@ public class TurnServiceImpl implements ITurnService {
 
         action.execute();
         if (!gameDTO.getTurnInformation().canDoNextActionAndReduceMissingTurns()) {
-
-            // gets the cards from the player queue where could appear EPIDEMIC, CITY or ACTION cards
-            // in case that PlayerQueue gets empty, it throws an end of game exception which is captured by the controller
-            // in case that is EPIDEMIC takes the bottom card from Infection Desk and infect that city
-            // if had overpass the outbreaks, then, it drops an End Of Game exception
-            // should shuffle the Discarded Infection Desk and put on the top (TBD)
-            if (epidemicService.playerGetNewCardsIfIsNotEpidemicAsTimesAsManyTimesAsInfectionsCards(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer(), gameDTO.getBoard().getNumberInfectionCard())) {
-                City cityToInfect = infectionService.getCardFromBottomInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
-                infectCityIfPosible(gameDTO, cityToInfect);
-            }
-
-            // gets the cards from the infection queue where could appear only CITY cards
-            // in case that the InfectionDeck gets empty, then through an end of Game Exception
-            int numberCardToInfect = gameDTO.getBoard().getNumberInfectionCard();
-            for(int i=0; i < numberCardToInfect; i++) {
-                City cityToInfect = infectionService.getCardFromTopInfectionDesk(gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
-                infectCityIfPosible(gameDTO, cityToInfect);
-            }
-
-            Player player = getNextActivePlayer(gameDTO.getBoard().getPlayers(),
-                    gameDTO.getTurnInformation().getActivePlayer());
-            gameDTO.getTurnInformation().setNewTurn(player);
+            endOfTurnService.getCardsFromPlayerDeck(gameDTO.getBoard().getPlayerQueue(), gameDTO.getTurnInformation().getActivePlayer());
+            endOfTurnService.getCardsFromInfectionDeck(gameDTO.getBoard().getNumberInfectionCard(), gameDTO.getBoard().getInfectionDeck(), gameDTO.getBoard().getInfectionDiscardDeck());
+            endOfTurnService.setNewTurnAndPlayer(gameDTO.getBoard().getPlayers(),gameDTO.getTurnInformation());
         }
+
         gamePersistence.insertOrUpdateGame(gameDTO);
 
         return gameDTO.getTurnInformation();
-    }
-
-    private void infectCityIfPosible(GameDTO gameDTO, City cityToInfect) throws EndOfGameException {
-        if (infectionService.canCityBeInfected(cityToInfect, gameDTO.getBoard().getVirusList(), gameDTO.getBoard().getPlayers())) {
-            VirusType virusTypeToOutbreak = infectionService.infectCityAndReturnCityVirusTypeIfOverpassOutbreak(gameDTO.getBoard().getCityFromBoardList(cityToInfect));
-            if (!isNull(virusTypeToOutbreak)) {
-                infectionService.spreadOutbreak(gameDTO.getBoard().getPlayers(), cityToInfect.getNodeCityConnection());
-                gameDTO.getBoard().increaseOutBreaks();
-            }
-        }
     }
 
     @Override
