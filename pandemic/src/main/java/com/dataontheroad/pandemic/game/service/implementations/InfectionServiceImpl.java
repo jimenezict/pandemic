@@ -21,30 +21,6 @@ import static java.util.Objects.isNull;
 public class InfectionServiceImpl implements IInfectionService {
 
     @Override
-    public City getCardFromBottomInfectionDesk(InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck) {
-        CityCard cityCard = infectionDeck.takeBottomCardOfDeck();
-        infectionDiscardDeck.add(cityCard);
-        return cityCard.getCity();
-    }
-
-    @Override
-    public City getCardFromTopInfectionDesk(InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck) {
-        CityCard cityCard = infectionDeck.takeTopCardOfDeck();
-        infectionDiscardDeck.add(cityCard);
-        return cityCard.getCity();
-    }
-
-    @Override
-    public void shuffleAndAtToTheTopOfDeck(InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck) {
-        if(!infectionDiscardDeck.isEmpty()) {
-            ArrayList<CityCard> infectionDiscardDeckSortedLocal = new ArrayList<>(infectionDiscardDeck);
-            Collections.shuffle(infectionDiscardDeckSortedLocal);
-            infectionDiscardDeckSortedLocal.forEach(cardDiscarded -> infectionDeck.getDeck().addFirst(cardDiscarded));
-            infectionDiscardDeck.clear();
-        }
-    }
-
-    @Override
     public VirusType infectCityAndReturnCityVirusTypeIfOverpassOutbreak(City cityFromBoardList) {
         if(cityFromBoardList.getVirusBoxes().size() < 3) {
             cityFromBoardList.addVirusBoxes(cityFromBoardList.getVirus());

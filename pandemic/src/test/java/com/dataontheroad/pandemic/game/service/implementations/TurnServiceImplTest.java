@@ -1,4 +1,4 @@
-package com.dataontheroad.pandemic.game.service.interfaces;
+package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DriveFerryAction;

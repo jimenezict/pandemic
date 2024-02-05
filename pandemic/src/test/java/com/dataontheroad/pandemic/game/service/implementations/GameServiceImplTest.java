@@ -1,10 +1,9 @@
-package com.dataontheroad.pandemic.game.service.interfaces;
+package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
-import com.dataontheroad.pandemic.game.service.implementations.GameServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GameDTOServiceImplTest {
+class GameServiceImplTest {
 
     @InjectMocks
     GameServiceImpl gameService;
