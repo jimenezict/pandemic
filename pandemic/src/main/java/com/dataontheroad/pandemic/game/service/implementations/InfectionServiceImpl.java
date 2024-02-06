@@ -1,9 +1,7 @@
 package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.game.service.interfaces.IInfectionService;
-import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
-import com.dataontheroad.pandemic.model.decks.InfectionDeck;
 import com.dataontheroad.pandemic.model.player.MedicPlayer;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.player.QuarantinePlayer;
