@@ -22,6 +22,7 @@ public class LiteralGame {
     public static final String TURN_WRONG_OPERATION_INVALID_DESTINATION_CITY = "destination is not a valid city on action " + OPERATION_FLY.name();
     public static final String TURN_WRONG_OPERATION_DESTINATION_FIELD = "destination field is mandatory when action is " + OPERATION_FLY.name();
     public static final String END_OF_GAME_EMPTY_DECK = "Player Deck is empty";
+    public static final String END_OF_GAME_EMPTY_INFECTION_DECK = "Infection Deck is empty";
     public static final String ADDITIONAL_FIELD_DESTINATION = "destination";
 
 }

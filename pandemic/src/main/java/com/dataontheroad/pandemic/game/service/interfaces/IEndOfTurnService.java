@@ -12,7 +12,7 @@ import java.util.Set;
 
 public interface IEndOfTurnService {
 
-    void getCardsFromPlayerDeck(PlayerQueue playerQueue, Player activePlayer) throws EndOfGameException;
+    boolean getCardsFromPlayerDeck(PlayerQueue playerQueue, Player activePlayer) throws EndOfGameException;
 
     void getCardsFromInfectionDeck(int numberOfInfections, InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck) throws EndOfGameException;
 

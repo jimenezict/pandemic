@@ -13,4 +13,6 @@ public interface IDeckManagementService {
     City getCardFromTopInfectionDesk(InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck);
 
     void shuffleAndAtToTheTopOfDeck(InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck);
+
+
 }

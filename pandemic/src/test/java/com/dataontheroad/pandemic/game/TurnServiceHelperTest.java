@@ -1,21 +1,15 @@
 package com.dataontheroad.pandemic.game;
 
-import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
-import com.dataontheroad.pandemic.model.cards.model.EpidemicCard;
 import com.dataontheroad.pandemic.model.city.City;
-import com.dataontheroad.pandemic.model.decks.PlayerQueue;
 import com.dataontheroad.pandemic.model.player.*;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_EMPTY_DECK;
 import static com.dataontheroad.pandemic.game.TurnServiceHelper.*;
-import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnServiceHelperTest {
@@ -65,32 +59,5 @@ class TurnServiceHelperTest {
         assertEquals(scientist, getNextActivePlayer(playerList, operations));
     }
 
-    @Test
-    void playerGetNewCardsIfIsNotEpidemic_isCityCard() throws EndOfGameException {
-        Player scientist = new ScientistPlayer();
-        PlayerQueue playerQueue = new PlayerQueue(Arrays.asList(createCityCard(newyork)));
-        assertTrue(playerGetNewCardsIfIsNotEpidemic(playerQueue, scientist));
-        assertEquals(1, scientist.getListCard().size());
-    }
-
-    @Test
-    void playerGetNewCardsIfIsNotEpidemic_isEpidemic() throws EndOfGameException {
-        Player scientist = new ScientistPlayer();
-        PlayerQueue playerQueue = new PlayerQueue(Arrays.asList(new EpidemicCard()));
-        assertFalse(playerGetNewCardsIfIsNotEpidemic(playerQueue, scientist));
-        assertTrue(scientist.getListCard().isEmpty());
-    }
-
-    @Test
-    void playerGetNewCardsIfIsNotEpidemic_emptyDeck() {
-        Player scientist = new ScientistPlayer();
-        PlayerQueue playerQueue = new PlayerQueue(new ArrayList<>());
-
-        EndOfGameException exception =
-                assertThrows(EndOfGameException.class,
-                        () -> playerGetNewCardsIfIsNotEpidemic(playerQueue, scientist));
-
-        assertTrue(exception.getMessage().contains(END_OF_GAME_EMPTY_DECK));
-    }
 
 }

@@ -4,11 +4,13 @@ import com.dataontheroad.pandemic.game.service.interfaces.IDeckManagementService
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.decks.InfectionDeck;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
 
+@Service
 public class DeckManagementServiceImpl implements IDeckManagementService {
     @Override
     public City getCardFromBottomInfectionDesk(InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck) {
