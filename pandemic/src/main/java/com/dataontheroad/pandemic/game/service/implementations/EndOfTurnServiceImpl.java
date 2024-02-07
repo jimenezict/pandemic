@@ -44,7 +44,7 @@ public class EndOfTurnServiceImpl implements IEndOfTurnService {
     @Override
     public void getCardsFromInfectionDeck(int numberOfInfections, InfectionDeck infectionDeck, Set<CityCard> infectionDiscardDeck) throws EndOfGameException {
         try {
-            for (int i = 1; i < numberOfInfections; i++) {
+            for (int i = 0; i < numberOfInfections; i++) {
                 deckManagementService.getCardFromTopInfectionDesk(infectionDeck, infectionDiscardDeck);
             }
         } catch(NoSuchElementException ex){
