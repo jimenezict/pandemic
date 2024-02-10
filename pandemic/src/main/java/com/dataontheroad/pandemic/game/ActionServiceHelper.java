@@ -56,12 +56,4 @@ public class ActionServiceHelper {
                 return new ArrayList<>();
         }
     }
-    public static Boolean executeAction(Action action) {
-        try {
-            action.execute();
-        } catch (ActionException e) {
-            return FALSE;
-        }
-        return TRUE;
-    }
 }

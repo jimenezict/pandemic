@@ -1,6 +1,7 @@
 package com.dataontheroad.pandemic.game;
 
 import com.dataontheroad.pandemic.actions.action_factory.*;
+import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 import com.dataontheroad.pandemic.model.city.City;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -53,42 +55,42 @@ class ActionServiceExecuteActionHelperTest {
     }
 
     @Test
-    void executeAction_buildResearchCenter_correct() {
+    void executeAction_buildResearchCenter_correct() throws ActionException {
         //player is in New York
         //New York do NOT have research center
         //Player has DefaultService for BuildResearchCenter
         //Player has the card of New York
         BuildResearchCenterAction action = new BuildResearchCenterAction(player);
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertTrue(player.getCity().getHasCenter());
     }
 
     @Test
-    void executeAction_buildResearchCenter_withoutCard() {
+    void executeAction_buildResearchCenter_withoutCard() throws ActionException {
         //player is in New York
         //New York has NOT research center
         //Player has DefaultService for BuildResearchCenter
         //Player has not the card of New York
         player.getListCard().remove(0);
         BuildResearchCenterAction action = new BuildResearchCenterAction(player);
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
         assertFalse(player.getCity().getHasCenter());
     }
 
     @Test
-    void executeAction_buildResearchCenter_hasResearchCenter() {
+    void executeAction_buildResearchCenter_hasResearchCenter() throws ActionException {
         //player is in New York
         //New York has a research center
         //Player has DefaultService for BuildResearchCenter
         //Player has the card of New York
         newyork.setHasCenter(TRUE);
         BuildResearchCenterAction action = new BuildResearchCenterAction(player);
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
         assertTrue(player.getCity().getHasCenter());
     }
 
     @Test
-    void executeAction_DiscoverCure_correct() {
+    void executeAction_DiscoverCure_correct() throws ActionException {
         //Player is in New York
         //New York has a research center
         //Player has 5 blue cards
@@ -102,12 +104,12 @@ class ActionServiceExecuteActionHelperTest {
 
         newyork.setHasCenter(TRUE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertTrue(blueVirus.getCureDiscovered());
     }
 
     @Test
-    void executeAction_DiscoverCure_cureAlreadyDiscovered() {
+    void executeAction_DiscoverCure_cureAlreadyDiscovered() throws ActionException {
         //Player is in New York
         //New York has a research center
         //Player has 5 blue cards
@@ -122,12 +124,12 @@ class ActionServiceExecuteActionHelperTest {
 
         newyork.setHasCenter(TRUE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
         assertTrue(blueVirus.getCureDiscovered());
     }
 
     @Test
-    void executeAction_DiscoverCure_cityHasNotResearchCenter() {
+    void executeAction_DiscoverCure_cityHasNotResearchCenter() throws ActionException {
         //Player is in New York
         //New York has not a research center
         //Player has 5 blue cards
@@ -141,12 +143,12 @@ class ActionServiceExecuteActionHelperTest {
 
         newyork.setHasCenter(FALSE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
         assertFalse(blueVirus.getCureDiscovered());
     }
 
     @Test
-    void executeAction_DiscoverCure_playerHasNotEnoughCards() {
+    void executeAction_DiscoverCure_playerHasNotEnoughCards() throws ActionException {
         //Player is in New York
         //New York has a research center
         //Player has 2 blue cards
@@ -157,12 +159,12 @@ class ActionServiceExecuteActionHelperTest {
 
         newyork.setHasCenter(TRUE);
         DiscoverCureAction action = new DiscoverCureAction(player, blueVirus);
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
         assertFalse(blueVirus.getCureDiscovered());
     }
 
     @Test
-    void executeAction_DriveFerryAction_correct() {
+    void executeAction_DriveFerryAction_correct() throws ActionException {
         //Player is in New York
         //Player goes to Atlanta
         //There is connection between cities
@@ -171,16 +173,16 @@ class ActionServiceExecuteActionHelperTest {
         atlanta.getNodeCityConnection().add(newyork);
 
         DriveFerryAction action = new DriveFerryAction(player, atlanta);
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertEquals(atlanta, player.getCity());
 
         action = new DriveFerryAction(player, newyork);
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertEquals(newyork, player.getCity());
     }
 
     @Test
-    void executeAction_DriveFerryAction_noConnectionBetweenCities() {
+    void executeAction_DriveFerryAction_noConnectionBetweenCities() throws ActionException {
         //Player is in New York
         //Player goes to Atlanta
         //There is connection between cities
@@ -189,11 +191,11 @@ class ActionServiceExecuteActionHelperTest {
         atlanta.getNodeCityConnection().add(newyork);
 
         DriveFerryAction action = new DriveFerryAction(player, tokio);
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
     }
 
     @Test
-    void executeAction_FlyCharterAction_correct() {
+    void executeAction_FlyCharterAction_correct() throws ActionException {
         //Player is in New York
         //Player goes to Essen
         //Player has New York card
@@ -207,12 +209,12 @@ class ActionServiceExecuteActionHelperTest {
         FlyCharterAction action = new FlyCharterAction(player);
         action.setDestination(essen);
 
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertEquals(essen, player.getCity());
     }
 
     @Test
-    void executeAction_FlyCharterAction_hasNotEssenCard() {
+    void executeAction_FlyCharterAction_hasNotEssenCard() throws ActionException {
         //Player is in Tokio
         //Player goes to Essen
         //Player has not Tokio card
@@ -227,11 +229,11 @@ class ActionServiceExecuteActionHelperTest {
         FlyCharterAction action = new FlyCharterAction(player);
         action.setDestination(essen);
 
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
     }
 
     @Test
-    void executeAction_FlyDirectAction_correct() {
+    void executeAction_FlyDirectAction_correct() throws ActionException {
         //Player is in New York
         //Player goes to Essen
         //Player has Essen card
@@ -244,12 +246,12 @@ class ActionServiceExecuteActionHelperTest {
 
         FlyDirectAction action = new FlyDirectAction(player, essen);
 
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertEquals(essen, player.getCity());
     }
 
     @Test
-    void executeAction_FlyDirectAction_doNotHasDestinationCard() {
+    void executeAction_FlyDirectAction_doNotHasDestinationCard() throws ActionException {
         //Player is in New York
         //Player goes to Tokio
         //Player has Essen card
@@ -262,11 +264,11 @@ class ActionServiceExecuteActionHelperTest {
 
         FlyDirectAction action = new FlyDirectAction(player, tokio);
 
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
     }
 
     @Test
-    void executeAction_FlyShuttleAction_correct() {
+    void executeAction_FlyShuttleAction_correct() throws ActionException {
         //Player is in New York
         //New York has research center
         //Player fly to essen and has research center
@@ -274,12 +276,12 @@ class ActionServiceExecuteActionHelperTest {
         essen.setHasCenter(TRUE);
         FlyShuttleAction action = new FlyShuttleAction(player, essen);
 
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertEquals(essen, player.getCity());
     }
 
     @Test
-    void executeAction_FlyShuttleAction_originWithoutResearchCenter() {
+    void executeAction_FlyShuttleAction_originWithoutResearchCenter() throws ActionException {
         //Player is in New York
         //New York has not research center
         //Player fly to essen and has research center
@@ -287,11 +289,14 @@ class ActionServiceExecuteActionHelperTest {
         essen.setHasCenter(TRUE);
         FlyShuttleAction action = new FlyShuttleAction(player, essen);
 
-        assertFalse(ActionServiceHelper.executeAction(action));
+        ActionException exception =
+                assertThrows(ActionException.class,
+                        () -> action.execute());
+        assertTrue(exception.getMessage().contains(SHUTTLEFLIGHT_ERROR_ORIGIN_NO_RESEARCH_STATION));
     }
 
     @Test
-    void executeAction_FlyShuttleAction_destinationWithoutResearchCenter() {
+    void executeAction_FlyShuttleAction_destinationWithoutResearchCenter() throws ActionException {
         //Player is in New York
         //New York has not research center
         //Player fly to essen and has research center
@@ -299,12 +304,12 @@ class ActionServiceExecuteActionHelperTest {
         essen.setHasCenter(FALSE);
         FlyShuttleAction action = new FlyShuttleAction(player, essen);
 
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
     }
 
 
     @Test
-    void executeAction_ShareKnowledge_correct() {
+    void executeAction_ShareKnowledge_correct() throws ActionException {
         //Sender (player) is in New York
         //Receiver is in New York
         //Sender has New York card
@@ -314,13 +319,13 @@ class ActionServiceExecuteActionHelperTest {
 
         ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
-        assertTrue(ActionServiceHelper.executeAction(action));
+        action.execute();
         assertTrue(player.getListCard().isEmpty());
         assertEquals(newyork.getName(), ((CityCard) receiver.getListCard().get(0)).getCity().getName());
     }
 
     @Test
-    void executeAction_ShareKnowledge_differentCity() {
+    void executeAction_ShareKnowledge_differentCity() throws ActionException {
         //Sender (player) is in New York
         //Receiver is in Tokio
         //Sender has New York card
@@ -330,11 +335,11 @@ class ActionServiceExecuteActionHelperTest {
 
         ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
     }
 
     @Test
-    void executeAction_ShareKnowledge_incorrectCardToChange() {
+    void executeAction_ShareKnowledge_incorrectCardToChange() throws ActionException {
         //Sender (player) is in New York
         //Receiver is in New York
         //Sender has Tokio card
@@ -346,6 +351,6 @@ class ActionServiceExecuteActionHelperTest {
 
         ShareKnowledgeAction action = new ShareKnowledgeAction(player, receiver,(CityCard) player.getListCard().get(0));
 
-        assertFalse(ActionServiceHelper.executeAction(action));
+        assertThrows(ActionException.class, () -> action.execute());
     }
 }
