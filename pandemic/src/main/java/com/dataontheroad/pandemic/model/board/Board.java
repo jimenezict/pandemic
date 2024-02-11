@@ -12,6 +12,8 @@ import com.dataontheroad.pandemic.model.virus.VirusType;
 
 import java.util.*;
 
+import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_MAX_INFECTION;
+import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_MAX_OUTBREAK;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
@@ -89,14 +91,14 @@ public class Board {
 
     public void increaseInfectionRate() throws EndOfGameException {
         if(infectionRate >= MAX_INFECTIONS) {
-            throw new EndOfGameException("You had reach the maximal infection rate");
+            throw new EndOfGameException(END_OF_GAME_MAX_INFECTION);
         }
         infectionRate++;
     }
 
     public void increaseOutBreaks() throws EndOfGameException {
         if(outbreaks >= MAX_OUTBREAKS) {
-            throw new EndOfGameException("You had reach the maximal number of outbreaks");
+            throw new EndOfGameException(END_OF_GAME_MAX_OUTBREAK);
         }
         outbreaks++;
     }
