@@ -37,4 +37,9 @@ public class EndOfGameServiceImpl implements IEndOfGameService {
     private int numberOfBoxesInCityAndType(City city, VirusType virusType) {
         return (int) city.getVirusBoxes().stream().filter(cityVirusBox -> cityVirusBox.equals(virusType)).count();
     }
+
+    @Override
+    public boolean allCitiesWithoutBoxes(List<City> listOfCities) {
+        return listOfCities.stream().filter(city -> city.getVirusBoxes().size() > 0).count() == 0;
+    }
 }

@@ -10,4 +10,6 @@ public interface IEndOfGameService {
     boolean allVirusHadBeenEradicated(List<Virus> virusList);
 
     VirusType returnVirusIfOverPassTheMaximalNumberOrNull(List<City> listOfCities);
+
+    boolean allCitiesWithoutBoxes(List<City> listOfCities);
 }

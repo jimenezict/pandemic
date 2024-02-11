@@ -80,4 +80,19 @@ class EndOfGameServiceImplTest {
         assertEquals(VirusType.YELLOW, endOfGameServiceImpl.returnVirusIfOverPassTheMaximalNumberOrNull(cityList));
     }
 
+    @Test
+    void allCitiesWithoutBoxes_noBoxesOnTheBoard() {
+        assertTrue(endOfGameServiceImpl.allCitiesWithoutBoxes(cityList));
+    }
+
+    @Test
+    void allCitiesWithoutBoxes_BoxesOnTheBoard() {
+        for(int i=0; i< 5; i ++) {
+            cityList.get(i).addVirusBoxes(VirusType.YELLOW);
+            cityList.get(i).addVirusBoxes(VirusType.YELLOW);
+            cityList.get(i).addVirusBoxes(VirusType.YELLOW);
+        }
+
+        assertFalse(endOfGameServiceImpl.allCitiesWithoutBoxes(cityList));
+    }
 }
