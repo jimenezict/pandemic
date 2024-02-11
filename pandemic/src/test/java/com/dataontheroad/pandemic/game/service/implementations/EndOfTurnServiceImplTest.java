@@ -24,7 +24,6 @@ import java.util.*;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_EMPTY_DECK;
 import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_EMPTY_INFECTION_DECK;
-import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERROR_NO_CONNECTION;
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;

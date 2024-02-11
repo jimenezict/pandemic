@@ -6,10 +6,15 @@ import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 
 @Service
 public class EndOfGameServiceImpl implements IEndOfGameService {
+
+    private static long MAX_VIRUS_BOXES = 24L;
 
     @Override
     public boolean allVirusHadBeenEradicated(List<Virus> virusList) {
@@ -18,6 +23,18 @@ public class EndOfGameServiceImpl implements IEndOfGameService {
 
     @Override
     public VirusType returnVirusIfOverPassTheMaximalNumberOrNull(List<City> listOfCities) {
+        ArrayList<VirusType> virusList = new ArrayList<>(Arrays.asList(VirusType.BLUE, VirusType.YELLOW, VirusType.BLACK, VirusType.RED));
+
+        for(VirusType iteratorVirusType : virusList) {
+            int numBoxes = listOfCities.stream().mapToInt(city -> numberOfBoxesInCityAndType(city, iteratorVirusType)).sum();
+            if(numBoxes > MAX_VIRUS_BOXES)
+                return iteratorVirusType;
+        }
+
         return null;
+    }
+
+    private int numberOfBoxesInCityAndType(City city, VirusType virusType) {
+        return (int) city.getVirusBoxes().stream().filter(cityVirusBox -> cityVirusBox.equals(virusType)).count();
     }
 }
