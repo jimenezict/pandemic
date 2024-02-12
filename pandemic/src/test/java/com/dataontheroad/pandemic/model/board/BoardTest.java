@@ -49,7 +49,7 @@ class BoardTest {
                 assertThrows(EndOfGameException.class,
                         () -> board.increaseInfectionRate());
 
-        assertEquals(exception.getReasonOfEndGame(), END_OF_GAME_MAX_INFECTION);
+        assertEquals(END_OF_GAME_MAX_INFECTION, exception.getReasonOfEndGame());
     }
 
     @Test
@@ -65,7 +65,7 @@ class BoardTest {
                 assertThrows(EndOfGameException.class,
                         () -> board.increaseOutBreaks());
 
-        assertEquals(exception.getReasonOfEndGame(), END_OF_GAME_MAX_OUTBREAK);
+        assertEquals(END_OF_GAME_MAX_OUTBREAK, exception.getReasonOfEndGame());
     }
 
     @ParameterizedTest

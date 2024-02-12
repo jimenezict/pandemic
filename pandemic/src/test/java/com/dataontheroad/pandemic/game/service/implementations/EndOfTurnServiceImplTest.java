@@ -66,7 +66,7 @@ class EndOfTurnServiceImplTest {
                 assertThrows(EndOfGameException.class,
                         () -> endOfTurnServiceImpl.getCardsFromPlayerDeck(playerQueue, scientist));
 
-        assertEquals(exception.getReasonOfEndGame(), END_OF_GAME_EMPTY_DECK);
+        assertEquals(END_OF_GAME_EMPTY_DECK, exception.getReasonOfEndGame());
     }
 
     @Test
@@ -103,6 +103,6 @@ class EndOfTurnServiceImplTest {
                 assertThrows(EndOfGameException.class,
                         () -> endOfTurnServiceImpl.getCardsFromInfectionDeck(3, createInfectionDeck(), new HashSet<>()));
 
-        assertEquals(exception.getReasonOfEndGame(), END_OF_GAME_EMPTY_INFECTION_DECK);
+        assertEquals(END_OF_GAME_EMPTY_INFECTION_DECK, exception.getReasonOfEndGame());
     }
 }
