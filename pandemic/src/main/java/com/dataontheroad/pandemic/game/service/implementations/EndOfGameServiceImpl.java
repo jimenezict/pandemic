@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -40,6 +41,6 @@ public class EndOfGameServiceImpl implements IEndOfGameService {
 
     @Override
     public boolean allCitiesWithoutBoxes(List<City> listOfCities) {
-        return listOfCities.stream().filter(city -> city.getVirusBoxes().size() > 0).count() == 0;
+        return listOfCities.stream().filter(city -> city.getVirusBoxes().size() > 0).collect(Collectors.toList()).isEmpty();
     }
 }
