@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
+import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_MAX_INFECTION;
+import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_MAX_OUTBREAK;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,8 +49,7 @@ class BoardTest {
                 assertThrows(EndOfGameException.class,
                         () -> board.increaseInfectionRate());
 
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains("You had reach the maximal infection rate"));
+        assertEquals(exception.getReasonOfEndGame(), END_OF_GAME_MAX_INFECTION);
     }
 
     @Test
@@ -64,8 +65,7 @@ class BoardTest {
                 assertThrows(EndOfGameException.class,
                         () -> board.increaseOutBreaks());
 
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains("You had reach the maximal number of outbreaks"));
+        assertEquals(exception.getReasonOfEndGame(), END_OF_GAME_MAX_OUTBREAK);
     }
 
     @ParameterizedTest

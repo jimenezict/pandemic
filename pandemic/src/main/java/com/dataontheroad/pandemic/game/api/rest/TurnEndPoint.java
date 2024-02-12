@@ -52,7 +52,7 @@ public class TurnEndPoint {
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_ACTION);
         }
 
-        TurnInformation turnInformation;
+        TurnInformation turnInformation = null;
         TurnExecuteDTO turnExecuteDTO;
 
         try {
@@ -60,7 +60,9 @@ public class TurnEndPoint {
             Action action = turnService.getSelectedAction(turnExecuteDTO, turnRequestDTO.getActionPosition());
             turnService.validateActionFormat(turnExecuteDTO, action, (HashMap<String, String>) turnRequestDTO.getAdditionalFields());
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), action);
-        } catch (ActionException | GameExecutionException | EndOfGameException e) {
+        } catch(EndOfGameException e) {
+
+        } catch (ActionException | GameExecutionException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
         }
 
