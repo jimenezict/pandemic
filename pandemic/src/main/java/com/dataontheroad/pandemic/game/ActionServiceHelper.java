@@ -3,7 +3,6 @@ package com.dataontheroad.pandemic.game;
 import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.player_services.DispatcherAllPlayerMovementsService;
 import com.dataontheroad.pandemic.actions.player_services.DispatcherMovePawnToPawnService;
-import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.ContingencyPlayer;
@@ -16,8 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 
 public class ActionServiceHelper {
 
