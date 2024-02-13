@@ -5,10 +5,7 @@ import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
-import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
-import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
-import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
-import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
+import com.dataontheroad.pandemic.game.api.model.turn.*;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -61,7 +58,8 @@ public class TurnEndPoint {
             turnService.validateActionFormat(turnExecuteDTO, action, (HashMap<String, String>) turnRequestDTO.getAdditionalFields());
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), action);
         } catch(EndOfGameException e) {
-
+            EndOfGameResponse endOfGameResponse = new EndOfGameResponse(TURN_ENDPOINT_NAME, turnRequestDTO.getUuid(), e.getReasonOfEndGame());
+            return ResponseEntity.ok().body(endOfGameResponse);
         } catch (ActionException | GameExecutionException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
         }
@@ -73,6 +71,7 @@ public class TurnEndPoint {
                         turnInformation.getActivePlayer().getCity().getName());
         return ResponseEntity.ok().body(successResponse);
     }
+
 
     private static ResponseEntity<ErrorResponse> getErrorResponse(UUID uuid, String errorMessage) {
         ErrorResponse errorResponse = new ErrorResponse(TURN_ENDPOINT_NAME, uuid, errorMessage);

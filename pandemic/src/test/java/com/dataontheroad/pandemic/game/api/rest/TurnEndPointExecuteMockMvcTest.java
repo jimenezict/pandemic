@@ -3,8 +3,10 @@ package com.dataontheroad.pandemic.game.api.rest;
 import com.dataontheroad.pandemic.actions.ActionsType;
 import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
+import com.dataontheroad.pandemic.game.api.model.turn.EndOfGameResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
@@ -232,6 +234,32 @@ class TurnEndPointExecuteMockMvcTest {
                                 .contentType("application/json;charset=UTF-8"))
                         .andDo(print())
                         .andExpect(status().isOk());
+        }
+
+        @Test
+        void getTurnExecute_execute_endOfGameResponse() throws Exception {
+                Player activePlayer = new ScientistPlayer();
+                when(turnService.getTurnServiceInformation(any()))
+                        .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
+                when(turnService.executeAction(any(), any())).thenThrow(new EndOfGameException(END_OF_GAME_EMPTY_DECK));
+
+                TurnRequestDTO turnRequestDTO =
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 0, null);
+
+                ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
+                                .post("/turn/execute")
+                                .content(objectMapper.writeValueAsString(turnRequestDTO))
+                                .contentType("application/json;charset=UTF-8"))
+                        .andDo(print())
+                        .andExpect(status().isOk());
+
+                MvcResult result = resultActions.andReturn();
+                String contentAsString = result.getResponse().getContentAsString();
+
+                EndOfGameResponse response = objectMapper.readValue(contentAsString, EndOfGameResponse.class);
+                assertEquals(TURN_ENDPOINT_NAME, response.getEndpoint());
+                assertEquals(uuid, response.getGameID());
+                assertEquals(END_OF_GAME_EMPTY_DECK, response.getMessage());
         }
 }
 

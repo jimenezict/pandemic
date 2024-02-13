@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class EndOfGameServiceImpl implements IEndOfGameService {
 
-    private static long MAX_VIRUS_BOXES = 24L;
+    private static final long MAX_VIRUS_BOXES = 24L;
 
     @Override
     public boolean allVirusHadBeenEradicated(List<Virus> virusList) {
@@ -41,6 +41,6 @@ public class EndOfGameServiceImpl implements IEndOfGameService {
 
     @Override
     public boolean allCitiesWithoutBoxes(List<City> listOfCities) {
-        return listOfCities.stream().filter(city -> city.getVirusBoxes().size() > 0).collect(Collectors.toList()).isEmpty();
+        return listOfCities.stream().filter(city -> !city.getVirusBoxes().isEmpty()).collect(Collectors.toList()).isEmpty();
     }
 }
