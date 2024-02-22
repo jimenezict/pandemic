@@ -21,4 +21,6 @@ public interface ITurnService {
     Action validateActionFormat(TurnExecuteDTO turnExecuteDTO, Action action, HashMap<String, String> additionalFields) throws GameExecutionException;
 
     TurnExecuteDTO getTurnExecuteDTO(UUID gameId) throws GameExecutionException;
+
+    void ifEndOfGameThrowExcepction(UUID uuid) throws EndOfGameException, GameExecutionException;
 }

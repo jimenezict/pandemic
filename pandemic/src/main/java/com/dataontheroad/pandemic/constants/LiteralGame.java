@@ -26,5 +26,6 @@ public class LiteralGame {
     public static final String ADDITIONAL_FIELD_DESTINATION = "destination";
     public static final String END_OF_GAME_MAX_INFECTION = "You had reach the maximal infection rate";
     public static final String END_OF_GAME_MAX_OUTBREAK = "You had reach the maximal number of outbreaks";
+    public static final String END_OF_GAME_VICTORY = "You WIN!";
 
 }

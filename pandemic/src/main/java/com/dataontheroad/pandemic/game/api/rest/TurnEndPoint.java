@@ -57,8 +57,10 @@ public class TurnEndPoint {
             Action action = turnService.getSelectedAction(turnExecuteDTO, turnRequestDTO.getActionPosition());
             turnService.validateActionFormat(turnExecuteDTO, action, (HashMap<String, String>) turnRequestDTO.getAdditionalFields());
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), action);
+            turnService.ifEndOfGameThrowExcepction(turnRequestDTO.getUuid());
         } catch(EndOfGameException e) {
             EndOfGameResponse endOfGameResponse = new EndOfGameResponse(TURN_ENDPOINT_NAME, turnRequestDTO.getUuid(), e.getReasonOfEndGame());
+            endOfGameResponse.setWin(e.getWin());
             return ResponseEntity.ok().body(endOfGameResponse);
         } catch (ActionException | GameExecutionException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());

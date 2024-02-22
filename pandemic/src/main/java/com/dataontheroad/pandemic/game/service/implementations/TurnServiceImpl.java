@@ -33,10 +33,14 @@ public class TurnServiceImpl implements ITurnService {
 
     private final EndOfTurnServiceImpl endOfTurnService;
 
+    private final EndOfGameServiceImpl endOfGameService;
+
     public TurnServiceImpl(GamePersistenceOnHashMap gamePersistence,
-                           EndOfTurnServiceImpl endOfTurnService) {
+                           EndOfTurnServiceImpl endOfTurnService,
+                           EndOfGameServiceImpl endOfGameService) {
         this.gamePersistence = gamePersistence;
         this.endOfTurnService = endOfTurnService;
+        this.endOfGameService = endOfGameService;
     }
 
     @Override
@@ -129,6 +133,23 @@ public class TurnServiceImpl implements ITurnService {
             throw new GameExecutionException(GAME_NOT_FOUND);
         }
         return new TurnExecuteDTO(gameDTO);
+    }
+
+    @Override
+    public void ifEndOfGameThrowExcepction(UUID gameId) throws EndOfGameException, GameExecutionException {
+        GameDTO gameDTO = gamePersistence.getGameById(gameId);
+        if (isNull(gameDTO)) {
+            throw new GameExecutionException(GAME_NOT_FOUND);
+        }
+
+        if(endOfGameService.allVirusHadBeenEradicated(gameDTO.getBoard().getVirusList())
+                && endOfGameService.allCitiesWithoutBoxes(gameDTO.getBoard().getBoardCities()))
+            throw new EndOfGameException(END_OF_GAME_VICTORY, true);
+
+        if(!isNull(endOfGameService.returnVirusIfOverPassTheMaximalNumberOrNull(gameDTO.getBoard().getBoardCities()))) {
+            throw new EndOfGameException(END_OF_GAME_VICTORY);
+        }
+
     }
 
 }

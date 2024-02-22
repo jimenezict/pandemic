@@ -36,8 +36,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERR
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.SCIENTIST_NAME;
 import static com.dataontheroad.pandemic.game.modelBuilder.buildTurnResponseDTOWithActionList;
 import static java.util.UUID.randomUUID;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doThrow;
@@ -260,6 +259,34 @@ class TurnEndPointExecuteMockMvcTest {
                 assertEquals(TURN_ENDPOINT_NAME, response.getEndpoint());
                 assertEquals(uuid, response.getGameID());
                 assertEquals(END_OF_GAME_EMPTY_DECK, response.getMessage());
+                assertFalse(response.isWin());
+        }
+
+        @Test
+        void getTurnExecute_execute_endOfGameResponseWin() throws Exception {
+                Player activePlayer = new ScientistPlayer();
+                when(turnService.getTurnServiceInformation(any()))
+                        .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
+                when(turnService.executeAction(any(), any())).thenThrow(new EndOfGameException(END_OF_GAME_EMPTY_DECK, true));
+
+                TurnRequestDTO turnRequestDTO =
+                        new TurnRequestDTO(uuid, SCIENTIST_NAME, 0, null);
+
+                ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
+                                .post("/turn/execute")
+                                .content(objectMapper.writeValueAsString(turnRequestDTO))
+                                .contentType("application/json;charset=UTF-8"))
+                        .andDo(print())
+                        .andExpect(status().isOk());
+
+                MvcResult result = resultActions.andReturn();
+                String contentAsString = result.getResponse().getContentAsString();
+
+                EndOfGameResponse response = objectMapper.readValue(contentAsString, EndOfGameResponse.class);
+                assertEquals(TURN_ENDPOINT_NAME, response.getEndpoint());
+                assertEquals(uuid, response.getGameID());
+                assertEquals(END_OF_GAME_EMPTY_DECK, response.getMessage());
+                assertTrue(response.isWin());
         }
 }
 
