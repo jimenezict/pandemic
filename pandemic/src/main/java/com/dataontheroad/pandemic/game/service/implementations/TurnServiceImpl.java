@@ -14,6 +14,7 @@ import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.interfaces.ITurnService;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -146,8 +147,9 @@ public class TurnServiceImpl implements ITurnService {
                 && endOfGameService.allCitiesWithoutBoxes(gameDTO.getBoard().getBoardCities()))
             throw new EndOfGameException(END_OF_GAME_VICTORY, true);
 
-        if(!isNull(endOfGameService.returnVirusIfOverPassTheMaximalNumberOrNull(gameDTO.getBoard().getBoardCities()))) {
-            throw new EndOfGameException(END_OF_GAME_VICTORY);
+        VirusType virusOverLimit = endOfGameService.returnVirusIfOverPassTheMaximalNumberOrNull(gameDTO.getBoard().getBoardCities());
+        if(!isNull(virusOverLimit)) {
+            throw new EndOfGameException(END_OF_GAME_MAX_VIRUS_SAME_TYPE + virusOverLimit.name());
         }
 
     }

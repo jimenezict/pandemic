@@ -4,6 +4,7 @@ import com.dataontheroad.pandemic.actions.action_factory.Action;
 import com.dataontheroad.pandemic.actions.action_factory.DriveFerryAction;
 import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
 import com.dataontheroad.pandemic.actions.action_factory.player_actions.FlyFromResearchCenterAnywhereAction;
+import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
@@ -15,6 +16,7 @@ import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 import com.dataontheroad.pandemic.model.player.Player;
+import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,6 +48,9 @@ class TurnServiceImplTest {
 
     @Mock
     EndOfTurnServiceImpl endOfTurnService;
+
+    @Mock
+    EndOfGameServiceImpl endOfGameService;
 
     private static UUID uuid = randomUUID();
 
@@ -233,5 +238,45 @@ class TurnServiceImplTest {
                         () -> turnService.validateActionFormat(turnExecuteDTO, action, null));
 
         assertTrue(exception.getMessage().contains(TURN_WRONG_OPERATION_DESTINATION_FIELD));
+    }
+
+    @Test
+    void ifEndOfGameThrowException_gameDoNotExists() {
+        GameExecutionException exception =
+                assertThrows(GameExecutionException.class,
+                        () -> turnService.ifEndOfGameThrowExcepction(uuid));
+
+        assertTrue(exception.getMessage().contains(GAME_NOT_FOUND));
+    }
+
+    @Test
+    void ifEndOfGameThrowException_allVirusEradicated_allCitiesWithouthBoxes() throws GameExecutionException {
+        GameDTO gameDTO = new GameDTO(3);
+        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        when(endOfGameService.allVirusHadBeenEradicated(any())).thenReturn(true);
+        when(endOfGameService.allCitiesWithoutBoxes(any())).thenReturn(true);
+
+        EndOfGameException exception =
+                assertThrows(EndOfGameException.class,
+                        () -> turnService.ifEndOfGameThrowExcepction(uuid));
+
+        assertTrue(exception.getMessage().contains(END_OF_GAME_VICTORY));
+        assertTrue(exception.getWin());
+    }
+
+    @Test
+    void ifEndOfGameThrowException_overPassLimit() throws GameExecutionException {
+        GameDTO gameDTO = new GameDTO(3);
+        when(gamePersistence.getGameById(any())).thenReturn(gameDTO);
+        when(endOfGameService.allVirusHadBeenEradicated(any())).thenReturn(false);
+        when(endOfGameService.returnVirusIfOverPassTheMaximalNumberOrNull(any())).thenReturn(VirusType.YELLOW);
+
+        EndOfGameException exception =
+                assertThrows(EndOfGameException.class,
+                        () -> turnService.ifEndOfGameThrowExcepction(uuid));
+
+        assertTrue(exception.getMessage().contains(END_OF_GAME_MAX_VIRUS_SAME_TYPE));
+        assertTrue(exception.getMessage().contains(VirusType.YELLOW.name()));
+        assertFalse(exception.getWin());
     }
 }
