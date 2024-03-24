@@ -135,7 +135,7 @@ class InfectionServiceImplTest {
     }
 
     @Test
-    void canCityBeInfected_virusIsNotCuredAndQuarantineIsFarCity_notPropagate() {
+    void canCityBeInfected_virusIsNotCuredAndQuarantineIsFarCity_Propagate() {
         City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
         City atlanta = board.getCityFromBoardList(new City(ATLANTA.cityName, BLUE));
         board.getPlayers().clear();
