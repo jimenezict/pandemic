@@ -10,9 +10,6 @@ import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
 import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
-import com.dataontheroad.pandemic.game.service.implementations.EndOfTurnServiceImpl;
-import com.dataontheroad.pandemic.game.service.implementations.InfectionServiceImpl;
-import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 import com.dataontheroad.pandemic.model.player.Player;
@@ -261,7 +258,7 @@ class TurnServiceImplTest {
                         () -> turnService.ifEndOfGameThrowExcepction(uuid));
 
         assertTrue(exception.getMessage().contains(END_OF_GAME_VICTORY));
-        assertTrue(exception.getWin());
+        assertTrue(exception.getDidPlayerWon());
     }
 
     @Test
@@ -277,6 +274,6 @@ class TurnServiceImplTest {
 
         assertTrue(exception.getMessage().contains(END_OF_GAME_MAX_VIRUS_SAME_TYPE));
         assertTrue(exception.getMessage().contains(VirusType.YELLOW.name()));
-        assertFalse(exception.getWin());
+        assertFalse(exception.getDidPlayerWon());
     }
 }

@@ -60,7 +60,7 @@ public class TurnEndPoint {
             turnService.ifEndOfGameThrowExcepction(turnRequestDTO.getUuid());
         } catch(EndOfGameException e) {
             EndOfGameResponse endOfGameResponse = new EndOfGameResponse(TURN_ENDPOINT_NAME, turnRequestDTO.getUuid(), e.getReasonOfEndGame());
-            endOfGameResponse.setWin(e.getWin());
+            endOfGameResponse.setWin(e.getDidPlayerWon());
             return ResponseEntity.ok().body(endOfGameResponse);
         } catch (ActionException | GameExecutionException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());

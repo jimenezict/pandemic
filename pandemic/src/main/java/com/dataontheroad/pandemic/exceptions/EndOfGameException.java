@@ -2,26 +2,26 @@ package com.dataontheroad.pandemic.exceptions;
 
 public class EndOfGameException extends Exception {
 
-    private boolean win;
+    private final boolean didPlayerWon;
     private final String reasonOfEndGame;
     public EndOfGameException(String reasonOfEndGame) {
         super("Game should finish because: " + reasonOfEndGame);
         this.reasonOfEndGame = reasonOfEndGame;
-        win = false;
+        didPlayerWon = false;
     }
 
-    public EndOfGameException(String reasonOfEndGame, boolean win) {
+    public EndOfGameException(String reasonOfEndGame, boolean didPlayerWon) {
         super("Game should finish because: " + reasonOfEndGame);
         this.reasonOfEndGame = reasonOfEndGame;
-        this.win = win;
+        this.didPlayerWon = didPlayerWon;
     }
 
     public String getReasonOfEndGame() {
         return reasonOfEndGame;
     }
 
-    public boolean getWin() {
-        return win;
+    public boolean getDidPlayerWon() {
+        return didPlayerWon;
     }
 
 
