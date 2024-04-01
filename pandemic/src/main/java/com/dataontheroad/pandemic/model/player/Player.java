@@ -4,10 +4,11 @@ import com.dataontheroad.pandemic.actions.default_services.*;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements IPlayerServices {
+public class Player implements IPlayerServices, Serializable {
     private List<BaseCard> listCard;
     private City city;
     protected String color;
@@ -15,14 +16,14 @@ public class Player implements IPlayerServices {
     protected String description;
     protected int numOfCardsForDiscoveringCure;
 
-    protected BuildResearchCenterDefaultService buildResearchCenterDefaultService;
-    protected DiscoverCureDefaultService discoverCureDefaultService;
-    protected DriveFerryDefaultService driveFerryDefaultService;
-    protected FlyCharterDefaultService flyCharterDefaultService;
-    protected FlyDirectCityDefaultService flyDirectCityDefaultService;
-    protected FlyShuttleDefaultService flyShuttleDefaultService;
-    protected ShareKnowledgeDefaultService shareKnowledgeDefaultService;
-    protected TreatDiseaseDefaultService treatDiseaseDefaultService;
+    protected transient BuildResearchCenterDefaultService buildResearchCenterDefaultService;
+    protected transient DiscoverCureDefaultService discoverCureDefaultService;
+    protected transient DriveFerryDefaultService driveFerryDefaultService;
+    protected transient FlyCharterDefaultService flyCharterDefaultService;
+    protected transient FlyDirectCityDefaultService flyDirectCityDefaultService;
+    protected transient FlyShuttleDefaultService flyShuttleDefaultService;
+    protected transient ShareKnowledgeDefaultService shareKnowledgeDefaultService;
+    protected transient TreatDiseaseDefaultService treatDiseaseDefaultService;
 
 
     public Player() {

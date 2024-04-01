@@ -9,7 +9,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 public class OperationsPlayer extends Player implements OneActionPerTurnInterface, SpecialActionInterface {
 
     private boolean isActionAvailableThisTurn;
-    private OperationsFlyFromReserachService operationsFlyFromReserachService;
+    private transient OperationsFlyFromReserachService operationsFlyFromReserachService;
 
     public OperationsPlayer() {
         super();

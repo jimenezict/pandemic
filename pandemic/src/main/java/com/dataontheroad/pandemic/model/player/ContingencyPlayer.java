@@ -9,7 +9,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsPlayers.*;
 public class ContingencyPlayer extends Player implements SpecialActionInterface {
 
     SpecialCard extraEventCard = null;
-    private final ContingencyPlannerService contingencyPlannerService;
+    private transient final ContingencyPlannerService contingencyPlannerService;
     public ContingencyPlayer() {
         super();
         color = CONTINGENCY_COLOR;

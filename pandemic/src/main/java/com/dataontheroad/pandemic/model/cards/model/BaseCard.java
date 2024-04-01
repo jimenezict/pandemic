@@ -2,7 +2,9 @@ package com.dataontheroad.pandemic.model.cards.model;
 
 import com.dataontheroad.pandemic.model.cards.CardTypeEnum;
 
-public abstract class BaseCard {
+import java.io.Serializable;
+
+public abstract class BaseCard implements Serializable {
 
     protected final CardTypeEnum cardTypeEnum;
 

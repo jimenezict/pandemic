@@ -2,9 +2,10 @@ package com.dataontheroad.pandemic.model.decks;
 
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class PlayerQueue {
+public class PlayerQueue implements Serializable {
 
     private Queue<BaseCard> queue;
 
