@@ -40,7 +40,7 @@ class ActionFactoryTest {
     List<Virus> virusList;
     List<City> boardCities = Arrays.asList(newyork, calcuta, essen, madrid, paris, tokio, atlanta);
 
-    BuildResearchCenterDefaultService buildResearchCenterDefaultService = new BuildResearchCenterDefaultService();
+    BuildResearchCenterDefaultService buildResearchCenterDefaultService = BuildResearchCenterDefaultService.getInstance();
     DiscoverCureDefaultService discoverCureDefaultService = new DiscoverCureDefaultService();
     FlyCharterDefaultService flyCharterDefaultService = new FlyCharterDefaultService();
     FlyDirectCityDefaultService flyDirectCityDefaultService = new FlyDirectCityDefaultService();

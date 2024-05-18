@@ -13,9 +13,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_CENTER_CREATED;
+import static java.util.Objects.isNull;
 
 public class OperationsBuildResearchCenterService extends BuildResearchCenterDefaultService {
 
+    private static OperationsBuildResearchCenterService operationsBuildResearchCenterService;
+
+    protected OperationsBuildResearchCenterService() {
+
+    }
+
+    public static OperationsBuildResearchCenterService getInstance() {
+        if(isNull(operationsBuildResearchCenterService)) {
+            operationsBuildResearchCenterService = new OperationsBuildResearchCenterService();
+        }
+        return operationsBuildResearchCenterService;
+    }
 
     @Override
     public boolean isDoable(Player player) {

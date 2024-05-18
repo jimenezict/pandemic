@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.model.player;
 
+import com.dataontheroad.pandemic.actions.default_services.BuildResearchCenterDefaultService;
 import com.dataontheroad.pandemic.actions.player_services.OperationsBuildResearchCenterService;
 import com.dataontheroad.pandemic.actions.player_services.OperationsFlyFromReserachService;
 import com.dataontheroad.pandemic.actions.player_services.SpecialActionInterface;
@@ -17,7 +18,6 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
         name = OPERATIONS_NAME;
         description = OPERATIONS_DESCRIPTION;
         isActionAvailableThisTurn = true;
-        buildResearchCenterDefaultService = new OperationsBuildResearchCenterService();
         operationsFlyFromReserachService = new OperationsFlyFromReserachService();
     }
     @Override
@@ -33,6 +33,11 @@ public class OperationsPlayer extends Player implements OneActionPerTurnInterfac
     @Override
     public void actionHasBeenExecuted() {
         isActionAvailableThisTurn = false;
+    }
+
+    @Override
+    public BuildResearchCenterDefaultService getBuildResearchCenter() {
+        return OperationsBuildResearchCenterService.getInstance();
     }
 
     public OperationsFlyFromReserachService specialActionService() {
