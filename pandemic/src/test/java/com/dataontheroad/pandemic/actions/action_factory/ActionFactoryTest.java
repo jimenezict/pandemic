@@ -41,7 +41,7 @@ class ActionFactoryTest {
     List<City> boardCities = Arrays.asList(newyork, calcuta, essen, madrid, paris, tokio, atlanta);
 
     BuildResearchCenterDefaultService buildResearchCenterDefaultService = BuildResearchCenterDefaultService.getInstance();
-    DiscoverCureDefaultService discoverCureDefaultService = new DiscoverCureDefaultService();
+    DiscoverCureDefaultService discoverCureDefaultService = DiscoverCureDefaultService.getInstance();
     FlyCharterDefaultService flyCharterDefaultService = new FlyCharterDefaultService();
     FlyDirectCityDefaultService flyDirectCityDefaultService = new FlyDirectCityDefaultService();
     FlyShuttleDefaultService flyShuttleDefaultService = new FlyShuttleDefaultService();
