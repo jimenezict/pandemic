@@ -14,8 +14,6 @@ public class Player implements IPlayerServices {
     protected String name;
     protected String description;
     protected int numOfCardsForDiscoveringCure;
-
-    protected DriveFerryDefaultService driveFerryDefaultService;
     protected FlyCharterDefaultService flyCharterDefaultService;
     protected FlyDirectCityDefaultService flyDirectCityDefaultService;
     protected FlyShuttleDefaultService flyShuttleDefaultService;
@@ -26,7 +24,6 @@ public class Player implements IPlayerServices {
     public Player() {
         listCard = new ArrayList<>();
         numOfCardsForDiscoveringCure = 5;
-        driveFerryDefaultService = new DriveFerryDefaultService();
         flyCharterDefaultService = new FlyCharterDefaultService();
         flyDirectCityDefaultService = new FlyDirectCityDefaultService();
         flyShuttleDefaultService = new FlyShuttleDefaultService();
@@ -81,7 +78,7 @@ public class Player implements IPlayerServices {
 
     @Override
     public DriveFerryDefaultService getDriveFerry() {
-        return driveFerryDefaultService;
+        return DriveFerryDefaultService.getInstance();
     }
 
     @Override

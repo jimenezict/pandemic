@@ -24,7 +24,7 @@ class DriveFerryTest {
     private City lima = new City("Lima", VirusType.YELLOW, new ArrayList<City>(Arrays.asList(santiago, mexico, bogota)));
     private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
     Player player;
-    private DriveFerryDefaultService driveFerryDefaultService = new DriveFerryDefaultService();
+    private DriveFerryDefaultService driveFerryDefaultService = DriveFerryDefaultService.getInstance();
 
 
     @BeforeEach
