@@ -14,9 +14,23 @@ import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasEnoughCards;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static java.util.Objects.isNull;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 public class DiscoverCureDefaultService {
+
+    private static DiscoverCureDefaultService discoverCureDefaultService;
+
+    private DiscoverCureDefaultService() {
+
+    }
+
+    public static DiscoverCureDefaultService getInstance() {
+        if(isNull(discoverCureDefaultService)) {
+            discoverCureDefaultService = new DiscoverCureDefaultService();
+        }
+        return discoverCureDefaultService;
+    }
 
     public boolean isDoable(Player player, Virus virus) {
         return player.getCity().getHasCenter()

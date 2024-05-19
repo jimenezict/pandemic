@@ -34,7 +34,7 @@ class DiscoverCureTest {
     private Virus virusNotDiscovered = new Virus(VirusType.BLUE);
     private Virus virusDiscovered = new Virus(VirusType.BLACK);
 
-    private DiscoverCureDefaultService discoverCureDefaultService = new DiscoverCureDefaultService();
+    private DiscoverCureDefaultService discoverCureDefaultService = DiscoverCureDefaultService.getInstance();
 
     @BeforeEach
     public void setPlayer() {
