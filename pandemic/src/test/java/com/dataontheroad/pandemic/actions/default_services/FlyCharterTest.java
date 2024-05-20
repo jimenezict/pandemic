@@ -28,7 +28,7 @@ class FlyCharterTest {
     private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
     Player player;
 
-    FlyCharterDefaultService flyCharterDefaultService = new FlyCharterDefaultService();
+    FlyCharterDefaultService flyCharterDefaultService = FlyCharterDefaultService.getInstance();
 
     @BeforeEach
     public void setPlayer() {

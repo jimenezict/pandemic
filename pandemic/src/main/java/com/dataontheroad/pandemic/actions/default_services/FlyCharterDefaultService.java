@@ -14,8 +14,23 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERROR_INCORRECT_DESTINATION;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
+import static java.util.Objects.isNull;
 
 public class FlyCharterDefaultService {
+
+    private static FlyCharterDefaultService flyCharterDefaultService;
+
+    private FlyCharterDefaultService() {
+
+    }
+
+    public static FlyCharterDefaultService getInstance() {
+        if(isNull(flyCharterDefaultService)) {
+            flyCharterDefaultService = new FlyCharterDefaultService();
+        }
+        return flyCharterDefaultService;
+    }
+
     public boolean isDoable(Player player) {
         return player.getListCard().contains(createCityCard(player.getCity()));
     }
