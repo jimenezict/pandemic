@@ -44,7 +44,7 @@ class ActionFactoryTest {
     DiscoverCureDefaultService discoverCureDefaultService = DiscoverCureDefaultService.getInstance();
     FlyCharterDefaultService flyCharterDefaultService = FlyCharterDefaultService.getInstance();
     FlyDirectCityDefaultService flyDirectCityDefaultService = FlyDirectCityDefaultService.getInstance();
-    FlyShuttleDefaultService flyShuttleDefaultService = new FlyShuttleDefaultService();
+    FlyShuttleDefaultService flyShuttleDefaultService = FlyShuttleDefaultService.getInstance();
     DriveFerryDefaultService driveFerryDefaultService = DriveFerryDefaultService.getInstance();
     ShareKnowledgeDefaultService shareKnowledgeDefaultService = new ShareKnowledgeDefaultService();
     TreatDiseaseDefaultService treatDiseaseDefaultService = new TreatDiseaseDefaultService();

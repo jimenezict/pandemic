@@ -24,7 +24,7 @@ class   FlyBetweenResearchCenterTest {
 
     private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
     private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    FlyShuttleDefaultService flyShuttleDefaultService = new FlyShuttleDefaultService();
+    FlyShuttleDefaultService flyShuttleDefaultService = FlyShuttleDefaultService.getInstance();
 
     @BeforeEach
     public void setPlayer() {
