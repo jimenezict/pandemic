@@ -27,7 +27,7 @@ class FlyDirectCityDefaultServiceTest {
     private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
     Player player;
 
-    FlyDirectCityDefaultService flyDirectCityDefaultService = new FlyDirectCityDefaultService();
+    FlyDirectCityDefaultService flyDirectCityDefaultService = FlyDirectCityDefaultService.getInstance();
 
     @BeforeEach
     public void setPlayer() {

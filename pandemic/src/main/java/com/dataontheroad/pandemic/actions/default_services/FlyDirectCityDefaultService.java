@@ -15,8 +15,22 @@ import java.util.stream.Collectors;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ERROR_NO_CARD;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
+import static java.util.Objects.isNull;
 
 public class FlyDirectCityDefaultService {
+
+    private static FlyDirectCityDefaultService flyDirectCityDefaultService;
+
+    private FlyDirectCityDefaultService() {
+
+    }
+
+    public static FlyDirectCityDefaultService getInstance() {
+        if(isNull(flyDirectCityDefaultService)) {
+            flyDirectCityDefaultService = new FlyDirectCityDefaultService();
+        }
+        return flyDirectCityDefaultService;
+    }
 
     public boolean isDoable(Player player, City destination) {
         return player.getListCard().contains(createCityCard(destination));

@@ -23,7 +23,6 @@ public class Player implements IPlayerServices {
     public Player() {
         listCard = new ArrayList<>();
         numOfCardsForDiscoveringCure = 5;
-        flyDirectCityDefaultService = new FlyDirectCityDefaultService();
         flyShuttleDefaultService = new FlyShuttleDefaultService();
         shareKnowledgeDefaultService = new ShareKnowledgeDefaultService();
         treatDiseaseDefaultService = new TreatDiseaseDefaultService();
@@ -86,7 +85,7 @@ public class Player implements IPlayerServices {
 
     @Override
     public FlyDirectCityDefaultService getFlyDirectCity() {
-        return flyDirectCityDefaultService;
+        return FlyDirectCityDefaultService.getInstance();
     }
     @Override
     public FlyShuttleDefaultService getFlyShuttle() {
