@@ -38,7 +38,7 @@ class ShareKnowledgeResearchServiceTest {
     private City paris = new City("Paris", VirusType.BLUE, emptyNodeCityConnection);
     private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
 
-    ShareKnowledgeResearchService shareKnowledgeResearchService = new ShareKnowledgeResearchService();
+    ShareKnowledgeResearchService shareKnowledgeResearchService = ShareKnowledgeResearchService.getInstance();
 
     @BeforeEach
     public void setPlayer() {

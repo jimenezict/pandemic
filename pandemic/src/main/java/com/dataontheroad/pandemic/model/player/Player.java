@@ -14,16 +14,12 @@ public class Player implements IPlayerServices {
     protected String name;
     protected String description;
     protected int numOfCardsForDiscoveringCure;
-    protected FlyDirectCityDefaultService flyDirectCityDefaultService;
-    protected FlyShuttleDefaultService flyShuttleDefaultService;
-    protected ShareKnowledgeDefaultService shareKnowledgeDefaultService;
     protected TreatDiseaseDefaultService treatDiseaseDefaultService;
 
 
     public Player() {
         listCard = new ArrayList<>();
         numOfCardsForDiscoveringCure = 5;
-        shareKnowledgeDefaultService = new ShareKnowledgeDefaultService();
         treatDiseaseDefaultService = new TreatDiseaseDefaultService();
     }
 
@@ -93,7 +89,7 @@ public class Player implements IPlayerServices {
 
     @Override
     public ShareKnowledgeDefaultService getShareKnowledge() {
-        return shareKnowledgeDefaultService;
+        return ShareKnowledgeDefaultService.getInstance();
     }
 
     @Override

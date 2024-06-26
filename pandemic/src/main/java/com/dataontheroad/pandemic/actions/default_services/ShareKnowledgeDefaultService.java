@@ -12,8 +12,23 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisLocation;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static java.util.Objects.isNull;
 
 public class ShareKnowledgeDefaultService {
+
+    private static ShareKnowledgeDefaultService shareKnowledgeDefaultService;
+
+    protected ShareKnowledgeDefaultService() {
+
+
+    }
+
+    public static ShareKnowledgeDefaultService getInstance() {
+        if(isNull(shareKnowledgeDefaultService)) {
+            shareKnowledgeDefaultService = new ShareKnowledgeDefaultService();
+        }
+        return shareKnowledgeDefaultService;
+    }
 
     public boolean isDoable(Player sender, Player receiver, CityCard card) {
         return sender.getCity().equals(receiver.getCity())  // sender and receiver are on the same city

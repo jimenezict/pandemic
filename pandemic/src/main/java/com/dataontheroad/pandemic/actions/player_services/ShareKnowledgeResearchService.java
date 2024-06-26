@@ -14,8 +14,21 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.CITY;
+import static java.util.Objects.isNull;
 
 public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService {
+
+    private static ShareKnowledgeResearchService shareKnowledgeResearchService;
+
+    private ShareKnowledgeResearchService() {
+    }
+
+    public static ShareKnowledgeResearchService getInstance() {
+        if(isNull(shareKnowledgeResearchService)) {
+            shareKnowledgeResearchService = new ShareKnowledgeResearchService();
+        }
+        return shareKnowledgeResearchService;
+    }
 
     @Override
     public boolean isDoable(Player sender, Player receiver, CityCard card) {
