@@ -14,13 +14,11 @@ public class Player implements IPlayerServices {
     protected String name;
     protected String description;
     protected int numOfCardsForDiscoveringCure;
-    protected TreatDiseaseDefaultService treatDiseaseDefaultService;
 
 
     public Player() {
         listCard = new ArrayList<>();
         numOfCardsForDiscoveringCure = 5;
-        treatDiseaseDefaultService = new TreatDiseaseDefaultService();
     }
 
     public Player(City city) {
@@ -94,6 +92,6 @@ public class Player implements IPlayerServices {
 
     @Override
     public TreatDiseaseDefaultService getTreatDisease() {
-        return treatDiseaseDefaultService;
+        return TreatDiseaseDefaultService.getInstance();
     }
 }

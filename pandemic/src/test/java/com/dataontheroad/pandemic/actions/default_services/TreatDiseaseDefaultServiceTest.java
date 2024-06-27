@@ -21,7 +21,7 @@ class TreatDiseaseDefaultServiceTest {
     Virus cureVirus;
     Virus uncureVirus;
     List<Virus> virusList;
-    TreatDiseaseDefaultService treatDiseaseDefaultService = new TreatDiseaseDefaultService();
+    TreatDiseaseDefaultService treatDiseaseDefaultService = TreatDiseaseDefaultService.getInstance();
 
     @BeforeEach
     public void setUp() {

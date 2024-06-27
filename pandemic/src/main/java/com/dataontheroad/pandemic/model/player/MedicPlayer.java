@@ -1,5 +1,6 @@
 package com.dataontheroad.pandemic.model.player;
 
+import com.dataontheroad.pandemic.actions.default_services.TreatDiseaseDefaultService;
 import com.dataontheroad.pandemic.actions.player_services.TreatDiseaseMedicService;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.virus.Virus;
@@ -17,7 +18,6 @@ public class MedicPlayer extends Player implements PreventPropagationOfVirusInte
         color = MEDIC_COLOR;
         name = MEDIC_NAME;
         description = MEDIC_DESCRIPTION;
-        treatDiseaseDefaultService = new TreatDiseaseMedicService();
     }
 
     public void executeAfterAction(List<Virus> virusList) {
@@ -29,6 +29,11 @@ public class MedicPlayer extends Player implements PreventPropagationOfVirusInte
     @Override
     public List<City> getCitiesWherePreventsToPropagate(List<VirusType> listOfVirus) {
         return Arrays.asList(this.getCity());
+    }
+
+    @Override
+    public TreatDiseaseDefaultService getTreatDisease() {
+        return TreatDiseaseMedicService.getInstance();
     }
 
 }

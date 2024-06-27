@@ -47,7 +47,7 @@ class ActionFactoryTest {
     FlyShuttleDefaultService flyShuttleDefaultService = FlyShuttleDefaultService.getInstance();
     DriveFerryDefaultService driveFerryDefaultService = DriveFerryDefaultService.getInstance();
     ShareKnowledgeDefaultService shareKnowledgeDefaultService = ShareKnowledgeDefaultService.getInstance();
-    TreatDiseaseDefaultService treatDiseaseDefaultService = new TreatDiseaseDefaultService();
+    TreatDiseaseDefaultService treatDiseaseDefaultService = TreatDiseaseDefaultService.getInstance();
 
 
     @BeforeEach

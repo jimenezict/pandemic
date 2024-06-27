@@ -8,8 +8,22 @@ import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.TREATDISEASE_ERROR_DO_NOT_EXISTS_VIRUS;
+import static java.util.Objects.isNull;
 
 public class TreatDiseaseMedicService extends TreatDiseaseDefaultService{
+
+    private static TreatDiseaseMedicService treatDiseaseMedicService;
+
+    protected TreatDiseaseMedicService() {
+
+    }
+
+    public static TreatDiseaseMedicService getInstance() {
+        if(isNull(treatDiseaseMedicService)) {
+            treatDiseaseMedicService = new TreatDiseaseMedicService();
+        }
+        return treatDiseaseMedicService;
+    }
 
     @Override
     public void doAction(Player player, Virus virus) throws ActionException {
