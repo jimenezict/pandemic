@@ -47,7 +47,7 @@ public class ActionServiceHelper {
             case DISPATCHER_NAME:
                 List<Action> allowedActions = new ArrayList<>();
                 allowedActions.addAll(DispatcherMovePawnToPawnService.returnAvailableActions(listOfPlayers));
-                allowedActions.addAll(DispatcherAllPlayerMovementsService.returnAvailableActions(listOfPlayers));
+                allowedActions.addAll(DispatcherAllPlayerMovementsService.getInstance().returnAvailableActions(listOfPlayers));
                 return allowedActions;
             default:
                 return new ArrayList<>();

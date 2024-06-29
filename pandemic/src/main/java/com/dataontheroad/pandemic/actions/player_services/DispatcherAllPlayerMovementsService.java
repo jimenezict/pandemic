@@ -13,17 +13,27 @@ import java.util.stream.Collectors;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ERROR_NO_CONNECTION;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.DISPATCHER_NAME;
+import static java.util.Objects.isNull;
 
 public class DispatcherAllPlayerMovementsService {
+
+    private static DispatcherAllPlayerMovementsService dispatcherAllPlayerMovementsService;
 
     private DispatcherAllPlayerMovementsService() {
     }
 
-    public static boolean isDoable(Player player, City destination) {
+    public static DispatcherAllPlayerMovementsService getInstance() {
+        if(isNull(dispatcherAllPlayerMovementsService)) {
+            dispatcherAllPlayerMovementsService = new DispatcherAllPlayerMovementsService();
+        }
+        return dispatcherAllPlayerMovementsService;
+    }
+
+    public boolean isDoable(Player player, City destination) {
         return player.getCity().getNodeCityConnection().contains(destination);
     }
 
-    public static List<Action> returnAvailableActions(List<Player> listOfPlayer) {
+    public List<Action> returnAvailableActions(List<Player> listOfPlayer) {
         List<Action> actionsToReturn = new ArrayList<>();
 
         listOfPlayer.stream()
@@ -38,7 +48,7 @@ public class DispatcherAllPlayerMovementsService {
         return actionsToReturn;
     }
 
-    public static void doAction(Player player, City destination) throws ActionException {
+    public void doAction(Player player, City destination) throws ActionException {
         if(!player.getCity().getNodeCityConnection().contains(destination)) {
             throw new ActionException(ActionsType.DRIVEFERRYDISPATCHER, DRIVEFERRY_ERROR_NO_CONNECTION);
         }
