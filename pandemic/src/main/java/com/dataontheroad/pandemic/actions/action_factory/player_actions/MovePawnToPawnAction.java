@@ -28,7 +28,7 @@ public class MovePawnToPawnAction extends Action {
 
     @Override
     public void execute() throws ActionException {
-        DispatcherMovePawnToPawnService.doAction(playerList, player, destination);
+        DispatcherMovePawnToPawnService.getInstance().doAction(playerList, player, destination);
     }
 
     public City getDestination() {

@@ -26,12 +26,12 @@ public class DispatcherMovePawnToPawnService {
         return dispatcherMovePawnToPawnService;
     }
 
-    public static boolean isDoable(List<Player> players, Player player, City destination) {
+    public boolean isDoable(List<Player> players, Player player, City destination) {
         return playerIsNotAlreadyOnDestination(player, destination) &&
                 thereIsPawnOnDestination(players, destination);
     }
 
-    public static List<Action> returnAvailableActions(List<Player> players) {
+    public List<Action> returnAvailableActions(List<Player> players) {
         List<Action> availableMovePawnToPawnAction = new ArrayList<>();
         players.stream().forEach(playerOrigin ->
             players.stream()
@@ -42,18 +42,18 @@ public class DispatcherMovePawnToPawnService {
         return availableMovePawnToPawnAction;
     }
 
-    public static void doAction(List<Player> players, Player player, City destination) throws ActionException {
+    public void doAction(List<Player> players, Player player, City destination) throws ActionException {
         if(!isDoable(players, player, destination)) {
             throw new ActionException(ActionsType.MOVEPAWNTOPAWN, MOVEPAWNTOPAWN_ERROR_DESTINATION_NOT_AVAILABLE);
         }
         player.setCity(destination);
     }
 
-    private static boolean thereIsPawnOnDestination(List<Player> players, City destination) {
+    private boolean thereIsPawnOnDestination(List<Player> players, City destination) {
         return players.stream().filter(player1 -> player1.getCity().equals(destination)).count() > 0;
     }
 
-    private static boolean playerIsNotAlreadyOnDestination(Player player, City destination) {
+    private boolean playerIsNotAlreadyOnDestination(Player player, City destination) {
         return !player.getCity().equals(destination);
     }
 }

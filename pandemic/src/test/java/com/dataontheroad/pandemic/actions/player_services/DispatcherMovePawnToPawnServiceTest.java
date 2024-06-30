@@ -54,17 +54,17 @@ class DispatcherMovePawnToPawnServiceTest {
 
     @Test
     void isDoable_BothPlayersOnSameCity() {
-        assertFalse(DispatcherMovePawnToPawnService.isDoable(playerList, medic, new City(ATLANTA.cityName, ATLANTA.virusType)));
+        assertFalse(dispatcherMovePawnToPawnService.isDoable(playerList, medic, new City(ATLANTA.cityName, ATLANTA.virusType)));
     }
 
     @Test
     void isDoable_MedicCanTravelToParis() {
-        assertTrue(DispatcherMovePawnToPawnService.isDoable(playerList, medic, new City(PARIS.cityName, PARIS.virusType)));
+        assertTrue(dispatcherMovePawnToPawnService.isDoable(playerList, medic, new City(PARIS.cityName, PARIS.virusType)));
     }
 
     @Test
     void returnAvailableActions_DestinationHasNoPawn() {
-        List<Action> availableActions = DispatcherMovePawnToPawnService.returnAvailableActions(playerList);
+        List<Action> availableActions = dispatcherMovePawnToPawnService.returnAvailableActions(playerList);
         assertEquals(10, availableActions.stream().filter(action -> MOVEPAWNTOPAWN.equals(action.getActionsType())).count());
         assertEquals(2, availableActions.stream().filter(action -> MEDIC_NAME.equals(action.getPlayer().getName())).count());
         assertEquals(3, availableActions.stream().filter(action -> CONTINGENCY_NAME.equals(action.getPlayer().getName())).count());
@@ -74,7 +74,7 @@ class DispatcherMovePawnToPawnServiceTest {
 
     @Test
     void doAction_successcase() throws ActionException {
-        List<Action> availableActions = DispatcherMovePawnToPawnService.returnAvailableActions(playerList);
+        List<Action> availableActions = dispatcherMovePawnToPawnService.returnAvailableActions(playerList);
         availableActions.get(0).execute();
         assertEquals(PARIS.cityName, playerList.get(0).getCity().getName());
     }

@@ -46,7 +46,7 @@ public class ActionServiceHelper {
                 return contingencyPlayer.specialActionService().returnAvailableActions(contingencyPlayer, discardedCards);
             case DISPATCHER_NAME:
                 List<Action> allowedActions = new ArrayList<>();
-                allowedActions.addAll(DispatcherMovePawnToPawnService.returnAvailableActions(listOfPlayers));
+                allowedActions.addAll(DispatcherMovePawnToPawnService.getInstance().returnAvailableActions(listOfPlayers));
                 allowedActions.addAll(DispatcherAllPlayerMovementsService.getInstance().returnAvailableActions(listOfPlayers));
                 return allowedActions;
             default:
