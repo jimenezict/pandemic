@@ -13,9 +13,21 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
+import static java.util.Objects.isNull;
 import static org.springframework.util.CollectionUtils.isEmpty;
+import static org.springframework.util.CollectionUtils.mergePropertiesIntoMap;
 
 public class OperationsFlyFromReserachService {
+
+    private static OperationsFlyFromReserachService operationsFlyFromReserachService;
+
+    private OperationsFlyFromReserachService() {}
+    public static OperationsFlyFromReserachService getInstance() {
+        if(isNull(operationsFlyFromReserachService)) {
+            operationsFlyFromReserachService = new OperationsFlyFromReserachService();
+        }
+        return operationsFlyFromReserachService;
+    }
 
     public boolean isDoable(OperationsPlayer player) {
         return player.getCity().getHasCenter()

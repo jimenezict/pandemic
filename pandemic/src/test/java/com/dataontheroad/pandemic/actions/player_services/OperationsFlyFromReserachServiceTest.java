@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OperationsFlyFromReserachServiceTest {
 
-    OperationsFlyFromReserachService operationsFlyFromReserachService;
+    OperationsFlyFromReserachService operationsFlyFromReserachService = OperationsFlyFromReserachService.getInstance();
 
     OperationsPlayer operationsPlayer;
     private City lagos = new City(LAGOS.cityName, VirusType.YELLOW);
@@ -35,7 +35,6 @@ class OperationsFlyFromReserachServiceTest {
 
     @BeforeEach
     public void setUp() {
-        operationsFlyFromReserachService = new OperationsFlyFromReserachService();
         operationsPlayer = new OperationsPlayer();
         atlanta.setHasCenter(Boolean.TRUE);
         lagos.setHasCenter(Boolean.FALSE);
