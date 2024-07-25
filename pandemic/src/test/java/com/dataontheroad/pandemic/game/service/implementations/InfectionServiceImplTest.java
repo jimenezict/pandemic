@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.model.board.BoardFactory.createBaseBoard;

@@ -13,7 +13,8 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_MAX_INFECTION;
 import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_MAX_OUTBREAK;
 import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BoardTest {
 

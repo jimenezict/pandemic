@@ -15,7 +15,6 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
 import static java.util.Objects.isNull;
 import static org.springframework.util.CollectionUtils.isEmpty;
-import static org.springframework.util.CollectionUtils.mergePropertiesIntoMap;
 
 public class OperationsFlyFromReserachService {
 

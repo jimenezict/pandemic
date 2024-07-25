@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 import static com.dataontheroad.pandemic.actions.ActionsType.*;
 import static com.dataontheroad.pandemic.constants.LiteralsCard.SPECIAL_EVENT_GOVERNMENT_GRANT_NAME;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.OPERATIONS_NAME;
-import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfSpecialActions;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static com.dataontheroad.pandemic.model.city.CityEnum.MADRID;

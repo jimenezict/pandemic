@@ -17,14 +17,18 @@ import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 import static com.dataontheroad.pandemic.actions.ActionsType.FLYCHARTER;
 import static com.dataontheroad.pandemic.actions.ActionsType.OPERATION_FLY;
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfActions;
 import static com.dataontheroad.pandemic.game.ActionServiceHelper.getListOfSpecialActions;
-import static com.dataontheroad.pandemic.game.TurnServiceHelper.*;
+import static com.dataontheroad.pandemic.game.TurnServiceHelper.getCitiesWithResearchCenter;
+import static com.dataontheroad.pandemic.game.TurnServiceHelper.getOtherPlayersOnTheCity;
 import static java.util.Objects.isNull;
 
 @Service

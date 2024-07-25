@@ -9,7 +9,8 @@ import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.MEDIC_NAME;
 import static com.dataontheroad.pandemic.constants.LiteralsPlayers.QUARANTINE_NAME;
