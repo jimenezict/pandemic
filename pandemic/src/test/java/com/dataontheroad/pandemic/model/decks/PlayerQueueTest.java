@@ -26,7 +26,6 @@ class PlayerQueueTest {
     void getCardFromPlayerQueue() {
         PlayerQueue playerQueue = createPlayerQueue();
         int initialSize = playerQueue.getQueue().size();
-        BaseCard baseCard = playerQueue.getCardFromPlayerQueue();
         assertEquals(initialSize - 1, playerQueue.getQueue().size());
     }
 

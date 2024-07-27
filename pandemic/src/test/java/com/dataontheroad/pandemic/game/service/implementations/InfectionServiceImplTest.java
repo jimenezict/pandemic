@@ -95,7 +95,7 @@ class InfectionServiceImplTest {
         City paris = board.getCityFromBoardList(new City(PARIS.cityName, BLUE));
         board.getPlayers().clear();
         MedicPlayer medicPlayer = new MedicPlayer();
-        medicPlayer.setCity(board.getCityFromBoardList(new City(WASHINGTON.cityName, BLUE)));
+        medicPlayer.setCity(paris);
         board.getPlayers().add(medicPlayer);
         List<Virus> virusList = board.getVirusList();
         assertTrue(infectionService.canCityBeInfected(paris, virusList, board.getPlayers()));

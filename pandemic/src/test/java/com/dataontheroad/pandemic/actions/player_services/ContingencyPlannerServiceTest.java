@@ -49,12 +49,12 @@ class ContingencyPlannerServiceTest {
     }
 
     @Test
-    void returnAvailableActions_returnsEmptyArray() throws ActionException {
+    void returnAvailableActions_returnsEmptyArray() {
         assertTrue(isEmpty(contingencyPlannerService.returnAvailableActions(player, discardedCards)));
     }
 
     @Test
-    void returnAvailableActions_returnsArray() throws ActionException {
+    void returnAvailableActions_returnsArray() {
         discardedCards.add(eventCard);
         List<Action> actionList = contingencyPlannerService.returnAvailableActions(player, discardedCards);
         assertEquals(1, actionList.size());
@@ -76,7 +76,7 @@ class ContingencyPlannerServiceTest {
     }
 
     @Test
-    void doAction_throwExceptionWhenPlayerHasAlreadyCard() throws ActionException {
+    void doAction_throwExceptionWhenPlayerHasAlreadyCard() {
         player.setExtraEventCard(eventCard);
 
         ActionException exception =

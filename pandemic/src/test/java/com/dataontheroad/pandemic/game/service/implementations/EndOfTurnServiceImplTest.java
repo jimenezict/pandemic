@@ -31,7 +31,6 @@ import static org.mockito.Mockito.*;
 class EndOfTurnServiceImplTest {
 
     private City newyork = new City("New York", VirusType.BLUE);
-    private City essen = new City("Essen", VirusType.BLUE);
     @InjectMocks
     EndOfTurnServiceImpl endOfTurnServiceImpl;
     @Mock

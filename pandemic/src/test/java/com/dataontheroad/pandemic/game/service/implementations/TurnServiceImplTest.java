@@ -212,7 +212,6 @@ class TurnServiceImplTest {
         TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
         Action action = new FlyCharterAction(gameDTO.getTurnInformation().getActivePlayer());
-        HashMap<String, String> additionalFields = new HashMap<>();
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
@@ -227,7 +226,6 @@ class TurnServiceImplTest {
         TurnExecuteDTO turnExecuteDTO = new TurnExecuteDTO(gameDTO);
 
         Action action = new FlyFromResearchCenterAnywhereAction(new OperationsPlayer());
-        HashMap<String, String> additionalFields = new HashMap<>();
 
         GameExecutionException exception =
                 assertThrows(GameExecutionException.class,
