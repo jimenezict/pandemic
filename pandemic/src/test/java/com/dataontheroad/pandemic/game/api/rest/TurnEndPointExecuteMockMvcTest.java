@@ -53,7 +53,6 @@ class TurnEndPointExecuteMockMvcTest {
         private MockMvc mvc;
         @Autowired
         private ObjectMapper objectMapper;
-        private City atlanta = new City("Atlanta", VirusType.BLUE);
 
         @MockBean
         TurnServiceImpl turnService;
@@ -233,6 +232,15 @@ class TurnEndPointExecuteMockMvcTest {
                                 .contentType("application/json;charset=UTF-8"))
                         .andDo(print())
                         .andExpect(status().isOk());
+
+                MvcResult result = resultActions.andReturn();
+                String contentAsString = result.getResponse().getContentAsString();
+
+                EndOfGameResponse response = objectMapper.readValue(contentAsString, EndOfGameResponse.class);
+                assertEquals(TURN_ENDPOINT_NAME, response.getEndpoint());
+                assertEquals(uuid, response.getGameID());
+                assertEquals(SUCCESS_ACTION, response.getMessage());
+                assertFalse(response.isWin());
         }
 
         @Test

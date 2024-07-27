@@ -58,19 +58,19 @@ class TakeDiscardEventCardActionTest {
 
     @Test
     void executeSuccessTest() throws ActionException {
-        List<BaseCard> discardedCards = createPlayerQueue(2);
+        List<BaseCard> localDiscardedCards = createPlayerQueue(2);
 
         TakeDiscardEventCardAction takeDiscardEventCardAction =
-                new TakeDiscardEventCardAction(contingencyPlayer, eventCard, discardedCards);
+                new TakeDiscardEventCardAction(contingencyPlayer, eventCard, localDiscardedCards);
 
-        discardedCards.add(eventCard);
-        Collections.shuffle(discardedCards);
+        localDiscardedCards.add(eventCard);
+        Collections.shuffle(localDiscardedCards);
 
         takeDiscardEventCardAction.execute();
 
         assertEquals(eventCard.getEventName(), contingencyPlayer.getExtraEventCard().getEventName());
-        assertFalse(discardedCards.contains(contingencyPlayer.getExtraEventCard()));
-        assertFalse(discardedCards.contains(eventCard));
+        assertFalse(localDiscardedCards.contains(contingencyPlayer.getExtraEventCard()));
+        assertFalse(localDiscardedCards.contains(eventCard));
     }
 
 }

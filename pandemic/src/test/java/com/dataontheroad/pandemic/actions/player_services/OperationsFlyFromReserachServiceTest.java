@@ -31,7 +31,6 @@ class OperationsFlyFromReserachServiceTest {
     private City calculta = new City("Calcuta", VirusType.BLACK);
     private City essen = new City("Essen", VirusType.BLUE);
     private City lima = new City("Lima", VirusType.YELLOW);
-    private City tokio = new City("Tokio", VirusType.RED);
 
     @BeforeEach
     public void setUp() {

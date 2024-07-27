@@ -14,6 +14,7 @@ public class ResearchPlayer extends Player {
         description = RESEARCHER_DESCRIPTION;
     }
 
+    @Override
     public ShareKnowledgeDefaultService getShareKnowledge() {
         return ShareKnowledgeResearchService.getInstance();
     }
