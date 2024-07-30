@@ -45,7 +45,7 @@ class GameEndPointCreatMockMvcTest {
     private static UUID uuid = randomUUID();
 
     @Test
-    void create_whenNumPandemicIsInvalid7() throws GameExecutionException, Exception {
+    void create_whenNumPandemicIsInvalid7() throws Exception {
         when(gameService.createGame(anyInt(), anyInt())).thenReturn(uuid);
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                         .get(getCreateURL(2,7))
@@ -63,7 +63,7 @@ class GameEndPointCreatMockMvcTest {
     }
 
     @Test
-    void create_whenNumPlayersIsInvalid1() throws GameExecutionException, Exception {
+    void create_whenNumPlayersIsInvalid1() throws Exception {
         when(gameService.createGame(anyInt(), anyInt())).thenThrow(new GameExecutionException("lorem ipsum"));
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                         .get(getCreateURL(1,4))
@@ -81,7 +81,7 @@ class GameEndPointCreatMockMvcTest {
     }
 
     @Test
-    void create_whenNumPlayersIsInvalid5() throws GameExecutionException, Exception {
+    void create_whenNumPlayersIsInvalid5() throws Exception {
         when(gameService.createGame(anyInt(), anyInt())).thenThrow(new GameExecutionException("lorem ipsum"));
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                         .get(getCreateURL(5,4))
@@ -99,7 +99,7 @@ class GameEndPointCreatMockMvcTest {
     }
 
     @Test
-    void create_success() throws GameExecutionException, Exception {
+    void create_success() throws Exception {
         when(gameService.createGame(anyInt(), anyInt())).thenReturn(uuid);
         ResultActions resultActions = mvc.perform(MockMvcRequestBuilders
                         .get(getCreateURL(3,4))

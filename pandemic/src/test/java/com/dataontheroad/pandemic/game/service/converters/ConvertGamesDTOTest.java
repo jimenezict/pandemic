@@ -21,9 +21,9 @@ class ConvertGamesDTOTest {
             "3, 3",
             "4, 2",
     })
-    void convertGameDTO(int NUMBER_OF_PLAYERS, int NUMBER_OF_CARDS) throws Exception {
+    void convertGameDTO(int numberOfPlayers, int numberOfCards) throws Exception {
 
-        GameDTO gameDTO = new GameDTO(NUMBER_OF_PLAYERS);
+        GameDTO gameDTO = new GameDTO(numberOfPlayers);
         GameResponseDTO gameResponseDTO = ConvertGamesDTO.convertGameDTO(gameDTO);
 
         //Validations of the ID of the game
@@ -31,7 +31,7 @@ class ConvertGamesDTOTest {
 
         //Validations about number of players on the board
         assertEquals(gameDTO.getBoard().getPlayers().size(), gameResponseDTO.getGameResponsePlayerList().size());
-        assertEquals(NUMBER_OF_PLAYERS, gameResponseDTO.getGameResponsePlayerList().size());
+        assertEquals(numberOfPlayers, gameResponseDTO.getGameResponsePlayerList().size());
 
         //Validations about player content
         // ** gameResponseDTO is the entity after the conversion
@@ -39,7 +39,7 @@ class ConvertGamesDTOTest {
         // Checks for the number of cards, the name of the player and location
         gameResponseDTO.getGameResponsePlayerList().stream().forEach(gameResponseDTOplayer -> {
             Player gameDTOplayer = gameDTO.getBoard().getPlayers().stream().filter(x -> x.getName().equals(gameResponseDTOplayer.getName())).findFirst().get();
-            assertEquals(NUMBER_OF_CARDS, gameResponseDTOplayer.getListCard().size());
+            assertEquals(numberOfCards, gameResponseDTOplayer.getListCard().size());
             assertEquals(gameResponseDTOplayer.getName(), gameDTOplayer.getName());
             assertEquals(gameResponseDTOplayer.getLocation().getName(), gameDTOplayer.getCity().getName());
         });

@@ -8,6 +8,7 @@ class PandemicApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// empty on propose
 	}
 
 }
