@@ -9,6 +9,7 @@ import java.util.List;
 
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class PlayerQueueTest {
 
@@ -26,7 +27,9 @@ class PlayerQueueTest {
     void getCardFromPlayerQueue() {
         PlayerQueue playerQueue = createPlayerQueue();
         int initialSize = playerQueue.getQueue().size();
+        BaseCard baseCard = playerQueue.getCardFromPlayerQueue();
         assertEquals(initialSize - 1, playerQueue.getQueue().size());
+        assertNotNull(baseCard);
     }
 
 }
