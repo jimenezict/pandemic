@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardFactoryTest {
 
-    private final static String INITIAL_CITY = "Atlanta";
+    private static final String INITIAL_CITY = "Atlanta";
     @Test
     void boardFactoryForThreePlayers() throws Exception {
         Board board = createBoardWithNumberOfPlayers(3);

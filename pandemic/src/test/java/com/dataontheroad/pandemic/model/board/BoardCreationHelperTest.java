@@ -25,14 +25,14 @@ class BoardCreationHelperTest {
             "3, 3",
             "4, 2",
     })
-    void configurePlayerOnBoard_All_CombinationOfPlayers(int number_player, int number_cards) {
+    void configurePlayerOnBoard_All_CombinationOfPlayers(int numberOfPlayer, int numberOfCards) {
         int initialSize = board.getPlayerQueue().getQueue().size();
-        configurePlayersOnBoard(board, number_player);
+        configurePlayersOnBoard(board, numberOfPlayer);
 
-        assertEquals(number_player, board.getPlayers().size());
-        assertEquals(number_cards, board.getPlayers().get(0).getListCard().size());
-        assertEquals(number_cards, board.getPlayers().get(1).getListCard().size());
-        assertEquals(initialSize - number_cards * number_player, board.getPlayerQueue().getQueue().size());
+        assertEquals(numberOfPlayer, board.getPlayers().size());
+        assertEquals(numberOfCards, board.getPlayers().get(0).getListCard().size());
+        assertEquals(numberOfCards, board.getPlayers().get(1).getListCard().size());
+        assertEquals(initialSize - numberOfCards * numberOfPlayer, board.getPlayerQueue().getQueue().size());
     }
 
     @Test
