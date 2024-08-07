@@ -41,7 +41,7 @@ public class TurnServiceImpl implements ITurnService {
 
     private final EndOfGameServiceImpl endOfGameService;
 
-    public TurnServiceImpl(@Qualifier("GamePersistenceOnFile") GamePersistenceAbstractClass gamePersistence,
+    public TurnServiceImpl(@Qualifier("gamePersistenceOnFile") GamePersistenceAbstractClass gamePersistence,
                            EndOfTurnServiceImpl endOfTurnService,
                            EndOfGameServiceImpl endOfGameService) {
         this.gamePersistence = gamePersistence;

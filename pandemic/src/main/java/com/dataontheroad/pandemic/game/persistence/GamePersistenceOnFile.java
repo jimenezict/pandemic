@@ -16,7 +16,7 @@ import java.io.ObjectInputStream;
 import java.util.UUID;
 
 @Repository
-@Qualifier("GamePersistenceOnFile")
+@Qualifier("gamePersistenceOnFile")
 public class GamePersistenceOnFile extends GamePersistenceAbstractClass {
     @Override
     public void insertOrUpdateGame(GameDTO gameDTO) {

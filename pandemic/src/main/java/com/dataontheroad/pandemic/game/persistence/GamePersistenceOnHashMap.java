@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-@Qualifier("GamePersistenceOnHashMap")
+@Qualifier("gamePersistenceOnHashMap")
 public class GamePersistenceOnHashMap extends GamePersistenceAbstractClass {
     @Override
     public void insertOrUpdateGame(GameDTO gameDTO) {
