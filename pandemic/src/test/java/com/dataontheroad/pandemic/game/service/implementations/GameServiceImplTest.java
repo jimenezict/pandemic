@@ -2,7 +2,7 @@ package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
-import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
+import com.dataontheroad.pandemic.game.persistence.GamePersistenceAbstractClass;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +29,7 @@ class GameServiceImplTest {
     GameServiceImpl gameService;
 
     @Mock
-    GamePersistenceOnHashMap gamePersistence;
+    GamePersistenceAbstractClass gamePersistence;
 
     @Captor
     ArgumentCaptor<GameDTO> gameCaptor;
