@@ -2,9 +2,10 @@ package com.dataontheroad.pandemic.game.service.implementations;
 
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.game.GameResponseDTO;
-import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
+import com.dataontheroad.pandemic.game.persistence.GamePersistenceAbstractClass;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.service.interfaces.IGameService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,9 +18,9 @@ import static java.util.Objects.isNull;
 @Service
 public class GameServiceImpl implements IGameService {
 
-    private final GamePersistenceOnHashMap gamePersistence;
+    private final GamePersistenceAbstractClass gamePersistence;
 
-    public GameServiceImpl(GamePersistenceOnHashMap gamePersistence) {
+    public GameServiceImpl(@Qualifier("GamePersistenceOnFile") GamePersistenceAbstractClass gamePersistence) {
         this.gamePersistence = gamePersistence;
     }
 

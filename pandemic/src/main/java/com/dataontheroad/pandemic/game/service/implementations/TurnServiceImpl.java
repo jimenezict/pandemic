@@ -8,13 +8,14 @@ import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
-import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
+import com.dataontheroad.pandemic.game.persistence.GamePersistenceAbstractClass;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.interfaces.ITurnService;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.VirusType;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,13 +35,13 @@ import static java.util.Objects.isNull;
 @Service
 public class TurnServiceImpl implements ITurnService {
 
-    private final GamePersistenceOnHashMap gamePersistence;
+    private final GamePersistenceAbstractClass gamePersistence;
 
     private final EndOfTurnServiceImpl endOfTurnService;
 
     private final EndOfGameServiceImpl endOfGameService;
 
-    public TurnServiceImpl(GamePersistenceOnHashMap gamePersistence,
+    public TurnServiceImpl(@Qualifier("GamePersistenceOnFile") GamePersistenceAbstractClass gamePersistence,
                            EndOfTurnServiceImpl endOfTurnService,
                            EndOfGameServiceImpl endOfGameService) {
         this.gamePersistence = gamePersistence;

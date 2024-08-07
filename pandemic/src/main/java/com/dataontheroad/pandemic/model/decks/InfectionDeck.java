@@ -2,12 +2,15 @@ package com.dataontheroad.pandemic.model.decks;
 
 import com.dataontheroad.pandemic.model.cards.model.CityCard;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-public class InfectionDeck {
+public class InfectionDeck implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Deque<CityCard> deck;
 

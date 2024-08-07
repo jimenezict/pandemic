@@ -1,9 +1,11 @@
 package com.dataontheroad.pandemic.model.virus;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Virus {
+public class Virus implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private final VirusType virusType;
     private boolean cureDiscovered = Boolean.FALSE;
     private boolean eradicated = Boolean.FALSE;

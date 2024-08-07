@@ -2,11 +2,13 @@ package com.dataontheroad.pandemic.model.city;
 
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class City {
+public class City implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private boolean hasCenter = Boolean.FALSE;
     private final VirusType virus;
     private final String name;

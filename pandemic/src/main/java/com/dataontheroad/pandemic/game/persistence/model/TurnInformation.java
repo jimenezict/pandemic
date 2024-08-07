@@ -2,8 +2,11 @@ package com.dataontheroad.pandemic.game.persistence.model;
 
 import com.dataontheroad.pandemic.model.player.Player;
 
-public class TurnInformation {
+import java.io.Serializable;
 
+public class TurnInformation implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private int missingTurns;
     private Player activePlayer;
     private static final int NUM_MISSING_ACTIONS = 4;

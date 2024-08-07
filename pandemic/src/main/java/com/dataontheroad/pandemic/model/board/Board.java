@@ -10,6 +10,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
+import java.io.Serializable;
 import java.util.*;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_MAX_INFECTION;
@@ -19,8 +20,9 @@ import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfec
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createPlayerQueue;
 import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
 
-public class Board {
+public class Board implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final int MAX_INFECTIONS = 6;
     private static final int MAX_OUTBREAKS = 8;
     private InfectionDeck infectionDeck;

@@ -4,10 +4,12 @@ import com.dataontheroad.pandemic.actions.default_services.*;
 import com.dataontheroad.pandemic.model.cards.model.BaseCard;
 import com.dataontheroad.pandemic.model.city.City;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements IPlayerServices {
+public class Player implements IPlayerServices, Serializable {
+    private static final long serialVersionUID = 1L;
     private List<BaseCard> listCard;
     private City city;
     protected String color;

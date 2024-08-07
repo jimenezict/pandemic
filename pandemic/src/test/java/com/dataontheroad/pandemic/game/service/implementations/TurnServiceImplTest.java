@@ -8,7 +8,7 @@ import com.dataontheroad.pandemic.exceptions.EndOfGameException;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnResponseDTO;
-import com.dataontheroad.pandemic.game.persistence.GamePersistenceOnHashMap;
+import com.dataontheroad.pandemic.game.persistence.GamePersistenceAbstractClass;
 import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
@@ -37,7 +37,7 @@ class TurnServiceImplTest {
     TurnServiceImpl turnService;
 
     @Mock
-    GamePersistenceOnHashMap gamePersistence;
+    GamePersistenceAbstractClass gamePersistence;
 
     @Mock
     InfectionServiceImpl infectionService;
