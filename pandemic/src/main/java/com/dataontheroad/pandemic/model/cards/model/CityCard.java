@@ -4,7 +4,9 @@ import com.dataontheroad.pandemic.model.cards.CardTypeEnum;
 import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.virus.VirusType;
 
-public class CityCard extends BaseCard{
+import java.io.Serializable;
+
+public class CityCard extends BaseCard implements Serializable {
     private final City city;
     private final VirusType virus;
 

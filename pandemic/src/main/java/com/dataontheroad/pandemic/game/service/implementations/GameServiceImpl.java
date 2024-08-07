@@ -20,7 +20,7 @@ public class GameServiceImpl implements IGameService {
 
     private final GamePersistenceAbstractClass gamePersistence;
 
-    public GameServiceImpl(@Qualifier("GamePersistenceOnHashMap") GamePersistenceAbstractClass gamePersistence) {
+    public GameServiceImpl(@Qualifier("GamePersistenceOnFile") GamePersistenceAbstractClass gamePersistence) {
         this.gamePersistence = gamePersistence;
     }
 

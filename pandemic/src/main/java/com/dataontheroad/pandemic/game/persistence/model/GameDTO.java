@@ -3,13 +3,14 @@ package com.dataontheroad.pandemic.game.persistence.model;
 import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.model.board.Board;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.model.board.BoardFactory.createBoardWithNumberOfPlayers;
 import static java.util.UUID.randomUUID;
 
-public class GameDTO {
+public class GameDTO implements Serializable {
 
     private final UUID uuid;
 
