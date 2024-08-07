@@ -22,6 +22,7 @@ import static com.dataontheroad.pandemic.model.city.CityFactory.createCityList;
 
 public class Board implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final int MAX_INFECTIONS = 6;
     private static final int MAX_OUTBREAKS = 8;
     private InfectionDeck infectionDeck;

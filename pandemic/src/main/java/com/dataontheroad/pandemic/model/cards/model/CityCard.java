@@ -7,6 +7,8 @@ import com.dataontheroad.pandemic.model.virus.VirusType;
 import java.io.Serializable;
 
 public class CityCard extends BaseCard implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private final City city;
     private final VirusType virus;
 

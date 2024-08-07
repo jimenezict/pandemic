@@ -32,7 +32,7 @@ public class GamePersistenceOnFile extends GamePersistenceAbstractClass {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("I am GamePersistenceOnFile");    }
+    }
 
     @Override
     public GameDTO getGameById(UUID uuid) {
@@ -46,7 +46,6 @@ public class GamePersistenceOnFile extends GamePersistenceAbstractClass {
                 return (GameDTO) ois.readObject();
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
             return null;
         }
     }

@@ -7,6 +7,8 @@ import java.util.*;
 
 public class PlayerQueue implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private Queue<BaseCard> queue;
 
     public PlayerQueue(List<BaseCard> playerQueueList) {

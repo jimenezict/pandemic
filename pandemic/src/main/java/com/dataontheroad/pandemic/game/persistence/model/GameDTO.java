@@ -12,6 +12,8 @@ import static java.util.UUID.randomUUID;
 
 public class GameDTO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private final UUID uuid;
 
     private final LocalDateTime insertDateTime;

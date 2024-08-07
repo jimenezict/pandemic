@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements IPlayerServices, Serializable {
+    private static final long serialVersionUID = 1L;
     private List<BaseCard> listCard;
     private City city;
     protected String color;

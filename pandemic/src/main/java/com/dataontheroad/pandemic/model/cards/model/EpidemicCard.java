@@ -8,6 +8,7 @@ import static com.dataontheroad.pandemic.model.cards.CardTypeEnum.EPIDEMIC;
 public class EpidemicCard extends BaseCard implements Serializable {
 
 
+    private static final long serialVersionUID = 1L;
     public EpidemicCard() {
         super(EPIDEMIC);
     }

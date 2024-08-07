@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Virus implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private final VirusType virusType;
     private boolean cureDiscovered = Boolean.FALSE;
     private boolean eradicated = Boolean.FALSE;

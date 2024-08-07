@@ -10,6 +10,8 @@ import java.util.List;
 
 public class InfectionDeck implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private Deque<CityCard> deck;
 
     public InfectionDeck(List<CityCard> infectionDeckList) {
