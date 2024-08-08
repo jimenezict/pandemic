@@ -8,6 +8,8 @@ import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.*;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,29 +25,45 @@ public class TurnEndPoint {
 
     private final TurnServiceImpl turnService;
 
+    Logger logger = LoggerFactory.getLogger(TurnEndPoint.class);
+
     public TurnEndPoint(TurnServiceImpl turnService) {
         this.turnService = turnService;
     }
 
     @GetMapping("/turn/status/{gameId}")
     ResponseEntity getTurn(@PathVariable UUID gameId) {
+        logger.info("Starting the status of turn request for gameId {}", gameId);
         TurnResponseDTO turnResponseDTO = turnService.getTurnServiceInformation(gameId);
         if(isNull(turnResponseDTO)) {
+            logger.warn("{} with Id {}", GAME_NOT_FOUND, gameId);
             ErrorResponse errorResponse = new ErrorResponse(TURN_ENDPOINT_NAME, gameId, GAME_NOT_FOUND);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
+        logger.info("Ending the status of request for gameId {} for active player {} and available actions are {}", gameId,
+                turnResponseDTO.getActivePlayer().getName(),
+                turnResponseDTO.getActionList().size());
+
         return ResponseEntity.ok().body(turnResponseDTO);
     }
 
     @PostMapping("/turn/execute")
     ResponseEntity executeTurn(@RequestBody TurnRequestDTO turnRequestDTO) {
+        logger.info("Starting the execute of turn request for gameId {}", turnRequestDTO.getUuid());
         TurnResponseDTO turnResponseDTO = turnService.getTurnServiceInformation(turnRequestDTO.getUuid());
 
         if(isNull(turnResponseDTO)) {
+            logger.warn("{}:{} during {}", GAME_NOT_FOUND, turnRequestDTO.getUuid(), TURN_ENDPOINT_NAME);
             return getErrorResponse(turnRequestDTO.getUuid(), GAME_NOT_FOUND);
         } else if (!turnResponseDTO.getActivePlayer().getName().equals(turnRequestDTO.getPlayerName())) {
+            logger.warn("During {} it was requested an action for {} but {} was the active player during gameId {}",
+                    TURN_ENDPOINT_NAME, turnRequestDTO.getPlayerName(),
+                    turnResponseDTO.getActivePlayer(), turnRequestDTO.getUuid());
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_PLAYER);
         } else if(turnRequestDTO.getActionPosition() >= turnResponseDTO.getActionList().size()) {
+            logger.warn("During {} it was requested the action {} but the highest allowed value was during gameId {}",
+                    TURN_ENDPOINT_NAME, turnRequestDTO.getActionPosition(),
+                    turnResponseDTO.getActionList().size() - 1, turnRequestDTO.getUuid());
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_ACTION);
         }
 
