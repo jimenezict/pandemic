@@ -53,7 +53,7 @@ public class GameEndPoint {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 
-        logger.info("Ending the creation of a game with {} players and {} number of pandemic cards and UUID {}", numPlayers, numPandemics, uuid);
+        logger.info("Ending the creation of a game with {} players and {} number of pandemic cards and gameId {}", numPlayers, numPandemics, uuid);
 
         SuccessResponse successResponse = new SuccessResponse(GAME_ENDPOINT_NAME, uuid, SUCCESS_GAME);
         return ResponseEntity.ok().body(successResponse);
@@ -71,7 +71,7 @@ public class GameEndPoint {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
 
-        logger.info("Found game {} created at {} and updated at {}", gameId, gameResponseDTO.getInsertDateTime(), gameResponseDTO.getUpdateDateTime());
+        logger.info("Found game with gameId {} created at {} and updated at {}", gameId, gameResponseDTO.getInsertDateTime(), gameResponseDTO.getUpdateDateTime());
         return ResponseEntity.ok().body(gameResponseDTO);
     }
 

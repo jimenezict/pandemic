@@ -67,23 +67,29 @@ public class TurnEndPoint {
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_ACTION);
         }
 
-        TurnInformation turnInformation = null;
+        TurnInformation turnInformation;
         TurnExecuteDTO turnExecuteDTO;
 
         try {
             turnExecuteDTO = turnService.getTurnExecuteDTO(turnRequestDTO.getUuid());
             Action action = turnService.getSelectedAction(turnExecuteDTO, turnRequestDTO.getActionPosition());
+            logger.info("Player {} will do the action {} on the gameId {}",
+                    turnExecuteDTO.getActivePlayer().getName(), action.actionPrompt(), turnRequestDTO.getUuid());
             turnService.validateActionFormat(turnExecuteDTO, action, (HashMap<String, String>) turnRequestDTO.getAdditionalFields());
             turnInformation = turnService.executeAction(turnRequestDTO.getUuid(), action);
+            logger.info("Player {} will do the action {} on the gameId {}",
+                    turnExecuteDTO.getActivePlayer().getName(), action.actionPrompt(), turnRequestDTO.getUuid());
             turnService.ifEndOfGameThrowExcepction(turnRequestDTO.getUuid());
         } catch(EndOfGameException e) {
             EndOfGameResponse endOfGameResponse = new EndOfGameResponse(TURN_ENDPOINT_NAME, turnRequestDTO.getUuid(), e.getReasonOfEndGame());
             endOfGameResponse.setWin(e.getDidPlayerWon());
+            logger.info("GameId {} has ended with reason {}", endOfGameResponse.getGameID(), endOfGameResponse.getMessage());
             return ResponseEntity.ok().body(endOfGameResponse);
         } catch (ActionException | GameExecutionException e) {
             return getErrorResponse(turnRequestDTO.getUuid(), e.getMessage());
         }
 
+        logger.info("Ending the execute of turn request for gameId {}, next user is {}", turnRequestDTO.getUuid(), turnInformation.getActivePlayer());
         ExecutionSuccessResponse successResponse =
                 new ExecutionSuccessResponse(TURN_ENDPOINT_NAME,
                         turnRequestDTO.getUuid(), SUCCESS_ACTION,
