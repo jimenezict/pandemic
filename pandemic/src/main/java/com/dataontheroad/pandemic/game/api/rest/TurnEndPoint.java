@@ -67,7 +67,7 @@ public class TurnEndPoint {
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_ACTION);
         }
 
-        TurnInformation turnInformation;
+        TurnInformation turnInformation = null;
         TurnExecuteDTO turnExecuteDTO;
 
         try {

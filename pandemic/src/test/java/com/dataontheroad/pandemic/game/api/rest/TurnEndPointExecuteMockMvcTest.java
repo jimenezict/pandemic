@@ -1,6 +1,8 @@
 package com.dataontheroad.pandemic.game.api.rest;
 
 import com.dataontheroad.pandemic.actions.ActionsType;
+import com.dataontheroad.pandemic.actions.action_factory.Action;
+import com.dataontheroad.pandemic.actions.action_factory.BuildResearchCenterAction;
 import com.dataontheroad.pandemic.actions.action_factory.FlyCharterAction;
 import com.dataontheroad.pandemic.exceptions.ActionException;
 import com.dataontheroad.pandemic.exceptions.EndOfGameException;
@@ -8,13 +10,16 @@ import com.dataontheroad.pandemic.exceptions.GameExecutionException;
 import com.dataontheroad.pandemic.game.api.model.commons.ErrorResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.EndOfGameResponse;
 import com.dataontheroad.pandemic.game.api.model.turn.ExecutionSuccessResponse;
+import com.dataontheroad.pandemic.game.api.model.turn.TurnExecuteDTO;
 import com.dataontheroad.pandemic.game.api.model.turn.TurnRequestDTO;
+import com.dataontheroad.pandemic.game.persistence.model.GameDTO;
 import com.dataontheroad.pandemic.game.persistence.model.TurnInformation;
 import com.dataontheroad.pandemic.game.service.implementations.TurnServiceImpl;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.player.ScientistPlayer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +61,24 @@ class TurnEndPointExecuteMockMvcTest {
         TurnServiceImpl turnService;
 
         private static UUID uuid = randomUUID();
+
+        private static GameDTO gameDTO;
+
+        private static TurnExecuteDTO turnExecuteDTO;
+
+        private static Action action;
+
+        @BeforeAll
+        public static void setUp() {
+                try {
+                        gameDTO = new GameDTO(3);
+                } catch (GameExecutionException e) {
+                        throw new RuntimeException(e);
+                }
+                turnExecuteDTO = new TurnExecuteDTO(gameDTO);
+                action = new BuildResearchCenterAction(turnExecuteDTO.getActivePlayer());
+        }
+
 
         @Test
         void getTurnExecute_whenGameDoNotExists() throws Exception {
@@ -134,6 +157,8 @@ class TurnEndPointExecuteMockMvcTest {
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
                 when(turnService.executeAction(any(), any())).thenReturn(new TurnInformation(activePlayer));
+                when(turnService.getTurnExecuteDTO(any())).thenReturn(turnExecuteDTO);
+                when(turnService.getSelectedAction(any(), anyInt())).thenReturn(action);
 
 
                 TurnRequestDTO turnRequestDTO =
@@ -160,6 +185,8 @@ class TurnEndPointExecuteMockMvcTest {
         void getTurnExecute_executeThrowException_actionIsNotValid() throws Exception {
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
+                when(turnService.getTurnExecuteDTO(any())).thenReturn(turnExecuteDTO);
+                when(turnService.getSelectedAction(any(), anyInt())).thenReturn(action);
 
                 doThrow(new ActionException(ActionsType.DRIVEFERRYDISPATCHER, DRIVEFERRY_ERROR_NO_CONNECTION)).
                         when(turnService).executeAction(any(UUID.class), any());
@@ -187,6 +214,8 @@ class TurnEndPointExecuteMockMvcTest {
         void getTurnExecute_executeThrowException_gameDoNotExists() throws Exception {
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(new ScientistPlayer()));
+                when(turnService.getTurnExecuteDTO(any())).thenReturn(turnExecuteDTO);
+                when(turnService.getSelectedAction(any(), anyInt())).thenReturn(action);
 
                 doThrow(new GameExecutionException(GAME_NOT_FOUND)).
                         when(turnService).executeAction(any(UUID.class), any());
@@ -216,6 +245,7 @@ class TurnEndPointExecuteMockMvcTest {
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
                 when(turnService.executeAction(any(), any())).thenReturn(new TurnInformation(activePlayer));
+                when(turnService.getTurnExecuteDTO(any())).thenReturn(turnExecuteDTO);
                 FlyCharterAction flyCharterAction = new FlyCharterAction(activePlayer);
                 when(turnService.getSelectedAction(any(), anyInt())).thenReturn(flyCharterAction);
                 HashMap<String, String> additionalFields = new HashMap<>();
@@ -244,9 +274,12 @@ class TurnEndPointExecuteMockMvcTest {
         @Test
         void getTurnExecute_execute_endOfGameResponse() throws Exception {
                 Player activePlayer = new ScientistPlayer();
+
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
                 when(turnService.executeAction(any(), any())).thenThrow(new EndOfGameException(END_OF_GAME_EMPTY_DECK));
+                when(turnService.getTurnExecuteDTO(any())).thenReturn(turnExecuteDTO);
+                when(turnService.getSelectedAction(any(), anyInt())).thenReturn(action);
 
                 TurnRequestDTO turnRequestDTO =
                         new TurnRequestDTO(uuid, SCIENTIST_NAME, 0, null);
@@ -274,6 +307,8 @@ class TurnEndPointExecuteMockMvcTest {
                 when(turnService.getTurnServiceInformation(any()))
                         .thenReturn(buildTurnResponseDTOWithActionList(activePlayer));
                 when(turnService.executeAction(any(), any())).thenThrow(new EndOfGameException(END_OF_GAME_EMPTY_DECK, true));
+                when(turnService.getTurnExecuteDTO(any())).thenReturn(turnExecuteDTO);
+                when(turnService.getSelectedAction(any(), anyInt())).thenReturn(action);
 
                 TurnRequestDTO turnRequestDTO =
                         new TurnRequestDTO(uuid, SCIENTIST_NAME, 0, null);
