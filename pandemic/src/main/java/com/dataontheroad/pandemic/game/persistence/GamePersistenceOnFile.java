@@ -18,12 +18,16 @@ import java.util.UUID;
 @Repository
 @Qualifier("gamePersistenceOnFile")
 public class GamePersistenceOnFile extends GamePersistenceAbstractClass {
+
+    private static final String basePath = "save";
     @Override
     public void insertOrUpdateGame(GameDTO gameDTO) {
 
-        Path path = Paths.get(gameDTO.getUuid().toString());
+        Path path = Paths.get(basePath,gameDTO.getUuid().toString() + ".pdm");
+
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+            Files.createDirectories(path.getParent());
 
             oos.writeObject(gameDTO);
             oos.flush();
@@ -36,7 +40,7 @@ public class GamePersistenceOnFile extends GamePersistenceAbstractClass {
 
     @Override
     public GameDTO getGameById(UUID uuid) {
-        Path path = Paths.get(uuid.toString());
+        Path path = Paths.get(basePath,uuid.toString() + ".pdm");
 
         try {
             byte[] bytes = Files.readAllBytes(path);
