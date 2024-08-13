@@ -46,7 +46,7 @@ public class ShareKnowledgeDefaultService {
         if(playerHasCardForHisLocation(player, player.getCity())) {
             sender = player;
         } else {
-            if(playersList.stream().filter(player1 -> playerHasCardForHisLocation(player1, player1.getCity())).count() == 0) {
+            if(playersList.stream().noneMatch(player1 -> playerHasCardForHisLocation(player1, player1.getCity()))) {
                 return actionList;
             }
             sender = playersList.stream().filter(player1 -> playerHasCardForHisLocation(player1, player1.getCity())).findFirst().get();
@@ -54,7 +54,7 @@ public class ShareKnowledgeDefaultService {
             playersList.add(player);
         }
 
-        playersList.stream().forEach(receiver -> {
+        playersList.forEach(receiver -> {
             if(isDoable(sender, receiver, card)) {
                 actionList.add(new ShareKnowledgeAction(sender, receiver, card));
             }

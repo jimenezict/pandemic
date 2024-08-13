@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GamePersistenceOnFileTest {
 
-    GamePersistenceOnFile underTest = new GamePersistenceOnFile();
+    final GamePersistenceOnFile underTest = new GamePersistenceOnFile();
 
     @Test
     void createsThreeGames() throws Exception {

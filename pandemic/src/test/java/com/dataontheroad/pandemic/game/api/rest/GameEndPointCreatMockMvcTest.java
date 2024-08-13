@@ -42,7 +42,7 @@ class GameEndPointCreatMockMvcTest {
     @MockBean
     GameServiceImpl gameService;
 
-    private static UUID uuid = randomUUID();
+    private static final UUID uuid = randomUUID();
 
     @Test
     void create_whenNumPandemicIsInvalid7() throws Exception {

@@ -21,8 +21,7 @@ public class CityFactory {
     }
 
     private static List<City> createCityListWithoutConnections() {
-        return Arrays.asList(CityEnum.values())
-                .stream()
+        return Arrays.stream(CityEnum.values())
                 .map(cityEnum -> new City(cityEnum.cityName, cityEnum.virusType))
                 .collect(Collectors.toList());
     }

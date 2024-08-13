@@ -25,7 +25,7 @@ public class TurnEndPoint {
 
     private final TurnServiceImpl turnService;
 
-    Logger logger = LoggerFactory.getLogger(TurnEndPoint.class);
+    final Logger logger = LoggerFactory.getLogger(TurnEndPoint.class);
 
     public TurnEndPoint(TurnServiceImpl turnService) {
         this.turnService = turnService;
@@ -61,7 +61,7 @@ public class TurnEndPoint {
                     turnResponseDTO.getActivePlayer(), turnRequestDTO.getUuid());
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_PLAYER);
         } else if(turnRequestDTO.getActionPosition() >= turnResponseDTO.getActionList().size()) {
-            logger.warn("During {} it was requested the action {} but the highest allowed value was during gameId {}",
+            logger.warn("During {} it was requested the action {} but the highest allowed value was {} during gameId {}",
                     TURN_ENDPOINT_NAME, turnRequestDTO.getActionPosition(),
                     turnResponseDTO.getActionList().size() - 1, turnRequestDTO.getUuid());
             return getErrorResponse(turnRequestDTO.getUuid(), TURN_WRONG_ACTION);

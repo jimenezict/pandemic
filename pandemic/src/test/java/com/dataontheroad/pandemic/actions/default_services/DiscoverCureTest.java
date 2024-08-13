@@ -21,20 +21,20 @@ class DiscoverCureTest {
 
     Player player;
 
-    List<City> emptyNodeCityConnection = new ArrayList<>();
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
 
-    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
-    private City calcuta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
-    private City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
-    private City paris = new City("Paris", VirusType.BLUE, emptyNodeCityConnection);
-    private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
-    private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
+    private final City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private final City calcuta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    private final City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
+    private final City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
+    private final City paris = new City("Paris", VirusType.BLUE, emptyNodeCityConnection);
+    private final City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
 
     private Virus virusNotDiscovered = new Virus(VirusType.BLUE);
     private Virus virusDiscovered = new Virus(VirusType.BLACK);
 
-    private DiscoverCureDefaultService discoverCureDefaultService = DiscoverCureDefaultService.getInstance();
+    private final DiscoverCureDefaultService discoverCureDefaultService = DiscoverCureDefaultService.getInstance();
 
     @BeforeEach
     public void setPlayer() {

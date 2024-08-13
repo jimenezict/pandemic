@@ -25,10 +25,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DispatcherAllPlayerMovementsServiceTest {
 
-    List<City> cityList = createCityList();
+    final List<City> cityList = createCityList();
     Player player;
 
-    DispatcherAllPlayerMovementsService dispatcherAllPlayerMovementsService = DispatcherAllPlayerMovementsService.getInstance();
+    final DispatcherAllPlayerMovementsService dispatcherAllPlayerMovementsService = DispatcherAllPlayerMovementsService.getInstance();
     private City getCityFromBoardList(City inputCity) {
         return cityList.stream().filter(city -> city.equals(inputCity)).findFirst().orElse(null);
     }

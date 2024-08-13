@@ -37,14 +37,14 @@ class GetListOfActionsSpecialActionTest {
     List<Virus> virusList;
 
 
-    private Virus blueVirus = new Virus(VirusType.BLUE);
-    private Virus blackVirus = new Virus(VirusType.BLACK);
-    private Virus redVirus = new Virus(VirusType.RED);
-    private Virus yellowVirus = new Virus(VirusType.YELLOW);
+    private final Virus blueVirus = new Virus(VirusType.BLUE);
+    private final Virus blackVirus = new Virus(VirusType.BLACK);
+    private final Virus redVirus = new Virus(VirusType.RED);
+    private final Virus yellowVirus = new Virus(VirusType.YELLOW);
 
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City essen = new City("Essen", VirusType.BLUE);
-    private City atlanta = new City("Atlanta", VirusType.BLUE);
+    private final City newyork = new City("New York", VirusType.BLUE);
+    private final City essen = new City("Essen", VirusType.BLUE);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE);
 
     @BeforeEach
     public void setUp() {

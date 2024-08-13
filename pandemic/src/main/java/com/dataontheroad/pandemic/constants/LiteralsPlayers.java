@@ -22,7 +22,7 @@ public class LiteralsPlayers {
     public static final String DISPATCHER_DESCRIPTION = "Move another player's pawn as if it were yours. As an action, move any pwn to a city with another pawn";
     public static final String OPERATIONS_COLOR = "Soft Green";
     public static final String OPERATIONS_NAME = "Operations Expert";
-    public static final String OPERATIONS_DESCRIPTION = "As an action, build a research station in the city you are in (no City card needed), once per turn as an action, move from a reserch station to any city by discarding any City card";
+    public static final String OPERATIONS_DESCRIPTION = "As an action, build a research station in the city you are in (no City card needed), once per turn as an action, move from a research station to any city by discarding any City card";
     public static final String RESEARCHER_COLOR = "Brown";
     public static final String RESEARCHER_NAME = "Researcher";
     public static final String RESEARCHER_DESCRIPTION = "As an action, you may give (or a player can take) any city card from your han. You must both be in the same city. The card does not have to match the city you are in";

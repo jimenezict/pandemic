@@ -41,12 +41,12 @@ class TurnEndPointStatusMockMvcTest {
         private MockMvc mvc;
         @Autowired
         private ObjectMapper objectMapper;
-        private City atlanta = new City("Atlanta", VirusType.BLUE);
+        private final City atlanta = new City("Atlanta", VirusType.BLUE);
 
         @MockBean
         TurnServiceImpl turnService;
 
-        private static UUID uuid = randomUUID();
+        private static final UUID uuid = randomUUID();
 
         @Test
         void getTurn_whenGameDoNotExists() throws Exception {

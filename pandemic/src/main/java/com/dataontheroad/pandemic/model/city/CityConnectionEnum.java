@@ -99,8 +99,8 @@ public enum CityConnectionEnum {
 
 
     ;
-    String city1;
-    String city2;
+    final String city1;
+    final String city2;
 
     CityConnectionEnum(String city1, String city2) {
         this.city1 = city1;

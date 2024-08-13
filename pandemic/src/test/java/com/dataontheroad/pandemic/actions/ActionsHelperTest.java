@@ -19,16 +19,16 @@ class ActionsHelperTest {
 
     Player player;
 
-    List<City> emptyNodeCityConnection = new ArrayList<>();
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
 
-    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
-    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
-    private City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
-    private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
-    private City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
-    private City london = new City("London", VirusType.BLUE, emptyNodeCityConnection);
-    private City washington = new City("Washington", VirusType.BLUE, emptyNodeCityConnection);
+    private final City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private final City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    private final City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
+    private final City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
+    private final City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
+    private final City london = new City("London", VirusType.BLUE, emptyNodeCityConnection);
+    private final City washington = new City("Washington", VirusType.BLUE, emptyNodeCityConnection);
 
     @BeforeEach
     public void setPlayer() {

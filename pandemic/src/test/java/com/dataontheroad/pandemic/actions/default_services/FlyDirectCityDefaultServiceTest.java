@@ -18,16 +18,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FlyDirectCityDefaultServiceTest {
 
-    List<City> emptyNodeCityConnection = new ArrayList<>();
-    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
-    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
-    private City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
-    private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
-    private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
+    private final City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private final City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    private final City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
+    private final City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
     Player player;
 
-    FlyDirectCityDefaultService flyDirectCityDefaultService = FlyDirectCityDefaultService.getInstance();
+    final FlyDirectCityDefaultService flyDirectCityDefaultService = FlyDirectCityDefaultService.getInstance();
 
     @BeforeEach
     public void setPlayer() {

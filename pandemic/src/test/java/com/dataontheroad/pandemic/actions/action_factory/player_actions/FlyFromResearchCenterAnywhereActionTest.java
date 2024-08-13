@@ -21,9 +21,9 @@ class FlyFromResearchCenterAnywhereActionTest {
 
     OperationsPlayer operationsPlayer;
 
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City calcuta = new City("Calcuta", VirusType.BLACK);
-    private City essen = new City("Essen", VirusType.BLUE);
+    private final City newyork = new City("New York", VirusType.BLUE);
+    private final City calcuta = new City("Calcuta", VirusType.BLACK);
+    private final City essen = new City("Essen", VirusType.BLUE);
     private List<BaseCard> operationPlayerListCard;
 
     @BeforeEach

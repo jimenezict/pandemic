@@ -24,17 +24,17 @@ class OperationsBuildResearchCenterServiceTest {
 
     Player player;
 
-    List<City> emptyNodeCityConnection = new ArrayList<>();
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
 
-    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
-    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
-    private City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
-    private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
+    private final City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private final City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    private final City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
+    private final City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
 
     Action action;
 
-    OperationsBuildResearchCenterService operationsBuildResearchCenterService = new OperationsBuildResearchCenterService();
+    final OperationsBuildResearchCenterService operationsBuildResearchCenterService = new OperationsBuildResearchCenterService();
     @BeforeEach
     public void setPlayer() {
         player = new OperationsPlayer();

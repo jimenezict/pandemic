@@ -41,7 +41,7 @@ class GameEndPointReadMockMvcTest {
     @MockBean
     GameServiceImpl gameService;
 
-    private static UUID uuid = randomUUID();
+    private static final UUID uuid = randomUUID();
 
     @Test
     void readGame_whenGameDoNotExists() throws Exception {

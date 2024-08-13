@@ -10,7 +10,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRYDISPATCHER_ACTION;
 
 public class AllPlayersMovementsAction extends Action {
-    City destination;
+    final City destination;
 
     public AllPlayersMovementsAction(Player player, City destination) {
         super(ActionsType.DRIVEFERRYDISPATCHER, player);

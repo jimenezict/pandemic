@@ -22,15 +22,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OperationsFlyFromReserachServiceTest {
 
-    OperationsFlyFromReserachService operationsFlyFromReserachService = OperationsFlyFromReserachService.getInstance();
+    final OperationsFlyFromReserachService operationsFlyFromReserachService = OperationsFlyFromReserachService.getInstance();
 
     OperationsPlayer operationsPlayer;
-    private City lagos = new City(LAGOS.cityName, VirusType.YELLOW);
-    private City atlanta = new City(ATLANTA.cityName, VirusType.BLACK);
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City calculta = new City("Calcuta", VirusType.BLACK);
-    private City essen = new City("Essen", VirusType.BLUE);
-    private City lima = new City("Lima", VirusType.YELLOW);
+    private final City lagos = new City(LAGOS.cityName, VirusType.YELLOW);
+    private final City atlanta = new City(ATLANTA.cityName, VirusType.BLACK);
+    private final City newyork = new City("New York", VirusType.BLUE);
+    private final City calculta = new City("Calcuta", VirusType.BLACK);
+    private final City essen = new City("Essen", VirusType.BLUE);
+    private final City lima = new City("Lima", VirusType.YELLOW);
 
     @BeforeEach
     public void setUp() {

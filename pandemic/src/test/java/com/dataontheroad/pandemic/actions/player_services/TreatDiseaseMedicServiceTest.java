@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TreatDiseaseMedicServiceTest {
 
     private MedicPlayer medic;
-    private City atlanta = new City("Atlanta", VirusType.BLUE);
-    private TreatDiseaseMedicService treatDiseaseMedicService = new TreatDiseaseMedicService();
+    private final City atlanta = new City("Atlanta", VirusType.BLUE);
+    private final TreatDiseaseMedicService treatDiseaseMedicService = new TreatDiseaseMedicService();
 
     @BeforeEach
     void setUp() {

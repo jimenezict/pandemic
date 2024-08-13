@@ -20,11 +20,11 @@ class   FlyBetweenResearchCenterTest {
 
     Player player;
 
-    List<City> emptyNodeCityConnection = new ArrayList<>();
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
 
-    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
-    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    FlyShuttleDefaultService flyShuttleDefaultService = FlyShuttleDefaultService.getInstance();
+    private final City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private final City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    final FlyShuttleDefaultService flyShuttleDefaultService = FlyShuttleDefaultService.getInstance();
 
     @BeforeEach
     public void setPlayer() {

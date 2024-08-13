@@ -17,11 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class TreatDiseaseDefaultServiceTest {
 
     Player player;
-    private City atlanta = new City("Atlanta", VirusType.BLUE);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE);
     Virus cureVirus;
     Virus uncureVirus;
     List<Virus> virusList;
-    TreatDiseaseDefaultService treatDiseaseDefaultService = TreatDiseaseDefaultService.getInstance();
+    final TreatDiseaseDefaultService treatDiseaseDefaultService = TreatDiseaseDefaultService.getInstance();
 
     @BeforeEach
     public void setUp() {

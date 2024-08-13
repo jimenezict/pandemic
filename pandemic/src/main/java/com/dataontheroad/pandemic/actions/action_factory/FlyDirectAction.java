@@ -9,7 +9,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYDIRECT_ACTI
 
 public class FlyDirectAction extends Action {
 
-    City destination;
+    final City destination;
 
     public FlyDirectAction(Player player, City destination) {
         super(ActionsType.FLYDIRECT, player);

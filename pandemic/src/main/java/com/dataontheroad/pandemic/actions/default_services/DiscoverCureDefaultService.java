@@ -8,7 +8,7 @@ import com.dataontheroad.pandemic.model.player.Player;
 import com.dataontheroad.pandemic.model.virus.Virus;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +44,7 @@ public class DiscoverCureDefaultService {
                 .filter(x -> isDoable(player, x))
                 .collect(Collectors.toList());
 
-        return !isEmpty(virus) ? new ArrayList<>(Arrays.asList(new DiscoverCureAction(player, virus.get(0)))) : new ArrayList<>();
+        return !isEmpty(virus) ? new ArrayList<>(Collections.singletonList(new DiscoverCureAction(player, virus.get(0)))) : new ArrayList<>();
     }
 
     public void doAction(Player player, Virus virus) throws ActionException {

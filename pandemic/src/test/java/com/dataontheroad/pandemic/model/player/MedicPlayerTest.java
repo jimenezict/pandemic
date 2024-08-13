@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MedicPlayerTest {
 
     MedicPlayer mediaPlayer;
-    private City atlanta = new City("Atlanta", VirusType.BLUE);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE);
     Virus cureVirus;
     Virus uncureVirus;
     List<Virus> virusList;

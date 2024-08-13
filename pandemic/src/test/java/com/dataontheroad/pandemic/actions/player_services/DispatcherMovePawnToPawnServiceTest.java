@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DispatcherMovePawnToPawnServiceTest {
 
-    List<City> cityList = createCityList();
+    final List<City> cityList = createCityList();
     List<Player> playerList;
     MedicPlayer medic;
     ContingencyPlayer contingency;

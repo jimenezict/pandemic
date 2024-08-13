@@ -25,12 +25,12 @@ public class Board implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final int MAX_INFECTIONS = 6;
     private static final int MAX_OUTBREAKS = 8;
-    private InfectionDeck infectionDeck;
+    private final InfectionDeck infectionDeck;
     private Set<CityCard> infectionDiscardDeck;
-    private PlayerQueue playerQueue;
-    private Set<BaseCard> playerDiscardDeck;
+    private final PlayerQueue playerQueue;
+    private final Set<BaseCard> playerDiscardDeck;
     private final List<City> boardCities;
-    private List<Player> players;
+    private final List<Player> players;
     private final List<Virus> virusList;
     private Integer infectionRate;
     private Integer outbreaks;

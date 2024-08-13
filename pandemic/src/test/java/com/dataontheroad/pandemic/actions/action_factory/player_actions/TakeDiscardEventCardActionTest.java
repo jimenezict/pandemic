@@ -27,8 +27,8 @@ class TakeDiscardEventCardActionTest {
     ContingencyPlayer contingencyPlayer;
     SpecialCard eventCard;
     List<BaseCard> discardedCards;
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City calcuta = new City("Calcuta", VirusType.BLACK);
+    private final City newyork = new City("New York", VirusType.BLUE);
+    private final City calcuta = new City("Calcuta", VirusType.BLACK);
 
     @BeforeEach
     public void setUp() {

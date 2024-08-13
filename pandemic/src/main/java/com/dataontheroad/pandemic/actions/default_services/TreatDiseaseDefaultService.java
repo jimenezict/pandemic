@@ -50,7 +50,7 @@ public class TreatDiseaseDefaultService {
             //When cure is discovered can remove all the boxes of the same color with a unique action
             position.getVirusBoxes().removeIf(virusBox -> virusBox.name().equals(virus.getVirusType().name()));
         } else {
-            position.getVirusBoxes().remove(position.getVirusBoxes().indexOf(virus.getVirusType()));
+            position.getVirusBoxes().remove(virus.getVirusType());
         }
     }
 }

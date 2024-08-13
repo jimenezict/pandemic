@@ -15,12 +15,12 @@ import static com.dataontheroad.pandemic.model.city.CityEnum.*;
 
 public class modelBuilder {
 
-    private static City atlanta = new City(ATLANTA.cityName, VirusType.BLUE);
-    private static City washington = new City(WASHINGTON.cityName, VirusType.BLUE);
-    private static City chicago = new City(CHICAGO.cityName, VirusType.BLUE);
-    private static City miami = new City(MIAMI.cityName, VirusType.BLUE);
-    private static City madrid = new City(MADRID.cityName, VirusType.BLUE);
-    private static City paris = new City(PARIS.cityName, VirusType.BLUE);
+    private static final City atlanta = new City(ATLANTA.cityName, VirusType.BLUE);
+    private static final City washington = new City(WASHINGTON.cityName, VirusType.BLUE);
+    private static final City chicago = new City(CHICAGO.cityName, VirusType.BLUE);
+    private static final City miami = new City(MIAMI.cityName, VirusType.BLUE);
+    private static final City madrid = new City(MADRID.cityName, VirusType.BLUE);
+    private static final City paris = new City(PARIS.cityName, VirusType.BLUE);
 
     public static TurnResponseDTO buildTurnResponseDTOWithActionList(Player player) {
         player.setCity(atlanta);

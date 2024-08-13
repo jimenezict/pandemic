@@ -43,7 +43,7 @@ public class ContingencyPlannerService {
     public boolean isDoable(ContingencyPlayer player, List<BaseCard> discardedCards) {
         return isNull(player.getExtraEventCard())
                 && !isNull(discardedCards)
-                && discardedCards.stream().filter(card -> EVENT_ACTION.equals(card.getCardType())).count() > 0;
+                && discardedCards.stream().anyMatch(card -> EVENT_ACTION.equals(card.getCardType()));
     }
 
     /**
@@ -52,7 +52,6 @@ public class ContingencyPlannerService {
      * @param player         Player should be a Contingency Planner
      * @param discardedCards tDiscarded cards deck, to validate that there are available actions
      * @return a list of TAKEDISCARDEVENTCARD Available actions
-     * @throws ActionException the action exception
      */
     public List<Action> returnAvailableActions(ContingencyPlayer player, List<BaseCard> discardedCards) {
 
@@ -75,8 +74,8 @@ public class ContingencyPlannerService {
 
     /**
      * Executes the action of getting the card from the discarded deck and bring it to the hand of the player
-     * consequently, the extra slot is busy and this action is unabled until is used that card
-     * In case the extra card is used, disapear from the game
+     * consequently, the extra slot is busy and this action is disabled until is used that card
+     * In case the extra card is used, disappear from the game
      *
      * @param player         Player should be a Contingency Planner
      * @param discardedCards Cards on the discarded player Deck
@@ -90,7 +89,7 @@ public class ContingencyPlannerService {
 
         int index = discardedCards.indexOf(eventCard);
         if(index > 0) {
-            discardedCards.remove(discardedCards.indexOf(eventCard));
+            discardedCards.remove(eventCard);
             player.setExtraEventCard(eventCard);
         }
     }

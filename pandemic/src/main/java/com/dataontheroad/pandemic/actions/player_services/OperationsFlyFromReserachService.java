@@ -9,7 +9,7 @@ import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.OperationsPlayer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.*;
@@ -36,7 +36,7 @@ public class OperationsFlyFromReserachService {
 
 
     public List<Action> returnAvailableActions(OperationsPlayer player) {
-        return isDoable(player)? new ArrayList<>(Arrays.asList(new FlyFromResearchCenterAnywhereAction(player))) : new ArrayList<>();
+        return isDoable(player)? new ArrayList<>(Collections.singletonList(new FlyFromResearchCenterAnywhereAction(player))) : new ArrayList<>();
     }
 
 

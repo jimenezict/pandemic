@@ -8,7 +8,7 @@ import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.actions.ActionsHelper.playerHasCardForHisLocation;
@@ -22,7 +22,7 @@ import static java.util.Objects.isNull;
  * Default Service for Building Research Center. A research center can be created when player is on a city
  * without research center, and holds the card of the city, and had not over pass the maximum allowed research centers
  * on the board.
- *
+ * <p>
  * There are exceptions over the default behave when:
  * * Is used the action card .....
  * * Player ..... can create research centers with no need of a city card.
@@ -59,7 +59,7 @@ public class BuildResearchCenterDefaultService {
      * @return Returns an action in a list if player can build a research center
      */
     public List<Action> returnAvailableActions(Player player) {
-        return isDoable(player)? new ArrayList<>(Arrays.asList(new BuildResearchCenterAction(player))) : new ArrayList<>();
+        return isDoable(player)? new ArrayList<>(Collections.singletonList(new BuildResearchCenterAction(player))) : new ArrayList<>();
     }
 
     /**

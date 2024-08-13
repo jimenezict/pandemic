@@ -41,6 +41,6 @@ public class EndOfGameServiceImpl implements IEndOfGameService {
 
     @Override
     public boolean allCitiesWithoutBoxes(List<City> listOfCities) {
-        return listOfCities.stream().filter(city -> !city.getVirusBoxes().isEmpty()).collect(Collectors.toList()).isEmpty();
+        return listOfCities.stream().filter(city -> !city.getVirusBoxes().isEmpty()).count() == 0;
     }
 }

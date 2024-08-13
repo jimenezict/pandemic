@@ -16,7 +16,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsPlayers.CONTINGENCY_N
 public class TakeDiscardEventCardAction extends Action {
 
     private final SpecialCard eventCard;
-    private List<BaseCard> discardedCards;
+    private final List<BaseCard> discardedCards;
 
     /**
      * Creates an Action of type TAKEDISCARDEVENTCARD.

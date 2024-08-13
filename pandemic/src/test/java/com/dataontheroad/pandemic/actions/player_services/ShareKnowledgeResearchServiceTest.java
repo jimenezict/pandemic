@@ -24,21 +24,21 @@ class ShareKnowledgeResearchServiceTest {
     ResearchPlayer researchPlayer;
     Player receiver;
 
-    List<City> emptyNodeCityConnection = new ArrayList<>();
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
 
-    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
-    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
-    private City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
-    private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
-    private City cairo =  new City("Cairo", VirusType.BLACK, emptyNodeCityConnection);
-    private City argel =  new City("Argel", VirusType.BLACK, emptyNodeCityConnection);
-    private City buenosaires = new City("Buenos Aires", VirusType.YELLOW, emptyNodeCityConnection);
-    private City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
-    private City paris = new City("Paris", VirusType.BLUE, emptyNodeCityConnection);
-    private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
+    private final City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private final City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    private final City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
+    private final City lima = new City("Lima", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
+    private final City cairo =  new City("Cairo", VirusType.BLACK, emptyNodeCityConnection);
+    private final City argel =  new City("Argel", VirusType.BLACK, emptyNodeCityConnection);
+    private final City buenosaires = new City("Buenos Aires", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
+    private final City paris = new City("Paris", VirusType.BLUE, emptyNodeCityConnection);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
 
-    ShareKnowledgeResearchService shareKnowledgeResearchService = ShareKnowledgeResearchService.getInstance();
+    final ShareKnowledgeResearchService shareKnowledgeResearchService = ShareKnowledgeResearchService.getInstance();
 
     @BeforeEach
     public void setPlayer() {

@@ -9,7 +9,7 @@ import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.BUILDRESEARCHSTATION_ERROR_CENTER_CREATED;
@@ -37,7 +37,7 @@ public class OperationsBuildResearchCenterService extends BuildResearchCenterDef
 
     @Override
     public List<Action> returnAvailableActions(Player player) {
-        return isDoable(player)? new ArrayList<>(Arrays.asList(new BuildResearchCenterAction(player))) : new ArrayList<>();
+        return isDoable(player)? new ArrayList<>(Collections.singletonList(new BuildResearchCenterAction(player))) : new ArrayList<>();
     }
 
     @Override

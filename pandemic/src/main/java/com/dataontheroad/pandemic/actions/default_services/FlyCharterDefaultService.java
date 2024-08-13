@@ -8,7 +8,7 @@ import com.dataontheroad.pandemic.model.city.City;
 import com.dataontheroad.pandemic.model.player.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.dataontheroad.pandemic.constants.LiteralsAction.FLYCHARTER_ERROR_INCORRECT_DESTINATION;
@@ -36,7 +36,7 @@ public class FlyCharterDefaultService {
     }
 
     public List<Action> returnAvailableActions(Player player) {
-        return isDoable(player) ? new ArrayList<>(Arrays.asList(new FlyCharterAction(player))) : new ArrayList<>();
+        return isDoable(player) ? new ArrayList<>(Collections.singletonList(new FlyCharterAction(player))) : new ArrayList<>();
     }
 
     public void doAction(Player player, City destination) throws ActionException {

@@ -37,7 +37,7 @@ class ConvertGamesDTOTest {
         // ** gameResponseDTO is the entity after the conversion
         // ** gameDTO is the entity before teh conversion
         // Checks for the number of cards, the name of the player and location
-        gameResponseDTO.getGameResponsePlayerList().stream().forEach(gameResponseDTOplayer -> {
+        gameResponseDTO.getGameResponsePlayerList().forEach(gameResponseDTOplayer -> {
             Player gameDTOplayer = gameDTO.getBoard().getPlayers().stream().filter(x -> x.getName().equals(gameResponseDTOplayer.getName())).findFirst().get();
             assertEquals(numberOfCards, gameResponseDTOplayer.getListCard().size());
             assertEquals(gameResponseDTOplayer.getName(), gameDTOplayer.getName());

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class GameDTOPersistenceOnHashMapTest {
 
-    GamePersistenceOnHashMap underTest = new GamePersistenceOnHashMap();
+    final GamePersistenceOnHashMap underTest = new GamePersistenceOnHashMap();
 
     @Test
     void createsThreeGames() throws Exception {

@@ -60,7 +60,7 @@ class TurnEndPointExecuteMockMvcTest {
         @MockBean
         TurnServiceImpl turnService;
 
-        private static UUID uuid = randomUUID();
+        private static final UUID uuid = randomUUID();
 
         private static GameDTO gameDTO;
 

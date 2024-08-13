@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TurnInformationTest {
 
     TurnInformation turnInformation;
-    Player player = new OperationsPlayer();
+    final Player player = new OperationsPlayer();
 
     @Test
     void constructor() {

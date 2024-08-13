@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DriveFerryTest {
 
-    List<City> emptyNodeCityConnection = new ArrayList<>();
-    private City santiago = new City("Santiago de Chile", VirusType.YELLOW, emptyNodeCityConnection);
-    private City mexico = new City("Ciudad de Mexico", VirusType.YELLOW, emptyNodeCityConnection);
-    private City bogota = new City("Bogota", VirusType.YELLOW, emptyNodeCityConnection);
-    private City lima = new City("Lima", VirusType.YELLOW, new ArrayList<City>(Arrays.asList(santiago, mexico, bogota)));
-    private City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
+    private final City santiago = new City("Santiago de Chile", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City mexico = new City("Ciudad de Mexico", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City bogota = new City("Bogota", VirusType.YELLOW, emptyNodeCityConnection);
+    private final City lima = new City("Lima", VirusType.YELLOW, new ArrayList<City>(Arrays.asList(santiago, mexico, bogota)));
+    private final City calculta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
     Player player;
-    private DriveFerryDefaultService driveFerryDefaultService = DriveFerryDefaultService.getInstance();
+    private final DriveFerryDefaultService driveFerryDefaultService = DriveFerryDefaultService.getInstance();
 
 
     @BeforeEach

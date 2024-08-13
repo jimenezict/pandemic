@@ -18,7 +18,7 @@ public enum ActionsType {
     OPERATION_FLY(OPERATIONFLY_DESCRIPTION);
 
     public final String label;
-    private ActionsType(String label) {
+    ActionsType(String label) {
         this.label = label;
     }
 }

@@ -24,30 +24,30 @@ import static org.springframework.util.CollectionUtils.isEmpty;
 class ActionFactoryTest {
 
     Player player;
-    List<City> emptyNodeCityConnection = new ArrayList<>();
-    private City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
-    private City calcuta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
-    private City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
-    private City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
-    private City paris = new City("Paris", VirusType.BLUE, Arrays.asList(essen, madrid));
-    private City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
-    private City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
+    final List<City> emptyNodeCityConnection = new ArrayList<>();
+    private final City newyork = new City("New York", VirusType.BLUE, emptyNodeCityConnection);
+    private final City calcuta = new City("Calcuta", VirusType.BLACK, emptyNodeCityConnection);
+    private final City essen = new City("Essen", VirusType.BLUE, emptyNodeCityConnection);
+    private final City madrid = new City("Madrid", VirusType.BLUE, emptyNodeCityConnection);
+    private final City paris = new City("Paris", VirusType.BLUE, Arrays.asList(essen, madrid));
+    private final City tokio = new City("Tokio", VirusType.RED, emptyNodeCityConnection);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE, emptyNodeCityConnection);
 
-    private Virus blueVirus = new Virus(VirusType.BLUE);
-    private Virus blackVirus = new Virus(VirusType.BLACK);
-    private Virus redVirus = new Virus(VirusType.RED);
-    private Virus yellowVirus = new Virus(VirusType.YELLOW);
+    private final Virus blueVirus = new Virus(VirusType.BLUE);
+    private final Virus blackVirus = new Virus(VirusType.BLACK);
+    private final Virus redVirus = new Virus(VirusType.RED);
+    private final Virus yellowVirus = new Virus(VirusType.YELLOW);
     List<Virus> virusList;
-    List<City> boardCities = Arrays.asList(newyork, calcuta, essen, madrid, paris, tokio, atlanta);
+    final List<City> boardCities = Arrays.asList(newyork, calcuta, essen, madrid, paris, tokio, atlanta);
 
-    BuildResearchCenterDefaultService buildResearchCenterDefaultService = BuildResearchCenterDefaultService.getInstance();
-    DiscoverCureDefaultService discoverCureDefaultService = DiscoverCureDefaultService.getInstance();
-    FlyCharterDefaultService flyCharterDefaultService = FlyCharterDefaultService.getInstance();
-    FlyDirectCityDefaultService flyDirectCityDefaultService = FlyDirectCityDefaultService.getInstance();
-    FlyShuttleDefaultService flyShuttleDefaultService = FlyShuttleDefaultService.getInstance();
-    DriveFerryDefaultService driveFerryDefaultService = DriveFerryDefaultService.getInstance();
-    ShareKnowledgeDefaultService shareKnowledgeDefaultService = ShareKnowledgeDefaultService.getInstance();
-    TreatDiseaseDefaultService treatDiseaseDefaultService = TreatDiseaseDefaultService.getInstance();
+    final BuildResearchCenterDefaultService buildResearchCenterDefaultService = BuildResearchCenterDefaultService.getInstance();
+    final DiscoverCureDefaultService discoverCureDefaultService = DiscoverCureDefaultService.getInstance();
+    final FlyCharterDefaultService flyCharterDefaultService = FlyCharterDefaultService.getInstance();
+    final FlyDirectCityDefaultService flyDirectCityDefaultService = FlyDirectCityDefaultService.getInstance();
+    final FlyShuttleDefaultService flyShuttleDefaultService = FlyShuttleDefaultService.getInstance();
+    final DriveFerryDefaultService driveFerryDefaultService = DriveFerryDefaultService.getInstance();
+    final ShareKnowledgeDefaultService shareKnowledgeDefaultService = ShareKnowledgeDefaultService.getInstance();
+    final TreatDiseaseDefaultService treatDiseaseDefaultService = TreatDiseaseDefaultService.getInstance();
 
 
     @BeforeEach

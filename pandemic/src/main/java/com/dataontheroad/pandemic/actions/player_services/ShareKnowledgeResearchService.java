@@ -41,7 +41,7 @@ public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService 
         List<Action> actionList = new ArrayList<>();
 
         //when researchPlayer is the sender and any of the others on the same city are the receivers
-        playersList.stream()
+        playersList
                 .forEach(receiver ->
                     researchPlayer.getListCard().stream()
                             .filter(card -> CITY.equals(card.getCardType()))
@@ -50,7 +50,7 @@ public class ShareKnowledgeResearchService extends ShareKnowledgeDefaultService 
                 );
 
         //when any of the others on the same city are the senders and the researchPlayer is the receiver
-        playersList.stream()
+        playersList
                 .forEach(sender ->
                     sender.getListCard().stream()
                             .filter(card -> CITY.equals(card.getCardType()))

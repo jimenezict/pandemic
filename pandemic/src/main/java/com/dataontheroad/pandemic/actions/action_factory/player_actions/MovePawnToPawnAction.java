@@ -12,8 +12,8 @@ import java.util.List;
 import static com.dataontheroad.pandemic.constants.LiteralsAction.MOVEPAWNTOPAWN_ACTION;
 
 public class MovePawnToPawnAction extends Action {
-    City destination;
-    List<Player> playerList;
+    final City destination;
+    final List<Player> playerList;
 
     public MovePawnToPawnAction(List<Player> playerList, Player player, City destination) {
         super(ActionsType.MOVEPAWNTOPAWN, player);

@@ -49,10 +49,7 @@ public class FlyDirectCityDefaultService {
 
     private static City getBoardCity(List<City> boardCities, City destination) {
         Optional<City> optional = boardCities.stream().filter(city -> city.equals(destination)).findFirst();
-        if(optional.isPresent()) {
-            return optional.get();
-        }
-        return null;
+        return optional.orElse(null);
     }
 
     public void doAction(Player player, City destination) throws ActionException {

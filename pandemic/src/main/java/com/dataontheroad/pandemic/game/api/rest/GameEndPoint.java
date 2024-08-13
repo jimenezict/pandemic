@@ -25,7 +25,7 @@ public class GameEndPoint {
 
     private final GameServiceImpl gameService;
 
-    Logger logger = LoggerFactory.getLogger(GameEndPoint.class);
+    final Logger logger = LoggerFactory.getLogger(GameEndPoint.class);
 
     public GameEndPoint(GameServiceImpl gameService) {
         this.gameService = gameService;

@@ -24,10 +24,10 @@ class EndOfGameServiceImplTest {
     private List<Virus> virusList;
     private List<City> cityList;
 
-    private Virus blueVirus = new Virus(VirusType.BLUE);
-    private Virus blackVirus = new Virus(VirusType.BLACK);
-    private Virus redVirus = new Virus(VirusType.RED);
-    private Virus yellowVirus = new Virus(VirusType.YELLOW);
+    private final Virus blueVirus = new Virus(VirusType.BLUE);
+    private final Virus blackVirus = new Virus(VirusType.BLACK);
+    private final Virus redVirus = new Virus(VirusType.RED);
+    private final Virus yellowVirus = new Virus(VirusType.YELLOW);
 
     @BeforeEach
     public void setUp() {

@@ -33,7 +33,7 @@ public class DispatcherMovePawnToPawnService {
 
     public List<Action> returnAvailableActions(List<Player> players) {
         List<Action> availableMovePawnToPawnAction = new ArrayList<>();
-        players.stream().forEach(playerOrigin ->
+        players.forEach(playerOrigin ->
             players.stream()
                     .filter(playerDestination -> isDoable(players, playerOrigin, playerDestination.getCity()))
                     .forEach(playerDestination -> availableMovePawnToPawnAction.add(new MovePawnToPawnAction(players, playerOrigin, playerDestination.getCity()))
@@ -50,7 +50,7 @@ public class DispatcherMovePawnToPawnService {
     }
 
     private boolean thereIsPawnOnDestination(List<Player> players, City destination) {
-        return players.stream().filter(player1 -> player1.getCity().equals(destination)).count() > 0;
+        return players.stream().anyMatch(player1 -> player1.getCity().equals(destination));
     }
 
     private boolean playerIsNotAlreadyOnDestination(Player player, City destination) {

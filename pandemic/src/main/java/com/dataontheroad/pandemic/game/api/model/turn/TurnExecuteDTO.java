@@ -14,7 +14,7 @@ import java.util.List;
 import static com.dataontheroad.pandemic.game.TurnServiceHelper.getCitiesWithResearchCenter;
 
 public class TurnExecuteDTO {
-    private GameDTO gameDTO;
+    private final GameDTO gameDTO;
     public TurnExecuteDTO(GameDTO gameDTO) {
         this.gameDTO = gameDTO;
     }

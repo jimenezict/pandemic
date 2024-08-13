@@ -9,7 +9,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.SHUTTLEFLIGHT_
 
 public class FlyShuttleAction extends Action {
 
-    City destination;
+    final City destination;
 
     public FlyShuttleAction(Player player, City destination) {
         super(ActionsType.SHUTTLEFLIGHT, player);

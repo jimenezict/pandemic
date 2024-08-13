@@ -9,8 +9,8 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.SHAREKNOWLEDGE
 
 public class ShareKnowledgeAction extends Action {
 
-    Player receiver;
-    CityCard card;
+    final Player receiver;
+    final CityCard card;
 
     public ShareKnowledgeAction(Player sender, Player receiver, CityCard card) {
         super(ActionsType.SHAREKNOWLEDGE, sender);

@@ -48,7 +48,7 @@ class TurnServiceImplTest {
     @Mock
     EndOfGameServiceImpl endOfGameService;
 
-    private static UUID uuid = randomUUID();
+    private static final UUID uuid = randomUUID();
 
 
     @Test

@@ -24,13 +24,12 @@ import static com.dataontheroad.pandemic.constants.LiteralGame.END_OF_GAME_EMPTY
 import static com.dataontheroad.pandemic.model.cards.DeckCardFactory.createInfectionDeck;
 import static com.dataontheroad.pandemic.model.cards.model.CityCard.createCityCard;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class EndOfTurnServiceImplTest {
 
-    private City newyork = new City("New York", VirusType.BLUE);
+    private final City newyork = new City("New York", VirusType.BLUE);
     @InjectMocks
     EndOfTurnServiceImpl endOfTurnServiceImpl;
     @Mock

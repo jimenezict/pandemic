@@ -9,7 +9,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.DRIVEFERRY_ACT
 
 public class DriveFerryAction extends Action {
 
-    City destination;
+    final City destination;
 
     public DriveFerryAction(Player player, City destination) {
         super(ActionsType.DRIVEFERRY, player);

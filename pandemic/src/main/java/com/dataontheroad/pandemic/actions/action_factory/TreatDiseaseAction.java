@@ -9,7 +9,7 @@ import static com.dataontheroad.pandemic.constants.LiteralsAction.TREATDISEASE_A
 
 public class TreatDiseaseAction extends Action {
 
-    private Virus virus;
+    private final Virus virus;
 
     public TreatDiseaseAction(Player player, Virus virus) {
         super(ActionsType.TREATDISEASE, player);

@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TurnServiceHelperTest {
 
 
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City essen = new City("Essen", VirusType.BLUE);
+    private final City newyork = new City("New York", VirusType.BLUE);
+    private final City essen = new City("Essen", VirusType.BLUE);
 
     @Test
     void getOtherPlayersOnTheCity_shouldReturn2() throws Exception {

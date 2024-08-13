@@ -12,6 +12,6 @@ public class LiteralsCard {
 
 
     public static final String SPECIAL_EVENT_GOVERNMENT_GRANT_NAME = "Government Grant";
-    public static final String SPECIAL_EVENT_GOVERNMENT_GRANT_DESRIPTION = "Add 1 research station to any city (No city card needed)";
+    public static final String SPECIAL_EVENT_GOVERNMENT_GRANT_DESCRIPTION = "Add 1 research station to any city (No city card needed)";
 
 }

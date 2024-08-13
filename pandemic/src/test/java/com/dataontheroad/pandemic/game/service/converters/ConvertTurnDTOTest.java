@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConvertTurnDTOTest {
 
     Player playerTurnInformation;
-    private City atlanta = new City("Atlanta", VirusType.BLUE);
-    private City newyork = new City("New York", VirusType.BLUE);
-    private City paris = new City("Paris", VirusType.BLUE);
+    private final City atlanta = new City("Atlanta", VirusType.BLUE);
+    private final City newyork = new City("New York", VirusType.BLUE);
+    private final City paris = new City("Paris", VirusType.BLUE);
 
     @Test
     void convertTurnResponsePlayer_success() {
