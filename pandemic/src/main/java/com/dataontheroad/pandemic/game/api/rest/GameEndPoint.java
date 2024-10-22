@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.*;
@@ -35,11 +36,11 @@ public class GameEndPoint {
     @GetMapping("/game/create/players/{numPlayers}/pandemic/{numPandemics}")
     ResponseEntity createGame(@PathVariable int numPlayers, @PathVariable int numPandemics) {
         UUID uuid;
-        logger.info("Starting the creation of a game with {} players and {} number of pandemic cards", numPlayers, numPandemics);
+        logger.info("Starting the creation of a game with {} players and {} pandemic cards", numPlayers, numPandemics);
 
         if(numPandemics < 0 || numPandemics > 6) {
             ErrorResponse errorResponse = new ErrorResponse(GAME_ENDPOINT_NAME, null, WRONG_EPIDEMIC_CARDS);
-            logger.warn("Not all request parameter are valid for creating difficulty on number of epidemic cards {}", numPandemics);
+            logger.warn("During the creation of the game, it was found that number of epidemic cards were {}", numPandemics);
             logger.warn(WRONG_EPIDEMIC_CARDS);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
@@ -48,12 +49,12 @@ public class GameEndPoint {
             uuid = gameService.createGame(numPandemics, numPlayers);
         } catch (GameExecutionException e) {
             ErrorResponse errorResponse = new ErrorResponse(GAME_ENDPOINT_NAME, null, WRONG_PLAYERS);
-            logger.warn("Not all request parameter are valid for creating number of players {}", numPlayers);
+            logger.warn("During the creation of the game, it was found that number of players were {}", numPlayers);
             logger.warn(WRONG_PLAYERS);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 
-        logger.info("Ending the creation of a game with {} players and {} number of pandemic cards and gameId {}", numPlayers, numPandemics, uuid);
+        logger.info("Ending the creation of a game with {} players, {} pandemic cards and gameId {}", numPlayers, numPandemics, uuid.toString());
 
         SuccessResponse successResponse = new SuccessResponse(GAME_ENDPOINT_NAME, uuid, SUCCESS_GAME);
         return ResponseEntity.ok().body(successResponse);
@@ -62,7 +63,7 @@ public class GameEndPoint {
     @GetMapping("/game/read/{gameId}")
     ResponseEntity readGame(@PathVariable UUID gameId) {
 
-        logger.info("Looking for the game {}", gameId);
+        logger.info("Looking for game {}", gameId.toString());
         GameResponseDTO gameResponseDTO = gameService.getGameById(gameId);
 
         if(isNull(gameResponseDTO)) {
@@ -71,7 +72,10 @@ public class GameEndPoint {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
 
-        logger.info("Found game with gameId {} created at {} and updated at {}", gameId, gameResponseDTO.getInsertDateTime(), gameResponseDTO.getUpdateDateTime());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        logger.info("Found game with gameId {} created at {} and updated at {}", gameId,
+                gameResponseDTO.getInsertDateTime().format(formatter),
+                gameResponseDTO.getUpdateDateTime().format(formatter));
         return ResponseEntity.ok().body(gameResponseDTO);
     }
 

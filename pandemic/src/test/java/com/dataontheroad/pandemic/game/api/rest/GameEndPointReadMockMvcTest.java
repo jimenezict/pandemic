@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.dataontheroad.pandemic.constants.LiteralGame.GAME_ENDPOINT_NAME;
@@ -76,6 +77,9 @@ class GameEndPointReadMockMvcTest {
     @Test
     void readGame_whenReturnsGame() throws Exception {
         GameResponseDTO gameResponseDTO = new GameResponseDTO(uuid);
+        gameResponseDTO.setInsertDateTime(LocalDateTime.now());
+        gameResponseDTO.setUpdateDateTime(LocalDateTime.now());
+
         when(gameService.getGameById(any())).thenReturn(gameResponseDTO);
 
         mvc.perform(MockMvcRequestBuilders
